@@ -45,35 +45,40 @@ export default function SupportLocatorClient() {
   });
 
   const analyzeNeed = async () => {
-    if (!queryInput.trim()) return;
-    setIsAnalyzing(true); setShowAiPanel(true);
-
-    try {
-      let result: AIResult;
-      if (apiKey) {
-        const prompt = `Ets un assistent social de Càritas. Identifica el tipus de necessitat principal i retorna JSON: {"tipo_necessitat": string, "urgencia": número 1-3, "descripcio_breu": string, "servei_recomanat": string}. Situació: "${queryInput}"`;
-        const response = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST', headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-          body: JSON.stringify({ model: 'claude-opus-4-5', max_tokens: 256, messages: [{ role: 'user', content: prompt }] }),
-        });
-        if (response.ok) { const data = await response.json(); result = JSON.parse(data.content[0].text.trim()); }
-        else throw new Error('API error');
-      } else {
-        await new Promise((r) => setTimeout(r, 1500));
-        const lower = queryInput.toLowerCase();
-        let tipo = 'economia'; let servei = 'Assessorament econòmic';
-        if (lower.includes('pis') || lower.includes('dormir')) { tipo = 'habitatge'; servei = 'Servei d\'habitatge'; }
-        else if (lower.includes('menjar')) { tipo = 'alimentació'; servei = 'Banc d\'aliments'; }
-        result = { tipo_necessitat: tipo, urgencia: 2, descripcio_breu: `Hem detectat necessitat de ${tipo}. Podem ajudar-te.`, servei_recomanat: servei };
-      }
-      setAiResult(result);
-      const relevant = ATTENTION_CENTERS.filter((c) => c.services.includes(result.tipo_necessitat)).slice(0, 3);
-      setHighlightedCenters(relevant); setFilterService(result.tipo_necessitat);
-    } catch {
-      setAiResult({ tipo_necessitat: 'general', urgencia: 1, descripcio_breu: 'Podem ajudar-te. Contacta amb el centre més proper.', servei_recomanat: 'Atenció general' });
-      setHighlightedCenters(ATTENTION_CENTERS.slice(0, 3));
-    } finally { setIsAnalyzing(false); }
-  };
+  if (!queryInput.trim()) return;
+  setIsAnalyzing(true);
+  setShowAiPanel(true);
+  try {
+    const res = await fetch('http://54.163.22.58:5000/match/text', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: queryInput }),
+    });
+    const data = await res.json();
+    const tipus = data.necessitats_prioritaries?.[0]?.toLowerCase() || 'economia';
+    setAiResult({
+      tipo_necessitat: tipus,
+      urgencia: data.urgencia === 'alta' ? 3 : data.urgencia === 'mitjana' ? 2 : 1,
+      descripcio_breu: data.perfil_resum || 'Podem ajudar-te.',
+      servei_recomanat: data.recursos?.[0]?.nom || 'Atenció general',
+    });
+    const relevant = ATTENTION_CENTERS.filter((c) =>
+      c.services.some((s) => tipus.includes(s))
+    ).slice(0, 3);
+    setHighlightedCenters(relevant.length ? relevant : ATTENTION_CENTERS.slice(0, 3));
+    if (relevant.length) setFilterService(relevant[0].services[0]);
+  } catch {
+    setAiResult({
+      tipo_necessitat: 'general',
+      urgencia: 1,
+      descripcio_breu: 'Podem ajudar-te. Contacta amb el centre més proper.',
+      servei_recomanat: 'Atenció general',
+    });
+    setHighlightedCenters(ATTENTION_CENTERS.slice(0, 3));
+  } finally {
+    setIsAnalyzing(false);
+  }
+};
 
   const urgencyConfig = (u: number) => u === 3 ? { label: 'Alta', cls: 'urgency-3', icon: '🔴' } : u === 2 ? { label: 'Moderada', cls: 'urgency-2', icon: '🟡' } : { label: 'Baixa', cls: 'urgency-1', icon: '🟢' };
 
