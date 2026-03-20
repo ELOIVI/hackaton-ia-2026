@@ -1,64 +1,76 @@
-"""
-Gemini Analyst — Pas 2 del motor híbrid
-Analitza el context complet de la fitxa i retorna prioritats
-"""
+# Aquest mòdul és el cervell del sistema. Usa Gemini per interpretar
+# el context complet de la fitxa social i retornar un pla de necessitats
+# prioritzat. El context inclou els projectes reals de Càritas perquè
+# les recomanacions siguin el més precises possible.
+
 import json
 import sys
 import os
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 os.chdir(os.path.join(os.path.dirname(__file__), ".."))
+
 from gemini_call import call_gemini
 
+DB_PATH = os.path.join(os.path.dirname(__file__), "..", "db")
 
-SYSTEM_CONTEXT = """
-Ets un assistent social expert de Càritas Diocesana de Tarragona.
-La teva funció és analitzar fitxes socials de persones en situació
-de vulnerabilitat i determinar les seves necessitats prioritàries
-per assignar-los els recursos, voluntaris i organitzacions adequades.
 
-Càritas disposa dels següents tipus de recursos:
-- alimentació: ajuda alimentària, cistelles setmanals
-- habitatge: ajuda lloguer, mediació, allotjament temporal
-- legal: assessoria jurídica immigració, documentació
-- inserció_laboral: orientació laboral, CV, formació
-- educació: suport escolar infants
-- salut_mental: atenció psicosocial, acompanyament
-- salut: transport sanitari, acompanyament mèdic
-- espècie: roba, equipament llar
+def load_projectes():
+    path = os.path.join(DB_PATH, "projectes_caritas.json")
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
 
-Respon SEMPRE en JSON vàlid, sense cap text addicional.
-"""
+
+def build_context_projectes(projectes: list) -> str:
+    # Construïm un resum llegible dels projectes perquè Gemini
+    # els pugui usar com a referència sense saturar el context
+    lines = []
+    for p in projectes:
+        lines.append(
+            f"- {p['nom']}: {p['descripcio']} "
+            f"(perfil: {p['perfil_beneficiari']})"
+        )
+    return "\n".join(lines)
 
 
 def analyze_with_gemini(fitxa: dict, keywords: list) -> dict:
-    """
-    Analitza la fitxa amb Gemini i retorna un pla de necessitats.
-    """
-    prompt = f"""
-{SYSTEM_CONTEXT}
+    projectes = load_projectes()
+    context_projectes = build_context_projectes(projectes)
 
-FITXA SOCIAL:
+    prompt = f"""
+Ets un assistent social expert de Càritas Diocesana de Tarragona.
+La teva funció és analitzar fitxes socials i assignar recursos de manera
+intel·ligent i empàtica.
+
+PROJECTES REALS DE CÀRITAS TARRAGONA:
+{context_projectes}
+
+TIPUS DE RECURSOS DISPONIBLES:
+alimentació, habitatge, legal, inserció_laboral, educació, salut_mental, salut, espècie
+
+FITXA SOCIAL DE LA PERSONA:
 {json.dumps(fitxa, ensure_ascii=False, indent=2)}
 
 KEYWORDS DETECTADES AUTOMÀTICAMENT: {keywords}
 
-Analitza aquesta persona i retorna ÚNICAMENT aquest JSON:
+Analitza aquesta persona tenint en compte els projectes reals de Càritas
+i retorna ÚNICAMENT aquest JSON sense cap text addicional:
 {{
   "necessitats_prioritaries": ["tipus1", "tipus2"],
   "urgencia": "alta|mitjana|baixa",
-  "perfil_resum": "Descripció breu de la situació en català (màx 2 frases)",
-  "consideracions_especials": ["consideració1", "consideració2"],
+  "perfil_resum": "Descripció breu i empàtica de la situació en català (màx 2 frases)",
+  "projectes_recomanats": ["PRJ001", "PRJ004"],
+  "consideracions_especials": ["consideració1"],
   "recursos_recomanats_tipus": ["alimentació", "habitatge"],
   "quantitats_recomanades": {{
     "alimentació": 1,
     "habitatge": 1
   }},
-  "justificacio": "Explicació breu de per què aquests recursos en català"
+  "justificacio": "Explicació breu en català de per què aquests recursos i projectes"
 }}
 """
     try:
         response = call_gemini(prompt)
-        # Neteja la resposta per si Gemini afegeix markdown
         response = response.strip()
         if response.startswith("```"):
             response = response.split("```")[1]
@@ -66,15 +78,15 @@ Analitza aquesta persona i retorna ÚNICAMENT aquest JSON:
                 response = response[4:]
         return json.loads(response.strip())
     except Exception as e:
-        # Fallback si Gemini falla
         return {
             "necessitats_prioritaries": keywords[:3] if keywords else ["alimentació"],
             "urgencia": "mitjana",
             "perfil_resum": "Persona en situació de vulnerabilitat que requereix atenció.",
+            "projectes_recomanats": [],
             "consideracions_especials": [],
             "recursos_recomanats_tipus": keywords[:2] if keywords else ["alimentació"],
             "quantitats_recomanades": {},
-            "justificacio": f"Anàlisi automàtica basada en keywords. Error Gemini: {str(e)}"
+            "justificacio": f"Anàlisi automàtica. Error Gemini: {str(e)}"
         }
 
 

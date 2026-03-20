@@ -1,3 +1,5 @@
 .env
 __pycache__/
 *.pyc
+caritas-key.pem
+caritas-key.pem

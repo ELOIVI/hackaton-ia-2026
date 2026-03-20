@@ -1,0 +1,66 @@
+[
+  {
+    "id": "PRJ001",
+    "nom": "Acollida i Acompanyament",
+    "descripcio": "Atenció personalitzada a persones en situació de vulnerabilitat. Escolta activa, detecció de necessitats i orientació cap als recursos adequats.",
+    "perfil_beneficiari": "Qualsevol persona en situació de vulnerabilitat, especialment nouvinguts, persones soles i famílies en crisi.",
+    "recursos_associats": ["REC001", "REC003"],
+    "keywords": ["acollida", "acompanyament", "orientació", "nouvinguts", "família", "crisi"]
+  },
+  {
+    "id": "PRJ002",
+    "nom": "Inserció Sociolaboral",
+    "descripcio": "Suport a la recerca de feina, elaboració de CV, preparació d'entrevistes i formació ocupacional per a persones en situació d'atur.",
+    "perfil_beneficiari": "Persones en situació d'atur, especialment majors de 45 anys, joves sense experiència i persones amb situació administrativa irregular.",
+    "recursos_associats": ["REC005"],
+    "keywords": ["atur", "feina", "inserció_laboral", "formació", "CV", "entrevista", "joves"]
+  },
+  {
+    "id": "PRJ003",
+    "nom": "Habitatge i Emergència Social",
+    "descripcio": "Intervenció urgent en situacions de pèrdua d'habitatge, desnonaments i infrahabitatge. Mediació amb propietaris i administracions.",
+    "perfil_beneficiari": "Persones i famílies en risc de perdre l'habitatge o que viuen en condicions precàries.",
+    "recursos_associats": ["REC002"],
+    "keywords": ["habitatge", "desnonament", "infrahabitatge", "lloguer", "emergència", "sense_llar"]
+  },
+  {
+    "id": "PRJ004",
+    "nom": "Atenció a Famílies amb Infants",
+    "descripcio": "Suport integral a famílies amb menors en situació de vulnerabilitat. Inclou suport escolar, roba, alimentació i acompanyament familiar.",
+    "perfil_beneficiari": "Famílies monoparentals, famílies nombroses i famílies amb menors en risc d'exclusió.",
+    "recursos_associats": ["REC001", "REC003", "REC006"],
+    "keywords": ["família", "infants", "menors", "monoparental", "suport_escolar", "alimentació"]
+  },
+  {
+    "id": "PRJ005",
+    "nom": "Atenció a Persones Immigrades",
+    "descripcio": "Assessoria jurídica per a regularització administrativa, acollida cultural i acompanyament en el procés d'integració social.",
+    "perfil_beneficiari": "Persones extracomunitàries, especialment indocumentades o en situació irregular.",
+    "recursos_associats": ["REC004"],
+    "keywords": ["immigració", "extracomunitari", "situació_irregular", "documentació", "regularització", "indocumentat"]
+  },
+  {
+    "id": "PRJ006",
+    "nom": "Atenció a Gent Gran",
+    "descripcio": "Acompanyament a persones grans en situació de soledat, dependència o risc d'exclusió. Visites domiciliàries i suport en gestions.",
+    "perfil_beneficiari": "Persones majors de 65 anys que viuen soles o amb escassos recursos.",
+    "recursos_associats": ["REC007", "REC008"],
+    "keywords": ["gent_gran", "soledat", "dependència", "domicili", "acompanyament", "majors"]
+  },
+  {
+    "id": "PRJ007",
+    "nom": "Salut Mental i Addiccions",
+    "descripcio": "Acompanyament psicosocial a persones amb problemes de salut mental o addiccions. Coordinació amb serveis sanitaris.",
+    "perfil_beneficiari": "Persones amb trastorns de salut mental, addiccions o en situació de crisi emocional.",
+    "recursos_associats": ["REC007"],
+    "keywords": ["salut_mental", "addiccions", "psicologia", "crisi", "ansietat", "acompanyament_psicològic"]
+  },
+  {
+    "id": "PRJ008",
+    "nom": "Servei Comunitari i Voluntariat Jove",
+    "descripcio": "Programa per a alumnes de secundària que volen fer servei comunitari. Integració de joves voluntaris en projectes socials.",
+    "perfil_beneficiari": "Joves estudiants de secundària i batxillerat interessats en el voluntariat.",
+    "recursos_associats": [],
+    "keywords": ["joves", "voluntariat", "secundària", "servei_comunitari", "educació"]
+  }
+]
