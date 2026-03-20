@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --caritas-red: #C8102E;
+  --caritas-red-dark: #9E0D24;
+  --caritas-red-light: #F5E6E9;
+  --caritas-red-10: rgba(200, 16, 46, 0.1);
+  --warm-bg: #FAFAF8;
+  --card-bg: #FFFFFF;
+  --border: #E8E4E0;
+  --text-primary: #1A1614;
+  --text-secondary: #6B6460;
+  --text-muted: #9E9894;
+  --success: #1A7A4A;
+  --warning: #B45309;
+  --info: #1D5FA8;
+}
+
+* { box-sizing: border-box; }
+html { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 16px; scroll-behavior: smooth; }
+body { background-color: var(--warm-bg); color: var(--text-primary); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* Leaflet map overrides */
+.leaflet-container { font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important; border-radius: 12px; }
+.leaflet-popup-content-wrapper { border-radius: 10px !important; box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important; font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important; }
+.leaflet-popup-tip { background: white !important; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #F0EDE9; }
+::-webkit-scrollbar-thumb { background: #C8C4C0; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #A8A4A0; }
+
+/* Accessibility - large text mode */
+.large-text { font-size: 20px !important; }
+.large-text h1 { font-size: 2.5rem !important; }
+.large-text h2 { font-size: 2rem !important; }
+.large-text h3 { font-size: 1.6rem !important; }
+.large-text p, .large-text span, .large-text button { font-size: 1.2rem !important; }
+
+/* Animations */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fade-in-up { animation: fadeInUp 0.4s ease forwards; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.animate-fade-in { animation: fadeIn 0.3s ease forwards; }
+@keyframes pulse-red { 0%, 100% { background-color: rgba(200, 16, 46, 0.1); } 50% { background-color: rgba(200, 16, 46, 0.2); } }
+.animate-pulse-red { animation: pulse-red 2s ease-in-out infinite; }
+.chat-bubble { animation: fadeInUp 0.3s ease forwards; }
+
+/* High contrast badge colors */
+.badge-habitatge { background: #EEF2FF; color: #3730A3; border: 1px solid #C7D2FE; }
+.badge-alimentacio { background: #F0FDF4; color: #166534; border: 1px solid #BBF7D0; }
+.badge-economia { background: #FFFBEB; color: #92400E; border: 1px solid #FDE68A; }
+.badge-documentacio { background: #F0F9FF; color: #075985; border: 1px solid #BAE6FD; }
+.badge-salut { background: #FFF1F2; color: #9F1239; border: 1px solid #FECDD3; }
+.badge-solitud { background: #FAF5FF; color: #6B21A8; border: 1px solid #E9D5FF; }
+
+/* Urgency indicators */
+.urgency-1 { background: #F0FDF4; color: #166534; }
+.urgency-2 { background: #FFFBEB; color: #92400E; }
+.urgency-3 { background: #FFF1F2; color: #9F1239; }
