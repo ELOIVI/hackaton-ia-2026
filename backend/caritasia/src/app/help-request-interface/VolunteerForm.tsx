@@ -33,8 +33,9 @@ export default function VolunteerForm({ onBack }: { onBack: () => void }) {
 
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
 
+  // AQUESTA ÉS LA LÍNIA QUE HE CANVIAT
   const addMessage = (role: 'assistant' | 'user', content: string) => {
-    setMessages((prev) => [...prev, { id: Date.now().toString(), role, content, timestamp: new Date() }]);
+    setMessages((prev) => [...prev, { id: Date.now().toString() + Math.random().toString(36).substring(2, 9), role, content, timestamp: new Date() }]);
   };
 
   const callAnthropicAPI = async (userAnswers: string[]): Promise<MatchResult> => {
