@@ -1,56 +1,131 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Heart, Building2, ChevronRight, Sparkles } from 'lucide-react';
-import VolunteerForm from './VolunteerForm';
-import CompanyForm from './CompanyForm';
-
-type FlowType = 'volunteer' | 'company' | null;
+import React, { useState, useEffect } from 'react';
+import VolunteerForm from '@/app/help-request-interface/VolunteerForm';
+import CompanyForm from '@/app/help-request-interface/CompanyForm';
+import WorkerForm from '@/app/help-request-interface/WorkerForm';
+import AttendedForm from '@/app/help-request-interface/AttendedForm';
+import { Heart, Building2, UserCog, HandHelping, ArrowRight, LogOut, User as UserIcon } from 'lucide-react';
 
 export default function HelpRequestFlow() {
-  const [flowType, setFlowType] = useState<FlowType>(null);
+  const [flowType, setFlowType] = useState<'selection' | 'volunteer' | 'company' | 'worker' | 'attended'>('selection');
+  const [user, setUser] = useState<any>(null);
 
-  if (flowType === 'volunteer') return <VolunteerForm onBack={() => setFlowType(null)} />;
-  if (flowType === 'company') return <CompanyForm onBack={() => setFlowType(null)} />;
+  useEffect(() => {
+    const saved = localStorage.getItem('loggedUser');
+    if (saved) setUser(JSON.parse(saved));
+  }, []);
+
+  const handleLogin = (userData: any) => {
+    localStorage.setItem('loggedUser', JSON.stringify(userData));
+    setUser(userData);
+    setFlowType('selection');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('loggedUser');
+    setUser(null);
+    setFlowType('selection');
+  };
+
+  if (user) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-12">
+        <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center">
+                <UserIcon className="text-red-600" size={32} />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">{user.name || user.companyName}</h1>
+                <span className="text-xs font-bold uppercase tracking-wider text-red-500 bg-red-50 px-2 py-1 rounded-md">
+                  {user.role}
+                </span>
+              </div>
+            </div>
+            <button onClick={handleLogout} className="p-2 text-gray-400 hover:text-red-600 transition-colors">
+              <LogOut size={24} />
+            </button>
+          </div>
+
+          <div className="space-y-4">
+            <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest">Dades del perfil</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 bg-gray-50 rounded-2xl">
+                <p className="text-xs text-gray-400 font-bold uppercase mb-1">Email</p>
+                <p className="text-gray-900 font-medium">{user.email}</p>
+              </div>
+              {user.age && (
+                <div className="p-4 bg-gray-50 rounded-2xl">
+                  <p className="text-xs text-gray-400 font-bold uppercase mb-1">Edat</p>
+                  <p className="text-gray-900 font-medium">{user.age} anys</p>
+                </div>
+              )}
+              {user.location && (
+                <div className="p-4 bg-gray-50 rounded-2xl">
+                  <p className="text-xs text-gray-400 font-bold uppercase mb-1">Localització</p>
+                  <p className="text-gray-900 font-medium">{user.location}</p>
+                </div>
+              )}
+              {user.helpType && (
+                <div className="p-4 bg-gray-50 rounded-2xl">
+                  <p className="text-xs text-gray-400 font-bold uppercase mb-1">Especialitat / Ajuda</p>
+                  <p className="text-gray-900 font-medium capitalize">{user.helpType}</p>
+                </div>
+              )}
+              {user.level && (
+                <div className="p-4 bg-gray-50 rounded-2xl">
+                  <p className="text-xs text-gray-400 font-bold uppercase mb-1">Compromís</p>
+                  <p className="text-gray-900 font-medium capitalize">{user.level}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (flowType === 'volunteer') return <VolunteerForm onBack={() => setFlowType('selection')} onLogin={handleLogin} />;
+  if (flowType === 'company') return <CompanyForm onBack={() => setFlowType('selection')} onLogin={handleLogin} />;
+  if (flowType === 'worker') return <WorkerForm onBack={() => setFlowType('selection')} onLogin={handleLogin} />;
+  if (flowType === 'attended') return <AttendedForm onBack={() => setFlowType('selection')} />;
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-4 py-12 pb-24 md:pb-12">
-      <div className="text-center max-w-2xl mx-auto mb-12 animate-fade-in-up">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ background: 'rgba(200,16,46,0.08)', color: '#C8102E' }}>
-          <Sparkles size={14} />
-          <span>Powered by Intel·ligència Artificial</span>
-        </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
-          Vull <span style={{ color: '#C8102E' }}>ajudar</span>
-        </h1>
-        <p className="text-lg text-gray-600 leading-relaxed">
-          L'IA de Càritas t'ajudarà a trobar el projecte de voluntariat o col·laboració que millor s'adapta a tu. Només necessitem uns minuts del teu temps.
-        </p>
+    <div className="max-w-5xl mx-auto px-4 py-12">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">Càritas Tarragona</h1>
+        <p className="text-lg text-gray-500">Gestió de perfils i col·laboració social</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl animate-fade-in-up">
-        <button onClick={() => setFlowType('volunteer')} className="group relative bg-white rounded-2xl p-8 border-2 border-gray-100 hover:border-red-200 hover:shadow-xl transition-all duration-200 text-left cursor-pointer active:scale-95">
-          <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-200 group-hover:scale-110" style={{ background: 'rgba(200,16,46,0.1)' }}>
-            <Heart size={28} style={{ color: '#C8102E' }} />
-          </div>
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Soc voluntari/a</h2>
-          <p className="text-gray-500 text-sm leading-relaxed mb-4">Persona física que vol dedicar temps i habilitats als projectes de Càritas.</p>
-          <div className="flex items-center gap-1 text-sm font-semibold" style={{ color: '#C8102E' }}>
-            Trobar el meu projecte <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
-          </div>
-          <div className="absolute top-4 right-4 text-xs font-medium px-2 py-1 rounded-full" style={{ background: 'rgba(200,16,46,0.08)', color: '#C8102E' }}>1.177 voluntaris actius</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <button onClick={() => setFlowType('volunteer')} className="bg-white border-2 border-transparent hover:border-red-200 p-8 rounded-3xl shadow-card text-left group transition-all">
+          <Heart className="text-red-600 mb-6" size={32} />
+          <h3 className="text-2xl font-bold mb-2">Voluntari/a</h3>
+          <p className="text-gray-500 mb-6 text-sm">Registre d'habilitats i disponibilitat.</p>
+          <div className="flex items-center gap-2 text-red-600 font-bold"><span>Entrar</span><ArrowRight size={18} /></div>
         </button>
 
-        <button onClick={() => setFlowType('company')} className="group relative bg-white rounded-2xl p-8 border-2 border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-200 text-left cursor-pointer active:scale-95">
-          <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 bg-blue-50 transition-all duration-200 group-hover:scale-110">
-            <Building2 size={28} className="text-blue-600" />
-          </div>
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Soc empresa</h2>
-          <p className="text-gray-500 text-sm leading-relaxed mb-4">Empresa o organització que vol col·laborar a través del programa <em>Empreses amb Cor</em>.</p>
-          <div className="flex items-center gap-1 text-sm font-semibold text-blue-600">
-            Explorar col·laboració <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
-          </div>
-          <div className="absolute top-4 right-4 text-xs font-medium px-2 py-1 rounded-full bg-blue-50 text-blue-600">73 empreses col·laboren</div>
+        <button onClick={() => setFlowType('attended')} className="bg-white border-2 border-transparent hover:border-purple-200 p-8 rounded-3xl shadow-card text-left group transition-all">
+          <HandHelping className="text-purple-600 mb-6" size={32} />
+          <h3 className="text-2xl font-bold mb-2">Necessito Ajuda</h3>
+          <p className="text-gray-500 mb-6 text-sm">Assistència mitjançant el nostre assistent virtual.</p>
+          <div className="flex items-center gap-2 text-purple-600 font-bold"><span>Assistència</span><ArrowRight size={18} /></div>
+        </button>
+
+        <button onClick={() => setFlowType('worker')} className="bg-white border-2 border-transparent hover:border-emerald-200 p-8 rounded-3xl shadow-card text-left group transition-all">
+          <UserCog className="text-emerald-600 mb-6" size={32} />
+          <h3 className="text-2xl font-bold mb-2">Treballador/a</h3>
+          <p className="text-gray-500 mb-6 text-sm">Accés corporatiu per a gestió interna.</p>
+          <div className="flex items-center gap-2 text-emerald-600 font-bold"><span>Accedir</span><ArrowRight size={18} /></div>
+        </button>
+
+        <button onClick={() => setFlowType('company')} className="bg-white border-2 border-transparent hover:border-blue-200 p-8 rounded-3xl shadow-card text-left group transition-all">
+          <Building2 className="text-blue-600 mb-6" size={32} />
+          <h3 className="text-2xl font-bold mb-2">Empresa</h3>
+          <p className="text-gray-500 mb-6 text-sm">Col·laboració corporativa i donacions.</p>
+          <div className="flex items-center gap-2 text-blue-600 font-bold"><span>Col·laborar</span><ArrowRight size={18} /></div>
         </button>
       </div>
     </div>

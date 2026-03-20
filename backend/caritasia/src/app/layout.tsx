@@ -8,16 +8,20 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'CaritasIA — Intel·ligència per a la solidaritat',
-  description: 'Plataforma d\'IA de Càritas Diocesana de Tarragona per connectar persones vulnerables, voluntaris i empreses col·laboradores.',
+  title: 'Càritas Tarragona',
+  description: 'Suport social i voluntariat.',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="ca">
-      <body>{children}</body>
+    <html lang="ca" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }
