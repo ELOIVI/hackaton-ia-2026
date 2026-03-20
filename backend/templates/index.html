@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA Ciutadana — URV x T-Systems</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+  :root{--primary:#e63946;--dark:#1a1a2e;--light:#f8f9fa;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Segoe UI',sans-serif;background:var(--light);display:flex;flex-direction:column;height:100vh;}
+  header{background:var(--dark);color:white;padding:0.8rem 1.5rem;}
+  header h1{font-size:1.1rem;}
+  header span{font-size:0.8rem;opacity:0.6;}
+  #main{display:flex;flex:1;overflow:hidden;}
+  #map{flex:1;}
+  #panel{width:400px;display:flex;flex-direction:column;background:white;box-shadow:-3px 0 15px rgba(0,0,0,0.1);overflow-y:auto;}
+  .section{padding:1.2rem;border-bottom:1px solid #eee;}
+  .section h3{font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:0.8rem;}
+  textarea{width:100%;height:75px;padding:0.6rem;border:1px solid #ddd;border-radius:8px;resize:none;font-size:0.9rem;font-family:'Segoe UI',sans-serif;}
+  textarea:focus{outline:none;border-color:var(--primary);}
+  .btn{width:100%;padding:0.7rem;border:none;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;margin-top:0.5rem;transition:opacity 0.2s;}
+  .btn:disabled{opacity:0.5;cursor:not-allowed;}
+  .btn-primary{background:var(--primary);color:white;}
+  .btn-secondary{background:var(--dark);color:white;}
+  .btn-outline{background:transparent;border:2px solid var(--dark);color:var(--dark);}
+  .result-box{margin-top:0.8rem;padding:0.8rem;background:var(--light);border-radius:8px;font-size:0.88rem;line-height:1.5;display:none;}
+  .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-weight:700;font-size:0.8rem;}
+  .positive{background:#d4edda;color:#155724;}
+  .negative{background:#f8d7da;color:#721c24;}
+  .history-item{padding:0.6rem 0;border-bottom:1px solid #f0f0f0;font-size:0.83rem;}
+  .spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.6s linear infinite;vertical-align:middle;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  #status{padding:0.3rem 1.5rem;background:#e9ecef;font-size:0.75rem;color:#666;text-align:right;}
+</style>
+</head>
+<body>
+<header>
+  <h1>🏙️ IA Ciutadana — Tarragona</h1>
+  <span>Hackató IA 2026 · URV x T-Systems</span>
+</header>
+<div id="main">
+  <div id="map"></div>
+  <div id="panel">
+    <div class="section">
+      <h3>⚡ Generar text amb Gemini</h3>
+      <textarea id="promptInput" placeholder="Descriu el context o consulta..."></textarea>
+      <button class="btn btn-primary" onclick="generate()">Generar 🤖</button>
+      <div class="result-box" id="genBox">
+        <strong>Text generat:</strong>
+        <p id="genText" style="margin-top:4px"></p>
+        <button class="btn btn-secondary" style="margin-top:0.5rem" onclick="analyzeGenerated()">Analitzar sentiment 📊</button>
+      </div>
+    </div>
+    <div class="section">
+      <h3>📊 Anàlisi de sentiment</h3>
+      <textarea id="analyzeInput" placeholder="Escriu o enganxa text per analitzar..."></textarea>
+      <button class="btn btn-secondary" onclick="analyze()">Analitzar 🔍</button>
+      <div class="result-box" id="sentBox">
+        <strong>Resultat:</strong>
+        <p id="sentText" style="margin-top:4px"></p>
+        <span id="sentBadge" class="badge"></span>
+        <span id="sentScore" style="font-size:0.8rem;color:#666;margin-left:6px"></span>
+      </div>
+    </div>
+    <div class="section">
+      <h3>🕓 Historial (S3)</h3>
+      <button class="btn btn-outline" onclick="loadHistory()">Carregar historial</button>
+      <div id="historyList" style="margin-top:0.8rem"></div>
+    </div>
+  </div>
+</div>
+<div id="status">Sistema llest ✓</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const map=L.map('map').setView([41.1189,1.2445],13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
+const layers=L.layerGroup().addTo(map);
+function setStatus(msg){document.getElementById('status').textContent=msg;}
+function addMarker(lat,lng,html,color='#e63946'){
+  const icon=L.divIcon({className:'',html:`<div style="background:${color};width:14px;height:14px;border-radius:50%;border:2px solid white;box-shadow:0 2px 4px rgba(0,0,0,.3)"></div>`});
+  L.marker([lat,lng],{icon}).bindPopup(html).addTo(layers);
+}
+async function generate(){
+  const prompt=document.getElementById('promptInput').value.trim();
+  if(!prompt)return;
+  const btn=event.target;btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Generant...';
+  setStatus('Connectant amb Gemini...');
+  try{
+    const r=await fetch('/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
+    const d=await r.json();
+    document.getElementById('genText').textContent=d.generated_text;
+    document.getElementById('genBox').style.display='block';
+    setStatus('Text generat ✓');
+  }catch(e){setStatus('Error: '+e.message);}
+  finally{btn.disabled=false;btn.innerHTML='Generar 🤖';}
+}
+function analyzeGenerated(){
+  document.getElementById('analyzeInput').value=document.getElementById('genText').textContent;
+  analyze();
+}
+async function analyze(){
+  const text=document.getElementById('analyzeInput').value.trim();
+  if(!text)return;
+  const btn=event.target;btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Analitzant...';
+  setStatus('Analitzant sentiment...');
+  try{
+    const r=await fetch('/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})});
+    const d=await r.json();
+    const s=d.sentiment;
+    document.getElementById('sentText').textContent=text.substring(0,80)+'...';
+    const badge=document.getElementById('sentBadge');
+    const isPos=s.sentiment==='positive';
+    badge.textContent=isPos?'😊 Positiu':'😟 Negatiu';
+    badge.className='badge '+(isPos?'positive':'negative');
+    document.getElementById('sentScore').textContent=s.confidence?`(${(s.confidence*100).toFixed(0)}%)`:'';
+    document.getElementById('sentBox').style.display='block';
+    setStatus('Anàlisi completada ✓');
+  }catch(e){setStatus('Error: '+e.message);}
+  finally{btn.disabled=false;btn.innerHTML='Analitzar 🔍';}
+}
+async function loadHistory(){
+  const btn=event.target;btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Carregant...';
+  setStatus('Carregant historial de S3...');
+  try{
+    const r=await fetch('/history');
+    const items=await r.json();
+    const list=document.getElementById('historyList');
+    list.innerHTML=items.length?items.map(i=>`
+      <div class="history-item">
+        <span class="badge ${i.sentiment?.sentiment==='positive'?'positive':'negative'}">${i.sentiment?.sentiment==='positive'?'😊':'😟'} ${i.sentiment?.sentiment||'?'}</span>
+        <span style="margin-left:6px">${(i.text||'').substring(0,60)}...</span>
+        <div class="history-meta">${new Date(i.timestamp).toLocaleString('ca')}</div>
+      </div>`).join(''):'<p style="color:#999;font-size:0.85rem">Sense historial encara.</p>';
+    setStatus('Historial carregat ✓');
+  }catch(e){setStatus('Error S3: '+e.message);}
+  finally{btn.disabled=false;btn.innerHTML='Carregar historial';}
+}
+</script>
+</body>
+</html>
+EOF
