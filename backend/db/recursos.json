@@ -1,0 +1,139 @@
+[
+  {
+    "id": "REC001",
+    "nom": "Ajuda alimentària setmanal",
+    "tipus": "alimentació",
+    "keywords": [
+      "alimentació",
+      "fam",
+      "sense_ingressos",
+      "família",
+      "infants",
+      "pobresa"
+    ],
+    "quantitat_disponible": 50,
+    "unitat": "cistelles/setmana",
+    "centre_id": "CTR001",
+    "requisits": [
+      "empadronat",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC002",
+    "nom": "Ajuda pagament lloguer",
+    "tipus": "habitatge",
+    "keywords": [
+      "habitatge",
+      "lloguer",
+      "desnonament",
+      "inestabilitat_habitacional"
+    ],
+    "quantitat_disponible": 10,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR001",
+    "requisits": [
+      "ingressos_baixos",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC003",
+    "nom": "Roba i equipament llar",
+    "tipus": "espècie",
+    "keywords": [
+      "roba",
+      "equipament",
+      "necessitats_bàsiques",
+      "família",
+      "infants"
+    ],
+    "quantitat_disponible": 100,
+    "unitat": "lots",
+    "centre_id": "CTR001",
+    "requisits": []
+  },
+  {
+    "id": "REC004",
+    "nom": "Assessoria jurídica immigració",
+    "tipus": "legal",
+    "keywords": [
+      "situació_irregular",
+      "documentació",
+      "immigració",
+      "extracomunitari"
+    ],
+    "quantitat_disponible": 20,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR001",
+    "requisits": [
+      "situació_irregular"
+    ]
+  },
+  {
+    "id": "REC005",
+    "nom": "Orientació laboral i CV",
+    "tipus": "inserció_laboral",
+    "keywords": [
+      "atur",
+      "sense_feina",
+      "inserció_laboral",
+      "formació",
+      "joves"
+    ],
+    "quantitat_disponible": 30,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR001",
+    "requisits": []
+  },
+  {
+    "id": "REC006",
+    "nom": "Suport escolar infants",
+    "tipus": "educació",
+    "keywords": [
+      "infants",
+      "educació",
+      "suport_escolar",
+      "família",
+      "menors"
+    ],
+    "quantitat_disponible": 25,
+    "unitat": "places",
+    "centre_id": "CTR001",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC007",
+    "nom": "Atenció psicosocial",
+    "tipus": "salut_mental",
+    "keywords": [
+      "salut_mental",
+      "ansietat",
+      "acompanyament_psicològic",
+      "soledat",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 15,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR001",
+    "requisits": []
+  },
+  {
+    "id": "REC008",
+    "nom": "Transport i acompanyament sanitari",
+    "tipus": "salut",
+    "keywords": [
+      "salut",
+      "malaltia",
+      "mobilitat",
+      "gent_gran",
+      "discapacitat"
+    ],
+    "quantitat_disponible": 20,
+    "unitat": "serveis/mes",
+    "centre_id": "CTR001",
+    "requisits": []
+  }
+]

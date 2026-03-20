@@ -1,0 +1,88 @@
+[
+  {
+    "id": "ORG001",
+    "nom": "Creu Roja Tarragona",
+    "tipus": "ONG",
+    "serveis": [
+      "alimentació",
+      "roba",
+      "acompanyament_sanitari",
+      "transport"
+    ],
+    "keywords": [
+      "salut",
+      "malaltia",
+      "mobilitat",
+      "gent_gran",
+      "urgència"
+    ],
+    "contacte": "tarragona@creuroja.org",
+    "municipi": "Tarragona",
+    "lat": 41.121,
+    "lng": 1.245,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG002",
+    "nom": "SAIER Tarragona",
+    "tipus": "servei_públic",
+    "serveis": [
+      "assessoria_jurídica",
+      "documentació",
+      "acollida_immigrants"
+    ],
+    "keywords": [
+      "situació_irregular",
+      "immigració",
+      "documentació",
+      "extracomunitari"
+    ],
+    "contacte": "saier@tarragona.cat",
+    "municipi": "Tarragona",
+    "lat": 41.119,
+    "lng": 1.243,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG003",
+    "nom": "Hàbitat3 Tarragona",
+    "tipus": "ONG",
+    "serveis": [
+      "habitatge_social",
+      "mediació_habitatge",
+      "allotjament_temporal"
+    ],
+    "keywords": [
+      "habitatge",
+      "desnonament",
+      "sense_llar",
+      "urgència_habitatge"
+    ],
+    "contacte": "tarragona@habitat3.org",
+    "municipi": "Tarragona",
+    "lat": 41.118,
+    "lng": 1.246,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG004",
+    "nom": "SOC Reus",
+    "tipus": "servei_públic",
+    "serveis": [
+      "orientació_laboral",
+      "formació_ocupacional",
+      "borsa_treball"
+    ],
+    "keywords": [
+      "atur",
+      "inserció_laboral",
+      "formació",
+      "sense_feina"
+    ],
+    "contacte": "soc.reus@gencat.cat",
+    "municipi": "Reus",
+    "lat": 41.156,
+    "lng": 1.106,
+    "conveni_caritas": false
+  }
+]

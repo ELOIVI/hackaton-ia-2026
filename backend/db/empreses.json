@@ -1,0 +1,60 @@
+[
+  {
+    "id": "EMP001",
+    "nom": "Repsol Tarragona",
+    "tipus_col·laboració": [
+      "voluntariat_corporatiu",
+      "donació_econòmica"
+    ],
+    "recursos_oferts": [
+      "formació_laboral",
+      "orientació_professional"
+    ],
+    "keywords": [
+      "inserció_laboral",
+      "formació",
+      "joves",
+      "atur"
+    ],
+    "contacte": "rse@repsol.com",
+    "hores_voluntariat_disponibles": 40
+  },
+  {
+    "id": "EMP002",
+    "nom": "Port de Tarragona",
+    "tipus_col·laboració": [
+      "donació_espècie",
+      "voluntariat_corporatiu"
+    ],
+    "recursos_oferts": [
+      "material_oficina",
+      "espais_formació"
+    ],
+    "keywords": [
+      "formació",
+      "educació",
+      "joves"
+    ],
+    "contacte": "rse@porttarragona.cat",
+    "hores_voluntariat_disponibles": 20
+  },
+  {
+    "id": "EMP003",
+    "nom": "Mercadona Tarragona",
+    "tipus_col·laboració": [
+      "donació_espècie"
+    ],
+    "recursos_oferts": [
+      "alimentació",
+      "productes_primera_necessitat"
+    ],
+    "keywords": [
+      "alimentació",
+      "necessitats_bàsiques",
+      "família",
+      "pobresa"
+    ],
+    "contacte": "donacions@mercadona.es",
+    "hores_voluntariat_disponibles": 0
+  }
+]

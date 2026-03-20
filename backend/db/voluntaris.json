@@ -1,0 +1,444 @@
+[
+  {
+    "id": "VOL001",
+    "nom": "Joaquim Calvo Royo",
+    "rol": "Direcció",
+    "projecte": "Voluntariat",
+    "email": "jcalvo@caritasdtarragona.cat",
+    "telefon": "689 752 328",
+    "municipi": "VALLS",
+    "lat": 41.2867,
+    "lng": 1.25,
+    "habilitats": [
+      "acompanyament",
+      "orientació",
+      "gestió"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_tarda"
+    ],
+    "max_persones": 5,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL002",
+    "nom": "Joan París (administrador)",
+    "rol": "Administració",
+    "projecte": "Voluntariat",
+    "email": "jparis.caac@caritasdtarragona.cat",
+    "telefon": "",
+    "municipi": "VALLS",
+    "lat": 41.2867,
+    "lng": 1.25,
+    "habilitats": [
+      "acompanyament",
+      "orientació",
+      "gestió"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_tarda"
+    ],
+    "max_persones": 5,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL003",
+    "nom": "Dolors Sabaté bonet",
+    "rol": "Direcció",
+    "projecte": "Voluntariat",
+    "email": "dsabate@caritasdtarragona.cat",
+    "telefon": "629 904 445",
+    "municipi": "CAMBRILS",
+    "lat": 41.0674,
+    "lng": 1.058,
+    "habilitats": [
+      "acompanyament",
+      "orientació",
+      "gestió"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_tarda"
+    ],
+    "max_persones": 5,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL004",
+    "nom": "M. Del Carme Perelló Timodena",
+    "rol": "Direcció",
+    "projecte": "Voluntariat",
+    "email": "mcperello@caritasdtarragona.cat",
+    "telefon": "630 444 918",
+    "municipi": "EL VENDRELL",
+    "lat": 41.2183,
+    "lng": 1.5358,
+    "habilitats": [
+      "acompanyament",
+      "orientació",
+      "gestió"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_tarda"
+    ],
+    "max_persones": 5,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL005",
+    "nom": "Montserrat Palau Cruixent",
+    "rol": "Direcció",
+    "projecte": "Voluntariat",
+    "email": "mpalaucruixent@caritasdtarragona.cat",
+    "telefon": "680 406 795",
+    "municipi": "MONTBLANC",
+    "lat": 41.3833,
+    "lng": 1.1667,
+    "habilitats": [
+      "acompanyament",
+      "orientació",
+      "gestió"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_tarda"
+    ],
+    "max_persones": 5,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL006",
+    "nom": "Pilar Guil Martinez",
+    "rol": "Direcció",
+    "projecte": "Voluntariat",
+    "email": "pguil@caritasdtarragona.cat",
+    "telefon": "606 34 52 87",
+    "municipi": "FALSET",
+    "lat": 41.15,
+    "lng": 0.8167,
+    "habilitats": [
+      "acompanyament",
+      "orientació",
+      "gestió"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_tarda"
+    ],
+    "max_persones": 5,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL007",
+    "nom": "Miquel M. Aragonès",
+    "rol": "Direcció",
+    "projecte": "Voluntariat",
+    "email": "maragones.cir@caritasdtarragona.cat",
+    "telefon": "639 823 878",
+    "municipi": "CIR",
+    "lat": 41.1189,
+    "lng": 1.2445,
+    "habilitats": [
+      "acompanyament",
+      "orientació",
+      "gestió"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_tarda"
+    ],
+    "max_persones": 5,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL008",
+    "nom": "Joan Andreu Torres Sabaté",
+    "rol": "Direcció",
+    "projecte": "Voluntariat",
+    "email": "jatorres@caritasdtarragona.cat",
+    "telefon": "",
+    "municipi": "CIT",
+    "lat": 41.1189,
+    "lng": 1.2445,
+    "habilitats": [
+      "acompanyament",
+      "orientació",
+      "gestió"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_tarda"
+    ],
+    "max_persones": 5,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL009",
+    "nom": "Pere Bosque Ripollés",
+    "rol": "Direcció",
+    "projecte": "Voluntariat",
+    "email": "pbosque.cpt@caritasdtarragona.cat",
+    "telefon": "636 897 371",
+    "municipi": "TORREDEMBARRA",
+    "lat": 41.1467,
+    "lng": 1.3961,
+    "habilitats": [
+      "acompanyament",
+      "orientació",
+      "gestió"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_tarda"
+    ],
+    "max_persones": 5,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL010",
+    "nom": "Joan Ramirez Lara",
+    "rol": "Administració",
+    "projecte": "Voluntariat",
+    "email": "jramirez@caritasdtarragona.cat",
+    "telefon": "",
+    "municipi": "TORREDEMBARRA",
+    "lat": 41.1467,
+    "lng": 1.3961,
+    "habilitats": [
+      "acompanyament",
+      "orientació",
+      "gestió"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_tarda"
+    ],
+    "max_persones": 5,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL011",
+    "nom": "Esteve Tomàs",
+    "rol": "Direcció",
+    "projecte": "Voluntariat",
+    "email": "etomas@caritasdtarragona.cat",
+    "telefon": "",
+    "municipi": "SALOU",
+    "lat": 41.0752,
+    "lng": 1.1422,
+    "habilitats": [
+      "acompanyament",
+      "orientació",
+      "gestió"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_tarda"
+    ],
+    "max_persones": 5,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL012",
+    "nom": "M. Carme Vallvè fortuny",
+    "rol": "Direcció",
+    "projecte": "Voluntariat",
+    "email": "cvallve@caritasdtarragona.cat",
+    "telefon": "",
+    "municipi": "VILALLONGA DEL CAMP",
+    "lat": 41.1189,
+    "lng": 1.2445,
+    "habilitats": [
+      "acompanyament",
+      "orientació",
+      "gestió"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_tarda"
+    ],
+    "max_persones": 5,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL013",
+    "nom": "Teresa Vidal Tost",
+    "rol": "Direcció",
+    "projecte": "Voluntariat",
+    "email": "tvidal@caritasdtarragona.cat",
+    "telefon": "639 97 58 54",
+    "municipi": "ARBECA",
+    "lat": 41.1189,
+    "lng": 1.2445,
+    "habilitats": [
+      "acompanyament",
+      "orientació",
+      "gestió"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_tarda"
+    ],
+    "max_persones": 5,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL014",
+    "nom": "Anna P.",
+    "rol": "Voluntari/a",
+    "projecte": "Acollida i Acompanyament",
+    "email": "voluntari14@caritasdtarragona.cat",
+    "telefon": "",
+    "municipi": "Tarragona",
+    "lat": 41.1189,
+    "lng": 1.2445,
+    "habilitats": [
+      "alimentació",
+      "logística",
+      "repartiment"
+    ],
+    "disponibilitat": [
+      "dimarts_tarda",
+      "dijous_tarda"
+    ],
+    "max_persones": 4,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL015",
+    "nom": "Pere M.",
+    "rol": "Voluntari/a",
+    "projecte": "Acollida i Acompanyament",
+    "email": "voluntari15@caritasdtarragona.cat",
+    "telefon": "",
+    "municipi": "Reus",
+    "lat": 41.1561,
+    "lng": 1.1065,
+    "habilitats": [
+      "assessoria_jurídica",
+      "situació_irregular",
+      "documentació"
+    ],
+    "disponibilitat": [
+      "dilluns_tarda",
+      "divendres_mati"
+    ],
+    "max_persones": 4,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL016",
+    "nom": "Laura F.",
+    "rol": "Voluntari/a",
+    "projecte": "Acollida i Acompanyament",
+    "email": "voluntari16@caritasdtarragona.cat",
+    "telefon": "",
+    "municipi": "Valls",
+    "lat": 41.2867,
+    "lng": 1.25,
+    "habilitats": [
+      "inserció_laboral",
+      "formació",
+      "orientació_professional"
+    ],
+    "disponibilitat": [
+      "dimecres_mati",
+      "dijous_mati"
+    ],
+    "max_persones": 4,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL017",
+    "nom": "Jordi S.",
+    "rol": "Voluntari/a",
+    "projecte": "Acollida i Acompanyament",
+    "email": "voluntari17@caritasdtarragona.cat",
+    "telefon": "",
+    "municipi": "Tarragona",
+    "lat": 41.1189,
+    "lng": 1.2445,
+    "habilitats": [
+      "atenció_infants",
+      "suport_escolar",
+      "família"
+    ],
+    "disponibilitat": [
+      "dilluns_tarda",
+      "dimarts_tarda"
+    ],
+    "max_persones": 4,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL018",
+    "nom": "Montse R.",
+    "rol": "Voluntari/a",
+    "projecte": "Acollida i Acompanyament",
+    "email": "voluntari18@caritasdtarragona.cat",
+    "telefon": "",
+    "municipi": "Cambrils",
+    "lat": 41.0674,
+    "lng": 1.058,
+    "habilitats": [
+      "salut_mental",
+      "acompanyament_psicològic",
+      "gent_gran"
+    ],
+    "disponibilitat": [
+      "dimecres_tarda",
+      "divendres_tarda"
+    ],
+    "max_persones": 4,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL019",
+    "nom": "Carles B.",
+    "rol": "Voluntari/a",
+    "projecte": "Acollida i Acompanyament",
+    "email": "voluntari19@caritasdtarragona.cat",
+    "telefon": "",
+    "municipi": "Tarragona",
+    "lat": 41.1189,
+    "lng": 1.2445,
+    "habilitats": [
+      "habitatge",
+      "mediació",
+      "desnonament"
+    ],
+    "disponibilitat": [
+      "dimarts_mati",
+      "dijous_mati"
+    ],
+    "max_persones": 4,
+    "persones_actuals": 0
+  },
+  {
+    "id": "VOL020",
+    "nom": "Fàtima A.",
+    "rol": "Voluntari/a",
+    "projecte": "Acollida i Acompanyament",
+    "email": "voluntari20@caritasdtarragona.cat",
+    "telefon": "",
+    "municipi": "Reus",
+    "lat": 41.1561,
+    "lng": 1.1065,
+    "habilitats": [
+      "català",
+      "castellà",
+      "àrab",
+      "traducció",
+      "acollida"
+    ],
+    "disponibilitat": [
+      "dilluns_mati",
+      "dimecres_mati"
+    ],
+    "max_persones": 4,
+    "persones_actuals": 0
+  }
+]
