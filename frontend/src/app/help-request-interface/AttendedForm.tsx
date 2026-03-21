@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowLeft, Send, Loader2, Sparkles, MapPin, Phone, Clock } from 'lucide-react';
-import { API_BASE } from '@/lib/api';
+import { ArrowLeft, Send, Loader2, Sparkles, MapPin, Phone, Clock, Volume2, VolumeX } from 'lucide-react';
+import { API_BASE, getAuthHeaders } from '@/lib/api';
 
 interface Message { role: 'assistant' | 'user'; content: string; }
 
@@ -12,8 +12,32 @@ export default function AttendedForm({ onBack }: { onBack: () => void }) {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [matchResult, setMatchResult] = useState<Record<string,unknown> | null>(null);
+  const [isReading, setIsReading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
+  useEffect(() => {
+    return () => { if (typeof window !== 'undefined' && 'speechSynthesis' in window) window.speechSynthesis.cancel(); };
+  }, []);
+
+  const toggleVoiceReader = () => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+    if (isReading || window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
+      setIsReading(false);
+      return;
+    }
+    const text = (containerRef.current?.textContent || '').replace(/\s+/g, ' ').trim();
+    if (!text) return;
+    const utterance = new SpeechSynthesisUtterance(text.slice(0, 4000));
+    utterance.lang = 'ca-ES';
+    utterance.rate = 0.96;
+    utterance.onend = () => setIsReading(false);
+    utterance.onerror = () => setIsReading(false);
+    setIsReading(true);
+    window.speechSynthesis.speak(utterance);
+  };
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
@@ -25,7 +49,10 @@ export default function AttendedForm({ onBack }: { onBack: () => void }) {
     try {
       const res = await fetch(`${API_BASE}/chat/persona`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...getAuthHeaders(),
+        },
         body: JSON.stringify({ history: newMessages.slice(0, -1), message: userMessage }),
       });
       const data = await res.json().catch(() => ({}));
@@ -34,7 +61,6 @@ export default function AttendedForm({ onBack }: { onBack: () => void }) {
         setMessages([...newMessages, { role: 'assistant', content: `No hem pogut processar la consulta: ${backendError}` }]);
         return;
       }
-
       const responseText = typeof data?.response === 'string' ? data.response : 'No hi ha resposta disponible.';
       setMessages([...newMessages, { role: 'assistant', content: responseText }]);
       if (data.ready && data.match) setMatchResult(data.match);
@@ -44,13 +70,18 @@ export default function AttendedForm({ onBack }: { onBack: () => void }) {
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-8 pb-28 md:pb-8">
+    <div ref={containerRef} className="max-w-2xl mx-auto px-4 py-8 pb-28 md:pb-8">
       <div className="flex items-center gap-3 mb-8">
         <button onClick={onBack} className="p-2 rounded-xl hover:bg-gray-100 text-gray-500"><ArrowLeft size={20} /></button>
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Necessito Ajuda</h1>
-          <p className="text-sm text-gray-500">L'IA de Càritas et connectarà amb els recursos adequats</p>
+          <p className="text-sm text-gray-500">L&apos;IA de Càritas et connectarà amb els recursos adequats</p>
         </div>
+        <button onClick={toggleVoiceReader}
+          aria-label={isReading ? 'Atura lectura en veu alta' : 'Llegeix aquesta pantalla en veu alta'}
+          className={`ml-auto p-2 rounded-xl transition-all duration-150 ${isReading ? 'bg-purple-100 text-purple-700' : 'text-gray-500 hover:bg-gray-100'}`}>
+          {isReading ? <VolumeX size={18} /> : <Volume2 size={18} />}
+        </button>
       </div>
 
       <div className="space-y-4 mb-6">

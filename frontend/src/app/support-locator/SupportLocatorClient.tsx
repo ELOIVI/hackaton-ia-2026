@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Loader2, Sparkles, MapPin, Phone, Clock, X, ChevronRight, Search } from 'lucide-react';
+import { Loader2, Sparkles, MapPin, X, ChevronRight, Search } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 export const ATTENTION_CENTERS = [
@@ -16,8 +16,18 @@ const SERVICE_LABELS: Record<string, { label: string; cls: string }> = {
   habitatge: { label: 'Habitatge', cls: 'badge-habitatge' }, alimentació: { label: 'Alimentació', cls: 'badge-alimentacio' },
   economia: { label: 'Economia', cls: 'badge-economia' }, documentació: { label: 'Documentació', cls: 'badge-documentacio' },
   salut: { label: 'Salut', cls: 'badge-salut' }, educació: { label: 'Educació', cls: 'badge-solitud' },
+  general: { label: 'General', cls: 'bg-gray-100 text-gray-700' },
 };
 const ALL_SERVICES = Object.keys(SERVICE_LABELS);
+
+const SERVICE_KEYWORDS: Record<string, string[]> = {
+  habitatge: ['habitatge', 'vivienda', 'housing', 'pis', 'casa', 'hogar', 'dormir', 'lloguer', 'alquiler', 'rent'],
+  alimentació: ['alimentació', 'alimentacion', 'food', 'menjar', 'comida', 'aliments', 'alimentos'],
+  economia: ['economia', 'economía', 'money', 'diners', 'dinero', 'deute', 'deuda', 'factura', 'facturas'],
+  documentació: ['documentació', 'documentacion', 'documentation', 'papers', 'papeles', 'dni', 'nie', 'permiso'],
+  salut: ['salut', 'salud', 'health', 'metge', 'medico', 'médico', 'hospital', 'medicina'],
+  educació: ['educació', 'educacion', 'education', 'escola', 'escuela', 'school', 'estudi', 'estudio'],
+};
 
 const SupportMap = dynamic(() => import('./SupportMap'), { ssr: false, loading: () => (
   <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-2xl animate-pulse">
@@ -27,6 +37,30 @@ const SupportMap = dynamic(() => import('./SupportMap'), { ssr: false, loading: 
 
 interface AIResult { tipo_necessitat: string; urgencia: number; descripcio_breu: string; servei_recomanat: string; }
 
+function detectServiceFromQuery(query: string): string | null {
+  const normalized = query.trim().toLowerCase();
+  if (!normalized) return null;
+
+  for (const [service, keywords] of Object.entries(SERVICE_KEYWORDS)) {
+    if (keywords.some((keyword) => normalized.includes(keyword))) {
+      return service;
+    }
+  }
+
+  return null;
+}
+
+function searchCenters(query: string, service: string | null) {
+  const normalized = query.trim().toLowerCase();
+
+  return ATTENTION_CENTERS.filter((center) => {
+    const matchesService = !service || center.services.includes(service);
+    const haystack = `${center.name} ${center.address} ${center.district} ${center.services.join(' ')}`.toLowerCase();
+    const matchesText = !normalized || haystack.includes(normalized);
+    return matchesService && matchesText;
+  });
+}
+
 export default function SupportLocatorClient() {
   const [filterService, setFilterService] = useState<string | null>(null);
   const [selectedCenter, setSelectedCenter] = useState<typeof ATTENTION_CENTERS[0] | null>(null);
@@ -34,7 +68,6 @@ export default function SupportLocatorClient() {
   const [aiResult, setAiResult] = useState<AIResult | null>(null);
   const [highlightedCenters, setHighlightedCenters] = useState<typeof ATTENTION_CENTERS>([]);
   const [showAiPanel, setShowAiPanel] = useState(false);
-  const [apiKey, setApiKey] = useState('');
   const [queryInput, setQueryInput] = useState('');
   const [textFilter, setTextFilter] = useState('');
 
@@ -49,26 +82,36 @@ export default function SupportLocatorClient() {
     setIsAnalyzing(true); setShowAiPanel(true);
 
     try {
-      let result: AIResult;
-      if (apiKey) {
-        const prompt = `Ets un assistent social de Càritas. Identifica el tipus de necessitat principal i retorna JSON: {"tipo_necessitat": string, "urgencia": número 1-3, "descripcio_breu": string, "servei_recomanat": string}. Situació: "${queryInput}"`;
-        const response = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST', headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-          body: JSON.stringify({ model: 'claude-opus-4-5', max_tokens: 256, messages: [{ role: 'user', content: prompt }] }),
-        });
-        if (response.ok) { const data = await response.json(); result = JSON.parse(data.content[0].text.trim()); }
-        else throw new Error('API error');
+      await new Promise((r) => setTimeout(r, 280));
+      const detectedService = detectServiceFromQuery(queryInput);
+      const centers = searchCenters(queryInput, detectedService);
+      setTextFilter(queryInput.trim());
+
+      if (centers.length > 0) {
+        const servei = detectedService
+          ? SERVICE_LABELS[detectedService]?.label || 'Atenció general'
+          : 'Atenció general';
+        const result: AIResult = {
+          tipo_necessitat: detectedService || 'general',
+          urgencia: detectedService ? 2 : 1,
+          descripcio_breu: detectedService
+            ? `Hem detectat necessitat de ${detectedService}. Podem ajudar-te.`
+            : `Hem trobat ${centers.length} centre(s) relacionat(s) amb la teva cerca.`,
+          servei_recomanat: servei,
+        };
+        setAiResult(result);
+        setHighlightedCenters(centers.slice(0, 3));
+        setFilterService(detectedService);
       } else {
-        await new Promise((r) => setTimeout(r, 1500));
-        const lower = queryInput.toLowerCase();
-        let tipo = 'economia'; let servei = 'Assessorament econòmic';
-        if (lower.includes('pis') || lower.includes('dormir')) { tipo = 'habitatge'; servei = 'Servei d\'habitatge'; }
-        else if (lower.includes('menjar')) { tipo = 'alimentació'; servei = 'Banc d\'aliments'; }
-        result = { tipo_necessitat: tipo, urgencia: 2, descripcio_breu: `Hem detectat necessitat de ${tipo}. Podem ajudar-te.`, servei_recomanat: servei };
+        setAiResult({
+          tipo_necessitat: 'general',
+          urgencia: 1,
+          descripcio_breu: 'Ho sentim, no hem trobat la teva cerca.',
+          servei_recomanat: 'Atenció general',
+        });
+        setHighlightedCenters([]);
+        setFilterService(null);
       }
-      setAiResult(result);
-      const relevant = ATTENTION_CENTERS.filter((c) => c.services.includes(result.tipo_necessitat)).slice(0, 3);
-      setHighlightedCenters(relevant); setFilterService(result.tipo_necessitat);
     } catch {
       setAiResult({ tipo_necessitat: 'general', urgencia: 1, descripcio_breu: 'Podem ajudar-te. Contacta amb el centre més proper.', servei_recomanat: 'Atenció general' });
       setHighlightedCenters(ATTENTION_CENTERS.slice(0, 3));
@@ -93,7 +136,6 @@ export default function SupportLocatorClient() {
             {ALL_SERVICES.map((s) => (
               <button key={s} onClick={() => setFilterService(filterService === s ? null : s)} className={`flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium ${filterService === s ? 'text-white' :'bg-gray-100 text-gray-600'}`} style={filterService === s ? { background: '#C8102E' } : {}}>{SERVICE_LABELS[s].label}</button>
             ))}
-            <input type="password" value={apiKey} onChange={(e) => setApiKey(e.target.value)} placeholder="API Key (opcional)" className="ml-auto flex-shrink-0 px-3 py-1.5 text-xs border border-dashed border-gray-300 rounded-lg w-32 focus:outline-none" />
           </div>
         </div>
       </div>
@@ -102,14 +144,17 @@ export default function SupportLocatorClient() {
         <div className="w-80 xl:w-96 flex-shrink-0 bg-white border-r border-gray-100 overflow-y-auto hidden md:block">
           {showAiPanel && (
             <div className="m-3 rounded-xl p-4 border animate-fade-in-up" style={{ background: 'rgba(200,16,46,0.04)', borderColor: 'rgba(200,16,46,0.2)' }}>
-              <div className="flex justify-between mb-2"><div className="flex items-center gap-1.5"><Sparkles size={14} style={{ color: '#C8102E' }} /><span className="text-xs font-semibold text-gray-400">Anàlisi IA</span></div><button onClick={() => setShowAiPanel(false)}><X size={14} className="text-gray-400" /></button></div>
-              {isAnalyzing ? <div className="flex items-center gap-2 text-sm text-gray-500 py-2"><Loader2 size={14} className="animate-spin" />Analitzant...</div> : aiResult && (
+              <div className="flex justify-between mb-2"><div className="flex items-center gap-1.5"><Sparkles size={14} style={{ color: '#C8102E' }} /><span className="text-xs font-semibold text-gray-400">Resultat de cerca</span></div><button onClick={() => setShowAiPanel(false)}><X size={14} className="text-gray-400" /></button></div>
+              {isAnalyzing ? <div className="flex items-center gap-2 text-sm text-gray-500 py-2"><Loader2 size={14} className="animate-spin" />Cercant...</div> : aiResult && (
                 <><div className="flex gap-2 mb-2"><span className={`text-xs px-2 py-0.5 rounded-full ${SERVICE_LABELS[aiResult.tipo_necessitat]?.cls}`}>{aiResult.tipo_necessitat}</span><span className={`text-xs px-2 py-0.5 rounded-full ${urgencyConfig(aiResult.urgencia).cls}`}>{urgencyConfig(aiResult.urgencia).icon} {urgencyConfig(aiResult.urgencia).label}</span></div><p className="text-sm text-gray-700">{aiResult.descripcio_breu}</p></>
               )}
             </div>
           )}
           <div className="px-4 py-3 flex justify-between border-b border-gray-100"><span className="text-sm font-semibold">{filteredCenters.length} centres</span></div>
           <div className="divide-y divide-gray-50">
+            {filteredCenters.length === 0 && (
+              <div className="px-4 py-6 text-sm text-gray-500">Ho sentim, no hem trobat la teva cerca.</div>
+            )}
             {filteredCenters.map((center) => (
               <button key={center.id} onClick={() => setSelectedCenter(selectedCenter?.id === center.id ? null : center)} className={`w-full text-left px-4 py-4 hover:bg-gray-50 ${selectedCenter?.id === center.id ? 'bg-red-50' : ''}`}>
                 <div className="flex justify-between mb-1.5">

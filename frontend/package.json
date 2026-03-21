@@ -12,6 +12,7 @@
     "@heroicons/react": "^2.2.0",
     "@tailwindcss/typography": "^0.5.19",
     "autoprefixer": "^10.4.27",
+    "face-api.js": "^0.22.2",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.577.0",
     "next": "15.5.14",

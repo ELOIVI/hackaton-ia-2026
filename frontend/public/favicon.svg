@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Red background -->
+  <rect width="64" height="64" fill="#C8102E" rx="12"/>
+  <!-- White "C" letter -->
+  <text x="32" y="48" font-size="48" font-weight="bold" fill="white" text-anchor="middle" font-family="Arial, sans-serif">C</text>
+</svg>

@@ -16,7 +16,11 @@ def rate_limited(max_requests: int, window_seconds: int):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            client_ip = request.headers.get("X-Forwarded-For", request.remote_addr or "unknown")
+            forwarded_for = request.headers.get("X-Forwarded-For", "")
+            if forwarded_for:
+                client_ip = forwarded_for.split(",")[0].strip() or "unknown"
+            else:
+                client_ip = request.remote_addr or "unknown"
             endpoint = request.path
             now = time.time()
             key = f"{client_ip}:{endpoint}"

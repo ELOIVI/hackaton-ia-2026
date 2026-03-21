@@ -1,11 +1,16 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowLeft, Send, Loader2, Sparkles, MapPin, Phone, Clock, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Send, Loader2, Sparkles, MapPin, Phone, Clock, Eye, EyeOff, ScanFace } from 'lucide-react';
 import { API_BASE, authLogin, authRegister, getAuthHeaders } from '@/lib/api';
+import FaceIdLogin from '@/components/FaceIdLogin';
 
 interface Message { role: 'assistant' | 'user'; content: string; }
 
 type Step = 'login' | 'register' | 'chatbot' | 'dashboard';
+
+function getVolunteerFaceIdKey(email: string): string {
+  return `faceid:voluntari:${email.trim().toLowerCase()}`;
+}
 
 export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void; onLogin: (data: unknown) => void }) {
   const [step, setStep] = useState<Step>('login');
@@ -20,8 +25,40 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
   const [authLoading, setAuthLoading] = useState(false);
   const [matchResult, setMatchResult] = useState<Record<string, unknown> | null>(null);
   const [userData, setUserData] = useState<Record<string, unknown> | null>(null);
+  const [showFaceId, setShowFaceId] = useState(false);
+  const [faceMode, setFaceMode] = useState<'login' | 'register'>('login');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
+
+  const openFaceId = (mode: 'login' | 'register') => {
+    setError('');
+
+    if (!form.email.trim()) {
+      setError('Introdueix l\'email per fer servir Face ID');
+      return;
+    }
+
+    if (mode === 'login' && !form.password.trim()) {
+      setError('Introdueix la contrasenya abans de validar amb Face ID');
+      return;
+    }
+
+    setFaceMode(mode);
+    setShowFaceId(true);
+  };
+
+  const handleFaceSuccess = async (faceDescriptor: Float32Array) => {
+    const storageKey = getVolunteerFaceIdKey(form.email);
+
+    if (faceMode === 'register') {
+      localStorage.setItem(storageKey, JSON.stringify(Array.from(faceDescriptor)));
+      setShowFaceId(false);
+      return;
+    }
+
+    setShowFaceId(false);
+    await handleLogin();
+  };
 
   const handleLogin = async () => {
     setError('');
@@ -120,6 +157,15 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
         <ArrowLeft size={20} /> Tornar
       </button>
       <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+        {showFaceId ? (
+          <FaceIdLogin
+            storageKey={getVolunteerFaceIdKey(form.email)}
+            mode={faceMode}
+            onSuccess={(descriptor) => { void handleFaceSuccess(descriptor); }}
+            onCancel={() => setShowFaceId(false)}
+          />
+        ) : (
+          <>
         <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style={{ background: 'rgba(200,16,46,0.1)' }}>
           <Sparkles size={28} style={{ color: '#C8102E' }} />
         </div>
@@ -146,15 +192,21 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
             style={{ background: '#C8102E' }}>
             {authLoading ? 'Validant...' : 'Iniciar sessió'}
           </button>
+          <button onClick={() => openFaceId('login')} disabled={authLoading}
+            className="w-full py-3 rounded-xl font-bold text-sm border border-red-100 text-red-700 hover:bg-red-50 flex items-center justify-center gap-2">
+            <ScanFace size={18} /> Verificar amb Face ID
+          </button>
         </div>
 
         <div className="mt-4 text-center">
           <button onClick={() => { setStep('register'); setError(''); }}
             className="text-sm text-gray-500 hover:text-gray-800 underline">
-            Nou voluntari? Registra't aquí
+            Nou voluntari? Registra&apos;t aquí
           </button>
         </div>
 
+          </>
+        )}
       </div>
     </div>
   );
@@ -166,6 +218,15 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
         <ArrowLeft size={20} /> Tornar
       </button>
       <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+        {showFaceId ? (
+          <FaceIdLogin
+            storageKey={getVolunteerFaceIdKey(form.email)}
+            mode={faceMode}
+            onSuccess={(descriptor) => { void handleFaceSuccess(descriptor); }}
+            onCancel={() => setShowFaceId(false)}
+          />
+        ) : (
+          <>
         <h1 className="text-2xl font-bold text-gray-900 mb-1">Nou voluntari/a</h1>
         <p className="text-sm text-gray-500 mb-6">La IA trobarà el projecte ideal per a tu</p>
 
@@ -191,7 +252,14 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
             style={{ background: '#C8102E' }}>
             {authLoading ? 'Registrant...' : 'Continuar amb la IA →'}
           </button>
+          <button onClick={() => openFaceId('register')} type="button" disabled={authLoading}
+            className="w-full py-3 rounded-xl font-bold text-sm border border-red-100 text-red-700 hover:bg-red-50 flex items-center justify-center gap-2">
+            <ScanFace size={18} /> Registrar Face ID (opcional)
+          </button>
         </div>
+        <p className="text-xs text-gray-400 mt-4">La verificació facial es vincula a l&apos;email d&apos;aquest formulari.</p>
+          </>
+        )}
       </div>
     </div>
   );
@@ -203,7 +271,7 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
         <button onClick={() => setStep('register')} className="p-2 rounded-xl hover:bg-gray-100 text-gray-500"><ArrowLeft size={20} /></button>
         <div>
           <h1 className="text-xl font-bold text-gray-900">Hola, {String(userData?.nom || '')}!</h1>
-          <p className="text-sm text-gray-500">L'IA t'assignarà el projecte ideal</p>
+          <p className="text-sm text-gray-500">L&apos;IA t&apos;assignarà el projecte ideal</p>
         </div>
       </div>
 

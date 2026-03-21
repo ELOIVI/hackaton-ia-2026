@@ -5,7 +5,8 @@ from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
 def _get_secret_key() -> str:
     secret = os.getenv("AUTH_SECRET_KEY") or os.getenv("SECRET_KEY")
     if not secret:
-        raise ValueError("AUTH_SECRET_KEY missing")
+        # Dev fallback to avoid hard crash in local environments.
+        secret = "caritas-local-dev-secret"
     return secret
 
 

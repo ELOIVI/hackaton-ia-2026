@@ -10,6 +10,9 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'Càritas Tarragona',
   description: 'Suport social i voluntariat.',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({

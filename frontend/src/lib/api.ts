@@ -112,3 +112,27 @@ export async function matchText(text: string) {
   if (!res.ok) throw new Error('Error connectant amb el servidor');
   return res.json();
 }
+
+export async function chatPersona(history: {role:string;content:string}[], message: string) {
+  return requestJson<{response:string;ready:boolean;match:unknown}>(
+    `${API_BASE}/chat/persona`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+      body: JSON.stringify({ history, message }),
+    },
+    'No hem pogut processar la consulta'
+  );
+}
+
+export async function chatVoluntari(history: {role:string;content:string}[], message: string) {
+  return requestJson<{response:string;ready:boolean;match:unknown}>(
+    `${API_BASE}/chat/voluntari`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+      body: JSON.stringify({ history, message }),
+    },
+    'No hem pogut processar la consulta'
+  );
+}

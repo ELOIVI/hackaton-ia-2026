@@ -1,6 +1,7 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import { Heart, MapPin, Clock, Users, Star, LogOut, ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Heart, MapPin, Clock, Users, Star, LogOut } from 'lucide-react';
+import { getStoredLang } from '@/lib/i18n';
 
 // Dades sintètiques de demo per mostrar el dashboard
 // En producció vindrien de S3 via el backend
@@ -23,8 +24,10 @@ const URGENCY_COLORS: Record<string, string> = {
 };
 
 export default function VolunteerDashboard({ user, onLogout }: { user: Record<string,unknown>; onLogout: () => void }) {
-  const [expedients, setExpedients] = useState(CASOS_DEMO);
+  const expedients = CASOS_DEMO;
   const [tab, setTab] = useState<'casos' | 'projectes'>('casos');
+  const lang = getStoredLang();
+  const dateLocale = lang === 'es' ? 'es-ES' : lang === 'en' ? 'en-US' : 'ca-ES';
 
   const actius = expedients.filter(e => e.estat === 'actiu').length;
   const tancats = expedients.filter(e => e.estat === 'tancat').length;
@@ -95,7 +98,7 @@ export default function VolunteerDashboard({ user, onLogout }: { user: Record<st
                 </div>
                 <div className="flex items-center gap-3 text-xs text-gray-400">
                   <span className="flex items-center gap-1"><MapPin size={10} />{cas.necessitat}</span>
-                  <span className="flex items-center gap-1"><Clock size={10} />{new Date(cas.data).toLocaleDateString('ca')}</span>
+                  <span className="flex items-center gap-1"><Clock size={10} />{new Date(cas.data).toLocaleDateString(dateLocale)}</span>
                 </div>
               </div>
               <div className={`text-xs font-medium px-2 py-1 rounded-lg ${cas.estat === 'actiu' ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-500'}`}>

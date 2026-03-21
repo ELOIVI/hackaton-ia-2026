@@ -1,7 +1,12 @@
 'use client';
 import React, { useState } from 'react';
-import { ArrowLeft, Shield, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Shield, Eye, EyeOff, ScanFace } from 'lucide-react';
 import { authLogin, authRegister } from '@/lib/api';
+import FaceIdLogin from '@/components/FaceIdLogin';
+
+function getWorkerFaceIdKey(email: string): string {
+  return `faceid:treballador:${email.trim().toLowerCase()}`;
+}
 
 export default function WorkerForm({ onBack, onLogin }: { onBack: () => void; onLogin: (data: unknown) => void }) {
   const [mode, setMode] = useState<'login' | 'register'>('login');
@@ -14,6 +19,40 @@ export default function WorkerForm({ onBack, onLogin }: { onBack: () => void; on
     password: '',
   });
   const [error, setError] = useState('');
+  const [showFaceId, setShowFaceId] = useState(false);
+  const [faceMode, setFaceMode] = useState<'login' | 'register'>('login');
+
+  const handlePasswordLogin = async () => {
+    const auth = await authLogin(formData.email, formData.password);
+    if (auth.user.role !== 'treballador') {
+      setError('Aquest compte no és de treballador/a');
+      return;
+    }
+    onLogin({
+      role: auth.user.role,
+      name: auth.user.nom,
+      email: auth.user.email,
+      location: auth.user.location,
+      token: auth.token,
+    });
+  };
+
+  const handleWorkerRegister = async () => {
+    const auth = await authRegister({
+      role: 'treballador',
+      nom: formData.name,
+      location: formData.location,
+      email: formData.email,
+      password: formData.password,
+    });
+    onLogin({
+      role: auth.user.role,
+      name: auth.user.nom,
+      email: auth.user.email,
+      location: auth.user.location,
+      token: auth.token,
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,18 +61,7 @@ export default function WorkerForm({ onBack, onLogin }: { onBack: () => void; on
 
     if (mode === 'login') {
       try {
-        const auth = await authLogin(formData.email, formData.password);
-        if (auth.user.role !== 'treballador') {
-          setError('Aquest compte no és de treballador/a');
-          return;
-        }
-        onLogin({
-          role: auth.user.role,
-          name: auth.user.nom,
-          email: auth.user.email,
-          location: auth.user.location,
-          token: auth.token,
-        });
+        await handlePasswordLogin();
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Credencials corporatives no vàlides');
       } finally {
@@ -49,22 +77,45 @@ export default function WorkerForm({ onBack, onLogin }: { onBack: () => void; on
     }
 
     try {
-      const auth = await authRegister({
-        role: 'treballador',
-        nom: formData.name,
-        location: formData.location,
-        email: formData.email,
-        password: formData.password,
-      });
-      onLogin({
-        role: auth.user.role,
-        name: auth.user.nom,
-        email: auth.user.email,
-        location: auth.user.location,
-        token: auth.token,
-      });
+      await handleWorkerRegister();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'No s\'ha pogut completar el registre');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const openFaceId = (targetMode: 'login' | 'register') => {
+    setError('');
+
+    if (!formData.email.trim()) {
+      setError('Introdueix l\'email per fer servir Face ID');
+      return;
+    }
+
+    if (targetMode === 'login' && !formData.password.trim()) {
+      setError('Introdueix la contrasenya abans de validar amb Face ID');
+      return;
+    }
+
+    setFaceMode(targetMode);
+    setShowFaceId(true);
+  };
+
+  const handleFaceSuccess = async (descriptor: Float32Array) => {
+    if (faceMode === 'register') {
+      localStorage.setItem(getWorkerFaceIdKey(formData.email), JSON.stringify(Array.from(descriptor)));
+      setShowFaceId(false);
+      return;
+    }
+
+    setShowFaceId(false);
+    setSubmitting(true);
+    setError('');
+    try {
+      await handlePasswordLogin();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Credencials corporatives no vàlides');
     } finally {
       setSubmitting(false);
     }
@@ -76,6 +127,15 @@ export default function WorkerForm({ onBack, onLogin }: { onBack: () => void; on
         <ArrowLeft size={20} /> Tornar
       </button>
       <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+        {showFaceId ? (
+          <FaceIdLogin
+            storageKey={getWorkerFaceIdKey(formData.email)}
+            mode={faceMode}
+            onSuccess={(descriptor) => { void handleFaceSuccess(descriptor); }}
+            onCancel={() => setShowFaceId(false)}
+          />
+        ) : (
+          <>
         <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 bg-emerald-50">
           <Shield size={28} className="text-emerald-600" />
         </div>
@@ -114,12 +174,20 @@ export default function WorkerForm({ onBack, onLogin }: { onBack: () => void; on
             className="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
             <Shield size={18} /> {submitting ? 'Enviant...' : mode === 'login' ? 'Iniciar Sessió Segura' : 'Registrar treballador/a'}
           </button>
+          <button type="button" onClick={() => openFaceId(mode)} disabled={submitting}
+            className="w-full py-3 rounded-xl font-bold text-sm border border-emerald-100 text-emerald-700 hover:bg-emerald-50 flex items-center justify-center gap-2">
+            <ScanFace size={18} /> {mode === 'login' ? 'Verificar amb Face ID' : 'Registrar Face ID (opcional)'}
+          </button>
         </form>
+
+        <p className="text-xs text-gray-400 mt-4">La verificació facial es vincula a l&apos;email d&apos;aquest formulari.</p>
 
         <button onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setError(''); }}
           className="w-full mt-4 text-sm text-gray-400 hover:text-gray-600 underline">
           {mode === 'login' ? 'Crear compte intern' : 'Ja tens compte? Inicia sessió'}
         </button>
+          </>
+        )}
       </div>
     </div>
   );
