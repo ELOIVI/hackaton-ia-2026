@@ -5,20 +5,19 @@
 
 from flask import Blueprint, request, jsonify
 import json
-import sys, os
-
-# Afegim el directori backend/ al path per poder importar els mòduls del motor
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-os.chdir(os.path.join(os.path.dirname(__file__), ".."))
+import os
+import logging
 
 from engine.keyword_parser import extract_keywords
 from engine.gemini_analyst import analyze_with_gemini
 from engine.matcher import match_all
+from gemini_call import call_gemini
 from utils.json_utils import parse_json_object_from_llm
 from utils.rate_limit import rate_limited
 from utils.validation import validate_fitxa_payload
 
 match_bp = Blueprint("match", __name__)
+logger = logging.getLogger(__name__)
 
 
 @match_bp.route("/match", methods=["POST"])
@@ -116,18 +115,12 @@ tipus_ingressos: 3 (sense ingressos), 6 (IMV), 7 (serveis socials), 8 (RGC)
 ciutadania: 1 (extracomunitari), 3 (comunitari), 7 (indocumentat), 10 (espanyol)
 """
 
-    import sys, os
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-    from gemini_call import call_gemini
-    from engine.keyword_parser import extract_keywords
-    from engine.gemini_analyst import analyze_with_gemini
-    from engine.matcher import match_all
-
     try:
         response = call_gemini(prompt_extractor)
         fitxa_raw = parse_json_object_from_llm(response)
-    except Exception as e:
-        return jsonify({"error": f"Error interpretant el text: {str(e)}"}), 500
+    except Exception:
+        logger.exception("Failed to interpret free text in /match/text")
+        return jsonify({"error": "El servei d'anàlisi no està disponible temporalment."}), 500
 
     fitxa, fitxa_errors = validate_fitxa_payload(fitxa_raw)
     if fitxa_errors:
@@ -146,7 +139,7 @@ ciutadania: 1 (extracomunitari), 3 (comunitari), 7 (indocumentat), 10 (espanyol)
 def urgency():
     # Classifica l'urgència d'un text usant el nostre model entrenat a HuggingFace.
     # Complementa Gemini amb ML explicable i quantificable.
-    import os, requests as req
+    import requests as req
     data = request.json or {}
     text = data.get("text", "")
     if not text:
@@ -156,8 +149,20 @@ def urgency():
     if not hf_endpoint:
         return jsonify({"error": "HF_APP_ENDPOINT no configurat"}), 503
 
+    hf_token = os.getenv("HF_API_TOKEN", "").strip()
+    headers = {"Content-Type": "application/json"}
+    if hf_token:
+        headers["Authorization"] = f"Bearer {hf_token}"
+
     try:
-        r = req.post(f"{hf_endpoint}/predict", json={"text": text}, timeout=15)
+        r = req.post(
+            f"{hf_endpoint}/predict",
+            json={"text": text},
+            headers=headers,
+            timeout=15,
+        )
+        r.raise_for_status()
         return jsonify(r.json()), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    except Exception:
+        logger.exception("Urgency service failed")
+        return jsonify({"error": "El servei d'anàlisi no està disponible temporalment."}), 500

@@ -6,12 +6,18 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { ATTENTION_CENTERS } from './SupportLocatorClient';
 
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
-});
+function LeafletIconBootstrap() {
+  useEffect(() => {
+    const defaultProto = L.Icon.Default.prototype as L.Icon.Default & { _getIconUrl?: unknown };
+    delete defaultProto._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
+      iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+    });
+  }, []);
+  return null;
+}
 
 const createCaritasIcon = (highlighted: boolean, selected: boolean) => {
   const color = selected ? '#9E0D24' : highlighted ? '#C8102E' : '#6B6460';
@@ -55,6 +61,7 @@ export default function SupportMap({ centers, highlightedCenters, selectedCenter
 
   return (
     <MapContainer center={[41.1189, 1.2445]} zoom={10} style={{ width: '100%', height: '100%' }} zoomControl={true}>
+      <LeafletIconBootstrap />
       <TileLayer attribution='&copy; OpenStreetMap' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <MapController selectedCenter={selectedCenter} />
       {centers.map((center) => {

@@ -7,6 +7,7 @@ from flask import Blueprint, request, jsonify
 from flask import g
 import boto3, json, os, uuid
 from datetime import datetime
+import time
 from utils.rate_limit import rate_limited
 from utils.auth_guard import require_auth
 from utils.volunteer_load import increment_assigned_volunteers, decrement_assigned_volunteers
@@ -22,6 +23,12 @@ from utils.catalog_cache import get_catalog
 from engine.analytics import build_expedient_analytics
 
 dashboard_bp = Blueprint("dashboard", __name__)
+
+ANALYTICS_TTL_SECONDS = int(os.getenv("ANALYTICS_TTL_SECONDS", "300"))
+_analytics_cache: dict[str, object] = {
+    "payload": None,
+    "expires_at": 0.0,
+}
 
 AWS_S3_BUCKET = os.getenv("AWS_S3_BUCKET", "hackaton-bucket")
 
@@ -177,8 +184,18 @@ def get_centres_catalog():
 @dashboard_bp.route("/dashboard/analytics", methods=["GET"])
 @require_auth(roles=["treballador"])
 def get_dashboard_analytics():
+    now = time.monotonic()
+    cached_payload = _analytics_cache.get("payload")
+    expires_at = float(_analytics_cache.get("expires_at") or 0.0)
+
+    if cached_payload is not None and now < expires_at:
+        return jsonify(cached_payload), 200
+
     expedients = list_expedients()
-    return jsonify(build_expedient_analytics(expedients)), 200
+    payload = build_expedient_analytics(expedients)
+    _analytics_cache["payload"] = payload
+    _analytics_cache["expires_at"] = now + max(60, ANALYTICS_TTL_SECONDS)
+    return jsonify(payload), 200
 
 
 @dashboard_bp.route("/expedients/mine", methods=["GET"])
