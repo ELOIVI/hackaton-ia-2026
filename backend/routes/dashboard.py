@@ -18,6 +18,8 @@ from utils.expedient_store import (
     get_expedient as get_expedient_db,
     close_expedient as close_expedient_db,
 )
+from utils.catalog_cache import get_catalog
+from engine.analytics import build_expedient_analytics
 
 dashboard_bp = Blueprint("dashboard", __name__)
 
@@ -164,6 +166,19 @@ def dashboard_empresa(empresa_id):
 def get_expedients():
     # Retorna tots els expedients des de SQLite ordenats per urgència i data
     return jsonify(list_expedients()), 200
+
+
+@dashboard_bp.route("/catalog/centres", methods=["GET"])
+@require_auth(roles=["treballador", "voluntari"])
+def get_centres_catalog():
+    return jsonify(get_catalog("centres.json")), 200
+
+
+@dashboard_bp.route("/dashboard/analytics", methods=["GET"])
+@require_auth(roles=["treballador"])
+def get_dashboard_analytics():
+    expedients = list_expedients()
+    return jsonify(build_expedient_analytics(expedients)), 200
 
 
 @dashboard_bp.route("/expedients/mine", methods=["GET"])

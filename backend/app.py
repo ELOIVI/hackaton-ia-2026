@@ -25,21 +25,31 @@ from routes.match import match_bp
 from routes.chat import chat_bp
 from routes.dashboard import dashboard_bp
 from routes.auth import auth_bp
-from utils.user_store import init_user_store, ensure_master_admin
+from utils.auth_tokens import ensure_auth_secret_configured
+from utils.catalog_cache import warm_catalog_cache
+from utils.user_store import init_user_store, ensure_admin_accounts_all_roles
 from utils.expedient_store import init_expedient_store
-from utils.partner_store import init_partner_store, seed_partners_if_empty
+from utils.partner_store import init_partner_store, seed_partners_if_empty, ensure_partner_admin_entries
 
 app.register_blueprint(match_bp)
 app.register_blueprint(chat_bp)
 app.register_blueprint(dashboard_bp)
 app.register_blueprint(auth_bp)
 
+ensure_auth_secret_configured()
+preloaded_catalogs = warm_catalog_cache()
 init_user_store()
 init_partner_store()
 seed_partners_if_empty()
+partner_admins = ensure_partner_admin_entries()
 init_expedient_store()
-master_admin = ensure_master_admin()
-print(f"[AUTH] Master admin preparat: {master_admin['email']}")
+admins = ensure_admin_accounts_all_roles()
+print(
+    f"[AUTH] Admins preparats: treballador={admins['treballador']['email']}, "
+    f"voluntari={admins['voluntari']['email']}, empresa={admins['empresa']['email']}"
+)
+print(f"[PARTNERS] Admins preparats: voluntari={partner_admins['voluntari_admin_id']}, empresa={partner_admins['empresa_admin_id']}")
+print(f"[CACHE] Catalegs precarregats: {preloaded_catalogs}")
 
 
 @app.route("/health")
@@ -72,4 +82,8 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", "5000")),
+        debug=os.getenv("FLASK_DEBUG", "0") == "1",
+    )

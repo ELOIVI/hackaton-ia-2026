@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from werkzeug.security import check_password_hash, generate_password_hash
+import re
 import uuid
 
 from utils.auth_tokens import sign_auth_token, verify_auth_token
@@ -9,6 +10,7 @@ from utils.user_store import create_user, get_user_by_email, get_user_by_id
 auth_bp = Blueprint("auth", __name__)
 
 ALLOWED_ROLES = {"voluntari", "empresa", "treballador"}
+EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
 def _extract_bearer_token() -> str | None:
@@ -16,6 +18,10 @@ def _extract_bearer_token() -> str | None:
     if not auth_header.startswith("Bearer "):
         return None
     return auth_header.replace("Bearer ", "", 1).strip()
+
+
+def _is_valid_email(email: str) -> bool:
+    return bool(EMAIL_RE.match(email or ""))
 
 
 @auth_bp.route("/auth/register", methods=["POST"])
@@ -28,10 +34,12 @@ def register():
 
     if not email or not password or role not in ALLOWED_ROLES:
         return jsonify({"error": "Cal enviar email, password i role vàlid"}), 400
+    if not _is_valid_email(email):
+        return jsonify({"error": "Format d'email invàlid"}), 400
     if len(password) < 6:
         return jsonify({"error": "La contrasenya ha de tenir almenys 6 caràcters"}), 400
 
-    user_id = str(uuid.uuid4())[:12]
+    user_id = str(uuid.uuid4())
     password_hash = generate_password_hash(password)
 
     created = create_user(
@@ -75,6 +83,8 @@ def login():
 
     if not email or not password:
         return jsonify({"error": "Cal enviar email i password"}), 400
+    if not _is_valid_email(email):
+        return jsonify({"error": "Format d'email invàlid"}), 400
 
     user = get_user_by_email(email)
     if not user or not check_password_hash(user["password_hash"], password):

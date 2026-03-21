@@ -3,11 +3,18 @@ from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
 
 
 def _get_secret_key() -> str:
-    return os.getenv("AUTH_SECRET_KEY") or os.getenv("SECRET_KEY") or "dev-secret-change-me"
+    secret = os.getenv("AUTH_SECRET_KEY") or os.getenv("SECRET_KEY")
+    if not secret:
+        raise ValueError("AUTH_SECRET_KEY missing")
+    return secret
 
 
 def _serializer() -> URLSafeTimedSerializer:
     return URLSafeTimedSerializer(secret_key=_get_secret_key(), salt="caritas-auth")
+
+
+def ensure_auth_secret_configured() -> None:
+    _get_secret_key()
 
 
 def sign_auth_token(user_id: str, role: str) -> str:

@@ -11,6 +11,7 @@ import UrgentNeedsPanel from './UrgentNeedsPanel';
 import ActivityFeed from './ActivityFeed';
 import CorporatePartners from './CorporatePartners';
 import ExpedientsPanel from './ExpedientsPanel';
+import InternalCoverageMap from './InternalCoverageMap';
 
 export default function InternalDashboardPage() {
   const router = useRouter();
@@ -71,6 +72,10 @@ export default function InternalDashboardPage() {
             <UrgentNeedsPanel />
             <ActivityFeed />
           </div>
+        </div>
+
+        <div className="mt-6">
+          <InternalCoverageMap />
         </div>
 
         <div className="mt-6">

@@ -3,15 +3,13 @@ Matcher — Pas 3 del motor híbrid
 Cruza les necessitats detectades amb les 4 BBDDs
 """
 import json
-import os
 import math
 from utils.partner_store import get_voluntaris_for_matching, get_empreses_for_matching
+from utils.catalog_cache import get_catalog
 
-BASE = os.path.join(os.path.dirname(__file__), "..", "db")
 
 def load_db(filename):
-    with open(os.path.join(BASE, filename), encoding="utf-8") as f:
-        return json.load(f)
+    return get_catalog(filename)
 
 
 def distancia_km(lat1, lng1, lat2, lng2) -> float:
@@ -106,6 +104,32 @@ def match_empreses(keywords: list, empreses: list) -> list:
     return sorted(resultat, key=lambda x: x["score"], reverse=True)[:2]
 
 
+def _is_sensitive_case_for_women(analysis: dict, keywords: list, fitxa: dict) -> bool:
+    consideracions = [str(c).strip().lower() for c in analysis.get("consideracions_especials", [])]
+    keyword_set = {str(k).strip().lower() for k in keywords}
+    sensitive_tokens = {
+        "tema_sensible_dona",
+        "violencia_genere",
+        "violència de gènere",
+        "maltractament",
+        "violencia_domestica",
+    }
+    fitxa_flag = bool(fitxa.get("tema_sensible_dona") is True)
+
+    return fitxa_flag or any(token in sensitive_tokens for token in consideracions) or any(
+        token in sensitive_tokens for token in keyword_set
+    )
+
+
+def _normalize_gender(value: str | None) -> str:
+    text = str(value or "").strip().lower()
+    if text in {"dona", "f", "female", "mujer"}:
+        return "dona"
+    if text in {"home", "h", "male", "hombre"}:
+        return "home"
+    return "desconegut"
+
+
 def match_all(fitxa: dict, analysis: dict, keywords: list) -> dict:
     """
     Funció principal: retorna el pla complet de recursos
@@ -119,6 +143,13 @@ def match_all(fitxa: dict, analysis: dict, keywords: list) -> dict:
     tipus_recomanats  = analysis.get("recursos_recomanats_tipus", [])
     quantitats        = analysis.get("quantitats_recomanades", {})
 
+    voluntaris_assignats = match_voluntaris(keywords, fitxa, voluntaris)
+    women_only_policy = _is_sensitive_case_for_women(analysis, keywords, fitxa)
+    if women_only_policy:
+        voluntaris_assignats = [
+            vol for vol in voluntaris_assignats if _normalize_gender(vol.get("genere")) == "dona"
+        ]
+
     return {
         "perfil_resum":            analysis.get("perfil_resum", ""),
         "urgencia":                analysis.get("urgencia", "mitjana"),
@@ -127,10 +158,14 @@ def match_all(fitxa: dict, analysis: dict, keywords: list) -> dict:
         "consideracions_especials": analysis.get("consideracions_especials", []),
         "centre_mes_proper":       match_centre(fitxa, centres),
         "recursos":                match_recursos(keywords, tipus_recomanats, quantitats, recursos),
-        "voluntaris":              match_voluntaris(keywords, fitxa, voluntaris),
+        "voluntaris":              voluntaris_assignats,
         "organitzacions":          match_organitzacions(keywords, organitzacions),
         "empreses":                match_empreses(keywords, empreses),
         "keywords_detectades":     keywords,
+        "inclusion_policy_applied": {
+            "women_only_sensitive_case": women_only_policy,
+            "rule": "Si el cas es sensible per violencia de genere o maltractament, nomes s'assignen voluntaries dones.",
+        },
     }
 
 

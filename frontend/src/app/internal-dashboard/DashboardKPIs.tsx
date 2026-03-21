@@ -4,17 +4,54 @@ import React, { useEffect, useState } from 'react';
 import { Users, Heart, MapPin, Building2, AlertTriangle, Clock, TrendingUp, TrendingDown } from 'lucide-react';
 import { API_BASE, getAuthHeaders } from '@/lib/api';
 
+type DashboardAnalytics = {
+  totals?: {
+    expedients?: number;
+    actius?: number;
+    tancats?: number;
+    urgents?: number;
+  };
+  context_metrics?: {
+    housing_instability_pct?: number;
+    irregular_status_pct?: number;
+    digital_gap_risk_pct?: number;
+  };
+};
+
+type AssignedVolunteer = {
+  id?: string;
+  nom?: string;
+};
+
+type Expedient = {
+  id: string;
+  urgencia?: string;
+  estat?: string;
+  centre_assignat?: {
+    nom?: string;
+  };
+  voluntaris_assignats?: AssignedVolunteer[];
+};
+
 export default function DashboardKPIs() {
-  const [expedients, setExpedients] = useState<any[]>([]);
+  const [expedients, setExpedients] = useState<Expedient[]>([]);
+  const [analytics, setAnalytics] = useState<DashboardAnalytics | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API_BASE}/expedients`, { headers: getAuthHeaders() })
-      .then(r => {
-        if (!r.ok) throw new Error('No autoritzat');
-        return r.json();
+    const headers = getAuthHeaders();
+    Promise.all([
+      fetch(`${API_BASE}/expedients`, { headers }),
+      fetch(`${API_BASE}/dashboard/analytics`, { headers }),
+    ])
+      .then(async ([expRes, analyticsRes]) => {
+        if (!expRes.ok) throw new Error('No autoritzat');
+        const expData = await expRes.json();
+        const analyticsData = analyticsRes.ok ? await analyticsRes.json() : null;
+        setExpedients(expData);
+        setAnalytics(analyticsData);
+        setLoading(false);
       })
-      .then(data => { setExpedients(data); setLoading(false); })
       .catch(() => setLoading(false));
   }, []);
 
@@ -27,8 +64,12 @@ export default function DashboardKPIs() {
       .filter((v: unknown): v is string => typeof v === 'string' && v.length > 0)
   ).size;
   const voluntarisUnics = new Set(
-    expedients.flatMap(e => (e?.voluntaris_assignats || []).map((v: any) => v?.id || v?.nom || ''))
+    expedients.flatMap(e => (e?.voluntaris_assignats || []).map((v) => v?.id || v?.nom || ''))
   ).size;
+  const housingPct = analytics?.context_metrics?.housing_instability_pct ?? 0;
+  const irregularPct = analytics?.context_metrics?.irregular_status_pct ?? 0;
+  const digitalGapPct = analytics?.context_metrics?.digital_gap_risk_pct ?? 0;
+  const tancats = analytics?.totals?.tancats ?? expedients.filter(e => e.estat === 'tancat').length;
 
   const KPI_DATA = [
     {
@@ -59,13 +100,13 @@ export default function DashboardKPIs() {
     },
     {
       id: 'empreses', label: 'Empreses amb Cor', sublabel: "Col·laboradores actives",
-      value: loading ? '...' : 'N/D', trend: '-', trendDir: 'down', trendLabel: 'pendent integració',
+      value: loading ? '...' : `${irregularPct}%`, trend: `${housingPct}%`, trendDir: 'up', trendLabel: 'inestabilitat habitacional',
       icon: Building2, bg: 'bg-amber-50', color: 'text-amber-600',
       border: 'border-amber-100', trendColor: 'text-red-500'
     },
     {
-      id: 'temps', label: 'Temps incorporació', sublabel: 'Voluntaris nous',
-      value: loading ? '...' : 'N/D', trend: '-', trendDir: 'down', trendLabel: 'pendent mètrica',
+      id: 'temps', label: 'Bretxa digital', sublabel: 'Risc detectat als expedients',
+      value: loading ? '...' : `${digitalGapPct}%`, trend: `${tancats}`, trendDir: 'up', trendLabel: 'expedients tancats',
       icon: Clock, bg: 'bg-green-50', color: 'text-green-600',
       border: 'border-green-100', trendColor: 'text-green-600'
     },
@@ -73,7 +114,7 @@ export default function DashboardKPIs() {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      {KPI_DATA.map((kpi, i) => {
+      {KPI_DATA.map((kpi) => {
         const Icon = kpi.icon;
         return (
           <div key={kpi.id} className={`relative bg-white rounded-2xl border p-5 hover:shadow-md transition-all

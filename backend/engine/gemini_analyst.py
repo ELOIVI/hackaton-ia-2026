@@ -4,22 +4,16 @@
 # les recomanacions siguin el més precises possible.
 
 import json
-import sys
-import os
-
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-os.chdir(os.path.join(os.path.dirname(__file__), ".."))
+import logging
 
 from gemini_call import call_gemini
 from utils.json_utils import parse_json_object_from_llm
-
-DB_PATH = os.path.join(os.path.dirname(__file__), "..", "db")
+from utils.catalog_cache import get_catalog
+logger = logging.getLogger(__name__)
 
 
 def load_projectes():
-    path = os.path.join(DB_PATH, "projectes_caritas.json")
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
+    return get_catalog("projectes_caritas.json")
 
 
 def build_context_projectes(projectes: list) -> str:
@@ -73,7 +67,8 @@ i retorna ÚNICAMENT aquest JSON sense cap text addicional:
     try:
         response = call_gemini(prompt)
         return parse_json_object_from_llm(response)
-    except Exception as e:
+    except Exception:
+        logger.exception("Gemini analysis failed")
         return {
             "necessitats_prioritaries": keywords[:3] if keywords else ["alimentació"],
             "urgencia": "mitjana",
@@ -82,7 +77,7 @@ i retorna ÚNICAMENT aquest JSON sense cap text addicional:
             "consideracions_especials": [],
             "recursos_recomanats_tipus": keywords[:2] if keywords else ["alimentació"],
             "quantitats_recomanades": {},
-            "justificacio": f"Anàlisi automàtica. Error Gemini: {str(e)}"
+            "justificacio": "Error intern en l'anàlisi automàtica. S'ha aplicat una estimació conservadora."
         }
 
 

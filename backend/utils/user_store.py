@@ -74,24 +74,106 @@ def get_user_by_id(user_id: str) -> dict[str, Any] | None:
         return dict(row) if row else None
 
 
+def _ensure_default_user(
+    *,
+    user_id: str,
+    email: str,
+    password: str,
+    role: str,
+    nom: str,
+    company_name: str | None = None,
+    location: str | None = "Tarragona",
+) -> dict[str, str]:
+    normalized_email = email.strip().lower()
+    existing_email = get_user_by_email(normalized_email)
+    existing_id = get_user_by_id(user_id)
+
+    if existing_id and existing_id.get("email") != normalized_email:
+        with get_conn() as conn:
+            conn.execute(
+                """
+                UPDATE users
+                SET email = ?, password_hash = ?, role = ?, nom = ?, company_name = ?, location = ?
+                WHERE id = ?
+                """,
+                (
+                    normalized_email,
+                    generate_password_hash(password),
+                    role,
+                    nom,
+                    company_name,
+                    location,
+                    user_id,
+                ),
+            )
+    elif not existing_email:
+        create_user(
+            user_id=user_id,
+            email=normalized_email,
+            password_hash=generate_password_hash(password),
+            role=role,
+            nom=nom,
+            company_name=company_name,
+            location=location,
+        )
+    return {"email": normalized_email, "password": password, "role": role}
+
+
 def ensure_master_admin() -> dict[str, str]:
     """Ensure a default worker admin account exists.
 
     Defaults can be overridden with MASTER_ADMIN_EMAIL and MASTER_ADMIN_PASSWORD.
     """
-    email = os.getenv("MASTER_ADMIN_EMAIL", "admin@caritas.org").strip().lower()
+    email = os.getenv("MASTER_ADMIN_EMAIL", "AdminTreballador@caritas.org").strip().lower()
     password = os.getenv("MASTER_ADMIN_PASSWORD", "Admin1234!").strip()
 
-    existing = get_user_by_email(email)
-    if existing:
-        return {"email": email, "password": password}
-
-    create_user(
+    return _ensure_default_user(
         user_id="MASTERADMIN01",
         email=email,
-        password_hash=generate_password_hash(password),
+        password=password,
         role="treballador",
         nom="Admin Master",
         location="Tarragona",
     )
-    return {"email": email, "password": password}
+
+
+def ensure_admin_accounts_all_roles() -> dict[str, dict[str, str]]:
+    master = ensure_master_admin()
+
+    shared_password = os.getenv("ADMIN_SHARED_PASSWORD", "Admin1234!").strip()
+
+    voluntari = _ensure_default_user(
+        user_id="ADMINVOLUNT01",
+        email=os.getenv("VOLUNTEER_ADMIN_EMAIL", "AdminVoluntari@caritas.org"),
+        password=shared_password,
+        role="voluntari",
+        nom="Admin Voluntariat",
+        location="Tarragona",
+    )
+
+    empresa = _ensure_default_user(
+        user_id="ADMINEMPRESA01",
+        email=os.getenv("COMPANY_ADMIN_EMAIL", "AdminEmpresa@caritas.org"),
+        password=shared_password,
+        role="empresa",
+        nom="Admin Empresa",
+        company_name="Càritas Empresa Admin",
+        location="Tarragona",
+    )
+
+    # Cleanup legacy defaults no longer used.
+    with get_conn() as conn:
+        conn.execute(
+            "DELETE FROM users WHERE email IN (?, ?, ?)",
+            (
+                "admin@caritas.org",
+                "admin.voluntari@caritas.org",
+                "admin.empresa@caritas.org",
+            ),
+        )
+
+    return {
+        "treballador": master,
+        "voluntari": voluntari,
+        "empresa": empresa,
+    }

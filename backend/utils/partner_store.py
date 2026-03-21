@@ -7,6 +7,22 @@ VOL_JSON_PATH = os.path.join(os.path.dirname(__file__), "..", "db", "voluntaris.
 EMP_JSON_PATH = os.path.join(os.path.dirname(__file__), "..", "db", "empreses.json")
 
 
+def _infer_gender_from_identifier(identifier: str) -> str:
+    digits = "".join(ch for ch in str(identifier or "") if ch.isdigit())
+    if not digits:
+        return "dona"
+    return "dona" if int(digits[-1]) % 2 == 0 else "home"
+
+
+def _normalize_gender(value: str | None, fallback_id: str | None = None) -> str:
+    text = str(value or "").strip().lower()
+    if text in {"dona", "f", "female", "mujer"}:
+        return "dona"
+    if text in {"home", "h", "male", "hombre"}:
+        return "home"
+    return _infer_gender_from_identifier(str(fallback_id or ""))
+
+
 def init_partner_store() -> None:
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     with get_conn(enable_foreign_keys=True) as conn:
@@ -15,6 +31,7 @@ def init_partner_store() -> None:
             CREATE TABLE IF NOT EXISTS voluntaris (
                 id TEXT PRIMARY KEY,
                 nom TEXT,
+                genere TEXT,
                 rol TEXT,
                 projecte TEXT,
                 email TEXT,
@@ -29,6 +46,12 @@ def init_partner_store() -> None:
             )
             """
         )
+        columns = {
+            row["name"]
+            for row in conn.execute("PRAGMA table_info(voluntaris)").fetchall()
+        }
+        if "genere" not in columns:
+            conn.execute("ALTER TABLE voluntaris ADD COLUMN genere TEXT")
         conn.execute(
             """
             CREATE TABLE IF NOT EXISTS empreses (
@@ -59,13 +82,14 @@ def seed_partners_if_empty() -> None:
                 conn.execute(
                     """
                     INSERT INTO voluntaris (
-                        id, nom, rol, projecte, email, telefon, municipi, lat, lng,
+                        id, nom, genere, rol, projecte, email, telefon, municipi, lat, lng,
                         habilitats_json, disponibilitat_json, max_persones, persones_actuals
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         v.get("id"),
                         v.get("nom"),
+                        _normalize_gender(v.get("genere"), fallback_id=v.get("id")),
                         v.get("rol"),
                         v.get("projecte"),
                         v.get("email"),
@@ -103,6 +127,77 @@ def seed_partners_if_empty() -> None:
                 )
 
 
+def ensure_partner_admin_entries() -> dict[str, str]:
+    with get_conn(enable_foreign_keys=True) as conn:
+        vol_admin_id = "VOLADMIN01"
+        emp_admin_id = "EMPADMIN01"
+
+        vol_row = conn.execute(
+            "SELECT id FROM voluntaris WHERE id = ?",
+            (vol_admin_id,),
+        ).fetchone()
+        if not vol_row:
+            conn.execute(
+                """
+                INSERT INTO voluntaris (
+                    id, nom, genere, rol, projecte, email, telefon, municipi, lat, lng,
+                    habilitats_json, disponibilitat_json, max_persones, persones_actuals
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    vol_admin_id,
+                    "Admin Voluntariat",
+                    "dona",
+                    "Administrador/a",
+                    "Coordinacio General",
+                    "adminvoluntari@caritas.org",
+                    "600000001",
+                    "Tarragona",
+                    41.1189,
+                    1.2445,
+                    json.dumps(["gestio", "acollida", "treball_social"], ensure_ascii=False),
+                    json.dumps(["dilluns_mati", "dimarts_mati", "dimecres_mati"], ensure_ascii=False),
+                    20,
+                    0,
+                ),
+            )
+        else:
+            conn.execute(
+                "UPDATE voluntaris SET email = ? WHERE id = ?",
+                ("adminvoluntari@caritas.org", vol_admin_id),
+            )
+
+        emp_row = conn.execute(
+            "SELECT id FROM empreses WHERE id = ?",
+            (emp_admin_id,),
+        ).fetchone()
+        if not emp_row:
+            conn.execute(
+                """
+                INSERT INTO empreses (
+                    id, nom, tipus_colaboracio_json, recursos_oferts_json,
+                    keywords_json, contacte, hores_voluntariat_disponibles
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    emp_admin_id,
+                    "Empresa Admin Càritas",
+                    json.dumps(["voluntariat_corporatiu", "donacio_economica"], ensure_ascii=False),
+                    json.dumps(["alimentacio", "transport", "orientacio_professional"], ensure_ascii=False),
+                    json.dumps(["coordinacio", "solidaritat", "suport_social"], ensure_ascii=False),
+                    "adminempresa@caritas.org",
+                    200,
+                ),
+            )
+        else:
+            conn.execute(
+                "UPDATE empreses SET contacte = ? WHERE id = ?",
+                ("adminempresa@caritas.org", emp_admin_id),
+            )
+
+    return {"voluntari_admin_id": vol_admin_id, "empresa_admin_id": emp_admin_id}
+
+
 def get_voluntaris_for_matching() -> list[dict]:
     with get_conn(enable_foreign_keys=True) as conn:
         rows = conn.execute("SELECT * FROM voluntaris").fetchall()
@@ -113,6 +208,7 @@ def get_voluntaris_for_matching() -> list[dict]:
             {
                 "id": r["id"],
                 "nom": r["nom"],
+                "genere": _normalize_gender(r["genere"], fallback_id=r["id"]),
                 "rol": r["rol"],
                 "projecte": r["projecte"],
                 "email": r["email"],
