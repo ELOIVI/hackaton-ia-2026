@@ -4,8 +4,20 @@
 # Els dashboards agreguen aquestes dades per mostrar impacte real.
 
 from flask import Blueprint, request, jsonify
+from flask import g
 import boto3, json, os, uuid
 from datetime import datetime
+from utils.rate_limit import rate_limited
+from utils.auth_guard import require_auth
+from utils.volunteer_load import increment_assigned_volunteers, decrement_assigned_volunteers
+from utils.validation import validate_fitxa_payload
+from utils.expedient_store import (
+    create_expedient_record,
+    list_expedients,
+    list_expedients_by_creator,
+    get_expedient as get_expedient_db,
+    close_expedient as close_expedient_db,
+)
 
 dashboard_bp = Blueprint("dashboard", __name__)
 
@@ -53,6 +65,7 @@ def s3_list(prefix: str) -> list:
 
 # ── REGISTRE VOLUNTARI ────────────────────────────────────
 @dashboard_bp.route("/register/voluntari", methods=["POST"])
+@rate_limited(max_requests=20, window_seconds=60)
 def register_voluntari():
     data = request.json or {}
     voluntari_id = str(uuid.uuid4())[:8]
@@ -76,6 +89,7 @@ def register_voluntari():
 
 # ── DASHBOARD VOLUNTARI ───────────────────────────────────
 @dashboard_bp.route("/dashboard/voluntari/<voluntari_id>", methods=["GET"])
+@require_auth(roles=["voluntari", "treballador"])
 def dashboard_voluntari(voluntari_id):
     perfil = s3_get(f"voluntaris/{voluntari_id}.json")
     if not perfil:
@@ -97,6 +111,7 @@ def dashboard_voluntari(voluntari_id):
 
 # ── REGISTRE EMPRESA ──────────────────────────────────────
 @dashboard_bp.route("/register/empresa", methods=["POST"])
+@rate_limited(max_requests=20, window_seconds=60)
 def register_empresa():
     data = request.json or {}
     empresa_id = str(uuid.uuid4())[:8]
@@ -116,6 +131,7 @@ def register_empresa():
 
 # ── DASHBOARD EMPRESA ─────────────────────────────────────
 @dashboard_bp.route("/dashboard/empresa/<empresa_id>", methods=["GET"])
+@require_auth(roles=["empresa", "treballador"])
 def dashboard_empresa(empresa_id):
     perfil = s3_get(f"empreses/{empresa_id}.json")
     if not perfil:
@@ -144,17 +160,25 @@ def dashboard_empresa(empresa_id):
 
 # ── EXPEDIENTS (TREBALLADOR) ──────────────────────────────
 @dashboard_bp.route("/expedients", methods=["GET"])
+@require_auth(roles=["treballador"])
 def get_expedients():
-    # Retorna tots els expedients ordenats per urgència i data
-    expedients = s3_list("expedients/")
-    expedients.sort(key=lambda x: (
-        {"critica": 0, "alta": 1, "mitjana": 2, "baixa": 3}.get(x.get("urgencia", "baixa"), 4),
-        x.get("data_creacio", "")
-    ))
-    return jsonify(expedients), 200
+    # Retorna tots els expedients des de SQLite ordenats per urgència i data
+    return jsonify(list_expedients()), 200
+
+
+@dashboard_bp.route("/expedients/mine", methods=["GET"])
+@require_auth(roles=["treballador"])
+def get_my_expedients():
+    payload = getattr(g, "auth_payload", None)
+    if not isinstance(payload, dict) or not payload.get("user_id"):
+        return jsonify({"error": "No s'ha pogut identificar l'usuari"}), 401
+
+    return jsonify(list_expedients_by_creator(str(payload.get("user_id")))), 200
 
 
 @dashboard_bp.route("/expedient", methods=["POST"])
+@rate_limited(max_requests=20, window_seconds=60)
+@require_auth(roles=["treballador"])
 def create_expedient():
     # El treballador introdueix una fitxa social i el motor fa el matching
     import sys
@@ -166,7 +190,11 @@ def create_expedient():
     data = request.json or {}
     exp_id = str(uuid.uuid4())[:8]
 
-    fitxa = data.get("fitxa", {})
+    fitxa_raw = data.get("fitxa", {})
+    fitxa, fitxa_errors = validate_fitxa_payload(fitxa_raw)
+    if fitxa_errors:
+        return jsonify({"error": "Fitxa invàlida", "details": fitxa_errors}), 400
+
     keywords = extract_keywords(fitxa)
     analysis = analyze_with_gemini(fitxa, keywords)
     match_result = match_all(fitxa, analysis, keywords)
@@ -178,18 +206,53 @@ def create_expedient():
         "perfil_resum": match_result.get("perfil_resum", ""),
         "recursos_assignats": match_result.get("recursos", []),
         "voluntaris_assignats": match_result.get("voluntaris", []),
+        "empreses_assignades": match_result.get("empreses", []),
         "centre_assignat": match_result.get("centre_mes_proper", {}),
         "keywords": keywords,
         "data_creacio": datetime.utcnow().isoformat(),
         "estat": "actiu"
     }
+    created_by = None
+    payload = getattr(g, "auth_payload", None)
+    if isinstance(payload, dict):
+        created_by = payload.get("user_id")
+
+    create_expedient_record(expedient, created_by_user_id=created_by)
     s3_put(f"expedients/{exp_id}.json", expedient)
+    increment_assigned_volunteers(expedient.get("voluntaris_assignats", []))
     return jsonify(expedient), 201
 
 
 @dashboard_bp.route("/expedient/<exp_id>", methods=["GET"])
+@require_auth(roles=["treballador"])
 def get_expedient(exp_id):
-    expedient = s3_get(f"expedients/{exp_id}.json")
+    expedient = get_expedient_db(exp_id)
+    if not expedient:
+        expedient = s3_get(f"expedients/{exp_id}.json")
     if not expedient:
         return jsonify({"error": "Expedient no trobat"}), 404
+    return jsonify(expedient), 200
+
+
+@dashboard_bp.route("/expedient/<exp_id>/close", methods=["PATCH"])
+@rate_limited(max_requests=20, window_seconds=60)
+@require_auth(roles=["treballador"])
+def close_expedient(exp_id):
+    previous = get_expedient_db(exp_id)
+    resolver = None
+    payload = getattr(g, "auth_payload", None)
+    if isinstance(payload, dict):
+        resolver = payload.get("user_id")
+
+    expedient = close_expedient_db(exp_id, resolved_by_user_id=resolver)
+    if not expedient:
+        expedient = s3_get(f"expedients/{exp_id}.json")
+    if not expedient:
+        return jsonify({"error": "Expedient no trobat"}), 404
+
+    if previous and previous.get("estat") == "tancat":
+        return jsonify(expedient), 200
+
+    s3_put(f"expedients/{exp_id}.json", expedient)
+    decrement_assigned_volunteers(expedient.get("voluntaris_assignats", []))
     return jsonify(expedient), 200

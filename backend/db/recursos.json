@@ -1,139 +1,4871 @@
 [
   {
-    "id": "REC001",
-    "nom": "Ajuda alimentària setmanal",
-    "tipus": "alimentació",
+    "id": "REC0002",
+    "nom": "Recurs Alimentacio 0002",
+    "tipus": "alimentacio",
     "keywords": [
-      "alimentació",
-      "fam",
-      "sense_ingressos",
-      "família",
-      "infants",
-      "pobresa"
+      "acollida",
+      "formacio",
+      "assessoria_juridica",
+      "habitatge",
+      "suport_psicologic",
+      "repartiment",
+      "salut_mental",
+      "alimentacio"
     ],
-    "quantitat_disponible": 50,
-    "unitat": "cistelles/setmana",
-    "centre_id": "CTR001",
+    "quantitat_disponible": 243,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR027",
+    "requisits": []
+  },
+  {
+    "id": "REC0009",
+    "nom": "Recurs Alimentacio 0009",
+    "tipus": "alimentacio",
+    "keywords": [
+      "traduccio",
+      "habitatge",
+      "logistica",
+      "repartiment"
+    ],
+    "quantitat_disponible": 134,
+    "unitat": "lots",
+    "centre_id": "CTR038",
     "requisits": [
       "empadronat",
-      "ingressos_baixos"
+      "risc_exclusio"
     ]
   },
   {
-    "id": "REC002",
-    "nom": "Ajuda pagament lloguer",
-    "tipus": "habitatge",
+    "id": "REC0016",
+    "nom": "Recurs Alimentacio 0016",
+    "tipus": "alimentacio",
     "keywords": [
-      "habitatge",
-      "lloguer",
-      "desnonament",
-      "inestabilitat_habitacional"
+      "voluntariat",
+      "documentacio",
+      "formacio",
+      "atencio_infants",
+      "habitatge"
     ],
-    "quantitat_disponible": 10,
+    "quantitat_disponible": 116,
     "unitat": "ajudes/mes",
-    "centre_id": "CTR001",
+    "centre_id": "CTR058",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0018",
+    "nom": "Recurs Alimentacio 0018",
+    "tipus": "alimentacio",
+    "keywords": [
+      "salut",
+      "acollida",
+      "habitatge",
+      "salut_mental",
+      "documentacio"
+    ],
+    "quantitat_disponible": 102,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR007",
+    "requisits": []
+  },
+  {
+    "id": "REC0020",
+    "nom": "Recurs Alimentacio 0020",
+    "tipus": "alimentacio",
+    "keywords": [
+      "atencio_infants",
+      "gent_gran",
+      "educacio",
+      "traduccio"
+    ],
+    "quantitat_disponible": 188,
+    "unitat": "places",
+    "centre_id": "CTR017",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0055",
+    "nom": "Recurs Alimentacio 0055",
+    "tipus": "alimentacio",
+    "keywords": [
+      "orientacio",
+      "suport_escolar",
+      "logistica",
+      "traduccio",
+      "educacio",
+      "acompanyament",
+      "gestio",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 11,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR007",
+    "requisits": [
+      "ingressos_baixos",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0061",
+    "nom": "Recurs Alimentacio 0061",
+    "tipus": "alimentacio",
+    "keywords": [
+      "gent_gran",
+      "salut",
+      "traduccio",
+      "repartiment",
+      "acompanyament"
+    ],
+    "quantitat_disponible": 13,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR044",
+    "requisits": [
+      "empadronat",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0071",
+    "nom": "Recurs Alimentacio 0071",
+    "tipus": "alimentacio",
+    "keywords": [
+      "voluntariat",
+      "insercio_laboral",
+      "alimentacio",
+      "acompanyament",
+      "assessoria_juridica",
+      "alimentacio",
+      "habitatge",
+      "formacio"
+    ],
+    "quantitat_disponible": 130,
+    "unitat": "lots",
+    "centre_id": "CTR012",
+    "requisits": [
+      "empadronat",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0075",
+    "nom": "Recurs Alimentacio 0075",
+    "tipus": "alimentacio",
+    "keywords": [
+      "educacio",
+      "treball_social",
+      "formacio",
+      "logistica",
+      "voluntariat",
+      "atencio_infants",
+      "acompanyament",
+      "documentacio"
+    ],
+    "quantitat_disponible": 26,
+    "unitat": "places",
+    "centre_id": "CTR042",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0099",
+    "nom": "Recurs Alimentacio 0099",
+    "tipus": "alimentacio",
+    "keywords": [
+      "atencio_infants",
+      "formacio",
+      "logistica",
+      "acollida",
+      "voluntariat",
+      "suport_escolar",
+      "salut_mental",
+      "salut"
+    ],
+    "quantitat_disponible": 44,
+    "unitat": "lots",
+    "centre_id": "CTR036",
     "requisits": [
       "ingressos_baixos",
       "risc_exclusio"
     ]
   },
   {
-    "id": "REC003",
-    "nom": "Roba i equipament llar",
-    "tipus": "espècie",
+    "id": "REC0116",
+    "nom": "Recurs Alimentacio 0116",
+    "tipus": "alimentacio",
     "keywords": [
-      "roba",
-      "equipament",
-      "necessitats_bàsiques",
-      "família",
-      "infants"
+      "repartiment",
+      "traduccio",
+      "suport_escolar",
+      "alimentacio",
+      "salut",
+      "assessoria_juridica",
+      "salut_mental"
     ],
-    "quantitat_disponible": 100,
-    "unitat": "lots",
-    "centre_id": "CTR001",
-    "requisits": []
-  },
-  {
-    "id": "REC004",
-    "nom": "Assessoria jurídica immigració",
-    "tipus": "legal",
-    "keywords": [
-      "situació_irregular",
-      "documentació",
-      "immigració",
-      "extracomunitari"
-    ],
-    "quantitat_disponible": 20,
+    "quantitat_disponible": 117,
     "unitat": "sessions/mes",
-    "centre_id": "CTR001",
+    "centre_id": "CTR015",
     "requisits": [
-      "situació_irregular"
+      "ingressos_baixos"
     ]
   },
   {
-    "id": "REC005",
-    "nom": "Orientació laboral i CV",
-    "tipus": "inserció_laboral",
+    "id": "REC0125",
+    "nom": "Recurs Alimentacio 0125",
+    "tipus": "alimentacio",
     "keywords": [
-      "atur",
-      "sense_feina",
-      "inserció_laboral",
-      "formació",
-      "joves"
+      "salut",
+      "voluntariat",
+      "formacio",
+      "assessoria_juridica",
+      "traduccio",
+      "salut_mental"
     ],
-    "quantitat_disponible": 30,
+    "quantitat_disponible": 10,
     "unitat": "sessions/mes",
-    "centre_id": "CTR001",
+    "centre_id": "CTR027",
+    "requisits": [
+      "ingressos_baixos",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0127",
+    "nom": "Recurs Alimentacio 0127",
+    "tipus": "alimentacio",
+    "keywords": [
+      "gent_gran",
+      "traduccio",
+      "assessoria_juridica",
+      "insercio_laboral",
+      "documentacio"
+    ],
+    "quantitat_disponible": 165,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR018",
     "requisits": []
   },
   {
-    "id": "REC006",
-    "nom": "Suport escolar infants",
-    "tipus": "educació",
+    "id": "REC0128",
+    "nom": "Recurs Alimentacio 0128",
+    "tipus": "alimentacio",
     "keywords": [
-      "infants",
-      "educació",
-      "suport_escolar",
-      "família",
-      "menors"
+      "documentacio",
+      "salut_mental",
+      "acollida",
+      "alimentacio",
+      "orientacio"
     ],
-    "quantitat_disponible": 25,
+    "quantitat_disponible": 40,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR031",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0132",
+    "nom": "Recurs Alimentacio 0132",
+    "tipus": "alimentacio",
+    "keywords": [
+      "educacio",
+      "mediacio_habitatge",
+      "formacio",
+      "treball_social",
+      "salut_mental"
+    ],
+    "quantitat_disponible": 31,
+    "unitat": "places",
+    "centre_id": "CTR038",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0136",
+    "nom": "Recurs Alimentacio 0136",
+    "tipus": "alimentacio",
+    "keywords": [
+      "repartiment",
+      "formacio",
+      "insercio_laboral",
+      "insercio_laboral",
+      "traduccio",
+      "documentacio",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 154,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR033",
+    "requisits": [
+      "risc_exclusio",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0137",
+    "nom": "Recurs Alimentacio 0137",
+    "tipus": "alimentacio",
+    "keywords": [
+      "formacio",
+      "acollida",
+      "gestio",
+      "logistica",
+      "habitatge",
+      "alimentacio",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 44,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR033",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0157",
+    "nom": "Recurs Alimentacio 0157",
+    "tipus": "alimentacio",
+    "keywords": [
+      "salut_mental",
+      "formacio",
+      "educacio",
+      "acompanyament"
+    ],
+    "quantitat_disponible": 246,
+    "unitat": "lots",
+    "centre_id": "CTR055",
+    "requisits": []
+  },
+  {
+    "id": "REC0164",
+    "nom": "Recurs Alimentacio 0164",
+    "tipus": "alimentacio",
+    "keywords": [
+      "acollida",
+      "mediacio_habitatge",
+      "alimentacio",
+      "documentacio"
+    ],
+    "quantitat_disponible": 120,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR003",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0174",
+    "nom": "Recurs Alimentacio 0174",
+    "tipus": "alimentacio",
+    "keywords": [
+      "formacio",
+      "suport_escolar",
+      "insercio_laboral",
+      "suport_psicologic",
+      "voluntariat",
+      "gestio",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 24,
+    "unitat": "places",
+    "centre_id": "CTR014",
+    "requisits": []
+  },
+  {
+    "id": "REC0178",
+    "nom": "Recurs Alimentacio 0178",
+    "tipus": "alimentacio",
+    "keywords": [
+      "acollida",
+      "atencio_infants",
+      "suport_psicologic",
+      "orientacio",
+      "gent_gran",
+      "gestio",
+      "documentacio"
+    ],
+    "quantitat_disponible": 90,
+    "unitat": "places",
+    "centre_id": "CTR048",
+    "requisits": []
+  },
+  {
+    "id": "REC0185",
+    "nom": "Recurs Alimentacio 0185",
+    "tipus": "alimentacio",
+    "keywords": [
+      "acompanyament",
+      "alimentacio",
+      "repartiment",
+      "formacio",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 129,
+    "unitat": "lots",
+    "centre_id": "CTR060",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0228",
+    "nom": "Recurs Alimentacio 0228",
+    "tipus": "alimentacio",
+    "keywords": [
+      "alimentacio",
+      "assessoria_juridica",
+      "salut",
+      "formacio",
+      "documentacio",
+      "salut_mental"
+    ],
+    "quantitat_disponible": 36,
+    "unitat": "lots",
+    "centre_id": "CTR005",
+    "requisits": []
+  },
+  {
+    "id": "REC0233",
+    "nom": "Recurs Alimentacio 0233",
+    "tipus": "alimentacio",
+    "keywords": [
+      "treball_social",
+      "atencio_infants",
+      "habitatge",
+      "formacio",
+      "repartiment"
+    ],
+    "quantitat_disponible": 69,
+    "unitat": "lots",
+    "centre_id": "CTR032",
+    "requisits": [
+      "risc_exclusio",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0238",
+    "nom": "Recurs Alimentacio 0238",
+    "tipus": "alimentacio",
+    "keywords": [
+      "formacio",
+      "assessoria_juridica",
+      "habitatge",
+      "orientacio",
+      "gestio",
+      "salut",
+      "suport_escolar",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 121,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR021",
+    "requisits": []
+  },
+  {
+    "id": "REC0243",
+    "nom": "Recurs Alimentacio 0243",
+    "tipus": "alimentacio",
+    "keywords": [
+      "gent_gran",
+      "habitatge",
+      "treball_social",
+      "salut",
+      "acollida",
+      "suport_psicologic",
+      "orientacio"
+    ],
+    "quantitat_disponible": 156,
+    "unitat": "lots",
+    "centre_id": "CTR023",
+    "requisits": []
+  },
+  {
+    "id": "REC0001",
+    "nom": "Recurs Educacio 0001",
+    "tipus": "educacio",
+    "keywords": [
+      "acompanyament",
+      "logistica",
+      "suport_escolar",
+      "salut",
+      "alimentacio",
+      "salut_mental",
+      "formacio",
+      "orientacio"
+    ],
+    "quantitat_disponible": 73,
     "unitat": "places",
     "centre_id": "CTR001",
+    "requisits": [
+      "empadronat",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0012",
+    "nom": "Recurs Educacio 0012",
+    "tipus": "educacio",
+    "keywords": [
+      "suport_psicologic",
+      "repartiment",
+      "gent_gran",
+      "assessoria_juridica",
+      "mediacio_habitatge"
+    ],
+    "quantitat_disponible": 18,
+    "unitat": "places",
+    "centre_id": "CTR040",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0024",
+    "nom": "Recurs Educacio 0024",
+    "tipus": "educacio",
+    "keywords": [
+      "formacio",
+      "educacio",
+      "voluntariat",
+      "orientacio",
+      "acompanyament",
+      "documentacio",
+      "salut",
+      "habitatge"
+    ],
+    "quantitat_disponible": 163,
+    "unitat": "places",
+    "centre_id": "CTR036",
+    "requisits": []
+  },
+  {
+    "id": "REC0032",
+    "nom": "Recurs Educacio 0032",
+    "tipus": "educacio",
+    "keywords": [
+      "salut_mental",
+      "assessoria_juridica",
+      "voluntariat",
+      "alimentacio",
+      "orientacio",
+      "formacio"
+    ],
+    "quantitat_disponible": 169,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR009",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0033",
+    "nom": "Recurs Educacio 0033",
+    "tipus": "educacio",
+    "keywords": [
+      "habitatge",
+      "documentacio",
+      "repartiment",
+      "formacio",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 133,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR011",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0034",
+    "nom": "Recurs Educacio 0034",
+    "tipus": "educacio",
+    "keywords": [
+      "assessoria_juridica",
+      "documentacio",
+      "suport_psicologic",
+      "insercio_laboral",
+      "repartiment",
+      "voluntariat",
+      "treball_social",
+      "acollida"
+    ],
+    "quantitat_disponible": 33,
+    "unitat": "places",
+    "centre_id": "CTR037",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0037",
+    "nom": "Recurs Educacio 0037",
+    "tipus": "educacio",
+    "keywords": [
+      "repartiment",
+      "voluntariat",
+      "traduccio",
+      "habitatge",
+      "acompanyament",
+      "insercio_laboral",
+      "treball_social"
+    ],
+    "quantitat_disponible": 82,
+    "unitat": "lots",
+    "centre_id": "CTR006",
+    "requisits": [
+      "empadronat",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0040",
+    "nom": "Recurs Educacio 0040",
+    "tipus": "educacio",
+    "keywords": [
+      "treball_social",
+      "mediacio_habitatge",
+      "formacio",
+      "assessoria_juridica"
+    ],
+    "quantitat_disponible": 131,
+    "unitat": "lots",
+    "centre_id": "CTR004",
+    "requisits": []
+  },
+  {
+    "id": "REC0041",
+    "nom": "Recurs Educacio 0041",
+    "tipus": "educacio",
+    "keywords": [
+      "traduccio",
+      "habitatge",
+      "documentacio",
+      "voluntariat",
+      "formacio",
+      "gestio",
+      "acompanyament",
+      "acollida"
+    ],
+    "quantitat_disponible": 120,
+    "unitat": "lots",
+    "centre_id": "CTR027",
+    "requisits": []
+  },
+  {
+    "id": "REC0064",
+    "nom": "Recurs Educacio 0064",
+    "tipus": "educacio",
+    "keywords": [
+      "documentacio",
+      "acollida",
+      "voluntariat",
+      "gestio",
+      "logistica",
+      "salut",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 22,
+    "unitat": "lots",
+    "centre_id": "CTR046",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0073",
+    "nom": "Recurs Educacio 0073",
+    "tipus": "educacio",
+    "keywords": [
+      "salut",
+      "logistica",
+      "formacio",
+      "insercio_laboral",
+      "repartiment",
+      "atencio_infants",
+      "suport_psicologic",
+      "traduccio"
+    ],
+    "quantitat_disponible": 72,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR049",
+    "requisits": []
+  },
+  {
+    "id": "REC0108",
+    "nom": "Recurs Educacio 0108",
+    "tipus": "educacio",
+    "keywords": [
+      "traduccio",
+      "assessoria_juridica",
+      "formacio",
+      "alimentacio",
+      "educacio",
+      "documentacio"
+    ],
+    "quantitat_disponible": 122,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR015",
+    "requisits": []
+  },
+  {
+    "id": "REC0117",
+    "nom": "Recurs Educacio 0117",
+    "tipus": "educacio",
+    "keywords": [
+      "traduccio",
+      "alimentacio",
+      "mediacio_habitatge",
+      "repartiment",
+      "formacio",
+      "atencio_infants",
+      "acompanyament"
+    ],
+    "quantitat_disponible": 95,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR008",
+    "requisits": []
+  },
+  {
+    "id": "REC0130",
+    "nom": "Recurs Educacio 0130",
+    "tipus": "educacio",
+    "keywords": [
+      "habitatge",
+      "insercio_laboral",
+      "orientacio",
+      "repartiment",
+      "salut_mental",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 108,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR051",
+    "requisits": []
+  },
+  {
+    "id": "REC0131",
+    "nom": "Recurs Educacio 0131",
+    "tipus": "educacio",
+    "keywords": [
+      "documentacio",
+      "logistica",
+      "mediacio_habitatge",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 247,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR046",
+    "requisits": []
+  },
+  {
+    "id": "REC0139",
+    "nom": "Recurs Educacio 0139",
+    "tipus": "educacio",
+    "keywords": [
+      "traduccio",
+      "educacio",
+      "insercio_laboral",
+      "assessoria_juridica",
+      "voluntariat",
+      "salut",
+      "suport_psicologic",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 164,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR020",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0141",
+    "nom": "Recurs Educacio 0141",
+    "tipus": "educacio",
+    "keywords": [
+      "treball_social",
+      "acompanyament",
+      "suport_psicologic",
+      "salut",
+      "mediacio_habitatge",
+      "gent_gran",
+      "alimentacio",
+      "habitatge"
+    ],
+    "quantitat_disponible": 193,
+    "unitat": "lots",
+    "centre_id": "CTR027",
+    "requisits": [
+      "empadronat",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0146",
+    "nom": "Recurs Educacio 0146",
+    "tipus": "educacio",
+    "keywords": [
+      "orientacio",
+      "insercio_laboral",
+      "acollida",
+      "atencio_infants",
+      "formacio",
+      "gestio",
+      "treball_social"
+    ],
+    "quantitat_disponible": 102,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR025",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0147",
+    "nom": "Recurs Educacio 0147",
+    "tipus": "educacio",
+    "keywords": [
+      "suport_psicologic",
+      "traduccio",
+      "insercio_laboral",
+      "habitatge",
+      "gent_gran",
+      "formacio",
+      "formacio",
+      "mediacio_habitatge"
+    ],
+    "quantitat_disponible": 82,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR028",
+    "requisits": [
+      "ingressos_baixos",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0167",
+    "nom": "Recurs Educacio 0167",
+    "tipus": "educacio",
+    "keywords": [
+      "gestio",
+      "repartiment",
+      "insercio_laboral",
+      "documentacio",
+      "traduccio",
+      "salut_mental",
+      "educacio",
+      "salut"
+    ],
+    "quantitat_disponible": 79,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR056",
+    "requisits": [
+      "ingressos_baixos",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0181",
+    "nom": "Recurs Educacio 0181",
+    "tipus": "educacio",
+    "keywords": [
+      "gent_gran",
+      "alimentacio",
+      "salut_mental",
+      "suport_psicologic",
+      "educacio"
+    ],
+    "quantitat_disponible": 171,
+    "unitat": "places",
+    "centre_id": "CTR037",
+    "requisits": []
+  },
+  {
+    "id": "REC0182",
+    "nom": "Recurs Educacio 0182",
+    "tipus": "educacio",
+    "keywords": [
+      "formacio",
+      "mediacio_habitatge",
+      "documentacio",
+      "acollida"
+    ],
+    "quantitat_disponible": 106,
+    "unitat": "lots",
+    "centre_id": "CTR011",
+    "requisits": []
+  },
+  {
+    "id": "REC0198",
+    "nom": "Recurs Educacio 0198",
+    "tipus": "educacio",
+    "keywords": [
+      "formacio",
+      "salut_mental",
+      "assessoria_juridica",
+      "gent_gran",
+      "insercio_laboral",
+      "suport_escolar",
+      "atencio_infants",
+      "acollida"
+    ],
+    "quantitat_disponible": 80,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR003",
+    "requisits": []
+  },
+  {
+    "id": "REC0205",
+    "nom": "Recurs Educacio 0205",
+    "tipus": "educacio",
+    "keywords": [
+      "suport_escolar",
+      "salut_mental",
+      "documentacio",
+      "formacio"
+    ],
+    "quantitat_disponible": 112,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR048",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0206",
+    "nom": "Recurs Educacio 0206",
+    "tipus": "educacio",
+    "keywords": [
+      "assessoria_juridica",
+      "acompanyament",
+      "atencio_infants",
+      "traduccio"
+    ],
+    "quantitat_disponible": 216,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR011",
+    "requisits": [
+      "empadronat",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0222",
+    "nom": "Recurs Educacio 0222",
+    "tipus": "educacio",
+    "keywords": [
+      "suport_psicologic",
+      "alimentacio",
+      "educacio",
+      "logistica",
+      "insercio_laboral",
+      "mediacio_habitatge"
+    ],
+    "quantitat_disponible": 47,
+    "unitat": "lots",
+    "centre_id": "CTR034",
+    "requisits": []
+  },
+  {
+    "id": "REC0225",
+    "nom": "Recurs Educacio 0225",
+    "tipus": "educacio",
+    "keywords": [
+      "traduccio",
+      "suport_escolar",
+      "formacio",
+      "acollida",
+      "salut_mental",
+      "documentacio",
+      "gestio",
+      "salut"
+    ],
+    "quantitat_disponible": 85,
+    "unitat": "places",
+    "centre_id": "CTR052",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0229",
+    "nom": "Recurs Educacio 0229",
+    "tipus": "educacio",
+    "keywords": [
+      "insercio_laboral",
+      "treball_social",
+      "insercio_laboral",
+      "mediacio_habitatge",
+      "acompanyament"
+    ],
+    "quantitat_disponible": 100,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR009",
+    "requisits": [
+      "risc_exclusio",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0254",
+    "nom": "Recurs Educacio 0254",
+    "tipus": "educacio",
+    "keywords": [
+      "gent_gran",
+      "mediacio_habitatge",
+      "voluntariat",
+      "atencio_infants",
+      "habitatge",
+      "suport_escolar",
+      "insercio_laboral",
+      "acompanyament"
+    ],
+    "quantitat_disponible": 82,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR031",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0004",
+    "nom": "Recurs Espai 0004",
+    "tipus": "espai",
+    "keywords": [
+      "insercio_laboral",
+      "gent_gran",
+      "atencio_infants",
+      "documentacio"
+    ],
+    "quantitat_disponible": 127,
+    "unitat": "lots",
+    "centre_id": "CTR042",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0010",
+    "nom": "Recurs Espai 0010",
+    "tipus": "espai",
+    "keywords": [
+      "insercio_laboral",
+      "gent_gran",
+      "logistica",
+      "alimentacio",
+      "repartiment",
+      "salut",
+      "formacio"
+    ],
+    "quantitat_disponible": 44,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR024",
+    "requisits": []
+  },
+  {
+    "id": "REC0013",
+    "nom": "Recurs Espai 0013",
+    "tipus": "espai",
+    "keywords": [
+      "mediacio_habitatge",
+      "voluntariat",
+      "formacio",
+      "educacio",
+      "insercio_laboral",
+      "atencio_infants",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 40,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR006",
+    "requisits": [
+      "ingressos_baixos",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0021",
+    "nom": "Recurs Espai 0021",
+    "tipus": "espai",
+    "keywords": [
+      "traduccio",
+      "atencio_infants",
+      "suport_escolar",
+      "alimentacio",
+      "gent_gran",
+      "repartiment",
+      "acollida",
+      "suport_psicologic"
+    ],
+    "quantitat_disponible": 125,
+    "unitat": "places",
+    "centre_id": "CTR014",
     "requisits": [
       "menors_a_carrec"
     ]
   },
   {
-    "id": "REC007",
-    "nom": "Atenció psicosocial",
-    "tipus": "salut_mental",
+    "id": "REC0029",
+    "nom": "Recurs Espai 0029",
+    "tipus": "espai",
     "keywords": [
+      "formacio",
+      "habitatge",
+      "educacio",
+      "suport_escolar"
+    ],
+    "quantitat_disponible": 158,
+    "unitat": "places",
+    "centre_id": "CTR038",
+    "requisits": []
+  },
+  {
+    "id": "REC0063",
+    "nom": "Recurs Espai 0063",
+    "tipus": "espai",
+    "keywords": [
+      "insercio_laboral",
+      "mediacio_habitatge",
+      "gestio",
+      "treball_social",
+      "formacio",
+      "logistica",
+      "suport_escolar"
+    ],
+    "quantitat_disponible": 217,
+    "unitat": "lots",
+    "centre_id": "CTR040",
+    "requisits": [
+      "empadronat",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0077",
+    "nom": "Recurs Espai 0077",
+    "tipus": "espai",
+    "keywords": [
+      "suport_escolar",
+      "gestio",
+      "alimentacio",
+      "insercio_laboral",
+      "logistica",
+      "alimentacio",
+      "atencio_infants",
+      "formacio"
+    ],
+    "quantitat_disponible": 148,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR004",
+    "requisits": []
+  },
+  {
+    "id": "REC0083",
+    "nom": "Recurs Espai 0083",
+    "tipus": "espai",
+    "keywords": [
+      "atencio_infants",
+      "acompanyament",
+      "educacio",
+      "salut_mental"
+    ],
+    "quantitat_disponible": 101,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR049",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0085",
+    "nom": "Recurs Espai 0085",
+    "tipus": "espai",
+    "keywords": [
+      "habitatge",
+      "formacio",
+      "repartiment",
+      "gent_gran",
+      "educacio",
+      "documentacio"
+    ],
+    "quantitat_disponible": 172,
+    "unitat": "lots",
+    "centre_id": "CTR030",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0093",
+    "nom": "Recurs Espai 0093",
+    "tipus": "espai",
+    "keywords": [
+      "insercio_laboral",
+      "alimentacio",
+      "acompanyament",
+      "habitatge"
+    ],
+    "quantitat_disponible": 227,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR053",
+    "requisits": []
+  },
+  {
+    "id": "REC0094",
+    "nom": "Recurs Espai 0094",
+    "tipus": "espai",
+    "keywords": [
+      "logistica",
       "salut_mental",
-      "ansietat",
-      "acompanyament_psicològic",
-      "soledat",
-      "gent_gran"
+      "suport_escolar",
+      "assessoria_juridica"
+    ],
+    "quantitat_disponible": 123,
+    "unitat": "places",
+    "centre_id": "CTR052",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0098",
+    "nom": "Recurs Espai 0098",
+    "tipus": "espai",
+    "keywords": [
+      "acompanyament",
+      "logistica",
+      "gestio",
+      "documentacio",
+      "formacio",
+      "assessoria_juridica",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 155,
+    "unitat": "lots",
+    "centre_id": "CTR020",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0109",
+    "nom": "Recurs Espai 0109",
+    "tipus": "espai",
+    "keywords": [
+      "mediacio_habitatge",
+      "atencio_infants",
+      "salut_mental",
+      "acollida",
+      "logistica",
+      "treball_social",
+      "educacio",
+      "assessoria_juridica"
+    ],
+    "quantitat_disponible": 184,
+    "unitat": "places",
+    "centre_id": "CTR014",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0129",
+    "nom": "Recurs Espai 0129",
+    "tipus": "espai",
+    "keywords": [
+      "acompanyament",
+      "formacio",
+      "alimentacio",
+      "suport_escolar",
+      "acollida",
+      "formacio",
+      "suport_psicologic",
+      "repartiment"
+    ],
+    "quantitat_disponible": 137,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR031",
+    "requisits": []
+  },
+  {
+    "id": "REC0144",
+    "nom": "Recurs Espai 0144",
+    "tipus": "espai",
+    "keywords": [
+      "documentacio",
+      "treball_social",
+      "acollida",
+      "orientacio",
+      "repartiment",
+      "salut",
+      "habitatge"
+    ],
+    "quantitat_disponible": 241,
+    "unitat": "lots",
+    "centre_id": "CTR045",
+    "requisits": []
+  },
+  {
+    "id": "REC0176",
+    "nom": "Recurs Espai 0176",
+    "tipus": "espai",
+    "keywords": [
+      "atencio_infants",
+      "assessoria_juridica",
+      "formacio",
+      "habitatge"
+    ],
+    "quantitat_disponible": 243,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR009",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0187",
+    "nom": "Recurs Espai 0187",
+    "tipus": "espai",
+    "keywords": [
+      "alimentacio",
+      "assessoria_juridica",
+      "suport_psicologic",
+      "logistica",
+      "insercio_laboral",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 211,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR014",
+    "requisits": [
+      "menors_a_carrec",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0191",
+    "nom": "Recurs Espai 0191",
+    "tipus": "espai",
+    "keywords": [
+      "treball_social",
+      "acollida",
+      "insercio_laboral",
+      "orientacio",
+      "atencio_infants",
+      "voluntariat",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 238,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR005",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0194",
+    "nom": "Recurs Espai 0194",
+    "tipus": "espai",
+    "keywords": [
+      "voluntariat",
+      "salut",
+      "assessoria_juridica",
+      "mediacio_habitatge",
+      "alimentacio",
+      "acompanyament"
+    ],
+    "quantitat_disponible": 221,
+    "unitat": "lots",
+    "centre_id": "CTR033",
+    "requisits": []
+  },
+  {
+    "id": "REC0197",
+    "nom": "Recurs Espai 0197",
+    "tipus": "espai",
+    "keywords": [
+      "alimentacio",
+      "logistica",
+      "suport_escolar",
+      "assessoria_juridica"
+    ],
+    "quantitat_disponible": 54,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR055",
+    "requisits": []
+  },
+  {
+    "id": "REC0203",
+    "nom": "Recurs Espai 0203",
+    "tipus": "espai",
+    "keywords": [
+      "alimentacio",
+      "mediacio_habitatge",
+      "insercio_laboral",
+      "salut_mental",
+      "gent_gran",
+      "orientacio"
+    ],
+    "quantitat_disponible": 110,
+    "unitat": "lots",
+    "centre_id": "CTR007",
+    "requisits": []
+  },
+  {
+    "id": "REC0220",
+    "nom": "Recurs Espai 0220",
+    "tipus": "espai",
+    "keywords": [
+      "repartiment",
+      "gestio",
+      "gent_gran",
+      "assessoria_juridica",
+      "educacio"
+    ],
+    "quantitat_disponible": 221,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR044",
+    "requisits": [
+      "menors_a_carrec",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0223",
+    "nom": "Recurs Espai 0223",
+    "tipus": "espai",
+    "keywords": [
+      "insercio_laboral",
+      "salut_mental",
+      "alimentacio",
+      "treball_social",
+      "alimentacio",
+      "voluntariat",
+      "salut",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 245,
+    "unitat": "places",
+    "centre_id": "CTR037",
+    "requisits": [
+      "ingressos_baixos",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0230",
+    "nom": "Recurs Espai 0230",
+    "tipus": "espai",
+    "keywords": [
+      "atencio_infants",
+      "acollida",
+      "gent_gran",
+      "habitatge",
+      "suport_escolar"
     ],
     "quantitat_disponible": 15,
-    "unitat": "sessions/mes",
+    "unitat": "places",
+    "centre_id": "CTR029",
+    "requisits": [
+      "empadronat",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0240",
+    "nom": "Recurs Espai 0240",
+    "tipus": "espai",
+    "keywords": [
+      "gent_gran",
+      "orientacio",
+      "formacio",
+      "traduccio",
+      "gestio"
+    ],
+    "quantitat_disponible": 164,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR006",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0245",
+    "nom": "Recurs Espai 0245",
+    "tipus": "espai",
+    "keywords": [
+      "orientacio",
+      "treball_social",
+      "habitatge",
+      "documentacio"
+    ],
+    "quantitat_disponible": 67,
+    "unitat": "lots",
+    "centre_id": "CTR021",
+    "requisits": []
+  },
+  {
+    "id": "REC0249",
+    "nom": "Recurs Espai 0249",
+    "tipus": "espai",
+    "keywords": [
+      "documentacio",
+      "atencio_infants",
+      "gestio",
+      "salut_mental",
+      "insercio_laboral",
+      "suport_psicologic"
+    ],
+    "quantitat_disponible": 133,
+    "unitat": "places",
     "centre_id": "CTR001",
     "requisits": []
   },
   {
-    "id": "REC008",
-    "nom": "Transport i acompanyament sanitari",
+    "id": "REC0255",
+    "nom": "Recurs Espai 0255",
+    "tipus": "espai",
+    "keywords": [
+      "suport_escolar",
+      "logistica",
+      "voluntariat",
+      "assessoria_juridica"
+    ],
+    "quantitat_disponible": 244,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR045",
+    "requisits": [
+      "ingressos_baixos",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0259",
+    "nom": "Recurs Espai 0259",
+    "tipus": "espai",
+    "keywords": [
+      "salut_mental",
+      "suport_psicologic",
+      "suport_escolar",
+      "formacio",
+      "gent_gran",
+      "orientacio"
+    ],
+    "quantitat_disponible": 32,
+    "unitat": "places",
+    "centre_id": "CTR048",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0014",
+    "nom": "Recurs Habitatge 0014",
+    "tipus": "habitatge",
+    "keywords": [
+      "voluntariat",
+      "gestio",
+      "insercio_laboral",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 78,
+    "unitat": "places",
+    "centre_id": "CTR060",
+    "requisits": []
+  },
+  {
+    "id": "REC0017",
+    "nom": "Recurs Habitatge 0017",
+    "tipus": "habitatge",
+    "keywords": [
+      "logistica",
+      "salut_mental",
+      "habitatge",
+      "assessoria_juridica",
+      "treball_social"
+    ],
+    "quantitat_disponible": 207,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR045",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0022",
+    "nom": "Recurs Habitatge 0022",
+    "tipus": "habitatge",
+    "keywords": [
+      "acollida",
+      "repartiment",
+      "habitatge",
+      "insercio_laboral",
+      "traduccio",
+      "gestio"
+    ],
+    "quantitat_disponible": 85,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR028",
+    "requisits": [
+      "menors_a_carrec",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0035",
+    "nom": "Recurs Habitatge 0035",
+    "tipus": "habitatge",
+    "keywords": [
+      "documentacio",
+      "formacio",
+      "formacio",
+      "treball_social",
+      "acompanyament",
+      "mediacio_habitatge",
+      "voluntariat",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 207,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR011",
+    "requisits": []
+  },
+  {
+    "id": "REC0036",
+    "nom": "Recurs Habitatge 0036",
+    "tipus": "habitatge",
+    "keywords": [
+      "assessoria_juridica",
+      "formacio",
+      "gent_gran",
+      "alimentacio",
+      "orientacio",
+      "insercio_laboral",
+      "mediacio_habitatge"
+    ],
+    "quantitat_disponible": 204,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR043",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0051",
+    "nom": "Recurs Habitatge 0051",
+    "tipus": "habitatge",
+    "keywords": [
+      "acompanyament",
+      "salut",
+      "insercio_laboral",
+      "orientacio",
+      "suport_psicologic",
+      "acollida"
+    ],
+    "quantitat_disponible": 83,
+    "unitat": "lots",
+    "centre_id": "CTR032",
+    "requisits": []
+  },
+  {
+    "id": "REC0059",
+    "nom": "Recurs Habitatge 0059",
+    "tipus": "habitatge",
+    "keywords": [
+      "acompanyament",
+      "alimentacio",
+      "educacio",
+      "gestio",
+      "atencio_infants",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 228,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR046",
+    "requisits": [
+      "menors_a_carrec",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0078",
+    "nom": "Recurs Habitatge 0078",
+    "tipus": "habitatge",
+    "keywords": [
+      "orientacio",
+      "assessoria_juridica",
+      "formacio",
+      "traduccio"
+    ],
+    "quantitat_disponible": 42,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR056",
+    "requisits": []
+  },
+  {
+    "id": "REC0092",
+    "nom": "Recurs Habitatge 0092",
+    "tipus": "habitatge",
+    "keywords": [
+      "logistica",
+      "traduccio",
+      "salut",
+      "acompanyament",
+      "formacio",
+      "suport_escolar",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 136,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR050",
+    "requisits": [
+      "ingressos_baixos",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0096",
+    "nom": "Recurs Habitatge 0096",
+    "tipus": "habitatge",
+    "keywords": [
+      "suport_escolar",
+      "acompanyament",
+      "suport_psicologic",
+      "voluntariat",
+      "alimentacio",
+      "orientacio",
+      "habitatge"
+    ],
+    "quantitat_disponible": 55,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR053",
+    "requisits": [
+      "empadronat",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0100",
+    "nom": "Recurs Habitatge 0100",
+    "tipus": "habitatge",
+    "keywords": [
+      "gent_gran",
+      "voluntariat",
+      "salut",
+      "insercio_laboral",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 58,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR040",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0101",
+    "nom": "Recurs Habitatge 0101",
+    "tipus": "habitatge",
+    "keywords": [
+      "acompanyament",
+      "mediacio_habitatge",
+      "assessoria_juridica",
+      "voluntariat"
+    ],
+    "quantitat_disponible": 44,
+    "unitat": "places",
+    "centre_id": "CTR040",
+    "requisits": []
+  },
+  {
+    "id": "REC0115",
+    "nom": "Recurs Habitatge 0115",
+    "tipus": "habitatge",
+    "keywords": [
+      "salut_mental",
+      "gestio",
+      "alimentacio",
+      "formacio",
+      "insercio_laboral",
+      "salut",
+      "repartiment",
+      "traduccio"
+    ],
+    "quantitat_disponible": 128,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR051",
+    "requisits": []
+  },
+  {
+    "id": "REC0138",
+    "nom": "Recurs Habitatge 0138",
+    "tipus": "habitatge",
+    "keywords": [
+      "suport_psicologic",
+      "acompanyament",
+      "alimentacio",
+      "assessoria_juridica",
+      "repartiment",
+      "mediacio_habitatge"
+    ],
+    "quantitat_disponible": 156,
+    "unitat": "places",
+    "centre_id": "CTR014",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0142",
+    "nom": "Recurs Habitatge 0142",
+    "tipus": "habitatge",
+    "keywords": [
+      "logistica",
+      "alimentacio",
+      "salut",
+      "mediacio_habitatge",
+      "alimentacio",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 114,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR050",
+    "requisits": [
+      "ingressos_baixos",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0149",
+    "nom": "Recurs Habitatge 0149",
+    "tipus": "habitatge",
+    "keywords": [
+      "salut",
+      "salut_mental",
+      "formacio",
+      "habitatge"
+    ],
+    "quantitat_disponible": 119,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR019",
+    "requisits": [
+      "risc_exclusio",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0158",
+    "nom": "Recurs Habitatge 0158",
+    "tipus": "habitatge",
+    "keywords": [
+      "habitatge",
+      "treball_social",
+      "atencio_infants",
+      "suport_escolar",
+      "suport_psicologic",
+      "formacio",
+      "orientacio"
+    ],
+    "quantitat_disponible": 186,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR057",
+    "requisits": []
+  },
+  {
+    "id": "REC0175",
+    "nom": "Recurs Habitatge 0175",
+    "tipus": "habitatge",
+    "keywords": [
+      "insercio_laboral",
+      "voluntariat",
+      "alimentacio",
+      "acompanyament",
+      "traduccio"
+    ],
+    "quantitat_disponible": 184,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR049",
+    "requisits": [
+      "ingressos_baixos",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0200",
+    "nom": "Recurs Habitatge 0200",
+    "tipus": "habitatge",
+    "keywords": [
+      "salut",
+      "habitatge",
+      "treball_social",
+      "educacio"
+    ],
+    "quantitat_disponible": 193,
+    "unitat": "lots",
+    "centre_id": "CTR030",
+    "requisits": []
+  },
+  {
+    "id": "REC0213",
+    "nom": "Recurs Habitatge 0213",
+    "tipus": "habitatge",
+    "keywords": [
+      "salut",
+      "salut_mental",
+      "suport_escolar",
+      "alimentacio",
+      "documentacio"
+    ],
+    "quantitat_disponible": 98,
+    "unitat": "lots",
+    "centre_id": "CTR050",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0215",
+    "nom": "Recurs Habitatge 0215",
+    "tipus": "habitatge",
+    "keywords": [
+      "voluntariat",
+      "treball_social",
+      "repartiment",
+      "habitatge"
+    ],
+    "quantitat_disponible": 154,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR023",
+    "requisits": [
+      "ingressos_baixos",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0216",
+    "nom": "Recurs Habitatge 0216",
+    "tipus": "habitatge",
+    "keywords": [
+      "gestio",
+      "voluntariat",
+      "orientacio",
+      "mediacio_habitatge",
+      "acollida",
+      "repartiment"
+    ],
+    "quantitat_disponible": 67,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR020",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0226",
+    "nom": "Recurs Habitatge 0226",
+    "tipus": "habitatge",
+    "keywords": [
+      "salut",
+      "alimentacio",
+      "habitatge",
+      "alimentacio",
+      "treball_social"
+    ],
+    "quantitat_disponible": 11,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR056",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0227",
+    "nom": "Recurs Habitatge 0227",
+    "tipus": "habitatge",
+    "keywords": [
+      "treball_social",
+      "educacio",
+      "logistica",
+      "salut_mental",
+      "orientacio",
+      "salut",
+      "atencio_infants",
+      "traduccio"
+    ],
+    "quantitat_disponible": 33,
+    "unitat": "places",
+    "centre_id": "CTR016",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0244",
+    "nom": "Recurs Habitatge 0244",
+    "tipus": "habitatge",
+    "keywords": [
+      "insercio_laboral",
+      "alimentacio",
+      "logistica",
+      "acompanyament"
+    ],
+    "quantitat_disponible": 191,
+    "unitat": "places",
+    "centre_id": "CTR056",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0025",
+    "nom": "Recurs Insercio_Laboral 0025",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "gent_gran",
+      "gestio",
+      "formacio",
+      "insercio_laboral",
+      "assessoria_juridica",
+      "traduccio",
+      "alimentacio",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 192,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR048",
+    "requisits": [
+      "empadronat",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0038",
+    "nom": "Recurs Insercio_Laboral 0038",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "habitatge",
+      "salut",
+      "suport_psicologic",
+      "treball_social",
+      "voluntariat",
+      "acollida",
+      "salut_mental"
+    ],
+    "quantitat_disponible": 18,
+    "unitat": "lots",
+    "centre_id": "CTR041",
+    "requisits": []
+  },
+  {
+    "id": "REC0049",
+    "nom": "Recurs Insercio_Laboral 0049",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "alimentacio",
+      "treball_social",
+      "gent_gran",
+      "logistica",
+      "insercio_laboral",
+      "educacio"
+    ],
+    "quantitat_disponible": 21,
+    "unitat": "lots",
+    "centre_id": "CTR026",
+    "requisits": []
+  },
+  {
+    "id": "REC0072",
+    "nom": "Recurs Insercio_Laboral 0072",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "traduccio",
+      "educacio",
+      "documentacio",
+      "gestio",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 146,
+    "unitat": "lots",
+    "centre_id": "CTR002",
+    "requisits": [
+      "menors_a_carrec",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0103",
+    "nom": "Recurs Insercio_Laboral 0103",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "repartiment",
+      "treball_social",
+      "gent_gran",
+      "suport_psicologic",
+      "alimentacio",
+      "habitatge",
+      "acompanyament"
+    ],
+    "quantitat_disponible": 128,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR001",
+    "requisits": [
+      "menors_a_carrec",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0104",
+    "nom": "Recurs Insercio_Laboral 0104",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "alimentacio",
+      "salut_mental",
+      "orientacio",
+      "documentacio",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 34,
+    "unitat": "places",
+    "centre_id": "CTR057",
+    "requisits": []
+  },
+  {
+    "id": "REC0106",
+    "nom": "Recurs Insercio_Laboral 0106",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "insercio_laboral",
+      "formacio",
+      "alimentacio",
+      "gestio",
+      "salut_mental",
+      "suport_escolar",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 97,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR027",
+    "requisits": [
+      "ingressos_baixos",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0113",
+    "nom": "Recurs Insercio_Laboral 0113",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "treball_social",
+      "insercio_laboral",
+      "formacio",
+      "atencio_infants",
+      "salut_mental",
+      "suport_escolar",
+      "alimentacio",
+      "voluntariat"
+    ],
+    "quantitat_disponible": 136,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR013",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0123",
+    "nom": "Recurs Insercio_Laboral 0123",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "alimentacio",
+      "formacio",
+      "habitatge",
+      "voluntariat"
+    ],
+    "quantitat_disponible": 186,
+    "unitat": "places",
+    "centre_id": "CTR029",
+    "requisits": []
+  },
+  {
+    "id": "REC0124",
+    "nom": "Recurs Insercio_Laboral 0124",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "voluntariat",
+      "documentacio",
+      "acompanyament",
+      "repartiment",
+      "acollida",
+      "formacio",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 201,
+    "unitat": "lots",
+    "centre_id": "CTR048",
+    "requisits": [
+      "empadronat",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0148",
+    "nom": "Recurs Insercio_Laboral 0148",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "salut",
+      "alimentacio",
+      "suport_psicologic",
+      "traduccio",
+      "alimentacio",
+      "logistica",
+      "atencio_infants",
+      "habitatge"
+    ],
+    "quantitat_disponible": 212,
+    "unitat": "lots",
+    "centre_id": "CTR021",
+    "requisits": []
+  },
+  {
+    "id": "REC0162",
+    "nom": "Recurs Insercio_Laboral 0162",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "gent_gran",
+      "habitatge",
+      "alimentacio",
+      "assessoria_juridica",
+      "alimentacio",
+      "documentacio",
+      "atencio_infants",
+      "acollida"
+    ],
+    "quantitat_disponible": 55,
+    "unitat": "places",
+    "centre_id": "CTR006",
+    "requisits": []
+  },
+  {
+    "id": "REC0166",
+    "nom": "Recurs Insercio_Laboral 0166",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "repartiment",
+      "atencio_infants",
+      "gent_gran",
+      "orientacio",
+      "gestio",
+      "alimentacio",
+      "logistica",
+      "formacio"
+    ],
+    "quantitat_disponible": 114,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR024",
+    "requisits": []
+  },
+  {
+    "id": "REC0168",
+    "nom": "Recurs Insercio_Laboral 0168",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "suport_escolar",
+      "gent_gran",
+      "educacio",
+      "traduccio",
+      "habitatge",
+      "assessoria_juridica",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 111,
+    "unitat": "lots",
+    "centre_id": "CTR040",
+    "requisits": []
+  },
+  {
+    "id": "REC0177",
+    "nom": "Recurs Insercio_Laboral 0177",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "orientacio",
+      "gent_gran",
+      "formacio",
+      "gestio"
+    ],
+    "quantitat_disponible": 110,
+    "unitat": "lots",
+    "centre_id": "CTR034",
+    "requisits": [
+      "risc_exclusio",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0180",
+    "nom": "Recurs Insercio_Laboral 0180",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "mediacio_habitatge",
+      "habitatge",
+      "salut",
+      "alimentacio",
+      "formacio",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 197,
+    "unitat": "lots",
+    "centre_id": "CTR046",
+    "requisits": [
+      "ingressos_baixos",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0195",
+    "nom": "Recurs Insercio_Laboral 0195",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "salut_mental",
+      "logistica",
+      "treball_social",
+      "orientacio",
+      "mediacio_habitatge",
+      "suport_escolar"
+    ],
+    "quantitat_disponible": 66,
+    "unitat": "lots",
+    "centre_id": "CTR010",
+    "requisits": []
+  },
+  {
+    "id": "REC0199",
+    "nom": "Recurs Insercio_Laboral 0199",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "acompanyament",
+      "suport_escolar",
+      "insercio_laboral",
+      "salut",
+      "educacio"
+    ],
+    "quantitat_disponible": 124,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR056",
+    "requisits": []
+  },
+  {
+    "id": "REC0209",
+    "nom": "Recurs Insercio_Laboral 0209",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "alimentacio",
+      "gent_gran",
+      "suport_psicologic",
+      "habitatge",
+      "insercio_laboral",
+      "assessoria_juridica",
+      "gestio",
+      "acollida"
+    ],
+    "quantitat_disponible": 211,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR022",
+    "requisits": []
+  },
+  {
+    "id": "REC0217",
+    "nom": "Recurs Insercio_Laboral 0217",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "treball_social",
+      "formacio",
+      "orientacio",
+      "voluntariat",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 48,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR043",
+    "requisits": [
+      "empadronat",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0234",
+    "nom": "Recurs Insercio_Laboral 0234",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "acompanyament",
+      "salut_mental",
+      "suport_escolar",
+      "formacio"
+    ],
+    "quantitat_disponible": 207,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR044",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0235",
+    "nom": "Recurs Insercio_Laboral 0235",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "atencio_infants",
+      "suport_psicologic",
+      "mediacio_habitatge",
+      "habitatge",
+      "treball_social",
+      "alimentacio",
+      "assessoria_juridica",
+      "formacio"
+    ],
+    "quantitat_disponible": 47,
+    "unitat": "lots",
+    "centre_id": "CTR031",
+    "requisits": [
+      "menors_a_carrec",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0242",
+    "nom": "Recurs Insercio_Laboral 0242",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "acollida",
+      "assessoria_juridica",
+      "salut",
+      "alimentacio",
+      "formacio",
+      "formacio",
+      "gestio",
+      "salut_mental"
+    ],
+    "quantitat_disponible": 207,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR054",
+    "requisits": [
+      "ingressos_baixos",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0252",
+    "nom": "Recurs Insercio_Laboral 0252",
+    "tipus": "insercio_laboral",
+    "keywords": [
+      "suport_psicologic",
+      "alimentacio",
+      "atencio_infants",
+      "logistica",
+      "educacio"
+    ],
+    "quantitat_disponible": 84,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR012",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0006",
+    "nom": "Recurs Legal 0006",
+    "tipus": "legal",
+    "keywords": [
+      "orientacio",
+      "acollida",
+      "atencio_infants",
+      "voluntariat",
+      "salut_mental",
+      "educacio",
+      "insercio_laboral",
+      "formacio"
+    ],
+    "quantitat_disponible": 13,
+    "unitat": "lots",
+    "centre_id": "CTR054",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0011",
+    "nom": "Recurs Legal 0011",
+    "tipus": "legal",
+    "keywords": [
+      "mediacio_habitatge",
+      "gestio",
+      "salut",
+      "alimentacio",
+      "suport_escolar",
+      "voluntariat"
+    ],
+    "quantitat_disponible": 221,
+    "unitat": "lots",
+    "centre_id": "CTR021",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0015",
+    "nom": "Recurs Legal 0015",
+    "tipus": "legal",
+    "keywords": [
+      "suport_escolar",
+      "traduccio",
+      "treball_social",
+      "mediacio_habitatge"
+    ],
+    "quantitat_disponible": 98,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR040",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0023",
+    "nom": "Recurs Legal 0023",
+    "tipus": "legal",
+    "keywords": [
+      "repartiment",
+      "insercio_laboral",
+      "alimentacio",
+      "educacio",
+      "atencio_infants",
+      "salut_mental"
+    ],
+    "quantitat_disponible": 175,
+    "unitat": "lots",
+    "centre_id": "CTR039",
+    "requisits": []
+  },
+  {
+    "id": "REC0030",
+    "nom": "Recurs Legal 0030",
+    "tipus": "legal",
+    "keywords": [
+      "repartiment",
+      "habitatge",
+      "alimentacio",
+      "logistica",
+      "formacio",
+      "formacio",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 45,
+    "unitat": "lots",
+    "centre_id": "CTR031",
+    "requisits": []
+  },
+  {
+    "id": "REC0047",
+    "nom": "Recurs Legal 0047",
+    "tipus": "legal",
+    "keywords": [
+      "voluntariat",
+      "salut",
+      "documentacio",
+      "acollida",
+      "suport_escolar",
+      "formacio",
+      "traduccio"
+    ],
+    "quantitat_disponible": 26,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR044",
+    "requisits": []
+  },
+  {
+    "id": "REC0058",
+    "nom": "Recurs Legal 0058",
+    "tipus": "legal",
+    "keywords": [
+      "salut",
+      "atencio_infants",
+      "voluntariat",
+      "insercio_laboral",
+      "logistica",
+      "acompanyament",
+      "documentacio"
+    ],
+    "quantitat_disponible": 230,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR005",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0067",
+    "nom": "Recurs Legal 0067",
+    "tipus": "legal",
+    "keywords": [
+      "alimentacio",
+      "gestio",
+      "voluntariat",
+      "mediacio_habitatge",
+      "suport_escolar",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 120,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR033",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0082",
+    "nom": "Recurs Legal 0082",
+    "tipus": "legal",
+    "keywords": [
+      "gent_gran",
+      "suport_psicologic",
+      "acompanyament",
+      "gestio",
+      "formacio",
+      "repartiment",
+      "documentacio",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 47,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR032",
+    "requisits": []
+  },
+  {
+    "id": "REC0087",
+    "nom": "Recurs Legal 0087",
+    "tipus": "legal",
+    "keywords": [
+      "assessoria_juridica",
+      "suport_escolar",
+      "alimentacio",
+      "salut",
+      "repartiment",
+      "alimentacio",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 239,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR050",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0090",
+    "nom": "Recurs Legal 0090",
+    "tipus": "legal",
+    "keywords": [
+      "alimentacio",
+      "assessoria_juridica",
+      "salut",
+      "insercio_laboral",
+      "salut_mental",
+      "habitatge"
+    ],
+    "quantitat_disponible": 213,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR026",
+    "requisits": [
+      "empadronat",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0105",
+    "nom": "Recurs Legal 0105",
+    "tipus": "legal",
+    "keywords": [
+      "formacio",
+      "mediacio_habitatge",
+      "formacio",
+      "orientacio",
+      "acollida",
+      "educacio"
+    ],
+    "quantitat_disponible": 35,
+    "unitat": "places",
+    "centre_id": "CTR049",
+    "requisits": []
+  },
+  {
+    "id": "REC0107",
+    "nom": "Recurs Legal 0107",
+    "tipus": "legal",
+    "keywords": [
+      "suport_psicologic",
+      "assessoria_juridica",
+      "educacio",
+      "gestio",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 208,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR011",
+    "requisits": [
+      "menors_a_carrec",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0111",
+    "nom": "Recurs Legal 0111",
+    "tipus": "legal",
+    "keywords": [
+      "mediacio_habitatge",
+      "suport_psicologic",
+      "insercio_laboral",
+      "treball_social",
+      "repartiment",
+      "suport_escolar",
+      "gent_gran",
+      "habitatge"
+    ],
+    "quantitat_disponible": 68,
+    "unitat": "places",
+    "centre_id": "CTR028",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0135",
+    "nom": "Recurs Legal 0135",
+    "tipus": "legal",
+    "keywords": [
+      "logistica",
+      "atencio_infants",
+      "treball_social",
+      "gent_gran",
+      "acollida"
+    ],
+    "quantitat_disponible": 199,
+    "unitat": "places",
+    "centre_id": "CTR022",
+    "requisits": [
+      "menors_a_carrec",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0140",
+    "nom": "Recurs Legal 0140",
+    "tipus": "legal",
+    "keywords": [
+      "gestio",
+      "acollida",
+      "educacio",
+      "orientacio",
+      "acompanyament",
+      "suport_psicologic",
+      "formacio",
+      "logistica"
+    ],
+    "quantitat_disponible": 208,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR049",
+    "requisits": []
+  },
+  {
+    "id": "REC0155",
+    "nom": "Recurs Legal 0155",
+    "tipus": "legal",
+    "keywords": [
+      "orientacio",
+      "habitatge",
+      "treball_social",
+      "formacio"
+    ],
+    "quantitat_disponible": 188,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR016",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0159",
+    "nom": "Recurs Legal 0159",
+    "tipus": "legal",
+    "keywords": [
+      "habitatge",
+      "suport_escolar",
+      "insercio_laboral",
+      "voluntariat",
+      "salut_mental",
+      "mediacio_habitatge"
+    ],
+    "quantitat_disponible": 52,
+    "unitat": "places",
+    "centre_id": "CTR017",
+    "requisits": [
+      "ingressos_baixos",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0161",
+    "nom": "Recurs Legal 0161",
+    "tipus": "legal",
+    "keywords": [
+      "suport_escolar",
+      "treball_social",
+      "formacio",
+      "habitatge"
+    ],
+    "quantitat_disponible": 33,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR006",
+    "requisits": []
+  },
+  {
+    "id": "REC0184",
+    "nom": "Recurs Legal 0184",
+    "tipus": "legal",
+    "keywords": [
+      "formacio",
+      "formacio",
+      "habitatge",
+      "insercio_laboral",
+      "salut_mental",
+      "acompanyament"
+    ],
+    "quantitat_disponible": 196,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR015",
+    "requisits": [
+      "menors_a_carrec",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0188",
+    "nom": "Recurs Legal 0188",
+    "tipus": "legal",
+    "keywords": [
+      "gent_gran",
+      "documentacio",
+      "logistica",
+      "acollida",
+      "salut_mental",
+      "orientacio"
+    ],
+    "quantitat_disponible": 113,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR010",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0201",
+    "nom": "Recurs Legal 0201",
+    "tipus": "legal",
+    "keywords": [
+      "acompanyament",
+      "suport_psicologic",
+      "logistica",
+      "formacio"
+    ],
+    "quantitat_disponible": 11,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR009",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0212",
+    "nom": "Recurs Legal 0212",
+    "tipus": "legal",
+    "keywords": [
+      "formacio",
+      "treball_social",
+      "assessoria_juridica",
+      "acompanyament",
+      "gestio",
+      "gent_gran",
+      "suport_psicologic",
+      "logistica"
+    ],
+    "quantitat_disponible": 85,
+    "unitat": "lots",
+    "centre_id": "CTR015",
+    "requisits": [
+      "risc_exclusio",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0221",
+    "nom": "Recurs Legal 0221",
+    "tipus": "legal",
+    "keywords": [
+      "voluntariat",
+      "insercio_laboral",
+      "salut",
+      "acompanyament",
+      "treball_social",
+      "repartiment"
+    ],
+    "quantitat_disponible": 32,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR042",
+    "requisits": []
+  },
+  {
+    "id": "REC0241",
+    "nom": "Recurs Legal 0241",
+    "tipus": "legal",
+    "keywords": [
+      "suport_psicologic",
+      "salut_mental",
+      "formacio",
+      "treball_social",
+      "insercio_laboral",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 199,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR042",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0248",
+    "nom": "Recurs Legal 0248",
+    "tipus": "legal",
+    "keywords": [
+      "atencio_infants",
+      "gent_gran",
+      "acompanyament",
+      "treball_social",
+      "formacio",
+      "logistica",
+      "insercio_laboral",
+      "salut_mental"
+    ],
+    "quantitat_disponible": 203,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR016",
+    "requisits": [
+      "empadronat",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0260",
+    "nom": "Recurs Legal 0260",
+    "tipus": "legal",
+    "keywords": [
+      "acollida",
+      "mediacio_habitatge",
+      "habitatge",
+      "orientacio",
+      "suport_psicologic",
+      "suport_escolar",
+      "documentacio",
+      "salut"
+    ],
+    "quantitat_disponible": 82,
+    "unitat": "places",
+    "centre_id": "CTR046",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0007",
+    "nom": "Recurs Salut 0007",
+    "tipus": "salut",
+    "keywords": [
+      "alimentacio",
+      "acompanyament",
+      "repartiment",
+      "documentacio",
+      "salut_mental",
+      "atencio_infants",
+      "formacio",
+      "treball_social"
+    ],
+    "quantitat_disponible": 232,
+    "unitat": "lots",
+    "centre_id": "CTR041",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0008",
+    "nom": "Recurs Salut 0008",
+    "tipus": "salut",
+    "keywords": [
+      "acompanyament",
+      "assessoria_juridica",
+      "alimentacio",
+      "insercio_laboral",
+      "educacio",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 110,
+    "unitat": "lots",
+    "centre_id": "CTR049",
+    "requisits": []
+  },
+  {
+    "id": "REC0043",
+    "nom": "Recurs Salut 0043",
+    "tipus": "salut",
+    "keywords": [
+      "voluntariat",
+      "insercio_laboral",
+      "suport_escolar",
+      "orientacio"
+    ],
+    "quantitat_disponible": 153,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR054",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0044",
+    "nom": "Recurs Salut 0044",
     "tipus": "salut",
     "keywords": [
       "salut",
-      "malaltia",
-      "mobilitat",
       "gent_gran",
-      "discapacitat"
+      "gestio",
+      "repartiment",
+      "alimentacio",
+      "atencio_infants"
     ],
-    "quantitat_disponible": 20,
-    "unitat": "serveis/mes",
-    "centre_id": "CTR001",
+    "quantitat_disponible": 192,
+    "unitat": "places",
+    "centre_id": "CTR059",
+    "requisits": [
+      "empadronat",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0050",
+    "nom": "Recurs Salut 0050",
+    "tipus": "salut",
+    "keywords": [
+      "orientacio",
+      "salut",
+      "gent_gran",
+      "gestio",
+      "habitatge",
+      "salut_mental",
+      "documentacio"
+    ],
+    "quantitat_disponible": 122,
+    "unitat": "lots",
+    "centre_id": "CTR011",
     "requisits": []
+  },
+  {
+    "id": "REC0060",
+    "nom": "Recurs Salut 0060",
+    "tipus": "salut",
+    "keywords": [
+      "salut",
+      "logistica",
+      "documentacio",
+      "insercio_laboral",
+      "salut_mental",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 229,
+    "unitat": "lots",
+    "centre_id": "CTR003",
+    "requisits": [
+      "menors_a_carrec",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0065",
+    "nom": "Recurs Salut 0065",
+    "tipus": "salut",
+    "keywords": [
+      "formacio",
+      "suport_escolar",
+      "insercio_laboral",
+      "treball_social",
+      "alimentacio",
+      "suport_psicologic"
+    ],
+    "quantitat_disponible": 74,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR020",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0068",
+    "nom": "Recurs Salut 0068",
+    "tipus": "salut",
+    "keywords": [
+      "educacio",
+      "habitatge",
+      "insercio_laboral",
+      "logistica",
+      "atencio_infants",
+      "alimentacio",
+      "documentacio"
+    ],
+    "quantitat_disponible": 47,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR038",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0070",
+    "nom": "Recurs Salut 0070",
+    "tipus": "salut",
+    "keywords": [
+      "acollida",
+      "insercio_laboral",
+      "assessoria_juridica",
+      "atencio_infants",
+      "gent_gran",
+      "alimentacio",
+      "traduccio"
+    ],
+    "quantitat_disponible": 88,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR055",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0074",
+    "nom": "Recurs Salut 0074",
+    "tipus": "salut",
+    "keywords": [
+      "assessoria_juridica",
+      "documentacio",
+      "acollida",
+      "treball_social",
+      "suport_escolar",
+      "alimentacio",
+      "insercio_laboral",
+      "formacio"
+    ],
+    "quantitat_disponible": 66,
+    "unitat": "lots",
+    "centre_id": "CTR046",
+    "requisits": []
+  },
+  {
+    "id": "REC0076",
+    "nom": "Recurs Salut 0076",
+    "tipus": "salut",
+    "keywords": [
+      "logistica",
+      "gestio",
+      "salut_mental",
+      "mediacio_habitatge",
+      "salut",
+      "orientacio",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 148,
+    "unitat": "places",
+    "centre_id": "CTR036",
+    "requisits": []
+  },
+  {
+    "id": "REC0080",
+    "nom": "Recurs Salut 0080",
+    "tipus": "salut",
+    "keywords": [
+      "formacio",
+      "salut",
+      "repartiment",
+      "voluntariat",
+      "documentacio",
+      "formacio",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 108,
+    "unitat": "lots",
+    "centre_id": "CTR033",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0086",
+    "nom": "Recurs Salut 0086",
+    "tipus": "salut",
+    "keywords": [
+      "educacio",
+      "formacio",
+      "voluntariat",
+      "acollida",
+      "treball_social",
+      "traduccio"
+    ],
+    "quantitat_disponible": 170,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR022",
+    "requisits": []
+  },
+  {
+    "id": "REC0088",
+    "nom": "Recurs Salut 0088",
+    "tipus": "salut",
+    "keywords": [
+      "educacio",
+      "gent_gran",
+      "formacio",
+      "voluntariat",
+      "salut",
+      "treball_social",
+      "gestio"
+    ],
+    "quantitat_disponible": 241,
+    "unitat": "lots",
+    "centre_id": "CTR059",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0089",
+    "nom": "Recurs Salut 0089",
+    "tipus": "salut",
+    "keywords": [
+      "repartiment",
+      "salut_mental",
+      "acompanyament",
+      "suport_psicologic",
+      "mediacio_habitatge",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 169,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR025",
+    "requisits": []
+  },
+  {
+    "id": "REC0097",
+    "nom": "Recurs Salut 0097",
+    "tipus": "salut",
+    "keywords": [
+      "mediacio_habitatge",
+      "treball_social",
+      "formacio",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 34,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR010",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0110",
+    "nom": "Recurs Salut 0110",
+    "tipus": "salut",
+    "keywords": [
+      "insercio_laboral",
+      "formacio",
+      "assessoria_juridica",
+      "acollida",
+      "logistica"
+    ],
+    "quantitat_disponible": 113,
+    "unitat": "places",
+    "centre_id": "CTR011",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0114",
+    "nom": "Recurs Salut 0114",
+    "tipus": "salut",
+    "keywords": [
+      "atencio_infants",
+      "insercio_laboral",
+      "documentacio",
+      "traduccio",
+      "habitatge",
+      "suport_psicologic"
+    ],
+    "quantitat_disponible": 197,
+    "unitat": "places",
+    "centre_id": "CTR023",
+    "requisits": []
+  },
+  {
+    "id": "REC0118",
+    "nom": "Recurs Salut 0118",
+    "tipus": "salut",
+    "keywords": [
+      "salut_mental",
+      "traduccio",
+      "assessoria_juridica",
+      "documentacio",
+      "voluntariat",
+      "orientacio",
+      "formacio"
+    ],
+    "quantitat_disponible": 113,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR057",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0126",
+    "nom": "Recurs Salut 0126",
+    "tipus": "salut",
+    "keywords": [
+      "insercio_laboral",
+      "alimentacio",
+      "acompanyament",
+      "formacio",
+      "acollida",
+      "gent_gran",
+      "habitatge"
+    ],
+    "quantitat_disponible": 248,
+    "unitat": "places",
+    "centre_id": "CTR015",
+    "requisits": [
+      "empadronat",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0145",
+    "nom": "Recurs Salut 0145",
+    "tipus": "salut",
+    "keywords": [
+      "treball_social",
+      "habitatge",
+      "formacio",
+      "insercio_laboral",
+      "suport_escolar",
+      "suport_psicologic"
+    ],
+    "quantitat_disponible": 169,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR008",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0152",
+    "nom": "Recurs Salut 0152",
+    "tipus": "salut",
+    "keywords": [
+      "orientacio",
+      "alimentacio",
+      "traduccio",
+      "gent_gran",
+      "voluntariat",
+      "educacio",
+      "acollida",
+      "habitatge"
+    ],
+    "quantitat_disponible": 239,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR019",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0153",
+    "nom": "Recurs Salut 0153",
+    "tipus": "salut",
+    "keywords": [
+      "educacio",
+      "documentacio",
+      "treball_social",
+      "suport_escolar",
+      "alimentacio",
+      "traduccio"
+    ],
+    "quantitat_disponible": 91,
+    "unitat": "lots",
+    "centre_id": "CTR035",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0156",
+    "nom": "Recurs Salut 0156",
+    "tipus": "salut",
+    "keywords": [
+      "formacio",
+      "traduccio",
+      "alimentacio",
+      "voluntariat",
+      "documentacio",
+      "logistica",
+      "mediacio_habitatge"
+    ],
+    "quantitat_disponible": 16,
+    "unitat": "lots",
+    "centre_id": "CTR057",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0163",
+    "nom": "Recurs Salut 0163",
+    "tipus": "salut",
+    "keywords": [
+      "formacio",
+      "habitatge",
+      "traduccio",
+      "repartiment",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 64,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR056",
+    "requisits": []
+  },
+  {
+    "id": "REC0165",
+    "nom": "Recurs Salut 0165",
+    "tipus": "salut",
+    "keywords": [
+      "logistica",
+      "acompanyament",
+      "habitatge",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 24,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR018",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0170",
+    "nom": "Recurs Salut 0170",
+    "tipus": "salut",
+    "keywords": [
+      "insercio_laboral",
+      "alimentacio",
+      "alimentacio",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 30,
+    "unitat": "lots",
+    "centre_id": "CTR045",
+    "requisits": []
+  },
+  {
+    "id": "REC0179",
+    "nom": "Recurs Salut 0179",
+    "tipus": "salut",
+    "keywords": [
+      "atencio_infants",
+      "alimentacio",
+      "repartiment",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 99,
+    "unitat": "lots",
+    "centre_id": "CTR034",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0189",
+    "nom": "Recurs Salut 0189",
+    "tipus": "salut",
+    "keywords": [
+      "acompanyament",
+      "voluntariat",
+      "acollida",
+      "educacio",
+      "formacio"
+    ],
+    "quantitat_disponible": 205,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR050",
+    "requisits": [
+      "risc_exclusio",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0193",
+    "nom": "Recurs Salut 0193",
+    "tipus": "salut",
+    "keywords": [
+      "salut_mental",
+      "alimentacio",
+      "orientacio",
+      "alimentacio",
+      "formacio",
+      "treball_social",
+      "suport_escolar"
+    ],
+    "quantitat_disponible": 89,
+    "unitat": "places",
+    "centre_id": "CTR020",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0208",
+    "nom": "Recurs Salut 0208",
+    "tipus": "salut",
+    "keywords": [
+      "insercio_laboral",
+      "logistica",
+      "treball_social",
+      "alimentacio",
+      "traduccio",
+      "salut"
+    ],
+    "quantitat_disponible": 109,
+    "unitat": "places",
+    "centre_id": "CTR048",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0210",
+    "nom": "Recurs Salut 0210",
+    "tipus": "salut",
+    "keywords": [
+      "alimentacio",
+      "logistica",
+      "gestio",
+      "formacio",
+      "educacio"
+    ],
+    "quantitat_disponible": 117,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR016",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0214",
+    "nom": "Recurs Salut 0214",
+    "tipus": "salut",
+    "keywords": [
+      "insercio_laboral",
+      "assessoria_juridica",
+      "mediacio_habitatge",
+      "orientacio",
+      "suport_psicologic"
+    ],
+    "quantitat_disponible": 200,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR039",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0219",
+    "nom": "Recurs Salut 0219",
+    "tipus": "salut",
+    "keywords": [
+      "habitatge",
+      "suport_psicologic",
+      "alimentacio",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 232,
+    "unitat": "places",
+    "centre_id": "CTR045",
+    "requisits": []
+  },
+  {
+    "id": "REC0224",
+    "nom": "Recurs Salut 0224",
+    "tipus": "salut",
+    "keywords": [
+      "documentacio",
+      "suport_escolar",
+      "repartiment",
+      "orientacio",
+      "mediacio_habitatge"
+    ],
+    "quantitat_disponible": 195,
+    "unitat": "places",
+    "centre_id": "CTR022",
+    "requisits": [
+      "ingressos_baixos",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0239",
+    "nom": "Recurs Salut 0239",
+    "tipus": "salut",
+    "keywords": [
+      "logistica",
+      "orientacio",
+      "salut_mental",
+      "formacio",
+      "documentacio",
+      "suport_escolar",
+      "alimentacio",
+      "acompanyament"
+    ],
+    "quantitat_disponible": 150,
+    "unitat": "places",
+    "centre_id": "CTR015",
+    "requisits": []
+  },
+  {
+    "id": "REC0247",
+    "nom": "Recurs Salut 0247",
+    "tipus": "salut",
+    "keywords": [
+      "repartiment",
+      "gent_gran",
+      "logistica",
+      "alimentacio",
+      "formacio",
+      "formacio"
+    ],
+    "quantitat_disponible": 113,
+    "unitat": "places",
+    "centre_id": "CTR020",
+    "requisits": [
+      "ingressos_baixos",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0250",
+    "nom": "Recurs Salut 0250",
+    "tipus": "salut",
+    "keywords": [
+      "acollida",
+      "logistica",
+      "voluntariat",
+      "educacio",
+      "traduccio",
+      "salut_mental",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 121,
+    "unitat": "lots",
+    "centre_id": "CTR056",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0257",
+    "nom": "Recurs Salut 0257",
+    "tipus": "salut",
+    "keywords": [
+      "alimentacio",
+      "acompanyament",
+      "alimentacio",
+      "treball_social",
+      "mediacio_habitatge",
+      "formacio",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 231,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR003",
+    "requisits": []
+  },
+  {
+    "id": "REC0005",
+    "nom": "Recurs Salut_Mental 0005",
+    "tipus": "salut_mental",
+    "keywords": [
+      "repartiment",
+      "treball_social",
+      "acollida",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 17,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR014",
+    "requisits": []
+  },
+  {
+    "id": "REC0027",
+    "nom": "Recurs Salut_Mental 0027",
+    "tipus": "salut_mental",
+    "keywords": [
+      "suport_escolar",
+      "alimentacio",
+      "repartiment",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 197,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR013",
+    "requisits": []
+  },
+  {
+    "id": "REC0028",
+    "nom": "Recurs Salut_Mental 0028",
+    "tipus": "salut_mental",
+    "keywords": [
+      "suport_escolar",
+      "formacio",
+      "insercio_laboral",
+      "gestio",
+      "acompanyament",
+      "repartiment"
+    ],
+    "quantitat_disponible": 224,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR021",
+    "requisits": [
+      "empadronat",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0031",
+    "nom": "Recurs Salut_Mental 0031",
+    "tipus": "salut_mental",
+    "keywords": [
+      "gent_gran",
+      "alimentacio",
+      "repartiment",
+      "salut_mental",
+      "habitatge"
+    ],
+    "quantitat_disponible": 191,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR032",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0048",
+    "nom": "Recurs Salut_Mental 0048",
+    "tipus": "salut_mental",
+    "keywords": [
+      "gestio",
+      "acompanyament",
+      "gent_gran",
+      "repartiment",
+      "suport_psicologic",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 144,
+    "unitat": "lots",
+    "centre_id": "CTR023",
+    "requisits": []
+  },
+  {
+    "id": "REC0053",
+    "nom": "Recurs Salut_Mental 0053",
+    "tipus": "salut_mental",
+    "keywords": [
+      "insercio_laboral",
+      "treball_social",
+      "suport_psicologic",
+      "assessoria_juridica"
+    ],
+    "quantitat_disponible": 189,
+    "unitat": "lots",
+    "centre_id": "CTR057",
+    "requisits": []
+  },
+  {
+    "id": "REC0057",
+    "nom": "Recurs Salut_Mental 0057",
+    "tipus": "salut_mental",
+    "keywords": [
+      "orientacio",
+      "assessoria_juridica",
+      "suport_escolar",
+      "documentacio",
+      "traduccio"
+    ],
+    "quantitat_disponible": 169,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR045",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0062",
+    "nom": "Recurs Salut_Mental 0062",
+    "tipus": "salut_mental",
+    "keywords": [
+      "orientacio",
+      "salut_mental",
+      "formacio",
+      "mediacio_habitatge",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 55,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR037",
+    "requisits": []
+  },
+  {
+    "id": "REC0084",
+    "nom": "Recurs Salut_Mental 0084",
+    "tipus": "salut_mental",
+    "keywords": [
+      "acompanyament",
+      "suport_escolar",
+      "formacio",
+      "treball_social",
+      "acollida"
+    ],
+    "quantitat_disponible": 185,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR036",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0095",
+    "nom": "Recurs Salut_Mental 0095",
+    "tipus": "salut_mental",
+    "keywords": [
+      "assessoria_juridica",
+      "repartiment",
+      "mediacio_habitatge",
+      "traduccio",
+      "alimentacio",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 120,
+    "unitat": "places",
+    "centre_id": "CTR012",
+    "requisits": []
+  },
+  {
+    "id": "REC0102",
+    "nom": "Recurs Salut_Mental 0102",
+    "tipus": "salut_mental",
+    "keywords": [
+      "salut_mental",
+      "suport_escolar",
+      "treball_social",
+      "mediacio_habitatge"
+    ],
+    "quantitat_disponible": 86,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR042",
+    "requisits": [
+      "ingressos_baixos",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0120",
+    "nom": "Recurs Salut_Mental 0120",
+    "tipus": "salut_mental",
+    "keywords": [
+      "acompanyament",
+      "salut",
+      "traduccio",
+      "documentacio",
+      "gent_gran",
+      "mediacio_habitatge",
+      "alimentacio",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 214,
+    "unitat": "places",
+    "centre_id": "CTR021",
+    "requisits": []
+  },
+  {
+    "id": "REC0121",
+    "nom": "Recurs Salut_Mental 0121",
+    "tipus": "salut_mental",
+    "keywords": [
+      "mediacio_habitatge",
+      "educacio",
+      "insercio_laboral",
+      "voluntariat",
+      "salut",
+      "insercio_laboral",
+      "logistica"
+    ],
+    "quantitat_disponible": 27,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR041",
+    "requisits": [
+      "risc_exclusio",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0133",
+    "nom": "Recurs Salut_Mental 0133",
+    "tipus": "salut_mental",
+    "keywords": [
+      "suport_escolar",
+      "treball_social",
+      "salut",
+      "voluntariat",
+      "logistica",
+      "mediacio_habitatge"
+    ],
+    "quantitat_disponible": 249,
+    "unitat": "places",
+    "centre_id": "CTR060",
+    "requisits": []
+  },
+  {
+    "id": "REC0134",
+    "nom": "Recurs Salut_Mental 0134",
+    "tipus": "salut_mental",
+    "keywords": [
+      "voluntariat",
+      "gent_gran",
+      "traduccio",
+      "gestio",
+      "alimentacio",
+      "suport_escolar",
+      "atencio_infants"
+    ],
+    "quantitat_disponible": 106,
+    "unitat": "places",
+    "centre_id": "CTR025",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0143",
+    "nom": "Recurs Salut_Mental 0143",
+    "tipus": "salut_mental",
+    "keywords": [
+      "orientacio",
+      "alimentacio",
+      "voluntariat",
+      "formacio",
+      "documentacio",
+      "treball_social",
+      "acompanyament"
+    ],
+    "quantitat_disponible": 13,
+    "unitat": "lots",
+    "centre_id": "CTR055",
+    "requisits": []
+  },
+  {
+    "id": "REC0151",
+    "nom": "Recurs Salut_Mental 0151",
+    "tipus": "salut_mental",
+    "keywords": [
+      "acompanyament",
+      "gestio",
+      "suport_escolar",
+      "voluntariat",
+      "formacio",
+      "repartiment",
+      "documentacio",
+      "acollida"
+    ],
+    "quantitat_disponible": 54,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR044",
+    "requisits": [
+      "empadronat",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0160",
+    "nom": "Recurs Salut_Mental 0160",
+    "tipus": "salut_mental",
+    "keywords": [
+      "treball_social",
+      "habitatge",
+      "documentacio",
+      "atencio_infants",
+      "gestio",
+      "traduccio",
+      "suport_escolar"
+    ],
+    "quantitat_disponible": 175,
+    "unitat": "places",
+    "centre_id": "CTR048",
+    "requisits": []
+  },
+  {
+    "id": "REC0173",
+    "nom": "Recurs Salut_Mental 0173",
+    "tipus": "salut_mental",
+    "keywords": [
+      "treball_social",
+      "suport_psicologic",
+      "formacio",
+      "orientacio",
+      "salut_mental",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 101,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR004",
+    "requisits": []
+  },
+  {
+    "id": "REC0186",
+    "nom": "Recurs Salut_Mental 0186",
+    "tipus": "salut_mental",
+    "keywords": [
+      "alimentacio",
+      "salut_mental",
+      "acompanyament",
+      "logistica",
+      "alimentacio",
+      "traduccio",
+      "treball_social"
+    ],
+    "quantitat_disponible": 124,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR047",
+    "requisits": []
+  },
+  {
+    "id": "REC0196",
+    "nom": "Recurs Salut_Mental 0196",
+    "tipus": "salut_mental",
+    "keywords": [
+      "treball_social",
+      "atencio_infants",
+      "gent_gran",
+      "repartiment",
+      "acollida",
+      "suport_escolar",
+      "insercio_laboral",
+      "logistica"
+    ],
+    "quantitat_disponible": 48,
+    "unitat": "lots",
+    "centre_id": "CTR054",
+    "requisits": []
+  },
+  {
+    "id": "REC0207",
+    "nom": "Recurs Salut_Mental 0207",
+    "tipus": "salut_mental",
+    "keywords": [
+      "repartiment",
+      "documentacio",
+      "formacio",
+      "salut_mental",
+      "insercio_laboral",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 100,
+    "unitat": "places",
+    "centre_id": "CTR009",
+    "requisits": []
+  },
+  {
+    "id": "REC0211",
+    "nom": "Recurs Salut_Mental 0211",
+    "tipus": "salut_mental",
+    "keywords": [
+      "formacio",
+      "insercio_laboral",
+      "orientacio",
+      "salut",
+      "habitatge",
+      "suport_psicologic",
+      "suport_escolar"
+    ],
+    "quantitat_disponible": 236,
+    "unitat": "lots",
+    "centre_id": "CTR059",
+    "requisits": [
+      "risc_exclusio",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0231",
+    "nom": "Recurs Salut_Mental 0231",
+    "tipus": "salut_mental",
+    "keywords": [
+      "documentacio",
+      "voluntariat",
+      "atencio_infants",
+      "traduccio",
+      "suport_escolar",
+      "habitatge"
+    ],
+    "quantitat_disponible": 170,
+    "unitat": "places",
+    "centre_id": "CTR001",
+    "requisits": [
+      "risc_exclusio",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0232",
+    "nom": "Recurs Salut_Mental 0232",
+    "tipus": "salut_mental",
+    "keywords": [
+      "treball_social",
+      "suport_escolar",
+      "voluntariat",
+      "formacio",
+      "suport_psicologic"
+    ],
+    "quantitat_disponible": 195,
+    "unitat": "places",
+    "centre_id": "CTR050",
+    "requisits": [
+      "ingressos_baixos",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0237",
+    "nom": "Recurs Salut_Mental 0237",
+    "tipus": "salut_mental",
+    "keywords": [
+      "gent_gran",
+      "treball_social",
+      "formacio",
+      "acompanyament",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 74,
+    "unitat": "places",
+    "centre_id": "CTR019",
+    "requisits": []
+  },
+  {
+    "id": "REC0246",
+    "nom": "Recurs Salut_Mental 0246",
+    "tipus": "salut_mental",
+    "keywords": [
+      "logistica",
+      "acollida",
+      "salut",
+      "orientacio",
+      "mediacio_habitatge",
+      "suport_psicologic",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 205,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR037",
+    "requisits": []
+  },
+  {
+    "id": "REC0256",
+    "nom": "Recurs Salut_Mental 0256",
+    "tipus": "salut_mental",
+    "keywords": [
+      "acompanyament",
+      "suport_escolar",
+      "suport_psicologic",
+      "voluntariat",
+      "salut_mental",
+      "formacio",
+      "alimentacio",
+      "salut"
+    ],
+    "quantitat_disponible": 109,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR031",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0258",
+    "nom": "Recurs Salut_Mental 0258",
+    "tipus": "salut_mental",
+    "keywords": [
+      "suport_escolar",
+      "orientacio",
+      "gent_gran",
+      "acollida",
+      "acompanyament",
+      "formacio"
+    ],
+    "quantitat_disponible": 184,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR032",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0003",
+    "nom": "Recurs Transport 0003",
+    "tipus": "transport",
+    "keywords": [
+      "logistica",
+      "insercio_laboral",
+      "atencio_infants",
+      "salut_mental",
+      "acompanyament"
+    ],
+    "quantitat_disponible": 201,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR053",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0019",
+    "nom": "Recurs Transport 0019",
+    "tipus": "transport",
+    "keywords": [
+      "orientacio",
+      "atencio_infants",
+      "mediacio_habitatge",
+      "formacio",
+      "salut_mental"
+    ],
+    "quantitat_disponible": 177,
+    "unitat": "places",
+    "centre_id": "CTR015",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0026",
+    "nom": "Recurs Transport 0026",
+    "tipus": "transport",
+    "keywords": [
+      "documentacio",
+      "alimentacio",
+      "educacio",
+      "suport_escolar",
+      "assessoria_juridica",
+      "salut"
+    ],
+    "quantitat_disponible": 228,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR037",
+    "requisits": [
+      "risc_exclusio",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0039",
+    "nom": "Recurs Transport 0039",
+    "tipus": "transport",
+    "keywords": [
+      "salut",
+      "salut_mental",
+      "orientacio",
+      "acompanyament"
+    ],
+    "quantitat_disponible": 43,
+    "unitat": "lots",
+    "centre_id": "CTR004",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0042",
+    "nom": "Recurs Transport 0042",
+    "tipus": "transport",
+    "keywords": [
+      "traduccio",
+      "voluntariat",
+      "gent_gran",
+      "acollida"
+    ],
+    "quantitat_disponible": 30,
+    "unitat": "lots",
+    "centre_id": "CTR019",
+    "requisits": []
+  },
+  {
+    "id": "REC0045",
+    "nom": "Recurs Transport 0045",
+    "tipus": "transport",
+    "keywords": [
+      "logistica",
+      "suport_escolar",
+      "alimentacio",
+      "gent_gran",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 219,
+    "unitat": "places",
+    "centre_id": "CTR044",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0046",
+    "nom": "Recurs Transport 0046",
+    "tipus": "transport",
+    "keywords": [
+      "voluntariat",
+      "alimentacio",
+      "educacio",
+      "gestio",
+      "insercio_laboral",
+      "repartiment",
+      "acollida"
+    ],
+    "quantitat_disponible": 244,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR014",
+    "requisits": [
+      "empadronat",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0052",
+    "nom": "Recurs Transport 0052",
+    "tipus": "transport",
+    "keywords": [
+      "acompanyament",
+      "logistica",
+      "treball_social",
+      "gestio",
+      "voluntariat",
+      "salut"
+    ],
+    "quantitat_disponible": 233,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR029",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0054",
+    "nom": "Recurs Transport 0054",
+    "tipus": "transport",
+    "keywords": [
+      "traduccio",
+      "alimentacio",
+      "treball_social",
+      "insercio_laboral",
+      "habitatge",
+      "acollida",
+      "repartiment"
+    ],
+    "quantitat_disponible": 153,
+    "unitat": "places",
+    "centre_id": "CTR010",
+    "requisits": [
+      "ingressos_baixos",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0056",
+    "nom": "Recurs Transport 0056",
+    "tipus": "transport",
+    "keywords": [
+      "treball_social",
+      "insercio_laboral",
+      "alimentacio",
+      "suport_psicologic",
+      "documentacio"
+    ],
+    "quantitat_disponible": 125,
+    "unitat": "lots",
+    "centre_id": "CTR009",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0066",
+    "nom": "Recurs Transport 0066",
+    "tipus": "transport",
+    "keywords": [
+      "salut",
+      "logistica",
+      "voluntariat",
+      "formacio",
+      "orientacio",
+      "insercio_laboral",
+      "mediacio_habitatge",
+      "suport_psicologic"
+    ],
+    "quantitat_disponible": 83,
+    "unitat": "lots",
+    "centre_id": "CTR012",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0069",
+    "nom": "Recurs Transport 0069",
+    "tipus": "transport",
+    "keywords": [
+      "voluntariat",
+      "suport_escolar",
+      "suport_psicologic",
+      "salut_mental",
+      "alimentacio",
+      "educacio"
+    ],
+    "quantitat_disponible": 85,
+    "unitat": "places",
+    "centre_id": "CTR026",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0079",
+    "nom": "Recurs Transport 0079",
+    "tipus": "transport",
+    "keywords": [
+      "salut_mental",
+      "alimentacio",
+      "suport_escolar",
+      "insercio_laboral",
+      "salut",
+      "habitatge",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 151,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR023",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0081",
+    "nom": "Recurs Transport 0081",
+    "tipus": "transport",
+    "keywords": [
+      "acompanyament",
+      "gent_gran",
+      "orientacio",
+      "salut",
+      "habitatge",
+      "treball_social",
+      "salut_mental"
+    ],
+    "quantitat_disponible": 199,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR026",
+    "requisits": [
+      "risc_exclusio",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0091",
+    "nom": "Recurs Transport 0091",
+    "tipus": "transport",
+    "keywords": [
+      "repartiment",
+      "habitatge",
+      "gent_gran",
+      "treball_social",
+      "acollida",
+      "alimentacio",
+      "alimentacio",
+      "formacio"
+    ],
+    "quantitat_disponible": 149,
+    "unitat": "places",
+    "centre_id": "CTR034",
+    "requisits": [
+      "menors_a_carrec",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0112",
+    "nom": "Recurs Transport 0112",
+    "tipus": "transport",
+    "keywords": [
+      "insercio_laboral",
+      "salut",
+      "logistica",
+      "acompanyament",
+      "insercio_laboral"
+    ],
+    "quantitat_disponible": 93,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR056",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0119",
+    "nom": "Recurs Transport 0119",
+    "tipus": "transport",
+    "keywords": [
+      "acompanyament",
+      "documentacio",
+      "acollida",
+      "assessoria_juridica"
+    ],
+    "quantitat_disponible": 88,
+    "unitat": "places",
+    "centre_id": "CTR057",
+    "requisits": [
+      "empadronat",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0122",
+    "nom": "Recurs Transport 0122",
+    "tipus": "transport",
+    "keywords": [
+      "acollida",
+      "mediacio_habitatge",
+      "formacio",
+      "formacio",
+      "voluntariat",
+      "salut"
+    ],
+    "quantitat_disponible": 89,
+    "unitat": "lots",
+    "centre_id": "CTR049",
+    "requisits": [
+      "ingressos_baixos",
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0150",
+    "nom": "Recurs Transport 0150",
+    "tipus": "transport",
+    "keywords": [
+      "salut_mental",
+      "acollida",
+      "alimentacio",
+      "mediacio_habitatge",
+      "repartiment"
+    ],
+    "quantitat_disponible": 57,
+    "unitat": "lots",
+    "centre_id": "CTR008",
+    "requisits": []
+  },
+  {
+    "id": "REC0154",
+    "nom": "Recurs Transport 0154",
+    "tipus": "transport",
+    "keywords": [
+      "alimentacio",
+      "acompanyament",
+      "logistica",
+      "gent_gran",
+      "mediacio_habitatge",
+      "atencio_infants",
+      "assessoria_juridica",
+      "voluntariat"
+    ],
+    "quantitat_disponible": 126,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR021",
+    "requisits": []
+  },
+  {
+    "id": "REC0169",
+    "nom": "Recurs Transport 0169",
+    "tipus": "transport",
+    "keywords": [
+      "acollida",
+      "treball_social",
+      "salut",
+      "salut_mental",
+      "logistica",
+      "gent_gran",
+      "voluntariat",
+      "repartiment"
+    ],
+    "quantitat_disponible": 222,
+    "unitat": "lots",
+    "centre_id": "CTR023",
+    "requisits": [
+      "empadronat"
+    ]
+  },
+  {
+    "id": "REC0171",
+    "nom": "Recurs Transport 0171",
+    "tipus": "transport",
+    "keywords": [
+      "salut",
+      "voluntariat",
+      "acompanyament",
+      "atencio_infants",
+      "suport_escolar",
+      "traduccio",
+      "formacio"
+    ],
+    "quantitat_disponible": 167,
+    "unitat": "places",
+    "centre_id": "CTR053",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0172",
+    "nom": "Recurs Transport 0172",
+    "tipus": "transport",
+    "keywords": [
+      "alimentacio",
+      "salut_mental",
+      "logistica",
+      "documentacio",
+      "insercio_laboral",
+      "acollida",
+      "suport_psicologic"
+    ],
+    "quantitat_disponible": 96,
+    "unitat": "lots",
+    "centre_id": "CTR009",
+    "requisits": [
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0183",
+    "nom": "Recurs Transport 0183",
+    "tipus": "transport",
+    "keywords": [
+      "alimentacio",
+      "gestio",
+      "alimentacio",
+      "formacio",
+      "habitatge",
+      "acollida",
+      "suport_escolar"
+    ],
+    "quantitat_disponible": 228,
+    "unitat": "places",
+    "centre_id": "CTR042",
+    "requisits": [
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0190",
+    "nom": "Recurs Transport 0190",
+    "tipus": "transport",
+    "keywords": [
+      "voluntariat",
+      "formacio",
+      "traduccio",
+      "logistica"
+    ],
+    "quantitat_disponible": 239,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR049",
+    "requisits": [
+      "risc_exclusio",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0192",
+    "nom": "Recurs Transport 0192",
+    "tipus": "transport",
+    "keywords": [
+      "alimentacio",
+      "orientacio",
+      "voluntariat",
+      "salut_mental",
+      "assessoria_juridica",
+      "suport_psicologic",
+      "logistica"
+    ],
+    "quantitat_disponible": 112,
+    "unitat": "sessions/mes",
+    "centre_id": "CTR018",
+    "requisits": []
+  },
+  {
+    "id": "REC0202",
+    "nom": "Recurs Transport 0202",
+    "tipus": "transport",
+    "keywords": [
+      "alimentacio",
+      "orientacio",
+      "educacio",
+      "assessoria_juridica",
+      "alimentacio",
+      "gent_gran"
+    ],
+    "quantitat_disponible": 162,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR043",
+    "requisits": [
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0204",
+    "nom": "Recurs Transport 0204",
+    "tipus": "transport",
+    "keywords": [
+      "acollida",
+      "treball_social",
+      "habitatge",
+      "salut_mental",
+      "insercio_laboral",
+      "acompanyament",
+      "alimentacio"
+    ],
+    "quantitat_disponible": 163,
+    "unitat": "places",
+    "centre_id": "CTR043",
+    "requisits": [
+      "ingressos_baixos",
+      "risc_exclusio"
+    ]
+  },
+  {
+    "id": "REC0218",
+    "nom": "Recurs Transport 0218",
+    "tipus": "transport",
+    "keywords": [
+      "formacio",
+      "gent_gran",
+      "salut_mental",
+      "atencio_infants",
+      "voluntariat",
+      "repartiment",
+      "acompanyament",
+      "treball_social"
+    ],
+    "quantitat_disponible": 174,
+    "unitat": "lots",
+    "centre_id": "CTR030",
+    "requisits": [
+      "menors_a_carrec",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0236",
+    "nom": "Recurs Transport 0236",
+    "tipus": "transport",
+    "keywords": [
+      "formacio",
+      "repartiment",
+      "formacio",
+      "documentacio",
+      "suport_escolar"
+    ],
+    "quantitat_disponible": 86,
+    "unitat": "ajudes/mes",
+    "centre_id": "CTR050",
+    "requisits": [
+      "empadronat",
+      "ingressos_baixos"
+    ]
+  },
+  {
+    "id": "REC0251",
+    "nom": "Recurs Transport 0251",
+    "tipus": "transport",
+    "keywords": [
+      "salut",
+      "acollida",
+      "suport_escolar",
+      "educacio",
+      "atencio_infants",
+      "voluntariat"
+    ],
+    "quantitat_disponible": 76,
+    "unitat": "places",
+    "centre_id": "CTR056",
+    "requisits": [
+      "risc_exclusio",
+      "menors_a_carrec"
+    ]
+  },
+  {
+    "id": "REC0253",
+    "nom": "Recurs Transport 0253",
+    "tipus": "transport",
+    "keywords": [
+      "atencio_infants",
+      "salut",
+      "acollida",
+      "mediacio_habitatge",
+      "salut_mental"
+    ],
+    "quantitat_disponible": 175,
+    "unitat": "lots",
+    "centre_id": "CTR033",
+    "requisits": [
+      "menors_a_carrec"
+    ]
   }
 ]

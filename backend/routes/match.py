@@ -14,19 +14,27 @@ os.chdir(os.path.join(os.path.dirname(__file__), ".."))
 from engine.keyword_parser import extract_keywords
 from engine.gemini_analyst import analyze_with_gemini
 from engine.matcher import match_all
+from utils.json_utils import parse_json_object_from_llm
+from utils.rate_limit import rate_limited
+from utils.validation import validate_fitxa_payload
 
 match_bp = Blueprint("match", __name__)
 
 
 @match_bp.route("/match", methods=["POST"])
+@rate_limited(max_requests=30, window_seconds=60)
 def match():
     # Esperem un JSON amb els camps de la fitxa social parroquial.
     # Els camps mínims necessaris són: municipi, edat i tipus_habitatge.
     # La resta son opcionals però millorant la precisió del matching.
-    fitxa = request.json
+    fitxa_raw = request.json
 
-    if not fitxa:
+    if not fitxa_raw:
         return jsonify({"error": "Cal enviar una fitxa social en format JSON"}), 400
+
+    fitxa, fitxa_errors = validate_fitxa_payload(fitxa_raw)
+    if fitxa_errors:
+        return jsonify({"error": "Fitxa invàlida", "details": fitxa_errors}), 400
 
     # Pas 1: extreure keywords deterministes dels camps de la fitxa
     keywords = extract_keywords(fitxa)
@@ -63,6 +71,7 @@ def match_test():
 
 
 @match_bp.route("/match/text", methods=["POST"])
+@rate_limited(max_requests=20, window_seconds=60)
 def match_text():
     # Aquest endpoint permet al treballador social descriure el cas
     # en text lliure en català, castellà o qualsevol idioma.
@@ -116,14 +125,13 @@ ciutadania: 1 (extracomunitari), 3 (comunitari), 7 (indocumentat), 10 (espanyol)
 
     try:
         response = call_gemini(prompt_extractor)
-        response = response.strip()
-        if response.startswith("```"):
-            response = response.split("```")[1]
-            if response.startswith("json"):
-                response = response[4:]
-        fitxa = json.loads(response.strip())
+        fitxa_raw = parse_json_object_from_llm(response)
     except Exception as e:
         return jsonify({"error": f"Error interpretant el text: {str(e)}"}), 500
+
+    fitxa, fitxa_errors = validate_fitxa_payload(fitxa_raw)
+    if fitxa_errors:
+        return jsonify({"error": "Fitxa extreta invàlida", "details": fitxa_errors}), 400
 
     keywords = extract_keywords(fitxa)
     analysis = analyze_with_gemini(fitxa, keywords)
@@ -131,3 +139,25 @@ ciutadania: 1 (extracomunitari), 3 (comunitari), 7 (indocumentat), 10 (espanyol)
     result["fitxa_extreta"] = fitxa
 
     return jsonify(result), 200
+
+
+@match_bp.route("/urgency", methods=["POST"])
+@rate_limited(max_requests=40, window_seconds=60)
+def urgency():
+    # Classifica l'urgència d'un text usant el nostre model entrenat a HuggingFace.
+    # Complementa Gemini amb ML explicable i quantificable.
+    import os, requests as req
+    data = request.json or {}
+    text = data.get("text", "")
+    if not text:
+        return jsonify({"error": "Cal enviar text"}), 400
+
+    hf_endpoint = os.getenv("HF_APP_ENDPOINT", "").rstrip("/")
+    if not hf_endpoint:
+        return jsonify({"error": "HF_APP_ENDPOINT no configurat"}), 503
+
+    try:
+        r = req.post(f"{hf_endpoint}/predict", json={"text": text}, timeout=15)
+        return jsonify(r.json()), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

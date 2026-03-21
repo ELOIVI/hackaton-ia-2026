@@ -1,0 +1,119 @@
+{
+  "generated_at": "2026-03-21",
+  "project": "hackaton-ia-2026",
+  "modules": {
+    "backend": {
+      "framework": "Flask",
+      "entry": "backend/app.py",
+      "routes": [
+        "routes/match.py",
+        "routes/chat.py",
+        "routes/dashboard.py"
+      ],
+      "engine": [
+        "engine/keyword_parser.py",
+        "engine/gemini_analyst.py",
+        "engine/matcher.py"
+      ],
+      "db_files": [
+        "db/centres.json",
+        "db/recursos.json",
+        "db/voluntaris.json",
+        "db/organitzacions.json",
+        "db/empreses.json",
+        "db/projectes_caritas.json"
+      ]
+    },
+    "frontend": {
+      "framework": "Next.js 15 + React 19",
+      "root_redirect": "frontend/src/app/page.tsx -> /help-request-interface",
+      "active_flow": "frontend/src/app/help-request-interface/HelpRequestFlow.tsx",
+      "role_dashboards": [
+        "VolunteerDashboard.tsx",
+        "CompanyDashboard.tsx",
+        "WorkerDashboard.tsx"
+      ],
+      "session_storage_key": "caritasUser"
+    },
+    "hf_space": {
+      "framework": "FastAPI",
+      "entry": "hf_space/app.py",
+      "main_endpoint": "/predict"
+    }
+  },
+  "api": {
+    "core": [
+      "GET /",
+      "GET /health"
+    ],
+    "matching": [
+      "POST /match",
+      "GET /match/test",
+      "POST /match/text",
+      "POST /urgency"
+    ],
+    "chat": [
+      "POST /chat/persona",
+      "POST /chat/voluntari",
+      "GET /chat/test"
+    ],
+    "dashboard": [
+      "POST /register/voluntari",
+      "POST /register/empresa",
+      "GET /dashboard/voluntari/<id>",
+      "GET /dashboard/empresa/<id>",
+      "GET /expedients",
+      "POST /expedient",
+      "GET /expedient/<id>"
+    ]
+  },
+  "persistence": {
+    "s3_bucket_env": "AWS_S3_BUCKET",
+    "default_bucket": "hackaton-bucket",
+    "prefixes": [
+      "voluntaris/{id}.json",
+      "empreses/{id}.json",
+      "expedients/{id}.json"
+    ]
+  },
+  "env_vars": {
+    "backend": [
+      "GOOGLE_API_KEY",
+      "HF_APP_ENDPOINT",
+      "AWS_S3_BUCKET"
+    ],
+    "frontend": [
+      "NEXT_PUBLIC_API_URL"
+    ],
+    "hf_space": [
+      "MODEL_REPO_ID",
+      "PORT"
+    ]
+  },
+  "known_risks": [
+    "Demo credentials en frontend, sin auth real",
+    "Sesion usuario en localStorage en claro",
+    "Parseo JSON de Gemini fragil",
+    "Sin rate limiting",
+    "CORS global abierto",
+    "Inconsistencia fallback API URL en frontend",
+    "KPIs mixtos (datos reales + hardcoded)"
+  ],
+  "run_commands": {
+    "backend": [
+      "cd backend",
+      "pip install -r requirements.txt",
+      "python app.py"
+    ],
+    "frontend": [
+      "cd frontend",
+      "npm install",
+      "npm run dev"
+    ],
+    "hf_space": [
+      "cd hf_space",
+      "pip install -r requirements.txt",
+      "python app.py"
+    ]
+  }
+}

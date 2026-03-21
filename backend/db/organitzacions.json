@@ -1,88 +1,4233 @@
 [
   {
-    "id": "ORG001",
-    "nom": "Creu Roja Tarragona",
+    "id": "ORG0006",
+    "nom": "Organitzacio Social 0006",
     "tipus": "ONG",
     "serveis": [
-      "alimentació",
+      "suport_psicologic",
+      "roba",
+      "orientacio_laboral",
+      "documentacio"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "traduccio",
+      "atencio_infants",
+      "formacio"
+    ],
+    "contacte": "org0006@social.local",
+    "municipi": "Alcover",
+    "lat": 41.285668,
+    "lng": 1.17563,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0029",
+    "nom": "Organitzacio Social 0029",
+    "tipus": "fundacio",
+    "serveis": [
+      "formacio_ocupacional",
+      "suport_psicologic",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "formacio",
+      "gent_gran",
+      "logistica",
+      "suport_escolar",
+      "atencio_infants"
+    ],
+    "contacte": "org0029@social.local",
+    "municipi": "Alcover",
+    "lat": 41.254497,
+    "lng": 1.177179,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0030",
+    "nom": "Organitzacio Social 0030",
+    "tipus": "ONG",
+    "serveis": [
+      "documentacio",
+      "habitatge_social",
+      "assessoria_juridica",
+      "alimentacio"
+    ],
+    "keywords": [
+      "orientacio",
+      "treball_social",
+      "educacio",
+      "formacio",
+      "formacio",
+      "alimentacio",
+      "logistica",
+      "documentacio"
+    ],
+    "contacte": "org0030@social.local",
+    "municipi": "Alcover",
+    "lat": 41.255325,
+    "lng": 1.155083,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0039",
+    "nom": "Organitzacio Social 0039",
+    "tipus": "servei_public",
+    "serveis": [
+      "acompanyament_sanitari",
+      "alimentacio",
+      "orientacio_laboral",
+      "assessoria_juridica",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "voluntariat",
+      "formacio",
+      "insercio_laboral",
+      "traduccio",
+      "orientacio"
+    ],
+    "contacte": "org0039@social.local",
+    "municipi": "Alcover",
+    "lat": 41.25263,
+    "lng": 1.199445,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0066",
+    "nom": "Organitzacio Social 0066",
+    "tipus": "servei_public",
+    "serveis": [
       "roba",
       "acompanyament_sanitari",
-      "transport"
+      "orientacio_laboral",
+      "documentacio",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "atencio_infants",
+      "educacio",
+      "traduccio",
+      "suport_psicologic",
+      "formacio",
+      "acompanyament"
+    ],
+    "contacte": "org0066@social.local",
+    "municipi": "Alcover",
+    "lat": 41.261666,
+    "lng": 1.176385,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0084",
+    "nom": "Organitzacio Social 0084",
+    "tipus": "fundacio",
+    "serveis": [
+      "roba",
+      "acompanyament_sanitari",
+      "orientacio_laboral",
+      "alimentacio",
+      "documentacio"
+    ],
+    "keywords": [
+      "documentacio",
+      "logistica",
+      "salut_mental",
+      "insercio_laboral"
+    ],
+    "contacte": "org0084@social.local",
+    "municipi": "Alcover",
+    "lat": 41.267324,
+    "lng": 1.168438,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0094",
+    "nom": "Organitzacio Social 0094",
+    "tipus": "fundacio",
+    "serveis": [
+      "documentacio",
+      "orientacio_laboral",
+      "formacio_ocupacional",
+      "alimentacio"
     ],
     "keywords": [
       "salut",
-      "malaltia",
-      "mobilitat",
+      "insercio_laboral",
+      "salut_mental",
+      "insercio_laboral",
       "gent_gran",
-      "urgència"
+      "treball_social"
     ],
-    "contacte": "tarragona@creuroja.org",
-    "municipi": "Tarragona",
-    "lat": 41.121,
-    "lng": 1.245,
-    "conveni_caritas": true
+    "contacte": "org0094@social.local",
+    "municipi": "Alcover",
+    "lat": 41.289683,
+    "lng": 1.191911,
+    "conveni_caritas": false
   },
   {
-    "id": "ORG002",
-    "nom": "SAIER Tarragona",
-    "tipus": "servei_públic",
-    "serveis": [
-      "assessoria_jurídica",
-      "documentació",
-      "acollida_immigrants"
-    ],
-    "keywords": [
-      "situació_irregular",
-      "immigració",
-      "documentació",
-      "extracomunitari"
-    ],
-    "contacte": "saier@tarragona.cat",
-    "municipi": "Tarragona",
-    "lat": 41.119,
-    "lng": 1.243,
-    "conveni_caritas": true
-  },
-  {
-    "id": "ORG003",
-    "nom": "Hàbitat3 Tarragona",
+    "id": "ORG0119",
+    "nom": "Organitzacio Social 0119",
     "tipus": "ONG",
     "serveis": [
-      "habitatge_social",
-      "mediació_habitatge",
-      "allotjament_temporal"
+      "suport_psicologic",
+      "documentacio",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "mediacio_habitatge",
+      "salut",
+      "acompanyament",
+      "insercio_laboral",
+      "repartiment",
+      "documentacio",
+      "orientacio"
+    ],
+    "contacte": "org0119@social.local",
+    "municipi": "Alcover",
+    "lat": 41.249513,
+    "lng": 1.196117,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0120",
+    "nom": "Organitzacio Social 0120",
+    "tipus": "ONG",
+    "serveis": [
+      "assessoria_juridica",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "alimentacio",
+      "traduccio",
+      "insercio_laboral",
+      "voluntariat",
+      "habitatge",
+      "gent_gran",
+      "logistica"
+    ],
+    "contacte": "org0120@social.local",
+    "municipi": "Alcover",
+    "lat": 41.277737,
+    "lng": 1.190136,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0175",
+    "nom": "Organitzacio Social 0175",
+    "tipus": "ONG",
+    "serveis": [
+      "acompanyament_sanitari",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "orientacio",
+      "gent_gran",
+      "documentacio",
+      "suport_escolar",
+      "assessoria_juridica"
+    ],
+    "contacte": "org0175@social.local",
+    "municipi": "Alcover",
+    "lat": 41.275938,
+    "lng": 1.1411,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0180",
+    "nom": "Organitzacio Social 0180",
+    "tipus": "fundacio",
+    "serveis": [
+      "formacio_ocupacional",
+      "habitatge_social"
     ],
     "keywords": [
       "habitatge",
-      "desnonament",
-      "sense_llar",
-      "urgència_habitatge"
+      "formacio",
+      "acollida",
+      "educacio",
+      "acompanyament",
+      "suport_psicologic",
+      "gent_gran"
     ],
-    "contacte": "tarragona@habitat3.org",
-    "municipi": "Tarragona",
-    "lat": 41.118,
-    "lng": 1.246,
+    "contacte": "org0180@social.local",
+    "municipi": "Alcover",
+    "lat": 41.274947,
+    "lng": 1.186091,
     "conveni_caritas": true
   },
   {
-    "id": "ORG004",
-    "nom": "SOC Reus",
-    "tipus": "servei_públic",
+    "id": "ORG0011",
+    "nom": "Organitzacio Social 0011",
+    "tipus": "ONG",
     "serveis": [
-      "orientació_laboral",
-      "formació_ocupacional",
-      "borsa_treball"
+      "assessoria_juridica",
+      "documentacio",
+      "suport_psicologic",
+      "acompanyament_sanitari"
     ],
     "keywords": [
-      "atur",
-      "inserció_laboral",
-      "formació",
-      "sense_feina"
+      "acompanyament",
+      "habitatge",
+      "insercio_laboral",
+      "suport_psicologic",
+      "formacio",
+      "salut",
+      "alimentacio",
+      "repartiment"
     ],
-    "contacte": "soc.reus@gencat.cat",
-    "municipi": "Reus",
-    "lat": 41.156,
-    "lng": 1.106,
+    "contacte": "org0011@social.local",
+    "municipi": "Amposta",
+    "lat": 40.724975,
+    "lng": 0.595823,
     "conveni_caritas": false
+  },
+  {
+    "id": "ORG0020",
+    "nom": "Organitzacio Social 0020",
+    "tipus": "fundacio",
+    "serveis": [
+      "roba",
+      "habitatge_social",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "salut_mental",
+      "documentacio",
+      "voluntariat",
+      "logistica",
+      "orientacio",
+      "habitatge"
+    ],
+    "contacte": "org0020@social.local",
+    "municipi": "Amposta",
+    "lat": 40.705814,
+    "lng": 0.596684,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0024",
+    "nom": "Organitzacio Social 0024",
+    "tipus": "ONG",
+    "serveis": [
+      "documentacio",
+      "formacio_ocupacional",
+      "suport_psicologic",
+      "roba"
+    ],
+    "keywords": [
+      "logistica",
+      "assessoria_juridica",
+      "acollida",
+      "formacio",
+      "suport_psicologic",
+      "alimentacio",
+      "orientacio",
+      "documentacio"
+    ],
+    "contacte": "org0024@social.local",
+    "municipi": "Amposta",
+    "lat": 40.743627,
+    "lng": 0.579398,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0036",
+    "nom": "Organitzacio Social 0036",
+    "tipus": "fundacio",
+    "serveis": [
+      "assessoria_juridica",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "logistica",
+      "alimentacio",
+      "alimentacio",
+      "suport_escolar",
+      "repartiment"
+    ],
+    "contacte": "org0036@social.local",
+    "municipi": "Amposta",
+    "lat": 40.705974,
+    "lng": 0.569978,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0061",
+    "nom": "Organitzacio Social 0061",
+    "tipus": "servei_public",
+    "serveis": [
+      "alimentacio",
+      "orientacio_laboral",
+      "roba"
+    ],
+    "keywords": [
+      "salut",
+      "logistica",
+      "acollida",
+      "mediacio_habitatge"
+    ],
+    "contacte": "org0061@social.local",
+    "municipi": "Amposta",
+    "lat": 40.703839,
+    "lng": 0.558437,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0092",
+    "nom": "Organitzacio Social 0092",
+    "tipus": "ONG",
+    "serveis": [
+      "habitatge_social",
+      "roba",
+      "documentacio"
+    ],
+    "keywords": [
+      "traduccio",
+      "mediacio_habitatge",
+      "gestio",
+      "treball_social",
+      "voluntariat",
+      "alimentacio",
+      "educacio",
+      "atencio_infants"
+    ],
+    "contacte": "org0092@social.local",
+    "municipi": "Amposta",
+    "lat": 40.744011,
+    "lng": 0.57416,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0110",
+    "nom": "Organitzacio Social 0110",
+    "tipus": "ONG",
+    "serveis": [
+      "acompanyament_sanitari",
+      "habitatge_social",
+      "documentacio"
+    ],
+    "keywords": [
+      "traduccio",
+      "insercio_laboral",
+      "alimentacio",
+      "formacio",
+      "salut_mental"
+    ],
+    "contacte": "org0110@social.local",
+    "municipi": "Amposta",
+    "lat": 40.686353,
+    "lng": 0.569904,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0145",
+    "nom": "Organitzacio Social 0145",
+    "tipus": "fundacio",
+    "serveis": [
+      "orientacio_laboral",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "acompanyament",
+      "salut_mental",
+      "insercio_laboral",
+      "formacio",
+      "voluntariat",
+      "insercio_laboral"
+    ],
+    "contacte": "org0145@social.local",
+    "municipi": "Amposta",
+    "lat": 40.690441,
+    "lng": 0.555568,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0153",
+    "nom": "Organitzacio Social 0153",
+    "tipus": "fundacio",
+    "serveis": [
+      "suport_psicologic",
+      "formacio_ocupacional",
+      "orientacio_laboral",
+      "alimentacio"
+    ],
+    "keywords": [
+      "suport_escolar",
+      "educacio",
+      "voluntariat",
+      "traduccio"
+    ],
+    "contacte": "org0153@social.local",
+    "municipi": "Amposta",
+    "lat": 40.685177,
+    "lng": 0.56934,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0178",
+    "nom": "Organitzacio Social 0178",
+    "tipus": "fundacio",
+    "serveis": [
+      "assessoria_juridica",
+      "alimentacio",
+      "suport_psicologic",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "salut_mental",
+      "educacio",
+      "acompanyament",
+      "gestio",
+      "orientacio"
+    ],
+    "contacte": "org0178@social.local",
+    "municipi": "Amposta",
+    "lat": 40.732518,
+    "lng": 0.575798,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0008",
+    "nom": "Organitzacio Social 0008",
+    "tipus": "ONG",
+    "serveis": [
+      "roba",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "assessoria_juridica",
+      "logistica",
+      "insercio_laboral",
+      "gestio"
+    ],
+    "contacte": "org0008@social.local",
+    "municipi": "Calafell",
+    "lat": 41.20189,
+    "lng": 1.550288,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0032",
+    "nom": "Organitzacio Social 0032",
+    "tipus": "servei_public",
+    "serveis": [
+      "documentacio",
+      "assessoria_juridica",
+      "habitatge_social",
+      "suport_psicologic",
+      "roba"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "atencio_infants",
+      "alimentacio",
+      "logistica",
+      "habitatge"
+    ],
+    "contacte": "org0032@social.local",
+    "municipi": "Calafell",
+    "lat": 41.221615,
+    "lng": 1.58945,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0040",
+    "nom": "Organitzacio Social 0040",
+    "tipus": "ONG",
+    "serveis": [
+      "roba",
+      "documentacio",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "gestio",
+      "documentacio",
+      "treball_social",
+      "alimentacio"
+    ],
+    "contacte": "org0040@social.local",
+    "municipi": "Calafell",
+    "lat": 41.20192,
+    "lng": 1.557055,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0065",
+    "nom": "Organitzacio Social 0065",
+    "tipus": "servei_public",
+    "serveis": [
+      "documentacio",
+      "orientacio_laboral",
+      "alimentacio",
+      "acompanyament_sanitari",
+      "roba"
+    ],
+    "keywords": [
+      "suport_escolar",
+      "orientacio",
+      "formacio",
+      "gestio",
+      "acompanyament",
+      "repartiment"
+    ],
+    "contacte": "org0065@social.local",
+    "municipi": "Calafell",
+    "lat": 41.212381,
+    "lng": 1.580366,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0070",
+    "nom": "Organitzacio Social 0070",
+    "tipus": "fundacio",
+    "serveis": [
+      "formacio_ocupacional",
+      "acompanyament_sanitari",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "acompanyament",
+      "suport_psicologic",
+      "insercio_laboral",
+      "mediacio_habitatge"
+    ],
+    "contacte": "org0070@social.local",
+    "municipi": "Calafell",
+    "lat": 41.224049,
+    "lng": 1.562781,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0074",
+    "nom": "Organitzacio Social 0074",
+    "tipus": "fundacio",
+    "serveis": [
+      "assessoria_juridica",
+      "orientacio_laboral",
+      "roba",
+      "acompanyament_sanitari",
+      "documentacio"
+    ],
+    "keywords": [
+      "educacio",
+      "alimentacio",
+      "treball_social",
+      "acompanyament",
+      "salut_mental"
+    ],
+    "contacte": "org0074@social.local",
+    "municipi": "Calafell",
+    "lat": 41.209581,
+    "lng": 1.571352,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0082",
+    "nom": "Organitzacio Social 0082",
+    "tipus": "ONG",
+    "serveis": [
+      "suport_psicologic",
+      "roba",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "gent_gran",
+      "treball_social",
+      "orientacio",
+      "alimentacio",
+      "formacio",
+      "habitatge",
+      "assessoria_juridica",
+      "mediacio_habitatge"
+    ],
+    "contacte": "org0082@social.local",
+    "municipi": "Calafell",
+    "lat": 41.22803,
+    "lng": 1.546692,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0097",
+    "nom": "Organitzacio Social 0097",
+    "tipus": "fundacio",
+    "serveis": [
+      "assessoria_juridica",
+      "habitatge_social",
+      "acompanyament_sanitari",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "gent_gran",
+      "habitatge",
+      "acompanyament",
+      "voluntariat"
+    ],
+    "contacte": "org0097@social.local",
+    "municipi": "Calafell",
+    "lat": 41.21033,
+    "lng": 1.588879,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0108",
+    "nom": "Organitzacio Social 0108",
+    "tipus": "ONG",
+    "serveis": [
+      "assessoria_juridica",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "atencio_infants",
+      "acollida",
+      "insercio_laboral",
+      "acompanyament"
+    ],
+    "contacte": "org0108@social.local",
+    "municipi": "Calafell",
+    "lat": 41.190684,
+    "lng": 1.572703,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0109",
+    "nom": "Organitzacio Social 0109",
+    "tipus": "ONG",
+    "serveis": [
+      "formacio_ocupacional",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "acompanyament",
+      "acollida",
+      "voluntariat",
+      "repartiment"
+    ],
+    "contacte": "org0109@social.local",
+    "municipi": "Calafell",
+    "lat": 41.177211,
+    "lng": 1.550115,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0124",
+    "nom": "Organitzacio Social 0124",
+    "tipus": "ONG",
+    "serveis": [
+      "alimentacio",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "educacio",
+      "voluntariat",
+      "suport_psicologic",
+      "mediacio_habitatge",
+      "assessoria_juridica"
+    ],
+    "contacte": "org0124@social.local",
+    "municipi": "Calafell",
+    "lat": 41.227765,
+    "lng": 1.540947,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0128",
+    "nom": "Organitzacio Social 0128",
+    "tipus": "fundacio",
+    "serveis": [
+      "orientacio_laboral",
+      "assessoria_juridica",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "atencio_infants",
+      "mediacio_habitatge",
+      "alimentacio",
+      "repartiment",
+      "logistica"
+    ],
+    "contacte": "org0128@social.local",
+    "municipi": "Calafell",
+    "lat": 41.224115,
+    "lng": 1.53946,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0137",
+    "nom": "Organitzacio Social 0137",
+    "tipus": "servei_public",
+    "serveis": [
+      "habitatge_social",
+      "roba",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "gent_gran",
+      "logistica",
+      "mediacio_habitatge",
+      "suport_psicologic"
+    ],
+    "contacte": "org0137@social.local",
+    "municipi": "Calafell",
+    "lat": 41.20552,
+    "lng": 1.57283,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0148",
+    "nom": "Organitzacio Social 0148",
+    "tipus": "servei_public",
+    "serveis": [
+      "roba",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "gent_gran",
+      "treball_social",
+      "repartiment",
+      "alimentacio",
+      "salut_mental",
+      "atencio_infants"
+    ],
+    "contacte": "org0148@social.local",
+    "municipi": "Calafell",
+    "lat": 41.173454,
+    "lng": 1.55926,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0150",
+    "nom": "Organitzacio Social 0150",
+    "tipus": "fundacio",
+    "serveis": [
+      "suport_psicologic",
+      "assessoria_juridica",
+      "formacio_ocupacional",
+      "roba"
+    ],
+    "keywords": [
+      "salut_mental",
+      "traduccio",
+      "gestio",
+      "treball_social",
+      "voluntariat",
+      "salut",
+      "gent_gran"
+    ],
+    "contacte": "org0150@social.local",
+    "municipi": "Calafell",
+    "lat": 41.205573,
+    "lng": 1.543706,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0158",
+    "nom": "Organitzacio Social 0158",
+    "tipus": "servei_public",
+    "serveis": [
+      "roba",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "mediacio_habitatge",
+      "documentacio",
+      "logistica",
+      "acompanyament",
+      "suport_psicologic"
+    ],
+    "contacte": "org0158@social.local",
+    "municipi": "Calafell",
+    "lat": 41.187714,
+    "lng": 1.558271,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0170",
+    "nom": "Organitzacio Social 0170",
+    "tipus": "ONG",
+    "serveis": [
+      "acompanyament_sanitari",
+      "documentacio",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "assessoria_juridica",
+      "insercio_laboral",
+      "orientacio",
+      "insercio_laboral",
+      "repartiment",
+      "gent_gran"
+    ],
+    "contacte": "org0170@social.local",
+    "municipi": "Calafell",
+    "lat": 41.218037,
+    "lng": 1.566787,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0009",
+    "nom": "Organitzacio Social 0009",
+    "tipus": "fundacio",
+    "serveis": [
+      "roba",
+      "suport_psicologic",
+      "assessoria_juridica",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "documentacio",
+      "orientacio",
+      "gent_gran",
+      "alimentacio",
+      "atencio_infants",
+      "assessoria_juridica",
+      "voluntariat",
+      "educacio"
+    ],
+    "contacte": "org0009@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.093544,
+    "lng": 1.040838,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0027",
+    "nom": "Organitzacio Social 0027",
+    "tipus": "ONG",
+    "serveis": [
+      "habitatge_social",
+      "documentacio",
+      "orientacio_laboral",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "educacio",
+      "assessoria_juridica",
+      "treball_social",
+      "formacio",
+      "insercio_laboral",
+      "mediacio_habitatge",
+      "repartiment"
+    ],
+    "contacte": "org0027@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.094157,
+    "lng": 1.081358,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0031",
+    "nom": "Organitzacio Social 0031",
+    "tipus": "servei_public",
+    "serveis": [
+      "alimentacio",
+      "formacio_ocupacional",
+      "roba",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "gestio",
+      "suport_escolar",
+      "orientacio",
+      "treball_social",
+      "formacio"
+    ],
+    "contacte": "org0031@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.04983,
+    "lng": 1.051258,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0063",
+    "nom": "Organitzacio Social 0063",
+    "tipus": "fundacio",
+    "serveis": [
+      "habitatge_social",
+      "orientacio_laboral",
+      "documentacio"
+    ],
+    "keywords": [
+      "orientacio",
+      "habitatge",
+      "gent_gran",
+      "salut"
+    ],
+    "contacte": "org0063@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.084601,
+    "lng": 1.073315,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0064",
+    "nom": "Organitzacio Social 0064",
+    "tipus": "servei_public",
+    "serveis": [
+      "alimentacio",
+      "documentacio",
+      "roba",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "salut",
+      "acompanyament",
+      "orientacio",
+      "repartiment"
+    ],
+    "contacte": "org0064@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.087738,
+    "lng": 1.08443,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0067",
+    "nom": "Organitzacio Social 0067",
+    "tipus": "fundacio",
+    "serveis": [
+      "documentacio",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "salut",
+      "acompanyament",
+      "formacio"
+    ],
+    "contacte": "org0067@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.070287,
+    "lng": 1.085506,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0075",
+    "nom": "Organitzacio Social 0075",
+    "tipus": "ONG",
+    "serveis": [
+      "formacio_ocupacional",
+      "habitatge_social",
+      "orientacio_laboral",
+      "assessoria_juridica",
+      "documentacio"
+    ],
+    "keywords": [
+      "educacio",
+      "insercio_laboral",
+      "treball_social",
+      "repartiment",
+      "alimentacio",
+      "documentacio",
+      "suport_psicologic",
+      "logistica"
+    ],
+    "contacte": "org0075@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.055176,
+    "lng": 1.041848,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0080",
+    "nom": "Organitzacio Social 0080",
+    "tipus": "servei_public",
+    "serveis": [
+      "documentacio",
+      "habitatge_social",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "mediacio_habitatge",
+      "insercio_laboral",
+      "acompanyament",
+      "alimentacio"
+    ],
+    "contacte": "org0080@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.044466,
+    "lng": 1.064978,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0086",
+    "nom": "Organitzacio Social 0086",
+    "tipus": "fundacio",
+    "serveis": [
+      "documentacio",
+      "acompanyament_sanitari",
+      "assessoria_juridica",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "habitatge",
+      "documentacio",
+      "assessoria_juridica",
+      "orientacio",
+      "salut_mental",
+      "traduccio"
+    ],
+    "contacte": "org0086@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.083117,
+    "lng": 1.041667,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0090",
+    "nom": "Organitzacio Social 0090",
+    "tipus": "ONG",
+    "serveis": [
+      "roba",
+      "habitatge_social",
+      "orientacio_laboral",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "acompanyament",
+      "alimentacio",
+      "suport_escolar",
+      "orientacio",
+      "formacio"
+    ],
+    "contacte": "org0090@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.049854,
+    "lng": 1.060863,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0100",
+    "nom": "Organitzacio Social 0100",
+    "tipus": "servei_public",
+    "serveis": [
+      "roba",
+      "documentacio",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "orientacio",
+      "traduccio",
+      "alimentacio",
+      "acompanyament",
+      "logistica",
+      "gent_gran"
+    ],
+    "contacte": "org0100@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.062821,
+    "lng": 1.061782,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0105",
+    "nom": "Organitzacio Social 0105",
+    "tipus": "fundacio",
+    "serveis": [
+      "assessoria_juridica",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "repartiment",
+      "documentacio",
+      "salut_mental",
+      "alimentacio",
+      "suport_psicologic",
+      "logistica",
+      "formacio"
+    ],
+    "contacte": "org0105@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.09098,
+    "lng": 1.063266,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0134",
+    "nom": "Organitzacio Social 0134",
+    "tipus": "servei_public",
+    "serveis": [
+      "formacio_ocupacional",
+      "roba",
+      "documentacio",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "formacio",
+      "acompanyament",
+      "logistica",
+      "alimentacio",
+      "repartiment",
+      "orientacio",
+      "gestio",
+      "traduccio"
+    ],
+    "contacte": "org0134@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.091937,
+    "lng": 1.060815,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0140",
+    "nom": "Organitzacio Social 0140",
+    "tipus": "fundacio",
+    "serveis": [
+      "assessoria_juridica",
+      "roba",
+      "habitatge_social",
+      "alimentacio",
+      "documentacio"
+    ],
+    "keywords": [
+      "gent_gran",
+      "logistica",
+      "assessoria_juridica",
+      "mediacio_habitatge",
+      "voluntariat",
+      "suport_escolar",
+      "formacio"
+    ],
+    "contacte": "org0140@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.077528,
+    "lng": 1.081506,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0156",
+    "nom": "Organitzacio Social 0156",
+    "tipus": "fundacio",
+    "serveis": [
+      "orientacio_laboral",
+      "acompanyament_sanitari",
+      "assessoria_juridica",
+      "roba"
+    ],
+    "keywords": [
+      "salut_mental",
+      "voluntariat",
+      "acompanyament",
+      "formacio",
+      "habitatge",
+      "suport_escolar",
+      "orientacio",
+      "assessoria_juridica"
+    ],
+    "contacte": "org0156@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.058577,
+    "lng": 1.068082,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0172",
+    "nom": "Organitzacio Social 0172",
+    "tipus": "ONG",
+    "serveis": [
+      "suport_psicologic",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "suport_escolar",
+      "suport_psicologic",
+      "treball_social",
+      "insercio_laboral",
+      "documentacio",
+      "voluntariat",
+      "gent_gran",
+      "repartiment"
+    ],
+    "contacte": "org0172@social.local",
+    "municipi": "Cambrils",
+    "lat": 41.080478,
+    "lng": 1.076961,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0013",
+    "nom": "Organitzacio Social 0013",
+    "tipus": "fundacio",
+    "serveis": [
+      "suport_psicologic",
+      "alimentacio",
+      "documentacio"
+    ],
+    "keywords": [
+      "gent_gran",
+      "alimentacio",
+      "atencio_infants",
+      "suport_escolar",
+      "formacio",
+      "traduccio"
+    ],
+    "contacte": "org0013@social.local",
+    "municipi": "Constanti",
+    "lat": 41.161224,
+    "lng": 1.227462,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0015",
+    "nom": "Organitzacio Social 0015",
+    "tipus": "ONG",
+    "serveis": [
+      "documentacio",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "atencio_infants",
+      "assessoria_juridica",
+      "gent_gran",
+      "formacio",
+      "insercio_laboral",
+      "acollida",
+      "insercio_laboral",
+      "traduccio"
+    ],
+    "contacte": "org0015@social.local",
+    "municipi": "Constanti",
+    "lat": 41.145065,
+    "lng": 1.210353,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0017",
+    "nom": "Organitzacio Social 0017",
+    "tipus": "servei_public",
+    "serveis": [
+      "formacio_ocupacional",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "mediacio_habitatge",
+      "salut_mental",
+      "traduccio",
+      "documentacio"
+    ],
+    "contacte": "org0017@social.local",
+    "municipi": "Constanti",
+    "lat": 41.133426,
+    "lng": 1.19452,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0026",
+    "nom": "Organitzacio Social 0026",
+    "tipus": "servei_public",
+    "serveis": [
+      "suport_psicologic",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "gestio",
+      "repartiment",
+      "atencio_infants",
+      "assessoria_juridica",
+      "insercio_laboral",
+      "mediacio_habitatge",
+      "logistica",
+      "suport_escolar"
+    ],
+    "contacte": "org0026@social.local",
+    "municipi": "Constanti",
+    "lat": 41.174016,
+    "lng": 1.199028,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0037",
+    "nom": "Organitzacio Social 0037",
+    "tipus": "servei_public",
+    "serveis": [
+      "documentacio",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "assessoria_juridica",
+      "traduccio",
+      "alimentacio",
+      "insercio_laboral",
+      "gent_gran"
+    ],
+    "contacte": "org0037@social.local",
+    "municipi": "Constanti",
+    "lat": 41.166189,
+    "lng": 1.223058,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0046",
+    "nom": "Organitzacio Social 0046",
+    "tipus": "fundacio",
+    "serveis": [
+      "orientacio_laboral",
+      "assessoria_juridica",
+      "roba",
+      "acompanyament_sanitari",
+      "documentacio"
+    ],
+    "keywords": [
+      "salut_mental",
+      "formacio",
+      "documentacio",
+      "logistica",
+      "educacio",
+      "repartiment",
+      "suport_psicologic",
+      "habitatge"
+    ],
+    "contacte": "org0046@social.local",
+    "municipi": "Constanti",
+    "lat": 41.127048,
+    "lng": 1.223113,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0059",
+    "nom": "Organitzacio Social 0059",
+    "tipus": "ONG",
+    "serveis": [
+      "suport_psicologic",
+      "assessoria_juridica",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "salut",
+      "suport_escolar",
+      "orientacio",
+      "suport_psicologic",
+      "insercio_laboral",
+      "logistica"
+    ],
+    "contacte": "org0059@social.local",
+    "municipi": "Constanti",
+    "lat": 41.142978,
+    "lng": 1.218395,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0062",
+    "nom": "Organitzacio Social 0062",
+    "tipus": "fundacio",
+    "serveis": [
+      "assessoria_juridica",
+      "roba",
+      "acompanyament_sanitari",
+      "suport_psicologic",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "formacio",
+      "alimentacio",
+      "treball_social",
+      "logistica",
+      "suport_psicologic",
+      "repartiment"
+    ],
+    "contacte": "org0062@social.local",
+    "municipi": "Constanti",
+    "lat": 41.161879,
+    "lng": 1.239039,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0072",
+    "nom": "Organitzacio Social 0072",
+    "tipus": "servei_public",
+    "serveis": [
+      "roba",
+      "formacio_ocupacional",
+      "orientacio_laboral",
+      "acompanyament_sanitari",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "habitatge",
+      "insercio_laboral",
+      "insercio_laboral",
+      "atencio_infants",
+      "suport_escolar",
+      "traduccio",
+      "gent_gran"
+    ],
+    "contacte": "org0072@social.local",
+    "municipi": "Constanti",
+    "lat": 41.149686,
+    "lng": 1.185962,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0087",
+    "nom": "Organitzacio Social 0087",
+    "tipus": "fundacio",
+    "serveis": [
+      "acompanyament_sanitari",
+      "roba",
+      "orientacio_laboral",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "alimentacio",
+      "alimentacio",
+      "insercio_laboral",
+      "suport_psicologic",
+      "treball_social",
+      "assessoria_juridica"
+    ],
+    "contacte": "org0087@social.local",
+    "municipi": "Constanti",
+    "lat": 41.152624,
+    "lng": 1.207271,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0103",
+    "nom": "Organitzacio Social 0103",
+    "tipus": "fundacio",
+    "serveis": [
+      "habitatge_social",
+      "alimentacio",
+      "suport_psicologic",
+      "documentacio"
+    ],
+    "keywords": [
+      "logistica",
+      "gestio",
+      "alimentacio",
+      "acompanyament"
+    ],
+    "contacte": "org0103@social.local",
+    "municipi": "Constanti",
+    "lat": 41.169579,
+    "lng": 1.208185,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0113",
+    "nom": "Organitzacio Social 0113",
+    "tipus": "fundacio",
+    "serveis": [
+      "habitatge_social",
+      "orientacio_laboral",
+      "acompanyament_sanitari",
+      "alimentacio",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "gent_gran",
+      "treball_social",
+      "mediacio_habitatge",
+      "salut",
+      "voluntariat",
+      "alimentacio",
+      "assessoria_juridica",
+      "acollida"
+    ],
+    "contacte": "org0113@social.local",
+    "municipi": "Constanti",
+    "lat": 41.168313,
+    "lng": 1.234281,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0126",
+    "nom": "Organitzacio Social 0126",
+    "tipus": "ONG",
+    "serveis": [
+      "acompanyament_sanitari",
+      "roba",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "acompanyament",
+      "gestio",
+      "alimentacio",
+      "repartiment",
+      "formacio"
+    ],
+    "contacte": "org0126@social.local",
+    "municipi": "Constanti",
+    "lat": 41.123889,
+    "lng": 1.226126,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0127",
+    "nom": "Organitzacio Social 0127",
+    "tipus": "fundacio",
+    "serveis": [
+      "formacio_ocupacional",
+      "habitatge_social",
+      "roba",
+      "documentacio",
+      "alimentacio"
+    ],
+    "keywords": [
+      "repartiment",
+      "acollida",
+      "insercio_laboral",
+      "alimentacio",
+      "salut",
+      "suport_escolar",
+      "educacio"
+    ],
+    "contacte": "org0127@social.local",
+    "municipi": "Constanti",
+    "lat": 41.125199,
+    "lng": 1.210732,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0164",
+    "nom": "Organitzacio Social 0164",
+    "tipus": "ONG",
+    "serveis": [
+      "habitatge_social",
+      "formacio_ocupacional",
+      "roba",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "alimentacio",
+      "documentacio",
+      "orientacio",
+      "treball_social",
+      "traduccio"
+    ],
+    "contacte": "org0164@social.local",
+    "municipi": "Constanti",
+    "lat": 41.13279,
+    "lng": 1.24537,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0179",
+    "nom": "Organitzacio Social 0179",
+    "tipus": "ONG",
+    "serveis": [
+      "orientacio_laboral",
+      "assessoria_juridica",
+      "formacio_ocupacional",
+      "habitatge_social",
+      "alimentacio"
+    ],
+    "keywords": [
+      "acollida",
+      "alimentacio",
+      "educacio",
+      "insercio_laboral",
+      "assessoria_juridica",
+      "habitatge",
+      "atencio_infants",
+      "mediacio_habitatge"
+    ],
+    "contacte": "org0179@social.local",
+    "municipi": "Constanti",
+    "lat": 41.135472,
+    "lng": 1.194477,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0003",
+    "nom": "Organitzacio Social 0003",
+    "tipus": "fundacio",
+    "serveis": [
+      "assessoria_juridica",
+      "alimentacio",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "repartiment",
+      "gent_gran",
+      "atencio_infants",
+      "logistica",
+      "suport_escolar",
+      "documentacio"
+    ],
+    "contacte": "org0003@social.local",
+    "municipi": "El Vendrell",
+    "lat": 41.238395,
+    "lng": 1.518085,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0035",
+    "nom": "Organitzacio Social 0035",
+    "tipus": "ONG",
+    "serveis": [
+      "acompanyament_sanitari",
+      "assessoria_juridica",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "acollida",
+      "acompanyament",
+      "salut_mental",
+      "insercio_laboral",
+      "atencio_infants",
+      "suport_escolar",
+      "alimentacio",
+      "alimentacio"
+    ],
+    "contacte": "org0035@social.local",
+    "municipi": "El Vendrell",
+    "lat": 41.219105,
+    "lng": 1.538064,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0038",
+    "nom": "Organitzacio Social 0038",
+    "tipus": "ONG",
+    "serveis": [
+      "alimentacio",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "formacio",
+      "insercio_laboral",
+      "traduccio",
+      "salut_mental"
+    ],
+    "contacte": "org0038@social.local",
+    "municipi": "El Vendrell",
+    "lat": 41.195175,
+    "lng": 1.517361,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0054",
+    "nom": "Organitzacio Social 0054",
+    "tipus": "servei_public",
+    "serveis": [
+      "assessoria_juridica",
+      "alimentacio"
+    ],
+    "keywords": [
+      "salut",
+      "suport_escolar",
+      "mediacio_habitatge",
+      "salut_mental",
+      "formacio"
+    ],
+    "contacte": "org0054@social.local",
+    "municipi": "El Vendrell",
+    "lat": 41.203894,
+    "lng": 1.517508,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0093",
+    "nom": "Organitzacio Social 0093",
+    "tipus": "ONG",
+    "serveis": [
+      "alimentacio",
+      "habitatge_social",
+      "acompanyament_sanitari",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "salut_mental",
+      "educacio",
+      "gent_gran",
+      "suport_escolar",
+      "alimentacio",
+      "acollida",
+      "logistica"
+    ],
+    "contacte": "org0093@social.local",
+    "municipi": "El Vendrell",
+    "lat": 41.200609,
+    "lng": 1.542496,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0115",
+    "nom": "Organitzacio Social 0115",
+    "tipus": "fundacio",
+    "serveis": [
+      "formacio_ocupacional",
+      "habitatge_social",
+      "documentacio",
+      "alimentacio",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "formacio",
+      "acompanyament",
+      "gent_gran",
+      "atencio_infants",
+      "suport_psicologic",
+      "formacio"
+    ],
+    "contacte": "org0115@social.local",
+    "municipi": "El Vendrell",
+    "lat": 41.216909,
+    "lng": 1.525176,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0130",
+    "nom": "Organitzacio Social 0130",
+    "tipus": "fundacio",
+    "serveis": [
+      "documentacio",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "assessoria_juridica",
+      "mediacio_habitatge",
+      "treball_social",
+      "alimentacio",
+      "voluntariat",
+      "habitatge",
+      "gestio"
+    ],
+    "contacte": "org0130@social.local",
+    "municipi": "El Vendrell",
+    "lat": 41.223637,
+    "lng": 1.527965,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0135",
+    "nom": "Organitzacio Social 0135",
+    "tipus": "ONG",
+    "serveis": [
+      "roba",
+      "habitatge_social",
+      "formacio_ocupacional",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "suport_escolar",
+      "formacio",
+      "treball_social",
+      "insercio_laboral",
+      "voluntariat",
+      "logistica",
+      "gent_gran",
+      "mediacio_habitatge"
+    ],
+    "contacte": "org0135@social.local",
+    "municipi": "El Vendrell",
+    "lat": 41.211855,
+    "lng": 1.532855,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0160",
+    "nom": "Organitzacio Social 0160",
+    "tipus": "ONG",
+    "serveis": [
+      "roba",
+      "formacio_ocupacional",
+      "alimentacio",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "repartiment",
+      "logistica",
+      "salut_mental",
+      "alimentacio",
+      "insercio_laboral",
+      "acollida",
+      "voluntariat"
+    ],
+    "contacte": "org0160@social.local",
+    "municipi": "El Vendrell",
+    "lat": 41.191096,
+    "lng": 1.508319,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0161",
+    "nom": "Organitzacio Social 0161",
+    "tipus": "ONG",
+    "serveis": [
+      "alimentacio",
+      "suport_psicologic",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "formacio",
+      "acollida",
+      "voluntariat",
+      "suport_psicologic",
+      "gent_gran",
+      "habitatge",
+      "atencio_infants"
+    ],
+    "contacte": "org0161@social.local",
+    "municipi": "El Vendrell",
+    "lat": 41.234489,
+    "lng": 1.551278,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0001",
+    "nom": "Organitzacio Social 0001",
+    "tipus": "fundacio",
+    "serveis": [
+      "orientacio_laboral",
+      "acompanyament_sanitari",
+      "habitatge_social",
+      "alimentacio",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "habitatge",
+      "salut_mental",
+      "voluntariat",
+      "mediacio_habitatge"
+    ],
+    "contacte": "org0001@social.local",
+    "municipi": "Falset",
+    "lat": 41.142251,
+    "lng": 0.805145,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0033",
+    "nom": "Organitzacio Social 0033",
+    "tipus": "fundacio",
+    "serveis": [
+      "suport_psicologic",
+      "documentacio",
+      "alimentacio",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "acollida",
+      "salut",
+      "suport_escolar",
+      "alimentacio",
+      "formacio",
+      "atencio_infants",
+      "assessoria_juridica"
+    ],
+    "contacte": "org0033@social.local",
+    "municipi": "Falset",
+    "lat": 41.171092,
+    "lng": 0.8427,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0052",
+    "nom": "Organitzacio Social 0052",
+    "tipus": "ONG",
+    "serveis": [
+      "orientacio_laboral",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "suport_escolar",
+      "documentacio",
+      "habitatge",
+      "salut",
+      "formacio"
+    ],
+    "contacte": "org0052@social.local",
+    "municipi": "Falset",
+    "lat": 41.145903,
+    "lng": 0.818445,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0076",
+    "nom": "Organitzacio Social 0076",
+    "tipus": "ONG",
+    "serveis": [
+      "orientacio_laboral",
+      "suport_psicologic",
+      "documentacio"
+    ],
+    "keywords": [
+      "logistica",
+      "suport_psicologic",
+      "acollida",
+      "suport_escolar",
+      "voluntariat",
+      "gestio"
+    ],
+    "contacte": "org0076@social.local",
+    "municipi": "Falset",
+    "lat": 41.167772,
+    "lng": 0.804286,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0077",
+    "nom": "Organitzacio Social 0077",
+    "tipus": "fundacio",
+    "serveis": [
+      "orientacio_laboral",
+      "acompanyament_sanitari",
+      "assessoria_juridica",
+      "formacio_ocupacional",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "salut",
+      "treball_social",
+      "traduccio",
+      "insercio_laboral",
+      "alimentacio",
+      "gent_gran"
+    ],
+    "contacte": "org0077@social.local",
+    "municipi": "Falset",
+    "lat": 41.169072,
+    "lng": 0.829247,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0106",
+    "nom": "Organitzacio Social 0106",
+    "tipus": "servei_public",
+    "serveis": [
+      "habitatge_social",
+      "alimentacio"
+    ],
+    "keywords": [
+      "gestio",
+      "salut_mental",
+      "suport_escolar",
+      "mediacio_habitatge",
+      "formacio",
+      "gent_gran",
+      "habitatge",
+      "insercio_laboral"
+    ],
+    "contacte": "org0106@social.local",
+    "municipi": "Falset",
+    "lat": 41.132876,
+    "lng": 0.810592,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0122",
+    "nom": "Organitzacio Social 0122",
+    "tipus": "fundacio",
+    "serveis": [
+      "acompanyament_sanitari",
+      "suport_psicologic",
+      "formacio_ocupacional",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "treball_social",
+      "acompanyament",
+      "atencio_infants",
+      "orientacio",
+      "documentacio",
+      "acollida",
+      "repartiment",
+      "alimentacio"
+    ],
+    "contacte": "org0122@social.local",
+    "municipi": "Falset",
+    "lat": 41.163316,
+    "lng": 0.826635,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0139",
+    "nom": "Organitzacio Social 0139",
+    "tipus": "fundacio",
+    "serveis": [
+      "assessoria_juridica",
+      "acompanyament_sanitari",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "alimentacio",
+      "assessoria_juridica",
+      "mediacio_habitatge",
+      "educacio",
+      "treball_social",
+      "salut",
+      "gent_gran",
+      "formacio"
+    ],
+    "contacte": "org0139@social.local",
+    "municipi": "Falset",
+    "lat": 41.148881,
+    "lng": 0.831388,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0169",
+    "nom": "Organitzacio Social 0169",
+    "tipus": "fundacio",
+    "serveis": [
+      "orientacio_laboral",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "assessoria_juridica",
+      "atencio_infants",
+      "repartiment",
+      "insercio_laboral",
+      "documentacio",
+      "salut_mental",
+      "insercio_laboral",
+      "educacio"
+    ],
+    "contacte": "org0169@social.local",
+    "municipi": "Falset",
+    "lat": 41.130352,
+    "lng": 0.812431,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0173",
+    "nom": "Organitzacio Social 0173",
+    "tipus": "fundacio",
+    "serveis": [
+      "alimentacio",
+      "documentacio",
+      "suport_psicologic",
+      "roba",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "logistica",
+      "habitatge",
+      "orientacio",
+      "voluntariat"
+    ],
+    "contacte": "org0173@social.local",
+    "municipi": "Falset",
+    "lat": 41.144212,
+    "lng": 0.84315,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0014",
+    "nom": "Organitzacio Social 0014",
+    "tipus": "servei_public",
+    "serveis": [
+      "acompanyament_sanitari",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "orientacio",
+      "atencio_infants",
+      "logistica",
+      "salut_mental",
+      "salut"
+    ],
+    "contacte": "org0014@social.local",
+    "municipi": "Montblanc",
+    "lat": 41.353853,
+    "lng": 1.146356,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0023",
+    "nom": "Organitzacio Social 0023",
+    "tipus": "ONG",
+    "serveis": [
+      "roba",
+      "documentacio",
+      "suport_psicologic",
+      "acompanyament_sanitari",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "gent_gran",
+      "gestio",
+      "salut_mental",
+      "mediacio_habitatge",
+      "alimentacio",
+      "logistica"
+    ],
+    "contacte": "org0023@social.local",
+    "municipi": "Montblanc",
+    "lat": 41.39354,
+    "lng": 1.171925,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0085",
+    "nom": "Organitzacio Social 0085",
+    "tipus": "ONG",
+    "serveis": [
+      "documentacio",
+      "assessoria_juridica",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "acollida",
+      "salut_mental",
+      "atencio_infants",
+      "documentacio"
+    ],
+    "contacte": "org0085@social.local",
+    "municipi": "Montblanc",
+    "lat": 41.376957,
+    "lng": 1.165591,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0096",
+    "nom": "Organitzacio Social 0096",
+    "tipus": "fundacio",
+    "serveis": [
+      "documentacio",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "alimentacio",
+      "alimentacio",
+      "mediacio_habitatge",
+      "voluntariat",
+      "documentacio",
+      "logistica"
+    ],
+    "contacte": "org0096@social.local",
+    "municipi": "Montblanc",
+    "lat": 41.385943,
+    "lng": 1.172437,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0111",
+    "nom": "Organitzacio Social 0111",
+    "tipus": "ONG",
+    "serveis": [
+      "acompanyament_sanitari",
+      "alimentacio",
+      "assessoria_juridica",
+      "roba",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "alimentacio",
+      "documentacio",
+      "assessoria_juridica",
+      "habitatge",
+      "mediacio_habitatge",
+      "insercio_laboral"
+    ],
+    "contacte": "org0111@social.local",
+    "municipi": "Montblanc",
+    "lat": 41.405424,
+    "lng": 1.191573,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0129",
+    "nom": "Organitzacio Social 0129",
+    "tipus": "ONG",
+    "serveis": [
+      "orientacio_laboral",
+      "habitatge_social",
+      "documentacio",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "voluntariat",
+      "salut_mental",
+      "assessoria_juridica",
+      "formacio",
+      "educacio",
+      "orientacio",
+      "insercio_laboral"
+    ],
+    "contacte": "org0129@social.local",
+    "municipi": "Montblanc",
+    "lat": 41.364265,
+    "lng": 1.184989,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0002",
+    "nom": "Organitzacio Social 0002",
+    "tipus": "servei_public",
+    "serveis": [
+      "formacio_ocupacional",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "suport_escolar",
+      "voluntariat",
+      "habitatge",
+      "salut",
+      "formacio",
+      "gent_gran"
+    ],
+    "contacte": "org0002@social.local",
+    "municipi": "Reus",
+    "lat": 41.166648,
+    "lng": 1.107149,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0021",
+    "nom": "Organitzacio Social 0021",
+    "tipus": "servei_public",
+    "serveis": [
+      "habitatge_social",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "alimentacio",
+      "acompanyament",
+      "orientacio",
+      "documentacio",
+      "formacio",
+      "atencio_infants",
+      "logistica",
+      "repartiment"
+    ],
+    "contacte": "org0021@social.local",
+    "municipi": "Reus",
+    "lat": 41.1542,
+    "lng": 1.093953,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0028",
+    "nom": "Organitzacio Social 0028",
+    "tipus": "fundacio",
+    "serveis": [
+      "alimentacio",
+      "habitatge_social",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "acompanyament",
+      "formacio",
+      "assessoria_juridica",
+      "suport_escolar",
+      "educacio",
+      "logistica",
+      "gestio",
+      "formacio"
+    ],
+    "contacte": "org0028@social.local",
+    "municipi": "Reus",
+    "lat": 41.154383,
+    "lng": 1.128063,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0058",
+    "nom": "Organitzacio Social 0058",
+    "tipus": "fundacio",
+    "serveis": [
+      "alimentacio",
+      "assessoria_juridica",
+      "orientacio_laboral",
+      "roba",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "formacio",
+      "salut",
+      "repartiment"
+    ],
+    "contacte": "org0058@social.local",
+    "municipi": "Reus",
+    "lat": 41.150922,
+    "lng": 1.086513,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0073",
+    "nom": "Organitzacio Social 0073",
+    "tipus": "ONG",
+    "serveis": [
+      "alimentacio",
+      "roba"
+    ],
+    "keywords": [
+      "voluntariat",
+      "suport_escolar",
+      "insercio_laboral",
+      "assessoria_juridica",
+      "formacio",
+      "treball_social",
+      "atencio_infants"
+    ],
+    "contacte": "org0073@social.local",
+    "municipi": "Reus",
+    "lat": 41.129043,
+    "lng": 1.111023,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0083",
+    "nom": "Organitzacio Social 0083",
+    "tipus": "fundacio",
+    "serveis": [
+      "documentacio",
+      "roba",
+      "alimentacio"
+    ],
+    "keywords": [
+      "assessoria_juridica",
+      "salut",
+      "formacio",
+      "suport_escolar",
+      "insercio_laboral",
+      "traduccio"
+    ],
+    "contacte": "org0083@social.local",
+    "municipi": "Reus",
+    "lat": 41.145065,
+    "lng": 1.115812,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0101",
+    "nom": "Organitzacio Social 0101",
+    "tipus": "servei_public",
+    "serveis": [
+      "suport_psicologic",
+      "assessoria_juridica",
+      "documentacio",
+      "habitatge_social",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "treball_social",
+      "repartiment",
+      "assessoria_juridica",
+      "suport_escolar"
+    ],
+    "contacte": "org0101@social.local",
+    "municipi": "Reus",
+    "lat": 41.17264,
+    "lng": 1.097976,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0104",
+    "nom": "Organitzacio Social 0104",
+    "tipus": "servei_public",
+    "serveis": [
+      "suport_psicologic",
+      "habitatge_social",
+      "orientacio_laboral",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "voluntariat",
+      "alimentacio",
+      "logistica",
+      "insercio_laboral",
+      "documentacio",
+      "educacio",
+      "mediacio_habitatge",
+      "gestio"
+    ],
+    "contacte": "org0104@social.local",
+    "municipi": "Reus",
+    "lat": 41.185475,
+    "lng": 1.127102,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0112",
+    "nom": "Organitzacio Social 0112",
+    "tipus": "ONG",
+    "serveis": [
+      "orientacio_laboral",
+      "documentacio",
+      "assessoria_juridica",
+      "acompanyament_sanitari",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "traduccio",
+      "atencio_infants",
+      "habitatge",
+      "salut_mental"
+    ],
+    "contacte": "org0112@social.local",
+    "municipi": "Reus",
+    "lat": 41.161776,
+    "lng": 1.078066,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0116",
+    "nom": "Organitzacio Social 0116",
+    "tipus": "servei_public",
+    "serveis": [
+      "formacio_ocupacional",
+      "alimentacio",
+      "roba"
+    ],
+    "keywords": [
+      "acollida",
+      "formacio",
+      "mediacio_habitatge",
+      "documentacio",
+      "treball_social",
+      "gestio"
+    ],
+    "contacte": "org0116@social.local",
+    "municipi": "Reus",
+    "lat": 41.178653,
+    "lng": 1.098448,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0121",
+    "nom": "Organitzacio Social 0121",
+    "tipus": "servei_public",
+    "serveis": [
+      "formacio_ocupacional",
+      "alimentacio"
+    ],
+    "keywords": [
+      "assessoria_juridica",
+      "voluntariat",
+      "habitatge",
+      "educacio",
+      "formacio"
+    ],
+    "contacte": "org0121@social.local",
+    "municipi": "Reus",
+    "lat": 41.155395,
+    "lng": 1.115833,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0138",
+    "nom": "Organitzacio Social 0138",
+    "tipus": "fundacio",
+    "serveis": [
+      "habitatge_social",
+      "assessoria_juridica",
+      "roba"
+    ],
+    "keywords": [
+      "formacio",
+      "logistica",
+      "atencio_infants",
+      "repartiment",
+      "treball_social",
+      "gent_gran",
+      "salut_mental"
+    ],
+    "contacte": "org0138@social.local",
+    "municipi": "Reus",
+    "lat": 41.161115,
+    "lng": 1.114475,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0142",
+    "nom": "Organitzacio Social 0142",
+    "tipus": "ONG",
+    "serveis": [
+      "formacio_ocupacional",
+      "orientacio_laboral",
+      "roba"
+    ],
+    "keywords": [
+      "acompanyament",
+      "assessoria_juridica",
+      "salut",
+      "habitatge",
+      "repartiment"
+    ],
+    "contacte": "org0142@social.local",
+    "municipi": "Reus",
+    "lat": 41.179378,
+    "lng": 1.08354,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0159",
+    "nom": "Organitzacio Social 0159",
+    "tipus": "ONG",
+    "serveis": [
+      "roba",
+      "orientacio_laboral",
+      "habitatge_social",
+      "suport_psicologic",
+      "alimentacio"
+    ],
+    "keywords": [
+      "salut_mental",
+      "voluntariat",
+      "logistica",
+      "insercio_laboral"
+    ],
+    "contacte": "org0159@social.local",
+    "municipi": "Reus",
+    "lat": 41.141642,
+    "lng": 1.084029,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0162",
+    "nom": "Organitzacio Social 0162",
+    "tipus": "ONG",
+    "serveis": [
+      "assessoria_juridica",
+      "orientacio_laboral",
+      "documentacio"
+    ],
+    "keywords": [
+      "alimentacio",
+      "treball_social",
+      "logistica",
+      "acompanyament",
+      "traduccio",
+      "repartiment",
+      "suport_psicologic"
+    ],
+    "contacte": "org0162@social.local",
+    "municipi": "Reus",
+    "lat": 41.156314,
+    "lng": 1.091218,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0165",
+    "nom": "Organitzacio Social 0165",
+    "tipus": "servei_public",
+    "serveis": [
+      "roba",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "acollida",
+      "suport_psicologic",
+      "habitatge",
+      "mediacio_habitatge",
+      "insercio_laboral",
+      "educacio",
+      "documentacio"
+    ],
+    "contacte": "org0165@social.local",
+    "municipi": "Reus",
+    "lat": 41.144911,
+    "lng": 1.117613,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0176",
+    "nom": "Organitzacio Social 0176",
+    "tipus": "ONG",
+    "serveis": [
+      "assessoria_juridica",
+      "habitatge_social",
+      "roba",
+      "suport_psicologic",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "traduccio",
+      "formacio",
+      "salut"
+    ],
+    "contacte": "org0176@social.local",
+    "municipi": "Reus",
+    "lat": 41.131703,
+    "lng": 1.111783,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0007",
+    "nom": "Organitzacio Social 0007",
+    "tipus": "ONG",
+    "serveis": [
+      "formacio_ocupacional",
+      "suport_psicologic",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "mediacio_habitatge",
+      "orientacio",
+      "habitatge",
+      "gestio",
+      "assessoria_juridica",
+      "treball_social",
+      "formacio"
+    ],
+    "contacte": "org0007@social.local",
+    "municipi": "Salou",
+    "lat": 41.063017,
+    "lng": 1.166431,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0050",
+    "nom": "Organitzacio Social 0050",
+    "tipus": "ONG",
+    "serveis": [
+      "habitatge_social",
+      "alimentacio",
+      "acompanyament_sanitari",
+      "roba"
+    ],
+    "keywords": [
+      "alimentacio",
+      "formacio",
+      "treball_social",
+      "educacio",
+      "logistica",
+      "salut",
+      "orientacio",
+      "repartiment"
+    ],
+    "contacte": "org0050@social.local",
+    "municipi": "Salou",
+    "lat": 41.072578,
+    "lng": 1.120295,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0053",
+    "nom": "Organitzacio Social 0053",
+    "tipus": "fundacio",
+    "serveis": [
+      "orientacio_laboral",
+      "habitatge_social",
+      "documentacio"
+    ],
+    "keywords": [
+      "documentacio",
+      "habitatge",
+      "repartiment",
+      "atencio_infants",
+      "gestio",
+      "logistica"
+    ],
+    "contacte": "org0053@social.local",
+    "municipi": "Salou",
+    "lat": 41.051746,
+    "lng": 1.141455,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0091",
+    "nom": "Organitzacio Social 0091",
+    "tipus": "fundacio",
+    "serveis": [
+      "orientacio_laboral",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "gestio",
+      "mediacio_habitatge",
+      "salut_mental",
+      "insercio_laboral",
+      "salut"
+    ],
+    "contacte": "org0091@social.local",
+    "municipi": "Salou",
+    "lat": 41.070572,
+    "lng": 1.132108,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0125",
+    "nom": "Organitzacio Social 0125",
+    "tipus": "servei_public",
+    "serveis": [
+      "acompanyament_sanitari",
+      "roba",
+      "habitatge_social",
+      "orientacio_laboral",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "documentacio",
+      "gent_gran",
+      "formacio",
+      "orientacio",
+      "formacio",
+      "logistica",
+      "assessoria_juridica"
+    ],
+    "contacte": "org0125@social.local",
+    "municipi": "Salou",
+    "lat": 41.08262,
+    "lng": 1.166889,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0131",
+    "nom": "Organitzacio Social 0131",
+    "tipus": "ONG",
+    "serveis": [
+      "roba",
+      "documentacio",
+      "assessoria_juridica",
+      "orientacio_laboral",
+      "alimentacio"
+    ],
+    "keywords": [
+      "mediacio_habitatge",
+      "alimentacio",
+      "salut_mental",
+      "salut"
+    ],
+    "contacte": "org0131@social.local",
+    "municipi": "Salou",
+    "lat": 41.056838,
+    "lng": 1.143907,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0136",
+    "nom": "Organitzacio Social 0136",
+    "tipus": "ONG",
+    "serveis": [
+      "acompanyament_sanitari",
+      "alimentacio",
+      "documentacio",
+      "suport_psicologic",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "acollida",
+      "alimentacio",
+      "formacio",
+      "suport_escolar",
+      "alimentacio",
+      "suport_psicologic",
+      "salut_mental"
+    ],
+    "contacte": "org0136@social.local",
+    "municipi": "Salou",
+    "lat": 41.067737,
+    "lng": 1.171821,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0143",
+    "nom": "Organitzacio Social 0143",
+    "tipus": "fundacio",
+    "serveis": [
+      "suport_psicologic",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "repartiment",
+      "documentacio",
+      "insercio_laboral",
+      "suport_escolar"
+    ],
+    "contacte": "org0143@social.local",
+    "municipi": "Salou",
+    "lat": 41.046068,
+    "lng": 1.134423,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0149",
+    "nom": "Organitzacio Social 0149",
+    "tipus": "ONG",
+    "serveis": [
+      "formacio_ocupacional",
+      "habitatge_social",
+      "suport_psicologic",
+      "roba"
+    ],
+    "keywords": [
+      "acollida",
+      "treball_social",
+      "salut_mental",
+      "acompanyament",
+      "alimentacio"
+    ],
+    "contacte": "org0149@social.local",
+    "municipi": "Salou",
+    "lat": 41.076616,
+    "lng": 1.154087,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0152",
+    "nom": "Organitzacio Social 0152",
+    "tipus": "fundacio",
+    "serveis": [
+      "formacio_ocupacional",
+      "habitatge_social",
+      "acompanyament_sanitari",
+      "documentacio",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "formacio",
+      "atencio_infants",
+      "formacio",
+      "assessoria_juridica",
+      "logistica",
+      "acollida"
+    ],
+    "contacte": "org0152@social.local",
+    "municipi": "Salou",
+    "lat": 41.090324,
+    "lng": 1.124444,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0157",
+    "nom": "Organitzacio Social 0157",
+    "tipus": "fundacio",
+    "serveis": [
+      "documentacio",
+      "assessoria_juridica",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "atencio_infants",
+      "suport_escolar",
+      "orientacio",
+      "habitatge",
+      "gent_gran",
+      "repartiment",
+      "salut_mental"
+    ],
+    "contacte": "org0157@social.local",
+    "municipi": "Salou",
+    "lat": 41.070564,
+    "lng": 1.131863,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0166",
+    "nom": "Organitzacio Social 0166",
+    "tipus": "fundacio",
+    "serveis": [
+      "orientacio_laboral",
+      "alimentacio",
+      "acompanyament_sanitari",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "gestio",
+      "repartiment",
+      "atencio_infants",
+      "formacio",
+      "alimentacio"
+    ],
+    "contacte": "org0166@social.local",
+    "municipi": "Salou",
+    "lat": 41.099204,
+    "lng": 1.130462,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0177",
+    "nom": "Organitzacio Social 0177",
+    "tipus": "ONG",
+    "serveis": [
+      "roba",
+      "habitatge_social",
+      "suport_psicologic",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "assessoria_juridica",
+      "acompanyament",
+      "formacio",
+      "gent_gran",
+      "acollida",
+      "treball_social",
+      "suport_escolar",
+      "insercio_laboral"
+    ],
+    "contacte": "org0177@social.local",
+    "municipi": "Salou",
+    "lat": 41.090864,
+    "lng": 1.12196,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0004",
+    "nom": "Organitzacio Social 0004",
+    "tipus": "fundacio",
+    "serveis": [
+      "acompanyament_sanitari",
+      "assessoria_juridica",
+      "formacio_ocupacional",
+      "suport_psicologic",
+      "documentacio"
+    ],
+    "keywords": [
+      "salut",
+      "gent_gran",
+      "logistica",
+      "alimentacio",
+      "repartiment"
+    ],
+    "contacte": "org0004@social.local",
+    "municipi": "Tarragona",
+    "lat": 41.124376,
+    "lng": 1.266452,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0018",
+    "nom": "Organitzacio Social 0018",
+    "tipus": "servei_public",
+    "serveis": [
+      "alimentacio",
+      "formacio_ocupacional",
+      "roba",
+      "orientacio_laboral",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "habitatge",
+      "treball_social",
+      "atencio_infants",
+      "insercio_laboral",
+      "formacio",
+      "logistica"
+    ],
+    "contacte": "org0018@social.local",
+    "municipi": "Tarragona",
+    "lat": 41.114321,
+    "lng": 1.26709,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0041",
+    "nom": "Organitzacio Social 0041",
+    "tipus": "servei_public",
+    "serveis": [
+      "roba",
+      "suport_psicologic",
+      "assessoria_juridica",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "alimentacio",
+      "traduccio",
+      "acollida",
+      "insercio_laboral"
+    ],
+    "contacte": "org0041@social.local",
+    "municipi": "Tarragona",
+    "lat": 41.130534,
+    "lng": 1.254453,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0056",
+    "nom": "Organitzacio Social 0056",
+    "tipus": "ONG",
+    "serveis": [
+      "orientacio_laboral",
+      "documentacio",
+      "roba"
+    ],
+    "keywords": [
+      "voluntariat",
+      "salut_mental",
+      "traduccio",
+      "repartiment"
+    ],
+    "contacte": "org0056@social.local",
+    "municipi": "Tarragona",
+    "lat": 41.119289,
+    "lng": 1.260389,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0060",
+    "nom": "Organitzacio Social 0060",
+    "tipus": "servei_public",
+    "serveis": [
+      "orientacio_laboral",
+      "roba"
+    ],
+    "keywords": [
+      "habitatge",
+      "alimentacio",
+      "suport_escolar",
+      "treball_social",
+      "alimentacio",
+      "suport_psicologic",
+      "orientacio"
+    ],
+    "contacte": "org0060@social.local",
+    "municipi": "Tarragona",
+    "lat": 41.102796,
+    "lng": 1.229268,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0069",
+    "nom": "Organitzacio Social 0069",
+    "tipus": "fundacio",
+    "serveis": [
+      "habitatge_social",
+      "documentacio",
+      "roba",
+      "orientacio_laboral",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "orientacio",
+      "formacio",
+      "documentacio",
+      "atencio_infants",
+      "repartiment",
+      "acollida",
+      "insercio_laboral",
+      "gestio"
+    ],
+    "contacte": "org0069@social.local",
+    "municipi": "Tarragona",
+    "lat": 41.126054,
+    "lng": 1.251231,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0095",
+    "nom": "Organitzacio Social 0095",
+    "tipus": "ONG",
+    "serveis": [
+      "documentacio",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "repartiment",
+      "voluntariat",
+      "alimentacio",
+      "assessoria_juridica",
+      "documentacio",
+      "traduccio",
+      "orientacio",
+      "educacio"
+    ],
+    "contacte": "org0095@social.local",
+    "municipi": "Tarragona",
+    "lat": 41.122418,
+    "lng": 1.267884,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0102",
+    "nom": "Organitzacio Social 0102",
+    "tipus": "servei_public",
+    "serveis": [
+      "orientacio_laboral",
+      "habitatge_social",
+      "acompanyament_sanitari",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "educacio",
+      "orientacio",
+      "voluntariat",
+      "habitatge",
+      "alimentacio",
+      "suport_escolar",
+      "formacio",
+      "logistica"
+    ],
+    "contacte": "org0102@social.local",
+    "municipi": "Tarragona",
+    "lat": 41.116574,
+    "lng": 1.261281,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0114",
+    "nom": "Organitzacio Social 0114",
+    "tipus": "fundacio",
+    "serveis": [
+      "roba",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "educacio",
+      "atencio_infants",
+      "documentacio",
+      "insercio_laboral",
+      "mediacio_habitatge"
+    ],
+    "contacte": "org0114@social.local",
+    "municipi": "Tarragona",
+    "lat": 41.118665,
+    "lng": 1.257693,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0123",
+    "nom": "Organitzacio Social 0123",
+    "tipus": "ONG",
+    "serveis": [
+      "formacio_ocupacional",
+      "habitatge_social",
+      "documentacio",
+      "assessoria_juridica",
+      "alimentacio"
+    ],
+    "keywords": [
+      "logistica",
+      "salut_mental",
+      "suport_escolar",
+      "documentacio"
+    ],
+    "contacte": "org0123@social.local",
+    "municipi": "Tarragona",
+    "lat": 41.113365,
+    "lng": 1.231873,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0141",
+    "nom": "Organitzacio Social 0141",
+    "tipus": "fundacio",
+    "serveis": [
+      "habitatge_social",
+      "orientacio_laboral",
+      "documentacio",
+      "suport_psicologic",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "formacio",
+      "formacio",
+      "salut_mental",
+      "orientacio",
+      "alimentacio",
+      "voluntariat",
+      "insercio_laboral",
+      "gent_gran"
+    ],
+    "contacte": "org0141@social.local",
+    "municipi": "Tarragona",
+    "lat": 41.142064,
+    "lng": 1.246227,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0168",
+    "nom": "Organitzacio Social 0168",
+    "tipus": "servei_public",
+    "serveis": [
+      "assessoria_juridica",
+      "suport_psicologic",
+      "habitatge_social",
+      "acompanyament_sanitari",
+      "documentacio"
+    ],
+    "keywords": [
+      "formacio",
+      "insercio_laboral",
+      "acollida",
+      "gent_gran",
+      "logistica",
+      "treball_social",
+      "atencio_infants",
+      "assessoria_juridica"
+    ],
+    "contacte": "org0168@social.local",
+    "municipi": "Tarragona",
+    "lat": 41.091446,
+    "lng": 1.270728,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0010",
+    "nom": "Organitzacio Social 0010",
+    "tipus": "servei_public",
+    "serveis": [
+      "formacio_ocupacional",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "orientacio",
+      "treball_social",
+      "alimentacio",
+      "insercio_laboral",
+      "gent_gran",
+      "assessoria_juridica",
+      "formacio",
+      "habitatge"
+    ],
+    "contacte": "org0010@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.153216,
+    "lng": 1.37746,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0019",
+    "nom": "Organitzacio Social 0019",
+    "tipus": "servei_public",
+    "serveis": [
+      "roba",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "gestio",
+      "voluntariat",
+      "formacio",
+      "alimentacio",
+      "treball_social",
+      "formacio",
+      "habitatge"
+    ],
+    "contacte": "org0019@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.168978,
+    "lng": 1.413306,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0022",
+    "nom": "Organitzacio Social 0022",
+    "tipus": "ONG",
+    "serveis": [
+      "documentacio",
+      "formacio_ocupacional",
+      "suport_psicologic",
+      "assessoria_juridica",
+      "alimentacio"
+    ],
+    "keywords": [
+      "educacio",
+      "habitatge",
+      "salut_mental",
+      "alimentacio",
+      "mediacio_habitatge",
+      "gent_gran",
+      "voluntariat"
+    ],
+    "contacte": "org0022@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.172737,
+    "lng": 1.37983,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0034",
+    "nom": "Organitzacio Social 0034",
+    "tipus": "fundacio",
+    "serveis": [
+      "formacio_ocupacional",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "acompanyament",
+      "alimentacio",
+      "salut",
+      "suport_escolar",
+      "alimentacio",
+      "documentacio",
+      "orientacio"
+    ],
+    "contacte": "org0034@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.151098,
+    "lng": 1.380918,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0047",
+    "nom": "Organitzacio Social 0047",
+    "tipus": "ONG",
+    "serveis": [
+      "orientacio_laboral",
+      "formacio_ocupacional",
+      "alimentacio"
+    ],
+    "keywords": [
+      "logistica",
+      "orientacio",
+      "suport_psicologic",
+      "alimentacio",
+      "salut_mental",
+      "gestio",
+      "documentacio"
+    ],
+    "contacte": "org0047@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.14502,
+    "lng": 1.389985,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0048",
+    "nom": "Organitzacio Social 0048",
+    "tipus": "servei_public",
+    "serveis": [
+      "suport_psicologic",
+      "acompanyament_sanitari",
+      "assessoria_juridica",
+      "roba"
+    ],
+    "keywords": [
+      "traduccio",
+      "insercio_laboral",
+      "insercio_laboral",
+      "atencio_infants",
+      "suport_escolar",
+      "logistica"
+    ],
+    "contacte": "org0048@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.12103,
+    "lng": 1.395214,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0071",
+    "nom": "Organitzacio Social 0071",
+    "tipus": "fundacio",
+    "serveis": [
+      "documentacio",
+      "acompanyament_sanitari",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "alimentacio",
+      "salut",
+      "treball_social",
+      "documentacio",
+      "mediacio_habitatge",
+      "insercio_laboral"
+    ],
+    "contacte": "org0071@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.133457,
+    "lng": 1.416276,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0078",
+    "nom": "Organitzacio Social 0078",
+    "tipus": "servei_public",
+    "serveis": [
+      "roba",
+      "habitatge_social",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "formacio",
+      "insercio_laboral",
+      "repartiment",
+      "suport_psicologic"
+    ],
+    "contacte": "org0078@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.162515,
+    "lng": 1.42296,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0081",
+    "nom": "Organitzacio Social 0081",
+    "tipus": "ONG",
+    "serveis": [
+      "habitatge_social",
+      "formacio_ocupacional",
+      "suport_psicologic"
+    ],
+    "keywords": [
+      "alimentacio",
+      "atencio_infants",
+      "formacio",
+      "mediacio_habitatge",
+      "habitatge",
+      "suport_escolar",
+      "formacio",
+      "alimentacio"
+    ],
+    "contacte": "org0081@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.128062,
+    "lng": 1.408649,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0089",
+    "nom": "Organitzacio Social 0089",
+    "tipus": "servei_public",
+    "serveis": [
+      "assessoria_juridica",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "assessoria_juridica",
+      "voluntariat",
+      "traduccio",
+      "mediacio_habitatge",
+      "salut_mental",
+      "gestio"
+    ],
+    "contacte": "org0089@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.142288,
+    "lng": 1.397582,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0099",
+    "nom": "Organitzacio Social 0099",
+    "tipus": "fundacio",
+    "serveis": [
+      "orientacio_laboral",
+      "alimentacio",
+      "habitatge_social",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "documentacio",
+      "alimentacio",
+      "orientacio",
+      "formacio",
+      "logistica",
+      "voluntariat"
+    ],
+    "contacte": "org0099@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.123307,
+    "lng": 1.416974,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0146",
+    "nom": "Organitzacio Social 0146",
+    "tipus": "ONG",
+    "serveis": [
+      "habitatge_social",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "alimentacio",
+      "suport_psicologic",
+      "traduccio",
+      "voluntariat",
+      "acollida",
+      "mediacio_habitatge",
+      "educacio"
+    ],
+    "contacte": "org0146@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.143341,
+    "lng": 1.421692,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0163",
+    "nom": "Organitzacio Social 0163",
+    "tipus": "fundacio",
+    "serveis": [
+      "roba",
+      "suport_psicologic",
+      "alimentacio",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "formacio",
+      "alimentacio",
+      "insercio_laboral",
+      "suport_escolar",
+      "treball_social",
+      "traduccio"
+    ],
+    "contacte": "org0163@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.12797,
+    "lng": 1.372659,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0167",
+    "nom": "Organitzacio Social 0167",
+    "tipus": "fundacio",
+    "serveis": [
+      "documentacio",
+      "suport_psicologic",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "salut",
+      "suport_escolar",
+      "educacio",
+      "orientacio",
+      "atencio_infants",
+      "documentacio"
+    ],
+    "contacte": "org0167@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.162814,
+    "lng": 1.382684,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0171",
+    "nom": "Organitzacio Social 0171",
+    "tipus": "ONG",
+    "serveis": [
+      "habitatge_social",
+      "documentacio",
+      "acompanyament_sanitari",
+      "alimentacio",
+      "roba"
+    ],
+    "keywords": [
+      "salut",
+      "formacio",
+      "suport_escolar",
+      "insercio_laboral",
+      "traduccio",
+      "repartiment",
+      "suport_psicologic"
+    ],
+    "contacte": "org0171@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.149212,
+    "lng": 1.416849,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0174",
+    "nom": "Organitzacio Social 0174",
+    "tipus": "fundacio",
+    "serveis": [
+      "orientacio_laboral",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "acompanyament",
+      "treball_social",
+      "atencio_infants",
+      "educacio",
+      "documentacio",
+      "alimentacio",
+      "gent_gran"
+    ],
+    "contacte": "org0174@social.local",
+    "municipi": "Torredembarra",
+    "lat": 41.124038,
+    "lng": 1.397829,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0005",
+    "nom": "Organitzacio Social 0005",
+    "tipus": "fundacio",
+    "serveis": [
+      "alimentacio",
+      "documentacio",
+      "roba"
+    ],
+    "keywords": [
+      "acollida",
+      "alimentacio",
+      "insercio_laboral",
+      "documentacio",
+      "atencio_infants"
+    ],
+    "contacte": "org0005@social.local",
+    "municipi": "Tortosa",
+    "lat": 40.784632,
+    "lng": 0.516161,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0016",
+    "nom": "Organitzacio Social 0016",
+    "tipus": "servei_public",
+    "serveis": [
+      "formacio_ocupacional",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "habitatge",
+      "mediacio_habitatge",
+      "documentacio",
+      "insercio_laboral"
+    ],
+    "contacte": "org0016@social.local",
+    "municipi": "Tortosa",
+    "lat": 40.795527,
+    "lng": 0.502441,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0025",
+    "nom": "Organitzacio Social 0025",
+    "tipus": "fundacio",
+    "serveis": [
+      "documentacio",
+      "assessoria_juridica",
+      "acompanyament_sanitari",
+      "habitatge_social",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "documentacio",
+      "repartiment",
+      "habitatge",
+      "logistica"
+    ],
+    "contacte": "org0025@social.local",
+    "municipi": "Tortosa",
+    "lat": 40.801703,
+    "lng": 0.533869,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0043",
+    "nom": "Organitzacio Social 0043",
+    "tipus": "ONG",
+    "serveis": [
+      "formacio_ocupacional",
+      "documentacio"
+    ],
+    "keywords": [
+      "educacio",
+      "suport_escolar",
+      "gestio",
+      "formacio",
+      "mediacio_habitatge"
+    ],
+    "contacte": "org0043@social.local",
+    "municipi": "Tortosa",
+    "lat": 40.812824,
+    "lng": 0.513288,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0045",
+    "nom": "Organitzacio Social 0045",
+    "tipus": "fundacio",
+    "serveis": [
+      "habitatge_social",
+      "suport_psicologic",
+      "roba",
+      "acompanyament_sanitari",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "formacio",
+      "suport_escolar",
+      "salut_mental",
+      "insercio_laboral",
+      "educacio",
+      "treball_social"
+    ],
+    "contacte": "org0045@social.local",
+    "municipi": "Tortosa",
+    "lat": 40.82223,
+    "lng": 0.534762,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0055",
+    "nom": "Organitzacio Social 0055",
+    "tipus": "servei_public",
+    "serveis": [
+      "suport_psicologic",
+      "habitatge_social",
+      "documentacio",
+      "formacio_ocupacional",
+      "alimentacio"
+    ],
+    "keywords": [
+      "treball_social",
+      "insercio_laboral",
+      "salut_mental",
+      "documentacio",
+      "atencio_infants",
+      "suport_escolar"
+    ],
+    "contacte": "org0055@social.local",
+    "municipi": "Tortosa",
+    "lat": 40.813594,
+    "lng": 0.550147,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0057",
+    "nom": "Organitzacio Social 0057",
+    "tipus": "servei_public",
+    "serveis": [
+      "habitatge_social",
+      "alimentacio",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "salut_mental",
+      "salut",
+      "atencio_infants",
+      "treball_social",
+      "formacio"
+    ],
+    "contacte": "org0057@social.local",
+    "municipi": "Tortosa",
+    "lat": 40.81598,
+    "lng": 0.536771,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0147",
+    "nom": "Organitzacio Social 0147",
+    "tipus": "fundacio",
+    "serveis": [
+      "alimentacio",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "formacio",
+      "traduccio",
+      "atencio_infants",
+      "insercio_laboral",
+      "mediacio_habitatge"
+    ],
+    "contacte": "org0147@social.local",
+    "municipi": "Tortosa",
+    "lat": 40.838184,
+    "lng": 0.517305,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0151",
+    "nom": "Organitzacio Social 0151",
+    "tipus": "fundacio",
+    "serveis": [
+      "assessoria_juridica",
+      "formacio_ocupacional"
+    ],
+    "keywords": [
+      "formacio",
+      "insercio_laboral",
+      "repartiment",
+      "gestio",
+      "suport_psicologic",
+      "educacio"
+    ],
+    "contacte": "org0151@social.local",
+    "municipi": "Tortosa",
+    "lat": 40.825434,
+    "lng": 0.494646,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0154",
+    "nom": "Organitzacio Social 0154",
+    "tipus": "fundacio",
+    "serveis": [
+      "alimentacio",
+      "roba"
+    ],
+    "keywords": [
+      "voluntariat",
+      "habitatge",
+      "repartiment",
+      "educacio",
+      "alimentacio",
+      "salut",
+      "logistica",
+      "traduccio"
+    ],
+    "contacte": "org0154@social.local",
+    "municipi": "Tortosa",
+    "lat": 40.816066,
+    "lng": 0.511828,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0042",
+    "nom": "Organitzacio Social 0042",
+    "tipus": "servei_public",
+    "serveis": [
+      "documentacio",
+      "suport_psicologic",
+      "alimentacio",
+      "assessoria_juridica",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "formacio",
+      "formacio",
+      "traduccio",
+      "voluntariat",
+      "insercio_laboral"
+    ],
+    "contacte": "org0042@social.local",
+    "municipi": "Valls",
+    "lat": 41.279001,
+    "lng": 1.273516,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0044",
+    "nom": "Organitzacio Social 0044",
+    "tipus": "ONG",
+    "serveis": [
+      "orientacio_laboral",
+      "roba",
+      "habitatge_social",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "gestio",
+      "acompanyament",
+      "insercio_laboral",
+      "alimentacio"
+    ],
+    "contacte": "org0044@social.local",
+    "municipi": "Valls",
+    "lat": 41.283093,
+    "lng": 1.273062,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0051",
+    "nom": "Organitzacio Social 0051",
+    "tipus": "ONG",
+    "serveis": [
+      "formacio_ocupacional",
+      "documentacio",
+      "roba",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "acollida",
+      "habitatge",
+      "formacio",
+      "insercio_laboral",
+      "suport_psicologic"
+    ],
+    "contacte": "org0051@social.local",
+    "municipi": "Valls",
+    "lat": 41.265998,
+    "lng": 1.244249,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0118",
+    "nom": "Organitzacio Social 0118",
+    "tipus": "servei_public",
+    "serveis": [
+      "roba",
+      "documentacio",
+      "alimentacio",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "logistica",
+      "gent_gran",
+      "treball_social",
+      "insercio_laboral"
+    ],
+    "contacte": "org0118@social.local",
+    "municipi": "Valls",
+    "lat": 41.259111,
+    "lng": 1.247368,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0133",
+    "nom": "Organitzacio Social 0133",
+    "tipus": "servei_public",
+    "serveis": [
+      "documentacio",
+      "habitatge_social",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "logistica",
+      "insercio_laboral",
+      "formacio",
+      "educacio"
+    ],
+    "contacte": "org0133@social.local",
+    "municipi": "Valls",
+    "lat": 41.282635,
+    "lng": 1.220835,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0155",
+    "nom": "Organitzacio Social 0155",
+    "tipus": "ONG",
+    "serveis": [
+      "orientacio_laboral",
+      "acompanyament_sanitari",
+      "documentacio",
+      "roba",
+      "alimentacio"
+    ],
+    "keywords": [
+      "salut",
+      "logistica",
+      "insercio_laboral",
+      "suport_psicologic",
+      "alimentacio",
+      "habitatge",
+      "gestio",
+      "acollida"
+    ],
+    "contacte": "org0155@social.local",
+    "municipi": "Valls",
+    "lat": 41.284107,
+    "lng": 1.236045,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0012",
+    "nom": "Organitzacio Social 0012",
+    "tipus": "servei_public",
+    "serveis": [
+      "assessoria_juridica",
+      "alimentacio",
+      "documentacio",
+      "formacio_ocupacional",
+      "habitatge_social"
+    ],
+    "keywords": [
+      "gestio",
+      "voluntariat",
+      "acompanyament",
+      "logistica",
+      "salut",
+      "formacio",
+      "orientacio"
+    ],
+    "contacte": "org0012@social.local",
+    "municipi": "Vila-seca",
+    "lat": 41.126864,
+    "lng": 1.17228,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0049",
+    "nom": "Organitzacio Social 0049",
+    "tipus": "fundacio",
+    "serveis": [
+      "assessoria_juridica",
+      "alimentacio",
+      "formacio_ocupacional",
+      "orientacio_laboral",
+      "roba"
+    ],
+    "keywords": [
+      "suport_escolar",
+      "documentacio",
+      "insercio_laboral",
+      "suport_psicologic",
+      "habitatge",
+      "alimentacio",
+      "formacio"
+    ],
+    "contacte": "org0049@social.local",
+    "municipi": "Vila-seca",
+    "lat": 41.108375,
+    "lng": 1.124028,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0068",
+    "nom": "Organitzacio Social 0068",
+    "tipus": "servei_public",
+    "serveis": [
+      "roba",
+      "documentacio",
+      "habitatge_social",
+      "assessoria_juridica"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "documentacio",
+      "orientacio",
+      "salut"
+    ],
+    "contacte": "org0068@social.local",
+    "municipi": "Vila-seca",
+    "lat": 41.09127,
+    "lng": 1.162558,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0079",
+    "nom": "Organitzacio Social 0079",
+    "tipus": "ONG",
+    "serveis": [
+      "formacio_ocupacional",
+      "acompanyament_sanitari",
+      "documentacio"
+    ],
+    "keywords": [
+      "alimentacio",
+      "acollida",
+      "acompanyament",
+      "documentacio",
+      "formacio",
+      "salut_mental",
+      "traduccio"
+    ],
+    "contacte": "org0079@social.local",
+    "municipi": "Vila-seca",
+    "lat": 41.12212,
+    "lng": 1.159892,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0088",
+    "nom": "Organitzacio Social 0088",
+    "tipus": "servei_public",
+    "serveis": [
+      "alimentacio",
+      "acompanyament_sanitari",
+      "roba",
+      "orientacio_laboral",
+      "documentacio"
+    ],
+    "keywords": [
+      "acompanyament",
+      "gent_gran",
+      "voluntariat",
+      "logistica",
+      "insercio_laboral"
+    ],
+    "contacte": "org0088@social.local",
+    "municipi": "Vila-seca",
+    "lat": 41.086408,
+    "lng": 1.147556,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0098",
+    "nom": "Organitzacio Social 0098",
+    "tipus": "fundacio",
+    "serveis": [
+      "suport_psicologic",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "treball_social",
+      "suport_escolar",
+      "documentacio",
+      "mediacio_habitatge",
+      "suport_psicologic",
+      "orientacio",
+      "alimentacio"
+    ],
+    "contacte": "org0098@social.local",
+    "municipi": "Vila-seca",
+    "lat": 41.08666,
+    "lng": 1.153849,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0107",
+    "nom": "Organitzacio Social 0107",
+    "tipus": "fundacio",
+    "serveis": [
+      "documentacio",
+      "acompanyament_sanitari",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "assessoria_juridica",
+      "logistica",
+      "formacio",
+      "salut",
+      "insercio_laboral",
+      "alimentacio",
+      "habitatge"
+    ],
+    "contacte": "org0107@social.local",
+    "municipi": "Vila-seca",
+    "lat": 41.095884,
+    "lng": 1.142307,
+    "conveni_caritas": false
+  },
+  {
+    "id": "ORG0117",
+    "nom": "Organitzacio Social 0117",
+    "tipus": "fundacio",
+    "serveis": [
+      "roba",
+      "suport_psicologic",
+      "formacio_ocupacional",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "logistica",
+      "acollida",
+      "salut_mental",
+      "treball_social",
+      "gestio"
+    ],
+    "contacte": "org0117@social.local",
+    "municipi": "Vila-seca",
+    "lat": 41.116016,
+    "lng": 1.124961,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0132",
+    "nom": "Organitzacio Social 0132",
+    "tipus": "ONG",
+    "serveis": [
+      "roba",
+      "suport_psicologic",
+      "acompanyament_sanitari"
+    ],
+    "keywords": [
+      "atencio_infants",
+      "habitatge",
+      "insercio_laboral",
+      "educacio",
+      "alimentacio",
+      "orientacio"
+    ],
+    "contacte": "org0132@social.local",
+    "municipi": "Vila-seca",
+    "lat": 41.122677,
+    "lng": 1.139201,
+    "conveni_caritas": true
+  },
+  {
+    "id": "ORG0144",
+    "nom": "Organitzacio Social 0144",
+    "tipus": "servei_public",
+    "serveis": [
+      "assessoria_juridica",
+      "orientacio_laboral"
+    ],
+    "keywords": [
+      "habitatge",
+      "alimentacio",
+      "formacio",
+      "treball_social",
+      "assessoria_juridica",
+      "insercio_laboral",
+      "documentacio"
+    ],
+    "contacte": "org0144@social.local",
+    "municipi": "Vila-seca",
+    "lat": 41.081424,
+    "lng": 1.149179,
+    "conveni_caritas": true
   }
 ]

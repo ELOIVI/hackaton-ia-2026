@@ -1,9 +1,9 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowLeft, Send, Loader2, Sparkles, MapPin, Phone, Clock } from 'lucide-react';
+import { API_BASE } from '@/lib/api';
 
 interface Message { role: 'assistant' | 'user'; content: string; }
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://54.163.22.58:5000';
 
 export default function AttendedForm({ onBack }: { onBack: () => void }) {
   const [messages, setMessages] = useState<Message[]>([
@@ -28,11 +28,18 @@ export default function AttendedForm({ onBack }: { onBack: () => void }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ history: newMessages.slice(0, -1), message: userMessage }),
       });
-      const data = await res.json();
-      setMessages([...newMessages, { role: 'assistant', content: data.response }]);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const backendError = typeof data?.error === 'string' ? data.error : 'Error de servidor';
+        setMessages([...newMessages, { role: 'assistant', content: `No hem pogut processar la consulta: ${backendError}` }]);
+        return;
+      }
+
+      const responseText = typeof data?.response === 'string' ? data.response : 'No hi ha resposta disponible.';
+      setMessages([...newMessages, { role: 'assistant', content: responseText }]);
       if (data.ready && data.match) setMatchResult(data.match);
     } catch {
-      setMessages([...newMessages, { role: 'assistant', content: 'Ho sentim, error de connexió. Torna-ho a intentar.' }]);
+      setMessages([...newMessages, { role: 'assistant', content: `No hi ha connexió amb el backend (${API_BASE}). Comprova que està actiu.` }]);
     } finally { setLoading(false); }
   };
 

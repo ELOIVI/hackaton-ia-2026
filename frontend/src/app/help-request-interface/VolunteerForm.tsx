@@ -1,19 +1,86 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowLeft, Send, Loader2, Sparkles, MapPin, Phone, Clock } from 'lucide-react';
+import { ArrowLeft, Send, Loader2, Sparkles, MapPin, Phone, Clock, Eye, EyeOff } from 'lucide-react';
+import { API_BASE, authLogin, authRegister, getAuthHeaders } from '@/lib/api';
 
 interface Message { role: 'assistant' | 'user'; content: string; }
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://54.163.22.58:5000';
+
+type Step = 'login' | 'register' | 'chatbot' | 'dashboard';
 
 export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void; onLogin: (data: unknown) => void }) {
+  const [step, setStep] = useState<Step>('login');
+  const [showPass, setShowPass] = useState(false);
+  const [form, setForm] = useState({ nom: '', email: '', password: '' });
+  const [error, setError] = useState('');
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: "Hola! Sóc l'assistent de Càritas i t'ajudaré a trobar el projecte de voluntariat perfecte per a tu. 😊 En quin municipi vius?" }
+    { role: 'assistant', content: "Hola! Sóc l'assistent de Càritas. Per trobar el projecte ideal per a tu, necessito fer-te unes preguntes. En quin municipi vius?" }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [matchResult, setMatchResult] = useState<Record<string,unknown> | null>(null);
+  const [authLoading, setAuthLoading] = useState(false);
+  const [matchResult, setMatchResult] = useState<Record<string, unknown> | null>(null);
+  const [userData, setUserData] = useState<Record<string, unknown> | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
+
+  const handleLogin = async () => {
+    setError('');
+    if (!form.email || !form.password) {
+      setError('Omple email i contrasenya');
+      return;
+    }
+
+    setAuthLoading(true);
+    try {
+      const auth = await authLogin(form.email, form.password);
+      if (auth.user.role !== 'voluntari') {
+        setError('Aquest compte no és de voluntari/a');
+        return;
+      }
+
+      const data = {
+        role: auth.user.role,
+        nom: auth.user.nom,
+        email: auth.user.email,
+        token: auth.token,
+      };
+      setUserData(data);
+      onLogin(data);
+      setStep('dashboard');
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Credencials incorrectes');
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleRegister = async () => {
+    setError('');
+    if (!form.nom || !form.email || !form.password) { setError('Omple tots els camps'); return; }
+
+    setAuthLoading(true);
+    try {
+      const auth = await authRegister({
+        role: 'voluntari',
+        nom: form.nom,
+        email: form.email,
+        password: form.password,
+      });
+
+      const data = {
+        role: auth.user.role,
+        nom: auth.user.nom,
+        email: auth.user.email,
+        token: auth.token,
+      };
+      setUserData(data);
+      setStep('chatbot');
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'No s\'ha pogut completar el registre');
+    } finally {
+      setAuthLoading(false);
+    }
+  };
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
@@ -25,34 +92,118 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
     try {
       const res = await fetch(`${API_BASE}/chat/voluntari`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify({ history: newMessages.slice(0, -1), message: userMessage }),
       });
-      const data = await res.json();
-      setMessages([...newMessages, { role: 'assistant', content: data.response }]);
+      const data = await res.json().catch(() => ({}));
+      const responseText = typeof data?.response === 'string' ? data.response : 'No hi ha resposta disponible.';
+      setMessages([...newMessages, { role: 'assistant', content: responseText }]);
       if (data.ready && data.match) {
         setMatchResult(data.match);
-        // Guardem el perfil del voluntari per al login
-        onLogin({
-          name: 'Voluntari/a',
-          role: 'voluntari',
-          email: '',
-          location: data.match.centre_mes_proper?.municipi || 'Tarragona',
-          helpType: data.match.projectes_recomanats?.[0] || 'Acollida',
-        });
+        const perfil = {
+          ...userData,
+          projecte_assignat: data.match.projectes_recomanats?.[0] || '',
+          municipi: data.match.centre_mes_proper?.municipi || 'Tarragona',
+          match: data.match,
+        };
+        onLogin(perfil);
       }
     } catch {
-      setMessages([...newMessages, { role: 'assistant', content: 'Ho sentim, error de connexió. Torna-ho a intentar.' }]);
+      setMessages([...newMessages, { role: 'assistant', content: 'Error de connexió. Torna-ho a intentar.' }]);
     } finally { setLoading(false); }
   };
 
-  return (
+  // ── LOGIN ─────────────────────────────────────────────
+  if (step === 'login') return (
+    <div className="max-w-md mx-auto px-4 py-8">
+      <button onClick={onBack} className="flex items-center gap-2 text-gray-500 mb-6 hover:text-gray-800">
+        <ArrowLeft size={20} /> Tornar
+      </button>
+      <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+        <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style={{ background: 'rgba(200,16,46,0.1)' }}>
+          <Sparkles size={28} style={{ color: '#C8102E' }} />
+        </div>
+        <h1 className="text-2xl font-bold text-gray-900 mb-1">Accés voluntari/a</h1>
+        <p className="text-sm text-gray-500 mb-6">Entra amb les teves credencials de Càritas</p>
+
+        {error && <div className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-xl">{error}</div>}
+
+        <div className="space-y-3">
+          <input type="email" placeholder="Email" value={form.email}
+            onChange={e => setForm({...form, email: e.target.value})}
+            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-red-200 outline-none" />
+          <div className="relative">
+            <input type={showPass ? 'text' : 'password'} placeholder="Contrasenya" value={form.password}
+              onChange={e => setForm({...form, password: e.target.value})}
+              onKeyDown={e => { if (e.key === 'Enter') handleLogin(); }}
+              className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-red-200 outline-none" />
+            <button onClick={() => setShowPass(!showPass)} className="absolute right-3 top-3 text-gray-400">
+              {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
+          <button onClick={handleLogin} disabled={authLoading}
+            className="w-full py-3 rounded-xl font-bold text-white text-sm"
+            style={{ background: '#C8102E' }}>
+            {authLoading ? 'Validant...' : 'Iniciar sessió'}
+          </button>
+        </div>
+
+        <div className="mt-4 text-center">
+          <button onClick={() => { setStep('register'); setError(''); }}
+            className="text-sm text-gray-500 hover:text-gray-800 underline">
+            Nou voluntari? Registra't aquí
+          </button>
+        </div>
+
+      </div>
+    </div>
+  );
+
+  // ── REGISTRE ──────────────────────────────────────────
+  if (step === 'register') return (
+    <div className="max-w-md mx-auto px-4 py-8">
+      <button onClick={() => setStep('login')} className="flex items-center gap-2 text-gray-500 mb-6 hover:text-gray-800">
+        <ArrowLeft size={20} /> Tornar
+      </button>
+      <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+        <h1 className="text-2xl font-bold text-gray-900 mb-1">Nou voluntari/a</h1>
+        <p className="text-sm text-gray-500 mb-6">La IA trobarà el projecte ideal per a tu</p>
+
+        {error && <div className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-xl">{error}</div>}
+
+        <div className="space-y-3">
+          <input type="text" placeholder="Nom complet" value={form.nom}
+            onChange={e => setForm({...form, nom: e.target.value})}
+            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-red-200" />
+          <input type="email" placeholder="Email" value={form.email}
+            onChange={e => setForm({...form, email: e.target.value})}
+            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-red-200" />
+          <div className="relative">
+            <input type={showPass ? 'text' : 'password'} placeholder="Contrasenya" value={form.password}
+              onChange={e => setForm({...form, password: e.target.value})}
+              className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-red-200" />
+            <button onClick={() => setShowPass(!showPass)} className="absolute right-3 top-3 text-gray-400">
+              {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
+          <button onClick={handleRegister} disabled={authLoading}
+            className="w-full py-3 rounded-xl font-bold text-white text-sm"
+            style={{ background: '#C8102E' }}>
+            {authLoading ? 'Registrant...' : 'Continuar amb la IA →'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  // ── CHATBOT ───────────────────────────────────────────
+  if (step === 'chatbot') return (
     <div className="max-w-2xl mx-auto px-4 py-8 pb-28 md:pb-8">
-      <div className="flex items-center gap-3 mb-8">
-        <button onClick={onBack} className="p-2 rounded-xl hover:bg-gray-100 text-gray-500"><ArrowLeft size={20} /></button>
+      <div className="flex items-center gap-3 mb-6">
+        <button onClick={() => setStep('register')} className="p-2 rounded-xl hover:bg-gray-100 text-gray-500"><ArrowLeft size={20} /></button>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Voluntari/a</h1>
-          <p className="text-sm text-gray-500">L'IA de Càritas et guiarà per trobar el projecte ideal</p>
+          <h1 className="text-xl font-bold text-gray-900">Hola, {String(userData?.nom || '')}!</h1>
+          <p className="text-sm text-gray-500">L'IA t'assignarà el projecte ideal</p>
         </div>
       </div>
 
@@ -89,12 +240,12 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
         <div className="mb-6 rounded-2xl border-2 p-6" style={{ borderColor: '#C8102E', background: 'rgba(200,16,46,0.02)' }}>
           <div className="flex items-center gap-2 mb-3">
             <Sparkles size={16} style={{ color: '#C8102E' }} />
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Projecte recomanat</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Projecte assignat</span>
           </div>
-          <p className="text-sm text-gray-700 mb-4">{String(matchResult.perfil_resum || '')}</p>
+          <p className="text-sm text-gray-700 mb-3">{String(matchResult.perfil_resum || '')}</p>
           {(matchResult.projectes_recomanats as string[])?.slice(0,2).map((p, i) => (
             <div key={i} className="flex items-center gap-2 text-sm text-gray-700 mb-1">
-              <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: '#C8102E' }} />{p}
+              <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: '#C8102E' }} />{String(p)}
             </div>
           ))}
           {matchResult.centre_mes_proper && (
@@ -116,7 +267,6 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
               </div>
             </div>
           )}
-          <button onClick={onBack} className="mt-4 w-full py-3 rounded-xl border-2 border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50">Tornar</button>
         </div>
       )}
 
@@ -124,7 +274,7 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
         <div className="bg-white border border-gray-200 rounded-2xl p-3 shadow-sm">
           <textarea value={input} onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }}
-            placeholder="Escriu aquí la teva resposta..." rows={2} disabled={loading}
+            placeholder="Escriu aquí..." rows={2} disabled={loading}
             className="w-full resize-none text-sm text-gray-800 placeholder-gray-400 focus:outline-none leading-relaxed" />
           <div className="flex items-center justify-between mt-2">
             <span className="text-xs text-gray-400">Prem Enter per enviar</span>
@@ -138,4 +288,6 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
       )}
     </div>
   );
+
+  return null;
 }

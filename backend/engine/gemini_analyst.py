@@ -11,6 +11,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 os.chdir(os.path.join(os.path.dirname(__file__), ".."))
 
 from gemini_call import call_gemini
+from utils.json_utils import parse_json_object_from_llm
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "..", "db")
 
@@ -71,12 +72,7 @@ i retorna ÚNICAMENT aquest JSON sense cap text addicional:
 """
     try:
         response = call_gemini(prompt)
-        response = response.strip()
-        if response.startswith("```"):
-            response = response.split("```")[1]
-            if response.startswith("json"):
-                response = response[4:]
-        return json.loads(response.strip())
+        return parse_json_object_from_llm(response)
     except Exception as e:
         return {
             "necessitats_prioritaries": keywords[:3] if keywords else ["alimentació"],

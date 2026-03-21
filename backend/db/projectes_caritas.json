@@ -1,66 +1,2542 @@
 [
   {
-    "id": "PRJ001",
-    "nom": "Acollida i Acompanyament",
-    "descripcio": "Atenció personalitzada a persones en situació de vulnerabilitat. Escolta activa, detecció de necessitats i orientació cap als recursos adequats.",
-    "perfil_beneficiari": "Qualsevol persona en situació de vulnerabilitat, especialment nouvinguts, persones soles i famílies en crisi.",
-    "recursos_associats": ["REC001", "REC003"],
-    "keywords": ["acollida", "acompanyament", "orientació", "nouvinguts", "família", "crisi"]
+    "id": "PRJ0001",
+    "nom": "Projecte Social 0001",
+    "descripcio": "Programa integral 0001 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0191"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "gestio",
+      "salut",
+      "alimentacio",
+      "voluntariat",
+      "salut_mental"
+    ]
   },
   {
-    "id": "PRJ002",
-    "nom": "Inserció Sociolaboral",
-    "descripcio": "Suport a la recerca de feina, elaboració de CV, preparació d'entrevistes i formació ocupacional per a persones en situació d'atur.",
-    "perfil_beneficiari": "Persones en situació d'atur, especialment majors de 45 anys, joves sense experiència i persones amb situació administrativa irregular.",
-    "recursos_associats": ["REC005"],
-    "keywords": ["atur", "feina", "inserció_laboral", "formació", "CV", "entrevista", "joves"]
+    "id": "PRJ0002",
+    "nom": "Projecte Social 0002",
+    "descripcio": "Programa integral 0002 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0195"
+    ],
+    "keywords": [
+      "assessoria_juridica",
+      "acompanyament",
+      "documentacio",
+      "gent_gran"
+    ]
   },
   {
-    "id": "PRJ003",
-    "nom": "Habitatge i Emergència Social",
-    "descripcio": "Intervenció urgent en situacions de pèrdua d'habitatge, desnonaments i infrahabitatge. Mediació amb propietaris i administracions.",
-    "perfil_beneficiari": "Persones i famílies en risc de perdre l'habitatge o que viuen en condicions precàries.",
-    "recursos_associats": ["REC002"],
-    "keywords": ["habitatge", "desnonament", "infrahabitatge", "lloguer", "emergència", "sense_llar"]
+    "id": "PRJ0003",
+    "nom": "Projecte Social 0003",
+    "descripcio": "Programa integral 0003 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0119"
+    ],
+    "keywords": [
+      "atencio_infants",
+      "logistica",
+      "assessoria_juridica",
+      "documentacio",
+      "formacio"
+    ]
   },
   {
-    "id": "PRJ004",
-    "nom": "Atenció a Famílies amb Infants",
-    "descripcio": "Suport integral a famílies amb menors en situació de vulnerabilitat. Inclou suport escolar, roba, alimentació i acompanyament familiar.",
-    "perfil_beneficiari": "Famílies monoparentals, famílies nombroses i famílies amb menors en risc d'exclusió.",
-    "recursos_associats": ["REC001", "REC003", "REC006"],
-    "keywords": ["família", "infants", "menors", "monoparental", "suport_escolar", "alimentació"]
+    "id": "PRJ0004",
+    "nom": "Projecte Social 0004",
+    "descripcio": "Programa integral 0004 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0243",
+      "REC0225",
+      "REC0213",
+      "REC0049"
+    ],
+    "keywords": [
+      "suport_escolar",
+      "treball_social",
+      "repartiment",
+      "gent_gran",
+      "voluntariat"
+    ]
   },
   {
-    "id": "PRJ005",
-    "nom": "Atenció a Persones Immigrades",
-    "descripcio": "Assessoria jurídica per a regularització administrativa, acollida cultural i acompanyament en el procés d'integració social.",
-    "perfil_beneficiari": "Persones extracomunitàries, especialment indocumentades o en situació irregular.",
-    "recursos_associats": ["REC004"],
-    "keywords": ["immigració", "extracomunitari", "situació_irregular", "documentació", "regularització", "indocumentat"]
+    "id": "PRJ0005",
+    "nom": "Projecte Social 0005",
+    "descripcio": "Programa integral 0005 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0173",
+      "REC0117",
+      "REC0043"
+    ],
+    "keywords": [
+      "acollida",
+      "repartiment",
+      "voluntariat",
+      "insercio_laboral",
+      "suport_psicologic"
+    ]
   },
   {
-    "id": "PRJ006",
-    "nom": "Atenció a Gent Gran",
-    "descripcio": "Acompanyament a persones grans en situació de soledat, dependència o risc d'exclusió. Visites domiciliàries i suport en gestions.",
-    "perfil_beneficiari": "Persones majors de 65 anys que viuen soles o amb escassos recursos.",
-    "recursos_associats": ["REC007", "REC008"],
-    "keywords": ["gent_gran", "soledat", "dependència", "domicili", "acompanyament", "majors"]
+    "id": "PRJ0006",
+    "nom": "Projecte Social 0006",
+    "descripcio": "Programa integral 0006 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0034"
+    ],
+    "keywords": [
+      "gestio",
+      "alimentacio",
+      "salut",
+      "educacio"
+    ]
   },
   {
-    "id": "PRJ007",
-    "nom": "Salut Mental i Addiccions",
-    "descripcio": "Acompanyament psicosocial a persones amb problemes de salut mental o addiccions. Coordinació amb serveis sanitaris.",
-    "perfil_beneficiari": "Persones amb trastorns de salut mental, addiccions o en situació de crisi emocional.",
-    "recursos_associats": ["REC007"],
-    "keywords": ["salut_mental", "addiccions", "psicologia", "crisi", "ansietat", "acompanyament_psicològic"]
+    "id": "PRJ0007",
+    "nom": "Projecte Social 0007",
+    "descripcio": "Programa integral 0007 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0040",
+      "REC0114",
+      "REC0004",
+      "REC0081"
+    ],
+    "keywords": [
+      "logistica",
+      "acollida",
+      "alimentacio",
+      "assessoria_juridica"
+    ]
   },
   {
-    "id": "PRJ008",
-    "nom": "Servei Comunitari i Voluntariat Jove",
-    "descripcio": "Programa per a alumnes de secundària que volen fer servei comunitari. Integració de joves voluntaris en projectes socials.",
-    "perfil_beneficiari": "Joves estudiants de secundària i batxillerat interessats en el voluntariat.",
-    "recursos_associats": [],
-    "keywords": ["joves", "voluntariat", "secundària", "servei_comunitari", "educació"]
+    "id": "PRJ0008",
+    "nom": "Projecte Social 0008",
+    "descripcio": "Programa integral 0008 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0123",
+      "REC0133"
+    ],
+    "keywords": [
+      "mediacio_habitatge",
+      "habitatge",
+      "atencio_infants",
+      "repartiment",
+      "traduccio"
+    ]
+  },
+  {
+    "id": "PRJ0009",
+    "nom": "Projecte Social 0009",
+    "descripcio": "Programa integral 0009 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0256",
+      "REC0035",
+      "REC0221",
+      "REC0153"
+    ],
+    "keywords": [
+      "educacio",
+      "traduccio",
+      "logistica",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0010",
+    "nom": "Projecte Social 0010",
+    "descripcio": "Programa integral 0010 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0156",
+      "REC0070",
+      "REC0059"
+    ],
+    "keywords": [
+      "acollida",
+      "voluntariat",
+      "acompanyament",
+      "suport_psicologic"
+    ]
+  },
+  {
+    "id": "PRJ0011",
+    "nom": "Projecte Social 0011",
+    "descripcio": "Programa integral 0011 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0248",
+      "REC0161"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "alimentacio",
+      "salut_mental",
+      "insercio_laboral",
+      "voluntariat",
+      "suport_escolar",
+      "acompanyament"
+    ]
+  },
+  {
+    "id": "PRJ0012",
+    "nom": "Projecte Social 0012",
+    "descripcio": "Programa integral 0012 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0096",
+      "REC0222",
+      "REC0014",
+      "REC0170"
+    ],
+    "keywords": [
+      "repartiment",
+      "salut",
+      "voluntariat",
+      "traduccio",
+      "logistica"
+    ]
+  },
+  {
+    "id": "PRJ0013",
+    "nom": "Projecte Social 0013",
+    "descripcio": "Programa integral 0013 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0002",
+      "REC0252",
+      "REC0148"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "acollida",
+      "treball_social",
+      "gestio"
+    ]
+  },
+  {
+    "id": "PRJ0014",
+    "nom": "Projecte Social 0014",
+    "descripcio": "Programa integral 0014 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0160",
+      "REC0112"
+    ],
+    "keywords": [
+      "treball_social",
+      "formacio",
+      "acompanyament",
+      "educacio"
+    ]
+  },
+  {
+    "id": "PRJ0015",
+    "nom": "Projecte Social 0015",
+    "descripcio": "Programa integral 0015 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0181"
+    ],
+    "keywords": [
+      "repartiment",
+      "formacio",
+      "alimentacio",
+      "assessoria_juridica"
+    ]
+  },
+  {
+    "id": "PRJ0016",
+    "nom": "Projecte Social 0016",
+    "descripcio": "Programa integral 0016 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0181",
+      "REC0027",
+      "REC0080",
+      "REC0186"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "alimentacio",
+      "atencio_infants",
+      "salut_mental",
+      "formacio",
+      "salut",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0017",
+    "nom": "Projecte Social 0017",
+    "descripcio": "Programa integral 0017 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0179"
+    ],
+    "keywords": [
+      "atencio_infants",
+      "suport_escolar",
+      "formacio",
+      "suport_psicologic",
+      "acompanyament",
+      "salut",
+      "acollida"
+    ]
+  },
+  {
+    "id": "PRJ0018",
+    "nom": "Projecte Social 0018",
+    "descripcio": "Programa integral 0018 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0188"
+    ],
+    "keywords": [
+      "formacio",
+      "insercio_laboral",
+      "insercio_laboral",
+      "suport_escolar",
+      "voluntariat"
+    ]
+  },
+  {
+    "id": "PRJ0019",
+    "nom": "Projecte Social 0019",
+    "descripcio": "Programa integral 0019 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0085",
+      "REC0171",
+      "REC0006"
+    ],
+    "keywords": [
+      "formacio",
+      "gestio",
+      "atencio_infants",
+      "alimentacio",
+      "repartiment",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0020",
+    "nom": "Projecte Social 0020",
+    "descripcio": "Programa integral 0020 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0014",
+      "REC0021"
+    ],
+    "keywords": [
+      "formacio",
+      "orientacio",
+      "educacio",
+      "traduccio",
+      "acompanyament",
+      "treball_social"
+    ]
+  },
+  {
+    "id": "PRJ0021",
+    "nom": "Projecte Social 0021",
+    "descripcio": "Programa integral 0021 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0011"
+    ],
+    "keywords": [
+      "formacio",
+      "salut",
+      "orientacio",
+      "acompanyament",
+      "alimentacio",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0022",
+    "nom": "Projecte Social 0022",
+    "descripcio": "Programa integral 0022 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0028",
+      "REC0058",
+      "REC0068",
+      "REC0012"
+    ],
+    "keywords": [
+      "alimentacio",
+      "salut",
+      "acollida",
+      "logistica",
+      "gestio",
+      "gent_gran",
+      "alimentacio"
+    ]
+  },
+  {
+    "id": "PRJ0023",
+    "nom": "Projecte Social 0023",
+    "descripcio": "Programa integral 0023 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0202",
+      "REC0098"
+    ],
+    "keywords": [
+      "formacio",
+      "orientacio",
+      "gent_gran",
+      "gestio",
+      "logistica",
+      "acollida"
+    ]
+  },
+  {
+    "id": "PRJ0024",
+    "nom": "Projecte Social 0024",
+    "descripcio": "Programa integral 0024 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0158",
+      "REC0007",
+      "REC0118",
+      "REC0208"
+    ],
+    "keywords": [
+      "atencio_infants",
+      "alimentacio",
+      "formacio",
+      "formacio",
+      "treball_social"
+    ]
+  },
+  {
+    "id": "PRJ0025",
+    "nom": "Projecte Social 0025",
+    "descripcio": "Programa integral 0025 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0133",
+      "REC0116",
+      "REC0063",
+      "REC0207"
+    ],
+    "keywords": [
+      "documentacio",
+      "logistica",
+      "insercio_laboral",
+      "atencio_infants",
+      "assessoria_juridica",
+      "alimentacio"
+    ]
+  },
+  {
+    "id": "PRJ0026",
+    "nom": "Projecte Social 0026",
+    "descripcio": "Programa integral 0026 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0208"
+    ],
+    "keywords": [
+      "orientacio",
+      "salut",
+      "voluntariat",
+      "insercio_laboral",
+      "formacio",
+      "suport_escolar",
+      "acollida"
+    ]
+  },
+  {
+    "id": "PRJ0027",
+    "nom": "Projecte Social 0027",
+    "descripcio": "Programa integral 0027 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0028"
+    ],
+    "keywords": [
+      "atencio_infants",
+      "suport_psicologic",
+      "assessoria_juridica",
+      "acompanyament"
+    ]
+  },
+  {
+    "id": "PRJ0028",
+    "nom": "Projecte Social 0028",
+    "descripcio": "Programa integral 0028 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0117",
+      "REC0063",
+      "REC0082",
+      "REC0081"
+    ],
+    "keywords": [
+      "repartiment",
+      "voluntariat",
+      "habitatge",
+      "acollida"
+    ]
+  },
+  {
+    "id": "PRJ0029",
+    "nom": "Projecte Social 0029",
+    "descripcio": "Programa integral 0029 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0195",
+      "REC0242",
+      "REC0256",
+      "REC0233"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "gent_gran",
+      "insercio_laboral",
+      "repartiment",
+      "alimentacio"
+    ]
+  },
+  {
+    "id": "PRJ0030",
+    "nom": "Projecte Social 0030",
+    "descripcio": "Programa integral 0030 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0259",
+      "REC0084",
+      "REC0007",
+      "REC0201"
+    ],
+    "keywords": [
+      "repartiment",
+      "assessoria_juridica",
+      "atencio_infants",
+      "traduccio",
+      "salut",
+      "educacio"
+    ]
+  },
+  {
+    "id": "PRJ0031",
+    "nom": "Projecte Social 0031",
+    "descripcio": "Programa integral 0031 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0091",
+      "REC0106"
+    ],
+    "keywords": [
+      "logistica",
+      "gent_gran",
+      "salut_mental",
+      "suport_psicologic",
+      "alimentacio",
+      "voluntariat"
+    ]
+  },
+  {
+    "id": "PRJ0032",
+    "nom": "Projecte Social 0032",
+    "descripcio": "Programa integral 0032 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0042",
+      "REC0178"
+    ],
+    "keywords": [
+      "traduccio",
+      "alimentacio",
+      "educacio",
+      "logistica",
+      "insercio_laboral",
+      "suport_psicologic",
+      "acollida"
+    ]
+  },
+  {
+    "id": "PRJ0033",
+    "nom": "Projecte Social 0033",
+    "descripcio": "Programa integral 0033 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0260"
+    ],
+    "keywords": [
+      "suport_escolar",
+      "orientacio",
+      "habitatge",
+      "acollida",
+      "voluntariat"
+    ]
+  },
+  {
+    "id": "PRJ0034",
+    "nom": "Projecte Social 0034",
+    "descripcio": "Programa integral 0034 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0090",
+      "REC0165"
+    ],
+    "keywords": [
+      "atencio_infants",
+      "insercio_laboral",
+      "habitatge",
+      "suport_psicologic",
+      "mediacio_habitatge",
+      "formacio",
+      "educacio"
+    ]
+  },
+  {
+    "id": "PRJ0035",
+    "nom": "Projecte Social 0035",
+    "descripcio": "Programa integral 0035 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0218",
+      "REC0074",
+      "REC0118"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "gent_gran",
+      "salut",
+      "documentacio",
+      "formacio",
+      "repartiment"
+    ]
+  },
+  {
+    "id": "PRJ0036",
+    "nom": "Projecte Social 0036",
+    "descripcio": "Programa integral 0036 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0032",
+      "REC0140"
+    ],
+    "keywords": [
+      "orientacio",
+      "alimentacio",
+      "formacio",
+      "logistica"
+    ]
+  },
+  {
+    "id": "PRJ0037",
+    "nom": "Projecte Social 0037",
+    "descripcio": "Programa integral 0037 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0016",
+      "REC0111"
+    ],
+    "keywords": [
+      "documentacio",
+      "salut",
+      "suport_escolar",
+      "treball_social",
+      "educacio",
+      "mediacio_habitatge"
+    ]
+  },
+  {
+    "id": "PRJ0038",
+    "nom": "Projecte Social 0038",
+    "descripcio": "Programa integral 0038 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0091",
+      "REC0163",
+      "REC0237",
+      "REC0167"
+    ],
+    "keywords": [
+      "acompanyament",
+      "gent_gran",
+      "treball_social",
+      "atencio_infants",
+      "gestio"
+    ]
+  },
+  {
+    "id": "PRJ0039",
+    "nom": "Projecte Social 0039",
+    "descripcio": "Programa integral 0039 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0097",
+      "REC0197",
+      "REC0153"
+    ],
+    "keywords": [
+      "habitatge",
+      "alimentacio",
+      "gestio",
+      "voluntariat",
+      "repartiment",
+      "treball_social"
+    ]
+  },
+  {
+    "id": "PRJ0040",
+    "nom": "Projecte Social 0040",
+    "descripcio": "Programa integral 0040 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0183"
+    ],
+    "keywords": [
+      "treball_social",
+      "mediacio_habitatge",
+      "repartiment",
+      "salut_mental",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0041",
+    "nom": "Projecte Social 0041",
+    "descripcio": "Programa integral 0041 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0035",
+      "REC0128",
+      "REC0034",
+      "REC0137"
+    ],
+    "keywords": [
+      "formacio",
+      "acompanyament",
+      "assessoria_juridica",
+      "documentacio",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0042",
+    "nom": "Projecte Social 0042",
+    "descripcio": "Programa integral 0042 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0152",
+      "REC0015",
+      "REC0059",
+      "REC0171"
+    ],
+    "keywords": [
+      "alimentacio",
+      "acollida",
+      "documentacio",
+      "alimentacio",
+      "salut",
+      "formacio",
+      "suport_escolar"
+    ]
+  },
+  {
+    "id": "PRJ0043",
+    "nom": "Projecte Social 0043",
+    "descripcio": "Programa integral 0043 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0123",
+      "REC0159",
+      "REC0142",
+      "REC0163"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "suport_escolar",
+      "acollida",
+      "formacio",
+      "orientacio",
+      "salut",
+      "traduccio"
+    ]
+  },
+  {
+    "id": "PRJ0044",
+    "nom": "Projecte Social 0044",
+    "descripcio": "Programa integral 0044 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0153",
+      "REC0154"
+    ],
+    "keywords": [
+      "alimentacio",
+      "educacio",
+      "repartiment",
+      "gent_gran",
+      "atencio_infants",
+      "formacio"
+    ]
+  },
+  {
+    "id": "PRJ0045",
+    "nom": "Projecte Social 0045",
+    "descripcio": "Programa integral 0045 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0255",
+      "REC0012",
+      "REC0177"
+    ],
+    "keywords": [
+      "alimentacio",
+      "acollida",
+      "logistica",
+      "repartiment",
+      "habitatge",
+      "voluntariat",
+      "assessoria_juridica"
+    ]
+  },
+  {
+    "id": "PRJ0046",
+    "nom": "Projecte Social 0046",
+    "descripcio": "Programa integral 0046 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0179",
+      "REC0136",
+      "REC0231"
+    ],
+    "keywords": [
+      "salut_mental",
+      "repartiment",
+      "atencio_infants",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0047",
+    "nom": "Projecte Social 0047",
+    "descripcio": "Programa integral 0047 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0256",
+      "REC0203"
+    ],
+    "keywords": [
+      "formacio",
+      "salut",
+      "treball_social",
+      "gestio"
+    ]
+  },
+  {
+    "id": "PRJ0048",
+    "nom": "Projecte Social 0048",
+    "descripcio": "Programa integral 0048 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0223",
+      "REC0127"
+    ],
+    "keywords": [
+      "alimentacio",
+      "acollida",
+      "repartiment",
+      "formacio",
+      "logistica",
+      "documentacio",
+      "treball_social"
+    ]
+  },
+  {
+    "id": "PRJ0049",
+    "nom": "Projecte Social 0049",
+    "descripcio": "Programa integral 0049 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0141",
+      "REC0040",
+      "REC0223"
+    ],
+    "keywords": [
+      "alimentacio",
+      "assessoria_juridica",
+      "voluntariat",
+      "alimentacio"
+    ]
+  },
+  {
+    "id": "PRJ0050",
+    "nom": "Projecte Social 0050",
+    "descripcio": "Programa integral 0050 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0135",
+      "REC0204",
+      "REC0170",
+      "REC0058"
+    ],
+    "keywords": [
+      "formacio",
+      "formacio",
+      "gent_gran",
+      "orientacio",
+      "habitatge"
+    ]
+  },
+  {
+    "id": "PRJ0051",
+    "nom": "Projecte Social 0051",
+    "descripcio": "Programa integral 0051 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0225"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "gestio",
+      "logistica",
+      "orientacio",
+      "educacio",
+      "mediacio_habitatge"
+    ]
+  },
+  {
+    "id": "PRJ0052",
+    "nom": "Projecte Social 0052",
+    "descripcio": "Programa integral 0052 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0183"
+    ],
+    "keywords": [
+      "repartiment",
+      "documentacio",
+      "salut",
+      "orientacio"
+    ]
+  },
+  {
+    "id": "PRJ0053",
+    "nom": "Projecte Social 0053",
+    "descripcio": "Programa integral 0053 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0233",
+      "REC0209"
+    ],
+    "keywords": [
+      "salut",
+      "repartiment",
+      "alimentacio",
+      "traduccio",
+      "assessoria_juridica"
+    ]
+  },
+  {
+    "id": "PRJ0054",
+    "nom": "Projecte Social 0054",
+    "descripcio": "Programa integral 0054 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0251",
+      "REC0103"
+    ],
+    "keywords": [
+      "traduccio",
+      "treball_social",
+      "salut_mental",
+      "suport_escolar"
+    ]
+  },
+  {
+    "id": "PRJ0055",
+    "nom": "Projecte Social 0055",
+    "descripcio": "Programa integral 0055 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0023",
+      "REC0087",
+      "REC0185"
+    ],
+    "keywords": [
+      "voluntariat",
+      "acompanyament",
+      "salut",
+      "insercio_laboral",
+      "alimentacio",
+      "logistica"
+    ]
+  },
+  {
+    "id": "PRJ0056",
+    "nom": "Projecte Social 0056",
+    "descripcio": "Programa integral 0056 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0146",
+      "REC0101",
+      "REC0249"
+    ],
+    "keywords": [
+      "gestio",
+      "educacio",
+      "voluntariat",
+      "suport_escolar"
+    ]
+  },
+  {
+    "id": "PRJ0057",
+    "nom": "Projecte Social 0057",
+    "descripcio": "Programa integral 0057 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0216",
+      "REC0242"
+    ],
+    "keywords": [
+      "salut",
+      "insercio_laboral",
+      "repartiment",
+      "orientacio",
+      "salut_mental",
+      "assessoria_juridica"
+    ]
+  },
+  {
+    "id": "PRJ0058",
+    "nom": "Projecte Social 0058",
+    "descripcio": "Programa integral 0058 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0076"
+    ],
+    "keywords": [
+      "suport_escolar",
+      "acompanyament",
+      "documentacio",
+      "assessoria_juridica",
+      "formacio",
+      "gestio",
+      "treball_social"
+    ]
+  },
+  {
+    "id": "PRJ0059",
+    "nom": "Projecte Social 0059",
+    "descripcio": "Programa integral 0059 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0158",
+      "REC0008"
+    ],
+    "keywords": [
+      "assessoria_juridica",
+      "voluntariat",
+      "treball_social",
+      "formacio",
+      "suport_psicologic",
+      "formacio",
+      "habitatge"
+    ]
+  },
+  {
+    "id": "PRJ0060",
+    "nom": "Projecte Social 0060",
+    "descripcio": "Programa integral 0060 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0200",
+      "REC0146",
+      "REC0187",
+      "REC0061"
+    ],
+    "keywords": [
+      "suport_escolar",
+      "repartiment",
+      "assessoria_juridica",
+      "alimentacio",
+      "gent_gran"
+    ]
+  },
+  {
+    "id": "PRJ0061",
+    "nom": "Projecte Social 0061",
+    "descripcio": "Programa integral 0061 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0043",
+      "REC0206",
+      "REC0003"
+    ],
+    "keywords": [
+      "repartiment",
+      "suport_escolar",
+      "habitatge",
+      "traduccio"
+    ]
+  },
+  {
+    "id": "PRJ0062",
+    "nom": "Projecte Social 0062",
+    "descripcio": "Programa integral 0062 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0101",
+      "REC0080",
+      "REC0085",
+      "REC0089"
+    ],
+    "keywords": [
+      "mediacio_habitatge",
+      "repartiment",
+      "gestio",
+      "formacio",
+      "educacio"
+    ]
+  },
+  {
+    "id": "PRJ0063",
+    "nom": "Projecte Social 0063",
+    "descripcio": "Programa integral 0063 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0099",
+      "REC0230",
+      "REC0063",
+      "REC0159"
+    ],
+    "keywords": [
+      "acompanyament",
+      "gestio",
+      "suport_escolar",
+      "repartiment",
+      "habitatge"
+    ]
+  },
+  {
+    "id": "PRJ0064",
+    "nom": "Projecte Social 0064",
+    "descripcio": "Programa integral 0064 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0158",
+      "REC0136"
+    ],
+    "keywords": [
+      "formacio",
+      "gent_gran",
+      "salut",
+      "acollida"
+    ]
+  },
+  {
+    "id": "PRJ0065",
+    "nom": "Projecte Social 0065",
+    "descripcio": "Programa integral 0065 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0144",
+      "REC0224",
+      "REC0022",
+      "REC0097"
+    ],
+    "keywords": [
+      "alimentacio",
+      "gestio",
+      "salut_mental",
+      "formacio",
+      "orientacio",
+      "acompanyament",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0066",
+    "nom": "Projecte Social 0066",
+    "descripcio": "Programa integral 0066 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0134"
+    ],
+    "keywords": [
+      "treball_social",
+      "insercio_laboral",
+      "gent_gran",
+      "gestio"
+    ]
+  },
+  {
+    "id": "PRJ0067",
+    "nom": "Projecte Social 0067",
+    "descripcio": "Programa integral 0067 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0084",
+      "REC0095",
+      "REC0166",
+      "REC0053"
+    ],
+    "keywords": [
+      "acompanyament",
+      "educacio",
+      "documentacio",
+      "gent_gran",
+      "repartiment"
+    ]
+  },
+  {
+    "id": "PRJ0068",
+    "nom": "Projecte Social 0068",
+    "descripcio": "Programa integral 0068 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0182",
+      "REC0114"
+    ],
+    "keywords": [
+      "voluntariat",
+      "educacio",
+      "suport_psicologic",
+      "alimentacio",
+      "logistica",
+      "suport_escolar",
+      "documentacio"
+    ]
+  },
+  {
+    "id": "PRJ0069",
+    "nom": "Projecte Social 0069",
+    "descripcio": "Programa integral 0069 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0253",
+      "REC0234",
+      "REC0167"
+    ],
+    "keywords": [
+      "voluntariat",
+      "mediacio_habitatge",
+      "salut_mental",
+      "alimentacio"
+    ]
+  },
+  {
+    "id": "PRJ0070",
+    "nom": "Projecte Social 0070",
+    "descripcio": "Programa integral 0070 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0122",
+      "REC0029",
+      "REC0207",
+      "REC0241"
+    ],
+    "keywords": [
+      "habitatge",
+      "gestio",
+      "alimentacio",
+      "assessoria_juridica",
+      "formacio",
+      "gent_gran",
+      "traduccio"
+    ]
+  },
+  {
+    "id": "PRJ0071",
+    "nom": "Projecte Social 0071",
+    "descripcio": "Programa integral 0071 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0220",
+      "REC0001",
+      "REC0254"
+    ],
+    "keywords": [
+      "traduccio",
+      "treball_social",
+      "formacio",
+      "alimentacio",
+      "repartiment",
+      "atencio_infants",
+      "orientacio"
+    ]
+  },
+  {
+    "id": "PRJ0072",
+    "nom": "Projecte Social 0072",
+    "descripcio": "Programa integral 0072 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0129",
+      "REC0020"
+    ],
+    "keywords": [
+      "formacio",
+      "formacio",
+      "acompanyament",
+      "mediacio_habitatge",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0073",
+    "nom": "Projecte Social 0073",
+    "descripcio": "Programa integral 0073 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0200"
+    ],
+    "keywords": [
+      "traduccio",
+      "suport_escolar",
+      "salut",
+      "assessoria_juridica",
+      "treball_social",
+      "formacio",
+      "acollida"
+    ]
+  },
+  {
+    "id": "PRJ0074",
+    "nom": "Projecte Social 0074",
+    "descripcio": "Programa integral 0074 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0114",
+      "REC0062"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "orientacio",
+      "traduccio",
+      "salut_mental",
+      "documentacio",
+      "formacio"
+    ]
+  },
+  {
+    "id": "PRJ0075",
+    "nom": "Projecte Social 0075",
+    "descripcio": "Programa integral 0075 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0199",
+      "REC0207",
+      "REC0108",
+      "REC0230"
+    ],
+    "keywords": [
+      "logistica",
+      "alimentacio",
+      "habitatge",
+      "mediacio_habitatge",
+      "documentacio",
+      "salut_mental"
+    ]
+  },
+  {
+    "id": "PRJ0076",
+    "nom": "Projecte Social 0076",
+    "descripcio": "Programa integral 0076 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0210",
+      "REC0159"
+    ],
+    "keywords": [
+      "alimentacio",
+      "educacio",
+      "habitatge",
+      "gestio",
+      "acompanyament",
+      "alimentacio",
+      "orientacio"
+    ]
+  },
+  {
+    "id": "PRJ0077",
+    "nom": "Projecte Social 0077",
+    "descripcio": "Programa integral 0077 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0073",
+      "REC0218",
+      "REC0044"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "atencio_infants",
+      "voluntariat",
+      "salut",
+      "alimentacio",
+      "formacio"
+    ]
+  },
+  {
+    "id": "PRJ0078",
+    "nom": "Projecte Social 0078",
+    "descripcio": "Programa integral 0078 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0219",
+      "REC0251",
+      "REC0119",
+      "REC0205"
+    ],
+    "keywords": [
+      "gestio",
+      "educacio",
+      "suport_psicologic",
+      "traduccio",
+      "suport_escolar",
+      "mediacio_habitatge",
+      "logistica"
+    ]
+  },
+  {
+    "id": "PRJ0079",
+    "nom": "Projecte Social 0079",
+    "descripcio": "Programa integral 0079 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0046",
+      "REC0191"
+    ],
+    "keywords": [
+      "traduccio",
+      "acompanyament",
+      "alimentacio",
+      "insercio_laboral",
+      "salut",
+      "insercio_laboral",
+      "gent_gran"
+    ]
+  },
+  {
+    "id": "PRJ0080",
+    "nom": "Projecte Social 0080",
+    "descripcio": "Programa integral 0080 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0168"
+    ],
+    "keywords": [
+      "salut",
+      "treball_social",
+      "logistica",
+      "formacio",
+      "traduccio",
+      "suport_psicologic"
+    ]
+  },
+  {
+    "id": "PRJ0081",
+    "nom": "Projecte Social 0081",
+    "descripcio": "Programa integral 0081 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0072",
+      "REC0110",
+      "REC0023"
+    ],
+    "keywords": [
+      "formacio",
+      "insercio_laboral",
+      "salut_mental",
+      "insercio_laboral",
+      "traduccio"
+    ]
+  },
+  {
+    "id": "PRJ0082",
+    "nom": "Projecte Social 0082",
+    "descripcio": "Programa integral 0082 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0120",
+      "REC0109",
+      "REC0243",
+      "REC0165"
+    ],
+    "keywords": [
+      "treball_social",
+      "voluntariat",
+      "repartiment",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0083",
+    "nom": "Projecte Social 0083",
+    "descripcio": "Programa integral 0083 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0133",
+      "REC0238",
+      "REC0009"
+    ],
+    "keywords": [
+      "educacio",
+      "mediacio_habitatge",
+      "orientacio",
+      "assessoria_juridica"
+    ]
+  },
+  {
+    "id": "PRJ0084",
+    "nom": "Projecte Social 0084",
+    "descripcio": "Programa integral 0084 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0119"
+    ],
+    "keywords": [
+      "acollida",
+      "suport_escolar",
+      "acompanyament",
+      "assessoria_juridica",
+      "salut_mental"
+    ]
+  },
+  {
+    "id": "PRJ0085",
+    "nom": "Projecte Social 0085",
+    "descripcio": "Programa integral 0085 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0049",
+      "REC0214"
+    ],
+    "keywords": [
+      "alimentacio",
+      "insercio_laboral",
+      "logistica",
+      "suport_escolar"
+    ]
+  },
+  {
+    "id": "PRJ0086",
+    "nom": "Projecte Social 0086",
+    "descripcio": "Programa integral 0086 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0166",
+      "REC0140"
+    ],
+    "keywords": [
+      "treball_social",
+      "gent_gran",
+      "formacio",
+      "alimentacio",
+      "acollida",
+      "formacio"
+    ]
+  },
+  {
+    "id": "PRJ0087",
+    "nom": "Projecte Social 0087",
+    "descripcio": "Programa integral 0087 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0112",
+      "REC0201",
+      "REC0133"
+    ],
+    "keywords": [
+      "salut",
+      "formacio",
+      "logistica",
+      "atencio_infants",
+      "suport_psicologic",
+      "salut_mental",
+      "habitatge"
+    ]
+  },
+  {
+    "id": "PRJ0088",
+    "nom": "Projecte Social 0088",
+    "descripcio": "Programa integral 0088 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0170"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "insercio_laboral",
+      "acompanyament",
+      "alimentacio",
+      "gestio",
+      "suport_escolar",
+      "atencio_infants"
+    ]
+  },
+  {
+    "id": "PRJ0089",
+    "nom": "Projecte Social 0089",
+    "descripcio": "Programa integral 0089 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0243",
+      "REC0253",
+      "REC0111",
+      "REC0171"
+    ],
+    "keywords": [
+      "formacio",
+      "acompanyament",
+      "alimentacio",
+      "educacio",
+      "assessoria_juridica"
+    ]
+  },
+  {
+    "id": "PRJ0090",
+    "nom": "Projecte Social 0090",
+    "descripcio": "Programa integral 0090 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0056",
+      "REC0087",
+      "REC0114"
+    ],
+    "keywords": [
+      "voluntariat",
+      "gestio",
+      "alimentacio",
+      "salut",
+      "insercio_laboral",
+      "educacio",
+      "alimentacio"
+    ]
+  },
+  {
+    "id": "PRJ0091",
+    "nom": "Projecte Social 0091",
+    "descripcio": "Programa integral 0091 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0255",
+      "REC0019",
+      "REC0102",
+      "REC0197"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "documentacio",
+      "assessoria_juridica",
+      "logistica",
+      "orientacio",
+      "mediacio_habitatge"
+    ]
+  },
+  {
+    "id": "PRJ0092",
+    "nom": "Projecte Social 0092",
+    "descripcio": "Programa integral 0092 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0222",
+      "REC0243",
+      "REC0060"
+    ],
+    "keywords": [
+      "alimentacio",
+      "treball_social",
+      "acompanyament",
+      "documentacio",
+      "salut",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0093",
+    "nom": "Projecte Social 0093",
+    "descripcio": "Programa integral 0093 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0174"
+    ],
+    "keywords": [
+      "orientacio",
+      "suport_psicologic",
+      "treball_social",
+      "alimentacio"
+    ]
+  },
+  {
+    "id": "PRJ0094",
+    "nom": "Projecte Social 0094",
+    "descripcio": "Programa integral 0094 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0137"
+    ],
+    "keywords": [
+      "habitatge",
+      "repartiment",
+      "mediacio_habitatge",
+      "suport_psicologic",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0095",
+    "nom": "Projecte Social 0095",
+    "descripcio": "Programa integral 0095 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0018"
+    ],
+    "keywords": [
+      "educacio",
+      "suport_psicologic",
+      "alimentacio",
+      "acollida",
+      "salut_mental"
+    ]
+  },
+  {
+    "id": "PRJ0096",
+    "nom": "Projecte Social 0096",
+    "descripcio": "Programa integral 0096 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0042",
+      "REC0002",
+      "REC0252"
+    ],
+    "keywords": [
+      "mediacio_habitatge",
+      "assessoria_juridica",
+      "atencio_infants",
+      "alimentacio"
+    ]
+  },
+  {
+    "id": "PRJ0097",
+    "nom": "Projecte Social 0097",
+    "descripcio": "Programa integral 0097 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0148",
+      "REC0043",
+      "REC0225",
+      "REC0041"
+    ],
+    "keywords": [
+      "gestio",
+      "suport_escolar",
+      "formacio",
+      "salut_mental",
+      "habitatge"
+    ]
+  },
+  {
+    "id": "PRJ0098",
+    "nom": "Projecte Social 0098",
+    "descripcio": "Programa integral 0098 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0234",
+      "REC0237",
+      "REC0040"
+    ],
+    "keywords": [
+      "traduccio",
+      "atencio_infants",
+      "suport_psicologic",
+      "treball_social",
+      "gestio"
+    ]
+  },
+  {
+    "id": "PRJ0099",
+    "nom": "Projecte Social 0099",
+    "descripcio": "Programa integral 0099 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0043",
+      "REC0062",
+      "REC0005"
+    ],
+    "keywords": [
+      "orientacio",
+      "suport_escolar",
+      "acollida",
+      "atencio_infants",
+      "insercio_laboral",
+      "gestio"
+    ]
+  },
+  {
+    "id": "PRJ0100",
+    "nom": "Projecte Social 0100",
+    "descripcio": "Programa integral 0100 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0094",
+      "REC0116",
+      "REC0016"
+    ],
+    "keywords": [
+      "logistica",
+      "acollida",
+      "documentacio",
+      "acompanyament",
+      "mediacio_habitatge",
+      "salut"
+    ]
+  },
+  {
+    "id": "PRJ0101",
+    "nom": "Projecte Social 0101",
+    "descripcio": "Programa integral 0101 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0031"
+    ],
+    "keywords": [
+      "habitatge",
+      "formacio",
+      "repartiment",
+      "acollida",
+      "acompanyament",
+      "assessoria_juridica",
+      "suport_escolar"
+    ]
+  },
+  {
+    "id": "PRJ0102",
+    "nom": "Projecte Social 0102",
+    "descripcio": "Programa integral 0102 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0200",
+      "REC0093",
+      "REC0113",
+      "REC0109"
+    ],
+    "keywords": [
+      "repartiment",
+      "mediacio_habitatge",
+      "acollida",
+      "formacio",
+      "acompanyament",
+      "logistica",
+      "suport_psicologic"
+    ]
+  },
+  {
+    "id": "PRJ0103",
+    "nom": "Projecte Social 0103",
+    "descripcio": "Programa integral 0103 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0040",
+      "REC0179",
+      "REC0115"
+    ],
+    "keywords": [
+      "assessoria_juridica",
+      "traduccio",
+      "atencio_infants",
+      "formacio",
+      "mediacio_habitatge",
+      "orientacio"
+    ]
+  },
+  {
+    "id": "PRJ0104",
+    "nom": "Projecte Social 0104",
+    "descripcio": "Programa integral 0104 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0095",
+      "REC0233",
+      "REC0182"
+    ],
+    "keywords": [
+      "formacio",
+      "alimentacio",
+      "formacio",
+      "salut_mental",
+      "suport_escolar"
+    ]
+  },
+  {
+    "id": "PRJ0105",
+    "nom": "Projecte Social 0105",
+    "descripcio": "Programa integral 0105 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0156",
+      "REC0250",
+      "REC0029",
+      "REC0144"
+    ],
+    "keywords": [
+      "salut_mental",
+      "insercio_laboral",
+      "alimentacio",
+      "mediacio_habitatge",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0106",
+    "nom": "Projecte Social 0106",
+    "descripcio": "Programa integral 0106 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0137",
+      "REC0036"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "alimentacio",
+      "mediacio_habitatge",
+      "voluntariat",
+      "suport_escolar",
+      "acollida",
+      "logistica"
+    ]
+  },
+  {
+    "id": "PRJ0107",
+    "nom": "Projecte Social 0107",
+    "descripcio": "Programa integral 0107 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0246"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "educacio",
+      "salut",
+      "traduccio"
+    ]
+  },
+  {
+    "id": "PRJ0108",
+    "nom": "Projecte Social 0108",
+    "descripcio": "Programa integral 0108 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0144",
+      "REC0141"
+    ],
+    "keywords": [
+      "repartiment",
+      "assessoria_juridica",
+      "alimentacio",
+      "habitatge",
+      "logistica",
+      "acollida"
+    ]
+  },
+  {
+    "id": "PRJ0109",
+    "nom": "Projecte Social 0109",
+    "descripcio": "Programa integral 0109 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0173",
+      "REC0050",
+      "REC0196",
+      "REC0053"
+    ],
+    "keywords": [
+      "acollida",
+      "acompanyament",
+      "formacio",
+      "assessoria_juridica"
+    ]
+  },
+  {
+    "id": "PRJ0110",
+    "nom": "Projecte Social 0110",
+    "descripcio": "Programa integral 0110 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0091",
+      "REC0192",
+      "REC0144"
+    ],
+    "keywords": [
+      "atencio_infants",
+      "formacio",
+      "mediacio_habitatge",
+      "salut",
+      "gent_gran",
+      "documentacio",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0111",
+    "nom": "Projecte Social 0111",
+    "descripcio": "Programa integral 0111 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0159",
+      "REC0016",
+      "REC0080"
+    ],
+    "keywords": [
+      "treball_social",
+      "traduccio",
+      "orientacio",
+      "alimentacio",
+      "acompanyament",
+      "formacio"
+    ]
+  },
+  {
+    "id": "PRJ0112",
+    "nom": "Projecte Social 0112",
+    "descripcio": "Programa integral 0112 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0109"
+    ],
+    "keywords": [
+      "voluntariat",
+      "mediacio_habitatge",
+      "traduccio",
+      "orientacio",
+      "assessoria_juridica",
+      "gent_gran"
+    ]
+  },
+  {
+    "id": "PRJ0113",
+    "nom": "Projecte Social 0113",
+    "descripcio": "Programa integral 0113 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0165"
+    ],
+    "keywords": [
+      "salut",
+      "traduccio",
+      "gent_gran",
+      "mediacio_habitatge",
+      "suport_psicologic"
+    ]
+  },
+  {
+    "id": "PRJ0114",
+    "nom": "Projecte Social 0114",
+    "descripcio": "Programa integral 0114 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0237",
+      "REC0215",
+      "REC0233"
+    ],
+    "keywords": [
+      "orientacio",
+      "repartiment",
+      "voluntariat",
+      "atencio_infants",
+      "alimentacio"
+    ]
+  },
+  {
+    "id": "PRJ0115",
+    "nom": "Projecte Social 0115",
+    "descripcio": "Programa integral 0115 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0052",
+      "REC0196",
+      "REC0137",
+      "REC0107"
+    ],
+    "keywords": [
+      "logistica",
+      "formacio",
+      "mediacio_habitatge",
+      "assessoria_juridica",
+      "gestio",
+      "documentacio",
+      "acompanyament"
+    ]
+  },
+  {
+    "id": "PRJ0116",
+    "nom": "Projecte Social 0116",
+    "descripcio": "Programa integral 0116 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0120"
+    ],
+    "keywords": [
+      "documentacio",
+      "acompanyament",
+      "traduccio",
+      "gestio",
+      "gent_gran",
+      "atencio_infants"
+    ]
+  },
+  {
+    "id": "PRJ0117",
+    "nom": "Projecte Social 0117",
+    "descripcio": "Programa integral 0117 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0122",
+      "REC0073"
+    ],
+    "keywords": [
+      "treball_social",
+      "alimentacio",
+      "acompanyament",
+      "educacio",
+      "logistica"
+    ]
+  },
+  {
+    "id": "PRJ0118",
+    "nom": "Projecte Social 0118",
+    "descripcio": "Programa integral 0118 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0011",
+      "REC0161"
+    ],
+    "keywords": [
+      "acompanyament",
+      "repartiment",
+      "salut_mental",
+      "atencio_infants",
+      "mediacio_habitatge"
+    ]
+  },
+  {
+    "id": "PRJ0119",
+    "nom": "Projecte Social 0119",
+    "descripcio": "Programa integral 0119 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0145",
+      "REC0242",
+      "REC0101",
+      "REC0012"
+    ],
+    "keywords": [
+      "documentacio",
+      "atencio_infants",
+      "suport_escolar",
+      "gent_gran",
+      "orientacio",
+      "educacio",
+      "habitatge"
+    ]
+  },
+  {
+    "id": "PRJ0120",
+    "nom": "Projecte Social 0120",
+    "descripcio": "Programa integral 0120 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0158",
+      "REC0078",
+      "REC0162"
+    ],
+    "keywords": [
+      "gent_gran",
+      "acollida",
+      "mediacio_habitatge",
+      "alimentacio",
+      "formacio",
+      "salut"
+    ]
+  },
+  {
+    "id": "PRJ0121",
+    "nom": "Projecte Social 0121",
+    "descripcio": "Programa integral 0121 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0205"
+    ],
+    "keywords": [
+      "assessoria_juridica",
+      "traduccio",
+      "acompanyament",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0122",
+    "nom": "Projecte Social 0122",
+    "descripcio": "Programa integral 0122 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0108"
+    ],
+    "keywords": [
+      "salut_mental",
+      "salut",
+      "assessoria_juridica",
+      "insercio_laboral",
+      "atencio_infants"
+    ]
+  },
+  {
+    "id": "PRJ0123",
+    "nom": "Projecte Social 0123",
+    "descripcio": "Programa integral 0123 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0168",
+      "REC0060",
+      "REC0182"
+    ],
+    "keywords": [
+      "educacio",
+      "assessoria_juridica",
+      "repartiment",
+      "atencio_infants",
+      "gent_gran",
+      "logistica"
+    ]
+  },
+  {
+    "id": "PRJ0124",
+    "nom": "Projecte Social 0124",
+    "descripcio": "Programa integral 0124 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Joves sense itinerari formatiu",
+    "recursos_associats": [
+      "REC0240"
+    ],
+    "keywords": [
+      "mediacio_habitatge",
+      "gent_gran",
+      "educacio",
+      "insercio_laboral",
+      "orientacio",
+      "acompanyament"
+    ]
+  },
+  {
+    "id": "PRJ0125",
+    "nom": "Projecte Social 0125",
+    "descripcio": "Programa integral 0125 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0075",
+      "REC0163"
+    ],
+    "keywords": [
+      "salut_mental",
+      "mediacio_habitatge",
+      "treball_social",
+      "gent_gran",
+      "assessoria_juridica",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0126",
+    "nom": "Projecte Social 0126",
+    "descripcio": "Programa integral 0126 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0003",
+      "REC0146",
+      "REC0103"
+    ],
+    "keywords": [
+      "gestio",
+      "alimentacio",
+      "acompanyament",
+      "alimentacio",
+      "repartiment",
+      "treball_social",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0127",
+    "nom": "Projecte Social 0127",
+    "descripcio": "Programa integral 0127 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0056",
+      "REC0132",
+      "REC0085",
+      "REC0212"
+    ],
+    "keywords": [
+      "salut_mental",
+      "gent_gran",
+      "acompanyament",
+      "mediacio_habitatge",
+      "repartiment"
+    ]
+  },
+  {
+    "id": "PRJ0128",
+    "nom": "Projecte Social 0128",
+    "descripcio": "Programa integral 0128 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Families en risc d'exclusio",
+    "recursos_associats": [
+      "REC0179",
+      "REC0248",
+      "REC0236",
+      "REC0201"
+    ],
+    "keywords": [
+      "suport_psicologic",
+      "habitatge",
+      "mediacio_habitatge",
+      "voluntariat",
+      "formacio",
+      "salut_mental",
+      "traduccio"
+    ]
+  },
+  {
+    "id": "PRJ0129",
+    "nom": "Projecte Social 0129",
+    "descripcio": "Programa integral 0129 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0089",
+      "REC0020",
+      "REC0032",
+      "REC0127"
+    ],
+    "keywords": [
+      "acollida",
+      "alimentacio",
+      "orientacio",
+      "gestio",
+      "educacio",
+      "suport_escolar",
+      "gent_gran"
+    ]
+  },
+  {
+    "id": "PRJ0130",
+    "nom": "Projecte Social 0130",
+    "descripcio": "Programa integral 0130 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0082",
+      "REC0174",
+      "REC0247"
+    ],
+    "keywords": [
+      "traduccio",
+      "assessoria_juridica",
+      "atencio_infants",
+      "logistica"
+    ]
+  },
+  {
+    "id": "PRJ0131",
+    "nom": "Projecte Social 0131",
+    "descripcio": "Programa integral 0131 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0240",
+      "REC0133"
+    ],
+    "keywords": [
+      "gent_gran",
+      "mediacio_habitatge",
+      "acollida",
+      "salut"
+    ]
+  },
+  {
+    "id": "PRJ0132",
+    "nom": "Projecte Social 0132",
+    "descripcio": "Programa integral 0132 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0205",
+      "REC0162",
+      "REC0241"
+    ],
+    "keywords": [
+      "insercio_laboral",
+      "gent_gran",
+      "insercio_laboral",
+      "formacio",
+      "suport_psicologic",
+      "gestio",
+      "repartiment"
+    ]
+  },
+  {
+    "id": "PRJ0133",
+    "nom": "Projecte Social 0133",
+    "descripcio": "Programa integral 0133 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0158",
+      "REC0188",
+      "REC0129"
+    ],
+    "keywords": [
+      "suport_escolar",
+      "suport_psicologic",
+      "insercio_laboral",
+      "assessoria_juridica",
+      "educacio",
+      "formacio"
+    ]
+  },
+  {
+    "id": "PRJ0134",
+    "nom": "Projecte Social 0134",
+    "descripcio": "Programa integral 0134 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0013",
+      "REC0002",
+      "REC0116",
+      "REC0068"
+    ],
+    "keywords": [
+      "educacio",
+      "traduccio",
+      "acollida",
+      "insercio_laboral",
+      "gestio",
+      "habitatge",
+      "insercio_laboral"
+    ]
+  },
+  {
+    "id": "PRJ0135",
+    "nom": "Projecte Social 0135",
+    "descripcio": "Programa integral 0135 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones aturades de llarga durada",
+    "recursos_associats": [
+      "REC0056",
+      "REC0215",
+      "REC0044"
+    ],
+    "keywords": [
+      "treball_social",
+      "gent_gran",
+      "logistica",
+      "suport_escolar"
+    ]
+  },
+  {
+    "id": "PRJ0136",
+    "nom": "Projecte Social 0136",
+    "descripcio": "Programa integral 0136 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0091",
+      "REC0188"
+    ],
+    "keywords": [
+      "logistica",
+      "voluntariat",
+      "insercio_laboral",
+      "alimentacio",
+      "assessoria_juridica",
+      "atencio_infants",
+      "acompanyament"
+    ]
+  },
+  {
+    "id": "PRJ0137",
+    "nom": "Projecte Social 0137",
+    "descripcio": "Programa integral 0137 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0099",
+      "REC0064",
+      "REC0009"
+    ],
+    "keywords": [
+      "habitatge",
+      "formacio",
+      "documentacio",
+      "gestio",
+      "logistica",
+      "acompanyament",
+      "traduccio"
+    ]
+  },
+  {
+    "id": "PRJ0138",
+    "nom": "Projecte Social 0138",
+    "descripcio": "Programa integral 0138 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0110",
+      "REC0029",
+      "REC0086",
+      "REC0106"
+    ],
+    "keywords": [
+      "atencio_infants",
+      "voluntariat",
+      "alimentacio",
+      "alimentacio"
+    ]
+  },
+  {
+    "id": "PRJ0139",
+    "nom": "Projecte Social 0139",
+    "descripcio": "Programa integral 0139 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Persones migrades sense xarxa de suport",
+    "recursos_associats": [
+      "REC0041",
+      "REC0238",
+      "REC0081",
+      "REC0072"
+    ],
+    "keywords": [
+      "logistica",
+      "orientacio",
+      "acollida",
+      "mediacio_habitatge",
+      "gestio",
+      "formacio"
+    ]
+  },
+  {
+    "id": "PRJ0140",
+    "nom": "Projecte Social 0140",
+    "descripcio": "Programa integral 0140 per atendre situacions socials complexes.",
+    "perfil_beneficiari": "Gent gran en situacio de soledat",
+    "recursos_associats": [
+      "REC0176"
+    ],
+    "keywords": [
+      "formacio",
+      "habitatge",
+      "logistica",
+      "formacio",
+      "salut_mental",
+      "voluntariat"
+    ]
   }
 ]

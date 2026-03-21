@@ -5,6 +5,7 @@ Cruza les necessitats detectades amb les 4 BBDDs
 import json
 import os
 import math
+from utils.partner_store import get_voluntaris_for_matching, get_empreses_for_matching
 
 BASE = os.path.join(os.path.dirname(__file__), "..", "db")
 
@@ -111,9 +112,9 @@ def match_all(fitxa: dict, analysis: dict, keywords: list) -> dict:
     """
     centres      = load_db("centres.json")
     recursos     = load_db("recursos.json")
-    voluntaris   = load_db("voluntaris.json")
+    voluntaris   = get_voluntaris_for_matching()
     organitzacions = load_db("organitzacions.json")
-    empreses     = load_db("empreses.json")
+    empreses     = get_empreses_for_matching()
 
     tipus_recomanats  = analysis.get("recursos_recomanats_tipus", [])
     quantitats        = analysis.get("quantitats_recomanades", {})

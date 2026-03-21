@@ -22,7 +22,7 @@ def call_gemini(prompt):
     if not api_key:
         raise ValueError("GOOGLE_API_KEY not found")
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
 
     data = {"contents": [{"parts": [{"text": prompt}]}]}
 
