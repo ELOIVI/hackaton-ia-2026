@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import logging
 import re
+import bisect
 from functools import lru_cache
 
 import torch
@@ -109,28 +110,39 @@ def _contains_term(text: str, term: str) -> bool:
     return bool(_cached_term_pattern(term).search(text))
 
 
-def _is_negated_text(text: str, term: str, window: int = 3) -> bool:
-    term_words = _token_word_pattern().findall(term.lower())
-    text_words = _token_word_pattern().findall(text.lower())
-    if not term_words or not text_words:
-        return False
+def _count_non_negated_mentions(text: str, term: str, window: int = 3) -> int:
+    term_matches = list(_cached_term_pattern(term).finditer(text))
+    if not term_matches:
+        return 0
 
-    n = len(term_words)
-    for i in range(0, max(0, len(text_words) - n + 1)):
-        if text_words[i:i + n] == term_words:
-            start = max(0, i - window)
-            if any(w in NEGATION_TERMS for w in text_words[start:i]):
-                return True
-    return False
+    token_matches = list(_token_word_pattern().finditer(text.lower()))
+    if not token_matches:
+        return len(term_matches)
+
+    token_starts = [m.start() for m in token_matches]
+    non_negated = 0
+    for occ in term_matches:
+        token_idx = bisect.bisect_right(token_starts, occ.start()) - 1
+        if token_idx < 0:
+            non_negated += 1
+            continue
+
+        start_idx = max(0, token_idx - window)
+        prev_words = [token_matches[j].group(0) for j in range(start_idx, token_idx)]
+        is_negated = any(w in NEGATION_TERMS for w in prev_words)
+        if not is_negated:
+            non_negated += 1
+
+    return non_negated
 
 
 def _score_urgency_from_text(text: str) -> float:
     lowered = (text or "").lower()
 
     score = 0.0
-    score += 1.6 * sum(1 for t in CRITICAL_TOKENS if _contains_term(lowered, t) and not _is_negated_text(lowered, t))
-    score += 0.9 * sum(1 for t in HIGH_TOKENS if _contains_term(lowered, t) and not _is_negated_text(lowered, t))
-    score += 0.4 * sum(1 for t in MEDIUM_TOKENS if _contains_term(lowered, t) and not _is_negated_text(lowered, t))
+    score += 1.6 * sum(_count_non_negated_mentions(lowered, t) for t in CRITICAL_TOKENS)
+    score += 0.9 * sum(_count_non_negated_mentions(lowered, t) for t in HIGH_TOKENS)
+    score += 0.4 * sum(_count_non_negated_mentions(lowered, t) for t in MEDIUM_TOKENS)
     return score
 
 
@@ -252,7 +264,7 @@ def predict(request: PredictionRequest, _auth: None = Depends(_require_bearer_to
             model_signal = "positive" if prediction == 1 else "negative"
         else:
             id2label = getattr(getattr(model, "config", None), "id2label", {}) or {}
-            label = id2label.get(prediction, str(prediction))
+            label = id2label.get(str(prediction), id2label.get(prediction, str(prediction)))
             model_signal = _normalize_hf_label(str(label))
 
         urgency, calibrated = _urgency_label(_score_urgency_from_text(request.text), model_signal)
