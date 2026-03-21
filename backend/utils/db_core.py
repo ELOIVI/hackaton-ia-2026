@@ -29,3 +29,6 @@ def get_conn(enable_foreign_keys: bool = False) -> sqlite3.Connection:
     conn.execute("PRAGMA busy_timeout = 10000")
     conn.execute("PRAGMA foreign_keys = ON")
     return conn
+
+
+initialize_sqlite_db_settings()

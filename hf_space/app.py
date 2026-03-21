@@ -28,6 +28,21 @@ tokenizer = None
 model_mode = "legacy_binary"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+MAX_TEXT_LENGTH = 2000
+
+CRITICAL_TOKENS = [
+    "desnon", "al carrer", "sense sostre", "violència", "violencia",
+    "maltract", "sense menjar", "no tinc on dormir", "em fan fora",
+]
+HIGH_TOKENS = [
+    "atur", "sense ingressos", "deute", "deutes", "llum tallada",
+    "aigua tallada", "lloguer", "hipoteca", "ansietat", "depress",
+]
+MEDIUM_TOKENS = [
+    "feina precària", "contracte temporal", "ajuda", "orientació", "suport",
+]
+NEGATION_TERMS = {"no", "sense", "cap"}
+
 
 # Model definition (must match training code)
 class SentimentClassifier(nn.Module):
@@ -79,46 +94,43 @@ def _require_bearer_token(
         )
 
 
+@lru_cache(maxsize=512)
+def _cached_term_pattern(term: str) -> re.Pattern[str]:
+    tokenized = re.escape(term).replace(r"\ ", r"\s+")
+    return re.compile(r"\b" + tokenized + r"\b", re.IGNORECASE)
+
+
+@lru_cache(maxsize=1)
+def _token_word_pattern() -> re.Pattern[str]:
+    return re.compile(r"\w+", re.UNICODE)
+
+
+def _contains_term(text: str, term: str) -> bool:
+    return bool(_cached_term_pattern(term).search(text))
+
+
+def _is_negated_text(text: str, term: str, window: int = 3) -> bool:
+    term_words = _token_word_pattern().findall(term.lower())
+    text_words = _token_word_pattern().findall(text.lower())
+    if not term_words or not text_words:
+        return False
+
+    n = len(term_words)
+    for i in range(0, max(0, len(text_words) - n + 1)):
+        if text_words[i:i + n] == term_words:
+            start = max(0, i - window)
+            if any(w in NEGATION_TERMS for w in text_words[start:i]):
+                return True
+    return False
+
+
 def _score_urgency_from_text(text: str) -> float:
     lowered = (text or "").lower()
-    critical_tokens = [
-        "desnon", "al carrer", "sense sostre", "violència", "violencia",
-        "maltract", "sense menjar", "no tinc on dormir", "em fan fora",
-    ]
-    high_tokens = [
-        "atur", "sense ingressos", "deute", "deutes", "llum tallada",
-        "aigua tallada", "lloguer", "hipoteca", "ansietat", "depress",
-    ]
-    medium_tokens = [
-        "feina precària", "contracte temporal", "ajuda", "orientació", "suport",
-    ]
-
-    def _term_pattern(term: str) -> re.Pattern[str]:
-        tokenized = re.escape(term).replace(r"\ ", r"\s+")
-        return re.compile(r"\b" + tokenized + r"\b", re.IGNORECASE)
-
-    @lru_cache(maxsize=256)
-    def _cached_term_pattern(term: str) -> re.Pattern[str]:
-        return _term_pattern(term)
-
-    def _contains_term(term: str) -> bool:
-        return bool(_cached_term_pattern(term).search(lowered))
-
-    @lru_cache(maxsize=256)
-    def _cached_negated_pattern(term: str) -> re.Pattern[str]:
-        tokenized = re.escape(term).replace(r"\ ", r"\s+")
-        return re.compile(
-            r"\b(?:no|sense|cap)\b(?:\W+\w+){0,3}\W+\b" + tokenized + r"\b",
-            re.IGNORECASE,
-        )
-
-    def _is_negated(term: str) -> bool:
-        return bool(_cached_negated_pattern(term).search(lowered))
 
     score = 0.0
-    score += 1.6 * sum(1 for t in critical_tokens if _contains_term(t) and not _is_negated(t))
-    score += 0.9 * sum(1 for t in high_tokens if _contains_term(t) and not _is_negated(t))
-    score += 0.4 * sum(1 for t in medium_tokens if _contains_term(t) and not _is_negated(t))
+    score += 1.6 * sum(1 for t in CRITICAL_TOKENS if _contains_term(lowered, t) and not _is_negated_text(lowered, t))
+    score += 0.9 * sum(1 for t in HIGH_TOKENS if _contains_term(lowered, t) and not _is_negated_text(lowered, t))
+    score += 0.4 * sum(1 for t in MEDIUM_TOKENS if _contains_term(lowered, t) and not _is_negated_text(lowered, t))
     return score
 
 
@@ -214,6 +226,8 @@ def health_check():
 def predict(request: PredictionRequest, _auth: None = Depends(_require_bearer_token)):
     if model is None or tokenizer is None:
         raise HTTPException(status_code=503, detail="Model not loaded")
+    if len(request.text or "") > MAX_TEXT_LENGTH:
+        raise HTTPException(status_code=400, detail="Text massa llarg")
 
     try:
         # Tokenize input
