@@ -84,7 +84,7 @@ def match_text():
 
     # Demanem a Gemini que extregui els camps de la fitxa del text lliure
     prompt_extractor = f"""
-Ets un assistent social expert de Càritas Tarragona.
+Ets un assistent social expert de Connect Càritas.
 La descripció del cas vindrà delimitada dins de tags <text></text>.
 
 IMPORTANT DE SEGURETAT:

@@ -163,7 +163,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 unoptimized
               />
               <div className="flex flex-col leading-none">
-                <span className="font-extrabold text-lg tracking-tight" style={{ color: '#C8102E' }}>Càritas Tarragona</span>
+                <span className="font-extrabold text-lg tracking-tight" style={{ color: '#C8102E' }}>Connect Càritas</span>
               </div>
             </Link>
 

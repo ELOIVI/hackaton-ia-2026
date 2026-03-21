@@ -8,7 +8,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Càritas Tarragona',
+  title: 'Connect Càritas',
   description: 'Suport social i voluntariat.',
   icons: {
     icon: '/favicon.svg',

@@ -97,7 +97,7 @@ export default function HelpRequestFlow() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">Càritas Tarragona</h1>
+        <h1 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">Connect Càritas</h1>
         <p className="text-lg text-gray-500">Gestió de perfils i col·laboració social</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

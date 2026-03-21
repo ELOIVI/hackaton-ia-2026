@@ -1,12 +1,12 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowLeft, Send, Loader2, Sparkles, MapPin, Phone, Clock, Eye, EyeOff, ScanFace } from 'lucide-react';
+import { ArrowLeft, Send, Loader2, Sparkles, MapPin, Phone, Clock, Eye, EyeOff, ScanFace, CheckCircle } from 'lucide-react';
 import { API_BASE, authLogin, authRegister, getAuthHeaders } from '@/lib/api';
 import FaceIdLogin from '@/components/FaceIdLogin';
 
 interface Message { role: 'assistant' | 'user'; content: string; }
 
-type Step = 'login' | 'register' | 'chatbot' | 'dashboard';
+type Step = 'login' | 'register' | 'register-faceid' | 'chatbot' | 'dashboard';
 
 function getVolunteerFaceIdKey(email: string): string {
   return `faceid:voluntari:${email.trim().toLowerCase()}`;
@@ -27,7 +27,10 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
   const [userData, setUserData] = useState<Record<string, unknown> | null>(null);
   const [showFaceId, setShowFaceId] = useState(false);
   const [faceMode, setFaceMode] = useState<'login' | 'register'>('login');
+  const [registeredUser, setRegisteredUser] = useState<Record<string, unknown> | null>(null);
+  const [biometricConfigured, setBiometricConfigured] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
 
   const openFaceId = (mode: 'login' | 'register') => {
@@ -48,14 +51,39 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
   };
 
   const handleFaceSuccess = async (faceDescriptor: Float32Array) => {
-    const storageKey = getVolunteerFaceIdKey(form.email);
-
     if (faceMode === 'register') {
-      localStorage.setItem(storageKey, JSON.stringify(Array.from(faceDescriptor)));
-      setShowFaceId(false);
+      // Registro: guardar biometría
+      if (!registeredUser) return;
+
+      try {
+        setAuthLoading(true);
+        const response = await fetch(`/api/user/${registeredUser.id}/biometric`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${registeredUser.token}`,
+          },
+          body: JSON.stringify({
+            faceDescriptor: Array.from(faceDescriptor),
+          }),
+        });
+
+        if (response.ok) {
+          localStorage.setItem(getVolunteerFaceIdKey(form.email), JSON.stringify(Array.from(faceDescriptor)));
+          setBiometricConfigured(true);
+          setShowFaceId(false);
+        } else {
+          setError('Error guardant dades biomètriques');
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Error de connexió');
+      } finally {
+        setAuthLoading(false);
+      }
       return;
     }
 
+    // Login mode
     setShowFaceId(false);
     await handleLogin();
   };
@@ -105,17 +133,25 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
       });
 
       const data = {
+        id: auth.user.id,
         role: auth.user.role,
         nom: auth.user.nom,
         email: auth.user.email,
         token: auth.token,
       };
-      setUserData(data);
-      setStep('chatbot');
+      setRegisteredUser(data);
+      setStep('register-faceid');
     } catch (e) {
       setError(e instanceof Error ? e.message : 'No s\'ha pogut completar el registre');
     } finally {
       setAuthLoading(false);
+    }
+  };
+
+  const skipBiometric = () => {
+    if (registeredUser) {
+      setUserData(registeredUser);
+      setStep('chatbot');
     }
   };
 
@@ -159,52 +195,50 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
       <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
         {showFaceId ? (
           <FaceIdLogin
-            storageKey={getVolunteerFaceIdKey(form.email)}
             mode={faceMode}
             onSuccess={(descriptor) => { void handleFaceSuccess(descriptor); }}
             onCancel={() => setShowFaceId(false)}
           />
         ) : (
           <>
-        <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style={{ background: 'rgba(200,16,46,0.1)' }}>
-          <Sparkles size={28} style={{ color: '#C8102E' }} />
-        </div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-1">Accés voluntari/a</h1>
-        <p className="text-sm text-gray-500 mb-6">Entra amb les teves credencials de Càritas</p>
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style={{ background: 'rgba(200,16,46,0.1)' }}>
+              <Sparkles size={28} style={{ color: '#C8102E' }} />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-1">Accés voluntari/a</h1>
+            <p className="text-sm text-gray-500 mb-6">Entra amb les teves credencials de Càritas</p>
 
-        {error && <div className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-xl">{error}</div>}
+            {error && <div className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-xl">{error}</div>}
 
-        <div className="space-y-3">
-          <input type="email" placeholder="Email" value={form.email}
-            onChange={e => setForm({...form, email: e.target.value})}
-            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-red-200 outline-none" />
-          <div className="relative">
-            <input type={showPass ? 'text' : 'password'} placeholder="Contrasenya" value={form.password}
-              onChange={e => setForm({...form, password: e.target.value})}
-              onKeyDown={e => { if (e.key === 'Enter') handleLogin(); }}
-              className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-red-200 outline-none" />
-            <button onClick={() => setShowPass(!showPass)} className="absolute right-3 top-3 text-gray-400">
-              {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
-          </div>
-          <button onClick={handleLogin} disabled={authLoading}
-            className="w-full py-3 rounded-xl font-bold text-white text-sm"
-            style={{ background: '#C8102E' }}>
-            {authLoading ? 'Validant...' : 'Iniciar sessió'}
-          </button>
-          <button onClick={() => openFaceId('login')} disabled={authLoading}
-            className="w-full py-3 rounded-xl font-bold text-sm border border-red-100 text-red-700 hover:bg-red-50 flex items-center justify-center gap-2">
-            <ScanFace size={18} /> Verificar amb Face ID
-          </button>
-        </div>
+            <div className="space-y-3">
+              <input type="email" placeholder="Email" value={form.email}
+                onChange={e => setForm({...form, email: e.target.value})}
+                className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-red-200 outline-none" />
+              <div className="relative">
+                <input type={showPass ? 'text' : 'password'} placeholder="Contrasenya" value={form.password}
+                  onChange={e => setForm({...form, password: e.target.value})}
+                  onKeyDown={e => { if (e.key === 'Enter') handleLogin(); }}
+                  className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-red-200 outline-none" />
+                <button onClick={() => setShowPass(!showPass)} className="absolute right-3 top-3 text-gray-400">
+                  {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+              <button onClick={handleLogin} disabled={authLoading}
+                className="w-full py-3 rounded-xl font-bold text-white text-sm hover:opacity-90 disabled:opacity-50"
+                style={{ background: '#C8102E' }}>
+                {authLoading ? 'Validant...' : 'Iniciar sessió'}
+              </button>
+              <button onClick={() => openFaceId('login')} disabled={authLoading}
+                className="w-full py-3 rounded-xl font-bold text-sm border border-red-100 text-red-700 hover:bg-red-50 flex items-center justify-center gap-2 disabled:opacity-50">
+                <ScanFace size={18} /> Entrar amb Face ID
+              </button>
+            </div>
 
-        <div className="mt-4 text-center">
-          <button onClick={() => { setStep('register'); setError(''); }}
-            className="text-sm text-gray-500 hover:text-gray-800 underline">
-            Nou voluntari? Registra&apos;t aquí
-          </button>
-        </div>
-
+            <div className="mt-4 text-center">
+              <button onClick={() => { setStep('register'); setError(''); }}
+                className="text-sm text-gray-500 hover:text-gray-800 underline">
+                Nou voluntari? Registra&apos;t aquí
+              </button>
+            </div>
           </>
         )}
       </div>
@@ -218,15 +252,6 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
         <ArrowLeft size={20} /> Tornar
       </button>
       <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-        {showFaceId ? (
-          <FaceIdLogin
-            storageKey={getVolunteerFaceIdKey(form.email)}
-            mode={faceMode}
-            onSuccess={(descriptor) => { void handleFaceSuccess(descriptor); }}
-            onCancel={() => setShowFaceId(false)}
-          />
-        ) : (
-          <>
         <h1 className="text-2xl font-bold text-gray-900 mb-1">Nou voluntari/a</h1>
         <p className="text-sm text-gray-500 mb-6">La IA trobarà el projecte ideal per a tu</p>
 
@@ -248,16 +273,80 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
             </button>
           </div>
           <button onClick={handleRegister} disabled={authLoading}
-            className="w-full py-3 rounded-xl font-bold text-white text-sm"
+            className="w-full py-3 rounded-xl font-bold text-white text-sm hover:opacity-90 disabled:opacity-50"
             style={{ background: '#C8102E' }}>
-            {authLoading ? 'Registrant...' : 'Continuar amb la IA →'}
-          </button>
-          <button onClick={() => openFaceId('register')} type="button" disabled={authLoading}
-            className="w-full py-3 rounded-xl font-bold text-sm border border-red-100 text-red-700 hover:bg-red-50 flex items-center justify-center gap-2">
-            <ScanFace size={18} /> Registrar Face ID (opcional)
+            {authLoading ? 'Registrant...' : 'Continuar →'}
           </button>
         </div>
-        <p className="text-xs text-gray-400 mt-4">La verificació facial es vincula a l&apos;email d&apos;aquest formulari.</p>
+        <p className="text-xs text-gray-400 mt-4">En el següent pas podràs configurar Face ID.</p>
+      </div>
+    </div>
+  );
+
+  // ── REGISTRE FACEID ───────────────────────────────────
+  if (step === 'register-faceid') return (
+    <div className="max-w-md mx-auto px-4 py-8">
+      <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+        {!showFaceId && !biometricConfigured && (
+          <>
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style={{ background: 'rgba(200,16,46,0.1)' }}>
+              <ScanFace size={28} style={{ color: '#C8102E' }} />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-1">Configurar Face ID</h1>
+            <p className="text-sm text-gray-500 mb-6">Opcional: Registra la teva cara per a inicis més ràpids</p>
+
+            {error && <div className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-xl">{error}</div>}
+
+            <div className="bg-blue-50 p-4 rounded-xl mb-6">
+              <p className="text-sm text-blue-900">
+                📌 <strong>Recorda:</strong> Si configures Face ID ara, podràs entrar en futures sessions només amb la teva cara.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <button
+                onClick={() => openFaceId('register')}
+                disabled={authLoading}
+                className="w-full py-3 rounded-xl font-bold text-sm text-white hover:opacity-90 flex items-center justify-center gap-2 disabled:opacity-50"
+                style={{ background: '#C8102E' }}
+              >
+                <ScanFace size={18} /> Configurar Face ID Ara
+              </button>
+              <button
+                onClick={skipBiometric}
+                disabled={authLoading}
+                className="w-full py-3 rounded-xl font-bold text-sm border border-gray-200 text-gray-700 hover:bg-gray-50"
+              >
+                Omitir per Ara
+              </button>
+            </div>
+          </>
+        )}
+
+        {showFaceId && (
+          <FaceIdLogin
+            mode="register"
+            onSuccess={(descriptor) => { void handleFaceSuccess(descriptor); }}
+            onCancel={() => setShowFaceId(false)}
+          />
+        )}
+
+        {biometricConfigured && (
+          <>
+            <div className="flex flex-col items-center justify-center py-8">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mb-4" style={{ background: 'rgba(34,197,94,0.1)' }}>
+                <CheckCircle size={32} className="text-green-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Face ID Configurat!</h2>
+              <p className="text-sm text-gray-500 text-center mb-6">La teva biometria s'ha registrat correctament</p>
+            </div>
+            <button
+              onClick={skipBiometric}
+              className="w-full py-3 rounded-xl font-bold text-white text-sm hover:opacity-90"
+              style={{ background: '#C8102E' }}
+            >
+              Continuar a l'assistent
+            </button>
           </>
         )}
       </div>

@@ -1,4 +1,4 @@
-# Hackaton IA 2026 - Connector Càritas Tarragona
+# Hackaton IA 2026 - Connector Connect Càritas
 
 Resumen técnico completo del repositorio, con estado real de arquitectura, seguridad, datos, flujos funcionales y operación en local/Codespaces/EC2.
 

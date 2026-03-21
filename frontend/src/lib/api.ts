@@ -1,4 +1,4 @@
-export const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+export const API_BASE = 'http://34.235.116.7:5000';
 
 export type AuthRole = 'voluntari' | 'empresa' | 'treballador';
 

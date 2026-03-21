@@ -7,30 +7,71 @@ import * as faceapi from 'face-api.js';
 interface FaceIdLoginProps {
   onSuccess: (faceDescriptor: Float32Array) => void;
   onCancel: () => void;
-  storageKey: string;
+  userId?: string;
   mode: 'register' | 'login';
 }
 
-const MODEL_URL = '/models';
+const MODEL_URL = 'https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model';
 const FACE_DISTANCE_THRESHOLD = 0.55;
+const SCAN_SAMPLES = 5;
 
-function safeParseDescriptor(raw: string | null): Float32Array | null {
+function safeParseDescriptor(raw: string | Float32Array | number[] | null): Float32Array | null {
   if (!raw) return null;
 
   try {
-    const parsed = JSON.parse(raw) as unknown;
-    if (!Array.isArray(parsed)) return null;
+    let parsed: number[];
+    
+    if (raw instanceof Float32Array) {
+      return raw;
+    } else if (Array.isArray(raw)) {
+      parsed = raw.map((value) => Number(value));
+    } else if (typeof raw === 'string') {
+      parsed = JSON.parse(raw) as unknown as number[];
+      if (!Array.isArray(parsed)) return null;
+      parsed = parsed.map((value) => Number(value));
+    } else {
+      return null;
+    }
 
-    const numeric = parsed.map((value) => Number(value));
-    if (numeric.some((value) => Number.isNaN(value))) return null;
-
-    return new Float32Array(numeric);
-  } catch {
+    if (parsed.some((value) => Number.isNaN(value))) return null;
+    return new Float32Array(parsed);
+  } catch (err) {
+    console.error('Error parsing descriptor:', err);
     return null;
   }
 }
 
-export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: FaceIdLoginProps) {
+function euclideanDistance(a: Float32Array, b: Float32Array): number {
+  if (a.length !== b.length) {
+    console.error(`Descriptor length mismatch: ${a.length} vs ${b.length}`);
+    return Infinity;
+  }
+  
+  let sum = 0;
+  for (let i = 0; i < a.length; i++) {
+    const diff = a[i] - b[i];
+    sum += diff * diff;
+  }
+  return Math.sqrt(sum);
+}
+
+function averageDescriptors(descriptors: Float32Array[]): Float32Array {
+  if (descriptors.length === 0) {
+    throw new Error('No descriptors to average');
+  }
+
+  const result = new Float32Array(descriptors[0].length);
+  for (let i = 0; i < result.length; i++) {
+    let sum = 0;
+    for (const desc of descriptors) {
+      sum += desc[i];
+    }
+    result[i] = sum / descriptors.length;
+  }
+  return result;
+}
+
+export default function FaceIdLogin({ onSuccess, onCancel, userId, mode }: FaceIdLoginProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
@@ -42,6 +83,8 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scanCount = useRef(0);
   const statusRef = useRef(status);
+  const descriptorsRef = useRef<Float32Array[]>([]);
+  const lastDetectionTime = useRef(0);
 
   useEffect(() => {
     statusRef.current = status;
@@ -51,22 +94,23 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
     isComponentMounted.current = true;
     const loadModels = async () => {
       try {
-        setProgressMsg('Carregant model de detecció facial...');
-        await faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL);
-        
-        setProgressMsg('Carregant model de punts clau...');
-        await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
-        
-        setProgressMsg('Carregant xarxa neuronal...');
-        await faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL);
+        setProgressMsg('Carregant models de detecció facial...');
+        await Promise.all([
+          faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
+          faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+          faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
+        ]);
         
         if (isComponentMounted.current) {
           setProgressMsg('Models carregats! Iniciant càmera...');
-          startCamera();
+          await startCamera();
         }
       } catch (err) {
         console.error("Error carregant models:", err);
-        if (isComponentMounted.current) setStatus('error');
+        if (isComponentMounted.current) {
+          setStatus('error');
+          setProgressMsg('Error carregant models. Intenta més tard.');
+        }
       }
     };
     loadModels();
@@ -79,18 +123,29 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
 
   const startCamera = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        video: { 
+          facingMode: 'user',
+          width: { ideal: 640 },
+          height: { ideal: 480 }
+        } 
+      });
       if (videoRef.current && isComponentMounted.current) {
         videoRef.current.srcObject = stream;
         videoRef.current.onloadedmetadata = () => {
-          videoRef.current?.play();
+          videoRef.current?.play().catch(err => console.error("Play error:", err));
           setStatus('scanning');
-          setProgressMsg('Buscant rostre...');
+          setProgressMsg(mode === 'register' ? 'Buscant rostre per registre...' : 'Buscant rostre per verificar...');
+          descriptorsRef.current = [];
           detectLoop(); 
         };
       }
     } catch (err) {
-      if (isComponentMounted.current) setStatus('error');
+      console.error("Error accessing camera:", err);
+      if (isComponentMounted.current) {
+        setStatus('error');
+        setProgressMsg('No es pot accedir a la càmera. Comprova els permisos.');
+      }
     }
   };
 
@@ -101,7 +156,7 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
     try {
       const detection = await faceapi.detectSingleFace(
         videoRef.current, 
-        new faceapi.SsdMobilenetv1Options({ minConfidence: 0.5 })
+        new faceapi.SsdMobilenetv1Options({ minConfidence: 0.6 })
       )
       .withFaceLandmarks()
       .withFaceDescriptor();
@@ -112,7 +167,9 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
       if (displaySize.width > 0 && displaySize.height > 0) {
         faceapi.matchDimensions(canvas, displaySize);
         const ctx = canvas.getContext('2d');
-        ctx?.clearRect(0, 0, canvas.width, canvas.height);
+        if (ctx) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
 
         if (detection) {
           const resizedDetections = faceapi.resizeResults(detection, displaySize);
@@ -122,52 +179,12 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
           const faceDescriptor = detection.descriptor;
 
           if (mode === 'register') {
-            scanCount.current += 10;
-            setLearningProgress(scanCount.current);
-            setProgressMsg(`Aprenent trets facials... ${scanCount.current}%`);
-
-            if (scanCount.current >= 100) {
-              setStatus('success');
-              setProgressMsg('Rostre guardat correctament!');
-              stopCamera();
-              setTimeout(() => onSuccess(faceDescriptor), 1200);
-              return; 
-            }
+            handleRegisterMode(faceDescriptor);
           } else {
-            setProgressMsg('Rostre detectat. Verificant identitat...');
-            const storedDescriptor = safeParseDescriptor(localStorage.getItem(storageKey));
-            
-            if (storedDescriptor) {
-              
-              const distance = faceapi.euclideanDistance(storedDescriptor, faceDescriptor);
-              
-              if (distance < FACE_DISTANCE_THRESHOLD) { 
-                setStatus('success');
-                setProgressMsg('Identitat verificada!');
-                stopCamera();
-                setTimeout(() => onSuccess(faceDescriptor), 1200);
-                return; 
-              } else {
-                setProgressMsg('La cara no coincideix. Torna-ho a intentar.');
-                setStatus('not-recognized');
-                setTimeout(() => {
-                  if (!isComponentMounted.current) return;
-                  setStatus('scanning');
-                  setProgressMsg('Buscant rostre...');
-                }, 900);
-              }
-            } else {
-              setProgressMsg('No hi ha dades biomètriques per a aquest compte.');
-              setStatus('error');
-              return;
-            }
+            await handleLoginMode(faceDescriptor);
           }
         } else {
           setProgressMsg('Si us plau, mira directament a la càmera...');
-          if (mode === 'register') {
-             scanCount.current = 0; 
-             setLearningProgress(0);
-          }
         }
       }
     } catch (e) {
@@ -175,16 +192,125 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
     }
 
     if (isComponentMounted.current) {
-        timeoutId.current = setTimeout(() => {
-          detectLoop().catch(console.error);
-        }, 100);
+
+      timeoutId.current = setTimeout(() => {
+
+        detectLoop().catch(console.error);
+
+      }, 100);
+
+    }
+
+  };
+
+  const handleRegisterMode = (faceDescriptor: Float32Array) => {
+    const now = Date.now();
+    if (now - lastDetectionTime.current < 300) return; // Throttle detections
+    lastDetectionTime.current = now;
+
+    if (descriptorsRef.current.length < SCAN_SAMPLES) {
+      descriptorsRef.current.push(faceDescriptor);
+      scanCount.current = (descriptorsRef.current.length / SCAN_SAMPLES) * 100;
+      setLearningProgress(scanCount.current);
+      setProgressMsg(`Capturant mostres... ${descriptorsRef.current.length}/${SCAN_SAMPLES}`);
+
+      if (descriptorsRef.current.length === SCAN_SAMPLES) {
+        const averagedDescriptor = averageDescriptors(descriptorsRef.current);
+        setStatus('success');
+        setProgressMsg('Rostre registrat correctament!');
+        stopCamera();
+        setTimeout(() => {
+          if (isComponentMounted.current) {
+            onSuccess(averagedDescriptor);
+          }
+        }, 1200);
       }
-    };
+    }
+  };
+
+  const handleLoginMode = async (faceDescriptor: Float32Array) => {
+    const now = Date.now();
+    if (now - lastDetectionTime.current < 500) return; // Throttle detections
+    lastDetectionTime.current = now;
+
+    setProgressMsg('Rostre detectat. Verificant identitat...');
+    
+    try {
+      if (!userId) {
+        setProgressMsg('Error: ID d\'usuari no proporcionat.');
+        setStatus('error');
+        return;
+      }
+
+      const response = await fetch(`/api/user/${userId}/biometric`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        if (response.status === 404) {
+          setProgressMsg('Aquesta persona no té rostre registrat. Registra\'t primer.');
+          setStatus('not-recognized');
+        } else {
+          setProgressMsg('Error verificant identitat.');
+          setStatus('error');
+        }
+        setTimeout(() => {
+          if (!isComponentMounted.current || statusRef.current !== 'scanning') return;
+          setStatus('scanning');
+          setProgressMsg('Buscant rostre...');
+        }, 2000);
+        return;
+      }
+
+      const data = await response.json();
+      const storedDescriptor = safeParseDescriptor(data.faceDescriptor);
+      
+      if (!storedDescriptor) {
+        setProgressMsg('Error descodificant dades biomètriques.');
+        setStatus('error');
+        setTimeout(() => {
+          if (!isComponentMounted.current || statusRef.current !== 'scanning') return;
+          setStatus('scanning');
+          setProgressMsg('Buscant rostre...');
+        }, 2000);
+        return;
+      }
+
+      const distance = euclideanDistance(storedDescriptor, faceDescriptor);
+      console.log(`Face distance: ${distance} (threshold: ${FACE_DISTANCE_THRESHOLD})`);
+      
+      if (distance < FACE_DISTANCE_THRESHOLD) { 
+        setStatus('success');
+        setProgressMsg('Identitat verificada!');
+        stopCamera();
+        setTimeout(() => {
+          if (isComponentMounted.current) {
+            onSuccess(faceDescriptor);
+          }
+        }, 1200);
+      } else {
+        setProgressMsg('La cara no coincideix. Torna-ho a intentar.');
+        setStatus('not-recognized');
+        setTimeout(() => {
+          if (!isComponentMounted.current || statusRef.current !== 'scanning') return;
+          setStatus('scanning');
+          setProgressMsg('Buscant rostre...');
+        }, 2000);
+      }
+    } catch (error) {
+      console.error("Error fetching biometric data:", error);
+      setProgressMsg('Error de connexió. Intenta més tard.');
+      setStatus('error');
+    }
+  };
 
   const stopCamera = () => {
     if (videoRef.current?.srcObject) {
       const stream = videoRef.current.srcObject as MediaStream;
       stream.getTracks().forEach(track => track.stop());
+      videoRef.current.srcObject = null;
     }
     if (timeoutId.current) clearTimeout(timeoutId.current);
   };
@@ -195,7 +321,7 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-6 bg-gray-900 rounded-3xl w-full">
+    <div className="flex flex-col items-center justify-center py-6 bg-gray-900 rounded-3xl w-full max-w-2xl mx-auto">
       <div className="relative mb-6 w-full max-w-sm aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl border-4" style={{ borderColor: status === 'success' ? '#22c55e' : status === 'error' || status === 'not-recognized' ? '#ef4444' : '#3b82f6' }}>
         
         <video 
@@ -233,8 +359,8 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
         {mode === 'register' ? 'Registre biomètric' : 'Verificació facial'}
       </h2>
       
-      <div className="bg-gray-800 rounded-xl p-3 w-full max-w-sm mb-6 border border-gray-700">
-        <p className={`text-center font-medium ${status === 'error' || status === 'not-recognized' ? 'text-red-400' : status === 'success' ? 'text-green-400' : 'text-blue-300'}`}>
+      <div className="bg-gray-800 rounded-xl p-4 w-full max-w-sm mb-6 border border-gray-700">
+        <p className={`text-center font-medium text-sm ${status === 'error' || status === 'not-recognized' ? 'text-red-400' : status === 'success' ? 'text-green-400' : 'text-blue-300'}`}>
           {progressMsg}
         </p>
         
@@ -245,7 +371,11 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
         )}
       </div>
 
-      <button onClick={handleManualCancel} className="flex items-center gap-2 px-8 py-3 rounded-xl bg-gray-800 text-gray-300 font-bold hover:bg-red-600 hover:text-white transition-all">
+      <button 
+        onClick={handleManualCancel}
+        disabled={status === 'success'}
+        className="flex items-center gap-2 px-8 py-3 rounded-xl bg-gray-800 text-gray-300 font-bold hover:bg-red-600 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+      >
         <X size={20} /> Cancel·lar operació
       </button>
     </div>

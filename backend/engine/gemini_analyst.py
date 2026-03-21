@@ -37,7 +37,7 @@ Ets un assistent social expert de Càritas Diocesana de Tarragona.
 La teva funció és analitzar fitxes socials i assignar recursos de manera
 intel·ligent i empàtica.
 
-PROJECTES REALS DE CÀRITAS TARRAGONA:
+PROJECTES REALS DE Connect Càritas:
 {context_projectes}
 
 TIPUS DE RECURSOS DISPONIBLES:

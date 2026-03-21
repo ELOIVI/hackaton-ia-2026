@@ -5,7 +5,7 @@ import { Loader2, Sparkles, MapPin, X, ChevronRight, Search } from 'lucide-react
 import dynamic from 'next/dynamic';
 
 export const ATTENTION_CENTERS = [
-  { id: 1, name: 'Càritas Tarragona Centre', address: 'C/ Apodaca 14, Tarragona', phone: '977 21 00 36', lat: 41.1189, lng: 1.2445, services: ['habitatge', 'economia', 'alimentació', 'documentació', 'salut'], hours: 'Dl–Dv 9h–13h i 16h–19h', district: 'Tarragona Centre' },
+  { id: 1, name: 'Connect Càritas Centre', address: 'C/ Apodaca 14, Tarragona', phone: '977 21 00 36', lat: 41.1189, lng: 1.2445, services: ['habitatge', 'economia', 'alimentació', 'documentació', 'salut'], hours: 'Dl–Dv 9h–13h i 16h–19h', district: 'Tarragona Centre' },
   { id: 2, name: 'Càritas Bonavista', address: 'C/ Riu Ebre s/n, Tarragona', phone: '977 55 12 43', lat: 41.0980, lng: 1.2180, services: ['alimentació', 'economia', 'documentació'], hours: 'Dl, Dc, Dv 9h–12h', district: 'Bonavista' },
   { id: 3, name: 'Càritas Sant Pere i Sant Pau', address: 'Av. Vidal i Barraquer 2, Tarragona', phone: '977 20 88 71', lat: 41.1050, lng: 1.2350, services: ['habitatge', 'educació', 'economia'], hours: 'Dl–Dv 10h–13h', district: 'Sant Pere i Sant Pau' },
   { id: 4, name: 'Càritas Reus', address: 'C/ Ample 12, Reus', phone: '977 31 44 22', lat: 41.1561, lng: 1.1065, services: ['habitatge', 'economia', 'alimentació', 'documentació', 'salut', 'educació'], hours: 'Dl–Dv 9h–13h i 16h–19h', district: 'Reus' },
