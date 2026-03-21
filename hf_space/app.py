@@ -7,6 +7,8 @@ import json
 import os
 from pathlib import Path
 import logging
+import re
+from functools import lru_cache
 
 import torch
 import torch.nn as nn
@@ -14,7 +16,7 @@ from fastapi import Depends, FastAPI, HTTPException, status
 from huggingface_hub import hf_hub_download
 from pydantic import BaseModel
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from transformers import AutoModel, AutoTokenizer
+from transformers import AutoModel, AutoModelForSequenceClassification, AutoTokenizer
 
 app = FastAPI(title="Urgency Risk Analysis API")
 logger = logging.getLogger(__name__)
@@ -23,16 +25,18 @@ security = HTTPBearer(auto_error=False)
 # Global variables for lazy loading
 model = None
 tokenizer = None
+model_mode = "legacy_binary"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 # Model definition (must match training code)
 class SentimentClassifier(nn.Module):
-    def __init__(self):
+    def __init__(self, backbone_model_name: str):
         super().__init__()
-        self.bert = AutoModel.from_pretrained("distilbert-base-uncased")
+        self.bert = AutoModel.from_pretrained(backbone_model_name)
         self.dropout = nn.Dropout(0.3)
-        self.classifier = nn.Linear(768, 2)
+        hidden_size = int(getattr(self.bert.config, "hidden_size", 768))
+        self.classifier = nn.Linear(hidden_size, 2)
 
     def forward(self, input_ids, attention_mask, **kwargs):
         outputs = self.bert(input_ids=input_ids, attention_mask=attention_mask)
@@ -89,10 +93,32 @@ def _score_urgency_from_text(text: str) -> float:
         "feina precària", "contracte temporal", "ajuda", "orientació", "suport",
     ]
 
+    def _term_pattern(term: str) -> re.Pattern[str]:
+        tokenized = re.escape(term).replace(r"\ ", r"\s+")
+        return re.compile(r"\b" + tokenized + r"\b", re.IGNORECASE)
+
+    @lru_cache(maxsize=256)
+    def _cached_term_pattern(term: str) -> re.Pattern[str]:
+        return _term_pattern(term)
+
+    def _contains_term(term: str) -> bool:
+        return bool(_cached_term_pattern(term).search(lowered))
+
+    @lru_cache(maxsize=256)
+    def _cached_negated_pattern(term: str) -> re.Pattern[str]:
+        tokenized = re.escape(term).replace(r"\ ", r"\s+")
+        return re.compile(
+            r"\b(?:no|sense|cap)\b(?:\W+\w+){0,3}\W+\b" + tokenized + r"\b",
+            re.IGNORECASE,
+        )
+
+    def _is_negated(term: str) -> bool:
+        return bool(_cached_negated_pattern(term).search(lowered))
+
     score = 0.0
-    score += 1.6 * sum(1 for t in critical_tokens if t in lowered)
-    score += 0.9 * sum(1 for t in high_tokens if t in lowered)
-    score += 0.4 * sum(1 for t in medium_tokens if t in lowered)
+    score += 1.6 * sum(1 for t in critical_tokens if _contains_term(t) and not _is_negated(t))
+    score += 0.9 * sum(1 for t in high_tokens if _contains_term(t) and not _is_negated(t))
+    score += 0.4 * sum(1 for t in medium_tokens if _contains_term(t) and not _is_negated(t))
     return score
 
 
@@ -105,9 +131,18 @@ def _urgency_label(risk_score: float, model_signal: str) -> tuple[str, float]:
     return "baixa", 0.60
 
 
+def _normalize_hf_label(label: str) -> str:
+    value = str(label or "").strip().lower()
+    if any(token in value for token in ("negative", "negatiu", "negativo", "label_0")):
+        return "negative"
+    if any(token in value for token in ("positive", "positiu", "positivo", "label_2")):
+        return "positive"
+    return "neutral"
+
+
 def load_model_from_hf(repo_id: str):
     """Load model from Hugging Face on-demand"""
-    global model, tokenizer
+    global model, tokenizer, model_mode
 
     if model is not None:
         return  # Already loaded
@@ -118,20 +153,25 @@ def load_model_from_hf(repo_id: str):
     cache_dir = "./model_cache"
     Path(cache_dir).mkdir(exist_ok=True)
 
-    model_path = hf_hub_download(
-        repo_id=repo_id, filename="model.pt", cache_dir=cache_dir
-    )
-
-    config_path = hf_hub_download(
-        repo_id=repo_id, filename="config.json", cache_dir=cache_dir
-    )
-
-    # Load tokenizer
     tokenizer = AutoTokenizer.from_pretrained(repo_id, cache_dir=cache_dir)
 
-    # Load model
-    model = SentimentClassifier()
-    model.load_state_dict(torch.load(model_path, map_location=device))
+    try:
+        model_path = hf_hub_download(
+            repo_id=repo_id, filename="model.pt", cache_dir=cache_dir
+        )
+
+        backbone_model_name = os.environ.get(
+            "MODEL_BACKBONE",
+            "distilbert-base-uncased",
+        )
+        model = SentimentClassifier(backbone_model_name)
+        model.load_state_dict(torch.load(model_path, map_location=device))
+        model_mode = "legacy_binary"
+    except Exception:
+        logger.warning("No s'ha trobat model.pt; usant AutoModelForSequenceClassification", exc_info=True)
+        model = AutoModelForSequenceClassification.from_pretrained(repo_id, cache_dir=cache_dir)
+        model_mode = "hf_sequence"
+
     model.to(device)
     model.eval()
 
@@ -142,18 +182,18 @@ def load_model_from_hf(repo_id: str):
 async def startup_event():
     """Load model when server starts"""
     # Read from environment variable or use default
-    REPO_ID = os.environ.get("MODEL_REPO_ID", "ELOIVI/sentiment-model")
+    REPO_ID = os.environ.get("MODEL_REPO_ID", "cardiffnlp/twitter-xlm-roberta-base-sentiment")
     load_model_from_hf(REPO_ID)
 
 
 @app.get("/")
 def root():
     return {
-        "message": "Sentiment Analysis API",
+        "message": "Urgency Risk Analysis API",
         "mode": "urgency-risk",
         "status": "running",
         "endpoints": {
-            "/predict": "POST - Analyze sentiment of text",
+            "/predict": "POST - Analyze urgency risk of text",
             "/health": "GET - Check if model is loaded",
             "/docs": "GET - Interactive API documentation",
         },
@@ -165,6 +205,7 @@ def health_check():
     return {
         "status": "healthy",
         "model_loaded": model is not None,
+        "model_mode": model_mode,
         "device": str(device),
     }
 
@@ -188,11 +229,18 @@ def predict(request: PredictionRequest, _auth: None = Depends(_require_bearer_to
         # Get prediction
         with torch.no_grad():
             outputs = model(**inputs)
-            probs = torch.softmax(outputs, dim=1)
+            logits = outputs if isinstance(outputs, torch.Tensor) else outputs.logits
+            probs = torch.softmax(logits, dim=1)
             prediction = torch.argmax(probs, dim=1).item()
             confidence = probs[0][prediction].item()
 
-        model_signal = "positive" if prediction == 1 else "negative"
+        if model_mode == "legacy_binary":
+            model_signal = "positive" if prediction == 1 else "negative"
+        else:
+            id2label = getattr(getattr(model, "config", None), "id2label", {}) or {}
+            label = id2label.get(prediction, str(prediction))
+            model_signal = _normalize_hf_label(str(label))
+
         urgency, calibrated = _urgency_label(_score_urgency_from_text(request.text), model_signal)
 
         # Keep confidence grounded in both model signal and risk heuristic.

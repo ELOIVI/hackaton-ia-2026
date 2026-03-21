@@ -27,6 +27,7 @@ from routes.dashboard import dashboard_bp
 from routes.auth import auth_bp
 from utils.auth_tokens import ensure_auth_secret_configured
 from utils.catalog_cache import warm_catalog_cache
+from utils.db_core import initialize_sqlite_db_settings
 from utils.user_store import init_user_store, ensure_admin_accounts_all_roles
 from utils.expedient_store import init_expedient_store
 from utils.partner_store import init_partner_store, seed_partners_if_empty, ensure_partner_admin_entries
@@ -37,6 +38,7 @@ app.register_blueprint(dashboard_bp)
 app.register_blueprint(auth_bp)
 
 ensure_auth_secret_configured()
+initialize_sqlite_db_settings()
 preloaded_catalogs = warm_catalog_cache()
 init_user_store()
 init_partner_store()

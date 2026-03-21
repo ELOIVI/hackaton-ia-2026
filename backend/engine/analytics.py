@@ -182,10 +182,9 @@ def build_expedient_analytics_cached(
         ):
             return copy.deepcopy(_analytics_cache_payload)
 
-    payload = build_expedient_analytics(expedients)
-    expires_at = now + max(int(ttl_seconds), 1)
-
-    with _analytics_cache_lock:
+        # Recompute under the lock to prevent cache stampede on expiry.
+        payload = build_expedient_analytics(expedients)
+        expires_at = now + max(int(ttl_seconds), 1)
         _analytics_cache_payload = payload
         _analytics_cache_signature = signature
         _analytics_cache_expires_at = expires_at
