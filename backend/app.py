@@ -1,6 +1,3 @@
-# Aplicació Flask principal del Connector Càritas.
-# Integra el motor híbrid de matching i els chatbots guiats per Gemini.
-
 from flask import Flask, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -13,9 +10,11 @@ CORS(app)
 
 from routes.match import match_bp
 from routes.chat import chat_bp
+from routes.dashboard import dashboard_bp
 
 app.register_blueprint(match_bp)
 app.register_blueprint(chat_bp)
+app.register_blueprint(dashboard_bp)
 
 
 @app.route("/health")
@@ -26,13 +25,18 @@ def health():
 @app.route("/")
 def index():
     return jsonify({
-        "missatge": "Connector Càritas API activa",
+        "missatge": "Connector Càritas API",
         "endpoints": {
-            "POST /match": "Motor de matching amb fitxa estructurada",
-            "POST /match/text": "Motor de matching amb text lliure",
-            "POST /chat/persona": "Chatbot guiat per a persones ateses",
-            "POST /chat/voluntari": "Chatbot guiat per a voluntaris",
-            "GET /health": "Estat del servidor"
+            "POST /match": "Motor matching fitxa estructurada",
+            "POST /match/text": "Motor matching text lliure",
+            "POST /chat/persona": "Chatbot persona atesa",
+            "POST /chat/voluntari": "Chatbot voluntari",
+            "POST /register/voluntari": "Registre voluntari",
+            "POST /register/empresa": "Registre empresa",
+            "GET /dashboard/voluntari/:id": "Dashboard voluntari",
+            "GET /dashboard/empresa/:id": "Dashboard empresa",
+            "GET /expedients": "Llista expedients (treballador)",
+            "POST /expedient": "Crear expedient (treballador)",
         }
     })
 
