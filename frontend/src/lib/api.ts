@@ -1,4 +1,4 @@
-export const API_BASE = 'http://34.235.116.7:5000';
+export const API_BASE = 'http://100.27.202.201:5000';
 
 export type AuthRole = 'voluntari' | 'empresa' | 'treballador';
 
