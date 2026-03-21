@@ -1,8 +1,18 @@
 from __future__ import annotations
 
+import copy
+import hashlib
+import json
+import threading
+import time
 from typing import Any
 
 import pandas as pd
+
+_analytics_cache_lock = threading.Lock()
+_analytics_cache_payload: dict[str, Any] | None = None
+_analytics_cache_signature: str | None = None
+_analytics_cache_expires_at: float = 0.0
 
 
 def _is_housing_instability(value: Any) -> bool:
@@ -18,6 +28,35 @@ def _is_irregular_status(value: Any) -> bool:
 def _is_digital_gap(value: Any) -> bool:
     text = str(value or "").strip().lower()
     return text in {"baixa", "molt_baixa", "no", "sense", "0"}
+
+
+def _expedients_signature(expedients: list[dict[str, Any]]) -> str:
+    compact_rows: list[dict[str, Any]] = []
+    for exp in expedients:
+        fitxa = exp.get("fitxa") or {}
+        compact_rows.append(
+            {
+                "id": exp.get("id"),
+                "estat": exp.get("estat"),
+                "urgencia": exp.get("urgencia"),
+                "created_by_user_id": exp.get("created_by_user_id"),
+                "resolved_by_user_id": exp.get("resolved_by_user_id"),
+                "municipi": fitxa.get("municipi"),
+                "tipus_habitatge": fitxa.get("tipus_habitatge"),
+                "ciutadania": fitxa.get("ciutadania"),
+                "alfabetitzacio_digital": fitxa.get("alfabetitzacio_digital"),
+                "recursos": [
+                    {
+                        "tipus": (rec or {}).get("tipus"),
+                    }
+                    for rec in (exp.get("recursos_assignats") or [])
+                ],
+            }
+        )
+
+    compact_rows.sort(key=lambda x: str(x.get("id") or ""))
+    raw = json.dumps(compact_rows, sort_keys=True, ensure_ascii=True)
+    return hashlib.sha1(raw.encode("utf-8")).hexdigest()
 
 
 def build_expedient_analytics(expedients: list[dict[str, Any]]) -> dict[str, Any]:
@@ -124,3 +163,31 @@ def build_expedient_analytics(expedients: list[dict[str, Any]]) -> dict[str, Any
         "recursos_distribution": recursos_distribution,
         "resolts_per_treballador": resolts_per_treballador,
     }
+
+
+def build_expedient_analytics_cached(
+    expedients: list[dict[str, Any]],
+    ttl_seconds: int = 180,
+) -> dict[str, Any]:
+    global _analytics_cache_payload, _analytics_cache_signature, _analytics_cache_expires_at
+
+    now = time.time()
+    signature = _expedients_signature(expedients)
+
+    with _analytics_cache_lock:
+        if (
+            _analytics_cache_payload is not None
+            and _analytics_cache_signature == signature
+            and now < _analytics_cache_expires_at
+        ):
+            return copy.deepcopy(_analytics_cache_payload)
+
+    payload = build_expedient_analytics(expedients)
+    expires_at = now + max(int(ttl_seconds), 1)
+
+    with _analytics_cache_lock:
+        _analytics_cache_payload = payload
+        _analytics_cache_signature = signature
+        _analytics_cache_expires_at = expires_at
+
+    return copy.deepcopy(payload)

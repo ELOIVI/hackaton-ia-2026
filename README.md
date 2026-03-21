@@ -1,81 +1,145 @@
 # Hackaton IA 2026 - Connector Càritas Tarragona
 
-API + frontend para gestión social asistida por IA.
+Resumen técnico completo del repositorio, con estado real de arquitectura, seguridad, datos, flujos funcionales y operación en local/Codespaces/EC2.
 
-## Stack
+## 1) Qué Es Este Proyecto
 
-- Backend: Flask
-- Frontend: Next.js (App Router)
-- Persistencia: SQLite (principal) + S3 (espejo opcional)
-- IA: Gemini (análisis) + HF Space (urgencia)
+Plataforma de atención social asistida por IA para Càritas Diocesana de Tarragona.
 
-## Variables De Entorno
+Incluye:
 
-Backend:
+- Backend Flask con autenticación por token y motor de matching social.
+- Frontend Next.js App Router con panel interno, flujo de solicitud y mapa interactivo.
+- Persistencia en SQLite como fuente principal de verdad.
+- Espejo opcional en S3 para compatibilidad/histórico.
+- Integración IA híbrida:
+  - Gemini para análisis semántico y conversación guiada.
+  - Endpoint externo de urgencia (HF Space) para scoring específico.
+  - Analítica con Pandas en dashboard.
 
-- GOOGLE_API_KEY
-- HF_APP_ENDPOINT
-- AWS_S3_BUCKET (opcional)
-- AUTH_SECRET_KEY (recomendado en prod)
-- MASTER_ADMIN_EMAIL (opcional, default admin@caritas.org)
-- MASTER_ADMIN_PASSWORD (opcional, default Admin1234!)
-- CORS_ALLOW_ALL (default 1 en dev)
-- FRONTEND_ORIGINS (si CORS_ALLOW_ALL=0)
+## 2) Stack Tecnológico
 
-Frontend:
+- Backend:
+  - Flask, Flask-CORS
+  - SQLite
+  - boto3 (S3 opcional)
+  - requests
+  - pandas
+- Frontend:
+  - Next.js 15 (App Router)
+  - React 19
+  - Tailwind
+  - Recharts
+  - Leaflet + react-leaflet
+- IA:
+  - Google Gemini API
+  - HuggingFace Space (urgency endpoint)
 
-- NEXT_PUBLIC_API_URL (default http://localhost:5000)
+## 3) Scraping Funcional Del Repo (Mapa Real)
 
-## Arranque
+### Raíz
 
-Backend:
+- README.md: guía principal (este documento).
+- training_data.json: dataset base del proyecto.
 
-1. cd backend
-2. pip install -r requirements.txt
-3. python app.py
+### backend/
 
-Frontend:
+- app.py
+  - Inicialización global.
+  - Registro de blueprints.
+  - Carga de catálogos a memoria (warmup).
+  - Inicializa stores y cuentas admin automáticas.
+- routes/
+  - auth.py: registro/login/me con validación y rate limit.
+  - match.py: matching estructurado, matching por texto libre y endpoint de urgencia.
+  - chat.py: flujos conversacionales persona/voluntario con integración a matching.
+  - dashboard.py: expedientes, dashboards por rol, analytics y catálogos.
+- engine/
+  - keyword_parser.py: extracción determinista de keywords.
+  - gemini_analyst.py: análisis de caso con Gemini.
+  - matcher.py: motor híbrido final (centro/recursos/voluntarios/organizaciones/empresas).
+  - analytics.py: métricas agregadas con Pandas para dashboard.
+- utils/
+  - auth_tokens.py: firma/verificación de tokens; secret obligatorio.
+  - auth_guard.py: autorización por roles.
+  - db_core.py: conexión SQLite.
+  - user_store.py: usuarios/admins.
+  - partner_store.py: voluntarios/empresas y admins técnicos de partners.
+  - expedient_store.py: persistencia de expedientes y relaciones.
+  - catalog_cache.py: catálogos JSON precargados en RAM.
+  - rate_limit.py, validation.py, volunteer_load.py, json_utils.py.
+- db/
+  - users.sqlite
+  - catálogos JSON (centres, recursos, voluntaris, empreses, etc.).
+  - generate_massive_db_data.py: generación masiva realista multi-origen.
 
-1. cd frontend
-2. npm install
-3. npm run dev
+### frontend/
 
-## Generacion Masiva De Datos (Todas Las BDs)
+- src/app/help-request-interface/
+  - flujo de formularios por rol.
+- src/app/internal-dashboard/
+  - panel operativo interno (KPIs, expedientes, actividad, urgencias, cobertura, partners, mapa).
+- src/app/support-locator/
+  - localizador de puntos de atención con mapa Leaflet.
+- src/lib/api.ts
+  - cliente base para backend y auth headers.
 
-Script nuevo para poblar SQLite + JSONs de catalogo con datos sinteticos realistas y ordenados.
+### hf_space/
 
-Ubicacion:
+- app.py + Dockerfile para servicio de urgencia desplegable en Space.
 
-- backend/db/generate_massive_db_data.py
+## 4) Estado De Cambios Clave De Esta Iteración
 
-Que genera:
+### Arquitectura y escalabilidad
 
-- SQLite: users, voluntaris, empreses, expedients, expedient_voluntaris, expedient_empreses
-- JSONs: voluntaris.json, empreses.json, recursos.json, organitzacions.json, projectes_caritas.json
-- Ordena catalogos por claves utiles (municipi/nom/id o similars)
-- Incluye admin maestro y asigna created_by_user_id / resolved_by_user_id en expedients
+- Catálogos JSON ya no se leen por request.
+- Preload de catálogos al arranque y acceso desde memoria.
+- Analytics de dashboard con caché TTL para evitar recomputar Pandas en cada llamada.
 
-Ejemplo rapido:
+### Seguridad y robustez
 
-1. cd backend
-2. python db/generate_massive_db_data.py --expedients 5000 --voluntaris 900 --empreses 260
+- Secret de auth obligatorio (fail-fast si falta AUTH_SECRET_KEY).
+- Excepciones sanitizadas en endpoints críticos (sin leakage al cliente).
+- Endpoint de urgencia soporta Bearer token HF_API_TOKEN.
+- Llamada a Gemini endurecida:
+  - API key en header, no en querystring.
+  - errores internos sin exponer datos sensibles en respuestas.
+- Debug y CORS controlados por entorno.
 
-Notas:
+### IA y matching
 
-- Por defecto limpia tablas SQLite antes de regenerar. Usa --no-reset para mantener datos previos.
-- Credenciales admin por defecto: admin@caritas.org / Admin1234!
+- Matching híbrido operativo:
+  - deterministic keyword parsing
+  - Gemini analysis
+  - asignación de centro/recursos/voluntarios/organizaciones/empresas
+- Regla determinista de inclusión sensible en matcher:
+  - casos de violencia/maltrato activan filtro women-only en voluntariado.
 
-## Cuenta Maestra Inicial
+### Dashboard y UX
 
-- Email: admin@caritas.org
-- Password: Admin1234!
-- Rol: treballador
+- Panels antes hardcodeados migrados a datos reales de DB.
+- Mapa operativo interno incorporado con centros y expedientes geolocalizados.
+- Soporte Leaflet movido a ciclo de cliente para evitar problemas de hidratación.
 
-Se crea automáticamente al arrancar backend si no existe.
+### Datos
 
-## Endpoints API
+- Script de generación masiva:
+  - crea/ordena catálogos JSON,
+  - puebla SQLite con miles de registros,
+  - asigna created_by_user_id y resolved_by_user_id,
+  - recalcula carga real de voluntariado.
 
-### Salud y meta
+### Administración
+
+- Cuentas admin por rol autogeneradas al arranque:
+  - AdminTreballador@caritas.org
+  - AdminVoluntari@caritas.org
+  - AdminEmpresa@caritas.org
+  - password común por defecto: Admin1234!
+
+## 5) Endpoints API (Resumen Operativo)
+
+### Meta
 
 - GET /health
 - GET /
@@ -83,77 +147,133 @@ Se crea automáticamente al arrancar backend si no existe.
 ### Auth
 
 - POST /auth/register
-  - body: { email, password, role, nom?, companyName?, location? }
 - POST /auth/login
-  - body: { email, password }
 - GET /auth/me
-  - header: Authorization: Bearer <token>
 
 ### Matching
 
 - POST /match
-  - body: fitxa social JSON
 - GET /match/test
 - POST /match/text
-  - body: { text }
 - POST /urgency
-  - body: { text }
 
 ### Chat
 
 - POST /chat/persona
-  - body: { history, message }
 - POST /chat/voluntari
-  - auth: voluntari o treballador
-  - body: { history, message }
 - GET /chat/test
 
-### Dashboard y expedientes (treballador)
+### Dashboard y expedientes
 
 - GET /expedients
 - GET /expedients/mine
 - POST /expedient
-  - body: { fitxa }
 - GET /expedient/<id>
 - PATCH /expedient/<id>/close
-
-### Dashboards por rol
-
+- GET /dashboard/analytics
+- GET /catalog/centres
 - GET /dashboard/voluntari/<id>
-  - auth: voluntari o treballador
 - GET /dashboard/empresa/<id>
-  - auth: empresa o treballador
 
-## Persistencia y relaciones (SQLite)
+## 6) Variables De Entorno
 
-DB principal: backend/db/users.sqlite
+## Backend (obligatorias recomendadas)
 
-Tablas:
+- AUTH_SECRET_KEY (obligatoria)
+- GOOGLE_API_KEY (si usas Gemini)
+- HF_APP_ENDPOINT (si usas /urgency)
 
-- users
-- voluntaris
-- empreses
-- expedients
-- expedient_voluntaris (FK expedient -> voluntari)
-- expedient_empreses (FK expedient -> empresa)
+## Backend (opcionales)
 
-Relaciones implementadas:
+- HF_API_TOKEN
+- AWS_S3_BUCKET
+- ANALYTICS_TTL_SECONDS (default 300)
+- CORS_ALLOW_ALL (dev default 1)
+- FRONTEND_ORIGINS (cuando CORS_ALLOW_ALL=0)
+- FLASK_DEBUG
+- PORT
 
-- Expediente creado por trabajador: created_by_user_id
-- Expediente asociado a voluntarios asignados (tabla puente)
-- Expediente asociado a empresas recomendadas/asignadas (tabla puente)
+## Admin defaults
 
-## Validaciones Backend
+- MASTER_ADMIN_EMAIL / MASTER_ADMIN_PASSWORD
+- VOLUNTEER_ADMIN_EMAIL
+- COMPANY_ADMIN_EMAIL
+- ADMIN_SHARED_PASSWORD
 
-- edad: 0..120
-- menors_a_carrec: 0..20
-- lat: -90..90
-- lng: -180..180
+## Frontend
 
-Si hay error de validación, devuelve 400 con details.
+- NEXT_PUBLIC_API_URL (default http://localhost:5000)
 
-## Notas
+Ejemplo de backend/.env seguro:
 
-- S3 se mantiene como espejo opcional para compatibilidad.
-- El matching de voluntarios y empresas ya usa SQLite (no JSON estático).
-- Si el frontend muestra "Failed to fetch", revisar NEXT_PUBLIC_API_URL y backend activo.
+AUTH_SECRET_KEY=pon_una_clave_larga_unica
+GOOGLE_API_KEY=tu_key
+HF_APP_ENDPOINT=https://tu-space.hf.space
+HF_API_TOKEN=tu_token
+AWS_S3_BUCKET=hackaton-bucket
+CORS_ALLOW_ALL=0
+FRONTEND_ORIGINS=https://tu-frontend.com
+
+## 7) Arranque Local (Codespaces O Local)
+
+### Backend
+
+1. cd backend
+2. python -m venv .venv
+3. source .venv/Scripts/activate (Git Bash) o .\\.venv\\Scripts\\Activate.ps1 (PowerShell)
+4. pip install -r requirements.txt
+5. define AUTH_SECRET_KEY
+6. python app.py
+
+Notas:
+
+- En Git Bash usa export AUTH_SECRET_KEY=... (no uses sintaxis de PowerShell).
+- Si aparece ModuleNotFoundError: pandas, faltan dependencias del requirements.
+
+### Frontend
+
+1. cd frontend
+2. npm install
+3. npm run dev
+
+## 8) Generación Masiva De Datos
+
+Desde backend:
+
+python db/generate_massive_db_data.py --expedients 5000 --voluntaris 900 --empreses 260
+
+Opciones clave:
+
+- --no-reset para no limpiar tablas existentes.
+- --seed para reproducibilidad.
+- --resolved-ratio para proporción de cerrados.
+
+## 9) Despliegue En EC2 (Resumen)
+
+- Backend con Gunicorn + systemd en 127.0.0.1:5000.
+- Nginx como reverse proxy.
+- TLS con certbot.
+- Variables en EnvironmentFile (systemd) o .env protegido.
+- No subir ni versionar secrets.
+
+## 10) Checklist De Seguridad Antes De Producción
+
+- Rotar inmediatamente cualquier API key que haya sido expuesta.
+- Confirmar AUTH_SECRET_KEY fuerte y única.
+- Desactivar CORS_ALLOW_ALL en producción.
+- Configurar HF_API_TOKEN si endpoint de urgencia es privado.
+- Limitar rate limits según tráfico real.
+- Revisar logs y no devolver trazas al cliente.
+
+## 11) Estado Funcional Actual
+
+El repositorio está en estado funcional con:
+
+- matching operativo,
+- dashboard conectado a DB,
+- mapa interactivo,
+- admins por rol,
+- seguridad reforzada,
+- analytics cacheado,
+- y scripts de seed masivo listos para demo o carga.
+
