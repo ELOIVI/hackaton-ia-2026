@@ -29,6 +29,35 @@ class GeminiCallError(RuntimeError):
 
     _gemini_circuit_open_until: float = 0.0
 
+_gemini_requests_minute: list[float] = []
+_gemini_requests_day: list[float] = []
+
+
+def _check_and_update_local_quota(now: float) -> None:
+    global _gemini_requests_minute, _gemini_requests_day
+    
+    _gemini_requests_minute = [t for t in _gemini_requests_minute if now - t < 60]
+    _gemini_requests_day = [t for t in _gemini_requests_day if now - t < 86400]
+    
+    if len(_gemini_requests_day) >= 20:
+        raise GeminiCallError(
+            kind="rate_limited",
+            client_message="S'ha assolit el límit diari gratuït de consultes a l'IA (20/dia).",
+            status_code=429,
+            log_detail="Local quota circuit breaker: 20 RPD limit reached",
+        )
+        
+    if len(_gemini_requests_minute) >= 5:
+        raise GeminiCallError(
+            kind="rate_limited",
+            client_message="S'ha assolit el límit per minut de consultes a l'IA (5/min).",
+            status_code=429,
+            log_detail="Local quota circuit breaker: 5 RPM limit reached",
+        )
+        
+    _gemini_requests_minute.append(now)
+    _gemini_requests_day.append(now)
+
 
 def _gemini_timeout_seconds() -> int:
     # Timeout is configurable to avoid hardcoded network behavior.
@@ -111,6 +140,8 @@ def call_gemini(prompt: str) -> str:
             retry_after_seconds=retry_after,
             log_detail="Gemini circuit breaker open",
         )
+
+    _check_and_update_local_quota(now)
 
     api_key = os.environ.get("GOOGLE_API_KEY")
     if not api_key:

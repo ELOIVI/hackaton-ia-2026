@@ -51,16 +51,29 @@ def match_recursos(keywords: list, tipus_recomanats: list,
     """Selecciona recursos adequats amb quantitat recomanada"""
     resultat = []
     for rec in recursos:
+        if rec.get("quantitat_disponible", 0) <= 0:
+            continue
         score = keyword_score(rec["keywords"], keywords)
         is_recomanat = rec["tipus"] in tipus_recomanats
         if score > 0 or is_recomanat:
             quantitat = quantitats.get(rec["tipus"], 1)
-            resultat.append({
-                **rec,
-                "score": score + (3 if is_recomanat else 0),
-                "quantitat_recomanada": min(quantitat, rec["quantitat_disponible"])
-            })
-    return sorted(resultat, key=lambda x: x["score"], reverse=True)[:4]
+            quant_assignada = min(quantitat, rec["quantitat_disponible"])
+            if quant_assignada > 0:
+                resultat.append({
+                    **rec,
+                    "score": score + (3 if is_recomanat else 0),
+                    "quantitat_recomanada": quant_assignada
+                })
+                
+    seleccionats = sorted(resultat, key=lambda x: x["score"], reverse=True)[:4]
+    
+    for item in seleccionats:
+        for rec in recursos:
+            if rec.get("id") == item.get("id"):
+                rec["quantitat_disponible"] -= item["quantitat_recomanada"]
+                break
+                
+    return seleccionats
 
 
 def match_voluntaris(keywords: list, fitxa: dict, voluntaris: list) -> list:
@@ -69,7 +82,7 @@ def match_voluntaris(keywords: list, fitxa: dict, voluntaris: list) -> list:
     lng = fitxa.get("lng", 1.2445)
     resultat = []
     for vol in voluntaris:
-        if vol["persones_actuals"] >= vol["max_persones"]:
+        if vol.get("persones_actuals", 0) >= vol.get("max_persones", 1):
             continue
         score = keyword_score(vol["habilitats"], keywords)
         if score > 0:
@@ -79,9 +92,18 @@ def match_voluntaris(keywords: list, fitxa: dict, voluntaris: list) -> list:
                 "score": score,
                 "distancia_km": round(dist, 1)
             })
-    return sorted(resultat,
+            
+    seleccionats = sorted(resultat,
                   key=lambda x: (x["score"], -x["distancia_km"]),
                   reverse=True)[:3]
+                  
+    for item in seleccionats:
+        for vol in voluntaris:
+            if vol.get("id") == item.get("id"):
+                vol["persones_actuals"] = vol.get("persones_actuals", 0) + 1
+                break
+                
+    return seleccionats
 
 
 def match_organitzacions(keywords: list, organitzacions: list) -> list:

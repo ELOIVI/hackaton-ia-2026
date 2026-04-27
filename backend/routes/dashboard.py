@@ -209,6 +209,12 @@ def create_expedient():
     from engine.matcher import match_all
 
     data = request.json or {}
+    idempotency_key = request.headers.get("Idempotency-Key") or data.get("idempotency_key")
+    if idempotency_key:
+        cached = s3_get(f"idempotency/{idempotency_key}.json")
+        if cached:
+            return jsonify(cached), 200
+
     # Use full UUID to reduce collision risk under concurrent expedient creation.
     exp_id = str(uuid.uuid4())
 
@@ -241,6 +247,8 @@ def create_expedient():
 
     create_expedient_record(expedient, created_by_user_id=created_by)
     s3_put(f"expedients/{exp_id}.json", expedient)
+    if idempotency_key:
+        s3_put(f"idempotency/{idempotency_key}.json", expedient)
     increment_assigned_volunteers(expedient.get("voluntaris_assignats", []))
     return jsonify(expedient), 201
 

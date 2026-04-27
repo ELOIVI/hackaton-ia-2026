@@ -175,6 +175,9 @@ def urgency():
     if not text:
         return jsonify({"error": "Cal enviar text"}), 400
 
+    if len(text) > MAX_TEXT_LEN:
+        return jsonify({"error": "Text massa llarg. Màxim 2000 caràcters."}), 413
+
     hf_endpoint = os.getenv("HF_APP_ENDPOINT", "").rstrip("/")
     if not hf_endpoint:
         return jsonify({"error": "HF_APP_ENDPOINT no configurat"}), 503
