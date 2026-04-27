@@ -209,7 +209,8 @@ def create_expedient():
     from engine.matcher import match_all
 
     data = request.json or {}
-    exp_id = str(uuid.uuid4())[:8]
+    # Use full UUID to reduce collision risk under concurrent expedient creation.
+    exp_id = str(uuid.uuid4())
 
     fitxa_raw = data.get("fitxa", {})
     fitxa, fitxa_errors = validate_fitxa_payload(fitxa_raw)
@@ -271,7 +272,10 @@ def close_expedient(exp_id):
     if not expedient:
         return jsonify({"error": "Expedient no trobat"}), 404
 
-    if previous and previous.get("estat") == "tancat":
+    # Skip load adjustments when the expedient was already closed.
+    if (previous and previous.get("estat") == "tancat") or (
+        not previous and expedient.get("estat") == "tancat"
+    ):
         return jsonify(expedient), 200
 
     s3_put(f"expedients/{exp_id}.json", expedient)

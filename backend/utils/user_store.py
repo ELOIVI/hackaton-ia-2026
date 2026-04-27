@@ -140,7 +140,10 @@ def ensure_master_admin() -> dict[str, str]:
 def ensure_admin_accounts_all_roles() -> dict[str, dict[str, str]]:
     master = ensure_master_admin()
 
-    shared_password = os.getenv("ADMIN_SHARED_PASSWORD", "Admin1234!").strip()
+    # Require explicit shared admin password to avoid insecure defaults.
+    shared_password = os.getenv("ADMIN_SHARED_PASSWORD", "").strip()
+    if not shared_password:
+        raise RuntimeError("ADMIN_SHARED_PASSWORD is required for admin account provisioning")
 
     voluntari = _ensure_default_user(
         user_id="ADMINVOLUNT01",

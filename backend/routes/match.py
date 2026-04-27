@@ -18,6 +18,15 @@ from utils.validation import validate_fitxa_payload
 
 match_bp = Blueprint("match", __name__)
 logger = logging.getLogger(__name__)
+MAX_TEXT_LEN = 2000
+MAX_FITXA_FIELD_LEN = 500
+
+
+def _fitxa_has_oversized_fields(fitxa_payload: dict) -> bool:
+    for value in fitxa_payload.values():
+        if isinstance(value, str) and len(value) > MAX_FITXA_FIELD_LEN:
+            return True
+    return False
 
 
 @match_bp.route("/match", methods=["POST"])
@@ -30,6 +39,10 @@ def match():
 
     if not fitxa_raw:
         return jsonify({"error": "Cal enviar una fitxa social en format JSON"}), 400
+
+    # Reject oversized payload fields before validation.
+    if _fitxa_has_oversized_fields(fitxa_raw):
+        return jsonify({"error": "Fitxa massa llarga. Limita cada camp a 500 caràcters."}), 413
 
     fitxa, fitxa_errors = validate_fitxa_payload(fitxa_raw)
     if fitxa_errors:
@@ -80,7 +93,16 @@ def match_text():
     if not data or not data.get("text"):
         return jsonify({"error": "Cal enviar un camp 'text' amb la descripció del cas"}), 400
 
+    # Reject oversized free-text payloads before processing.
+    text_raw = str(data.get("text") or "")
+    if len(text_raw) > MAX_TEXT_LEN:
+        return jsonify({"error": "Text massa llarg. Màxim 2000 caràcters."}), 413
+
     text_lliure = data["text"]
+    # Bound and neutralize user text to reduce prompt-injection surface.
+    safe_text = str(text_lliure).replace("</text>", "</ text>").strip()
+    if len(safe_text) > 4000:
+        safe_text = safe_text[:4000]
 
     # Demanem a Gemini que extregui els camps de la fitxa del text lliure
     prompt_extractor = f"""
@@ -119,7 +141,7 @@ tipus_ingressos: 3 (sense ingressos), 6 (IMV), 7 (serveis socials), 8 (RGC)
 ciutadania: 1 (extracomunitari), 3 (comunitari), 7 (indocumentat), 10 (espanyol)
 
 <text>
-{text_lliure}
+{safe_text}
 </text>
 """
 

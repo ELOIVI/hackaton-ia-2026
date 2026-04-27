@@ -13,7 +13,8 @@ def initialize_sqlite_db_settings() -> None:
         if _sqlite_setup_done:
             return
 
-        conn = sqlite3.connect(DB_PATH, timeout=10)
+        # Increase SQLite timeouts to reduce lock contention under concurrent writes.
+        conn = sqlite3.connect(DB_PATH, timeout=20)
         try:
             conn.execute("PRAGMA journal_mode = WAL")
             conn.execute("PRAGMA synchronous = NORMAL")
@@ -24,9 +25,10 @@ def initialize_sqlite_db_settings() -> None:
 
 
 def get_conn(enable_foreign_keys: bool = False) -> sqlite3.Connection:
-    conn = sqlite3.connect(DB_PATH, timeout=10)
+    # Increase SQLite timeouts to reduce lock contention under concurrent writes.
+    conn = sqlite3.connect(DB_PATH, timeout=20)
     conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA busy_timeout = 10000")
+    conn.execute("PRAGMA busy_timeout = 20000")
     conn.execute("PRAGMA foreign_keys = ON")
     return conn
 

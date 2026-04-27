@@ -80,8 +80,14 @@ def extract_keywords(fitxa: dict) -> list:
 
     # Edat
     edat = fitxa.get("edat")
-    if edat:
-        keywords.update(keywords_per_edat(int(edat)))
+    if edat is not None:
+        try:
+            # Ignore non-numeric or negative ages instead of raising.
+            edat_int = int(edat)
+        except (TypeError, ValueError):
+            edat_int = None
+        if edat_int is not None and edat_int >= 0:
+            keywords.update(keywords_per_edat(edat_int))
 
     # Menors a càrrec
     menors = fitxa.get("menors_a_carrec", 0)

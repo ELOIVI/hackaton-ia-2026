@@ -12,6 +12,45 @@ from utils.catalog_cache import get_catalog
 logger = logging.getLogger(__name__)
 
 
+KEYWORD_TO_RESOURCE_TYPE = {
+    "alimentacio": "alimentació",
+    "alimentació": "alimentació",
+    "habitatge": "habitatge",
+    "sense_llar": "habitatge",
+    "desnonament": "habitatge",
+    "deutes": "legal",
+    "atur": "inserció_laboral",
+    "documentacio": "legal",
+    "documentació": "legal",
+    "salut": "salut",
+    "salut_mental": "salut_mental",
+    "educacio": "educació",
+    "educació": "educació",
+}
+
+
+def _deterministic_resource_types_from_keywords(keywords: list) -> list[str]:
+    # Deterministic fallback: derive resource types directly from extracted keywords.
+    inferred: list[str] = []
+    for keyword in keywords:
+        resource_type = KEYWORD_TO_RESOURCE_TYPE.get(str(keyword).strip().lower())
+        if resource_type and resource_type not in inferred:
+            inferred.append(resource_type)
+    return inferred or ["alimentació"]
+
+
+def _deterministic_urgency_from_keywords(keywords: list) -> str:
+    # Deterministic urgency based only on keyword severity buckets.
+    normalized = {str(keyword).strip().lower() for keyword in keywords}
+    high = {"sense_llar", "desnonament", "violencia_genere", "maltractament", "sense_ingressos"}
+    medium = {"deutes", "atur", "habitatge", "alimentacio", "documentacio", "salut"}
+    if normalized & high:
+        return "alta"
+    if normalized & medium:
+        return "mitjana"
+    return "baixa"
+
+
 def load_projectes():
     return get_catalog("projectes_caritas.json")
 
@@ -66,18 +105,28 @@ i retorna ÚNICAMENT aquest JSON sense cap text addicional:
 """
     try:
         response = call_gemini(prompt)
-        return parse_json_object_from_llm(response)
+        parsed = parse_json_object_from_llm(response)
+        # Validate required keys so partial Gemini JSON does not propagate downstream.
+        required_keys = {"necessitats_prioritaries", "urgencia", "perfil_resum"}
+        if not required_keys.issubset(parsed.keys()):
+            missing = sorted(required_keys.difference(parsed.keys()))
+            raise ValueError(f"Missing Gemini keys: {missing}")
+        # Observability flag to detect when fallback logic was not used.
+        parsed["fallback_used"] = False
+        return parsed
     except Exception:
         logger.exception("Gemini analysis failed")
+        resource_types = _deterministic_resource_types_from_keywords(keywords)
         return {
             "necessitats_prioritaries": keywords[:3] if keywords else ["alimentació"],
-            "urgencia": "mitjana",
-            "perfil_resum": "Persona en situació de vulnerabilitat que requereix atenció.",
+            "urgencia": _deterministic_urgency_from_keywords(keywords),
+            "perfil_resum": "Anàlisi deterministic per indisponibilitat temporal del servei IA.",
             "projectes_recomanats": [],
             "consideracions_especials": [],
-            "recursos_recomanats_tipus": keywords[:2] if keywords else ["alimentació"],
+            "recursos_recomanats_tipus": resource_types,
             "quantitats_recomanades": {},
-            "justificacio": "Error intern en l'anàlisi automàtica. S'ha aplicat una estimació conservadora."
+            "justificacio": "S'ha aplicat matching deterministic basat exclusivament en keywords detectades.",
+            "fallback_used": True,
         }
 
 

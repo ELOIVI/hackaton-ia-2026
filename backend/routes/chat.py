@@ -130,6 +130,68 @@ def _safe_chat_payload(raw_response: str) -> tuple[str, bool, str | None]:
         return "No he pogut interpretar correctament la resposta. Pots reformular-ho?", False, None
 
 
+def _json_error(message: str, status_code: int, *, code: str | None = None, retry_after_seconds: int | None = None):
+    payload: dict[str, object] = {"error": message}
+    if code:
+        payload["code"] = code
+    if retry_after_seconds is not None:
+        payload["retry_after_seconds"] = retry_after_seconds
+    return jsonify(payload), status_code
+
+
+def _classify_gemini_failure(exc: Exception) -> tuple[str, int | None]:
+    kind = str(getattr(exc, "kind", "")).strip().lower()
+    if kind:
+        retry_after = getattr(exc, "retry_after_seconds", None)
+        return kind, retry_after if isinstance(retry_after, int) else None
+
+    msg = str(exc).lower()
+    if "429" in msg or "rate" in msg or "quota" in msg:
+        return "rate_limited", None
+    if "timeout" in msg or "timed out" in msg:
+        return "timeout", None
+    if "api key" in msg or "unauthorized" in msg or "forbidden" in msg or "401" in msg or "403" in msg:
+        return "auth", None
+    return "generic", None
+
+
+def _urgency_from_keywords(keywords: list[str]) -> str:
+    critical_tokens = {"sense_llar", "violencia_genere", "maltractament", "desnonament", "sense_ingressos"}
+    medium_tokens = {"atur", "deutes", "alimentacio", "documentacio", "habitatge"}
+    keyword_set = {str(k).strip().lower() for k in keywords}
+    if keyword_set & critical_tokens:
+        return "alta"
+    if keyword_set & medium_tokens:
+        return "mitjana"
+    return "baixa"
+
+
+def _keyword_only_analysis(fitxa: dict, keywords: list[str]) -> dict:
+    # Fallback deterministic: use only extracted keywords and inferred fitxa context.
+    resource_types = keywords[:3] if keywords else ["alimentació"]
+    return {
+        "necessitats_prioritaries": resource_types,
+        "urgencia": _urgency_from_keywords(keywords),
+        "perfil_resum": f"Atenció inicial automàtica per al municipi {fitxa.get('municipi', 'Tarragona')}.",
+        "projectes_recomanats": [],
+        "consideracions_especials": ["gemini_unavailable"],
+        "recursos_recomanats_tipus": resource_types,
+        "quantitats_recomanades": {},
+        "justificacio": "S'ha aplicat matching determinista basat en keywords perquè el servei IA no està disponible temporalment.",
+        "fallback_used": True,
+    }
+
+
+def _build_keyword_only_match(history: list, message: str, municipi_detectat: str | None):
+    fitxa_inferida = infer_fitxa_from_text(history, message, municipi_detectat)
+    keywords = extract_keywords(fitxa_inferida)
+    analysis = _keyword_only_analysis(fitxa_inferida, keywords)
+    match = match_all(fitxa_inferida, analysis, keywords)
+    match["fallback_used"] = True
+    match["fallback_source"] = "keywords_only"
+    return fitxa_inferida, match
+
+
 @chat_bp.route("/chat/persona", methods=["POST"])
 @rate_limited(max_requests=20, window_seconds=60)
 def chat_persona():
@@ -140,18 +202,42 @@ def chat_persona():
         return jsonify({"error": "Cal enviar un missatge"}), 400
 
     prompt = build_prompt(SYSTEM_PERSONA, history, message)
-    response = call_gemini(prompt)
-    clean, ready, municipi_detectat = _safe_chat_payload(response)
+    fallback_retry_after: int | None = None
+    try:
+        response = call_gemini(prompt)
+        clean, ready, municipi_detectat = _safe_chat_payload(response)
+    except Exception as exc:
+        kind, retry_after = _classify_gemini_failure(exc)
+        if kind in {"rate_limited", "timeout", "auth"}:
+            logger.warning("Gemini unavailable in /chat/persona. Applying keyword-only fallback. kind=%s", kind, exc_info=True)
+            clean = "Ara mateix el servei d'IA està temporalment limitat. Aplico una primera orientació automàtica perquè no et quedis sense resposta."
+            ready = True
+            municipi_detectat = None
+            fallback_retry_after = retry_after
+        else:
+            logger.exception("Unexpected Gemini failure in /chat/persona")
+            return _json_error("El servei de conversa no està disponible temporalment.", 502, code="chat_upstream_error")
+
     result = {"response": clean, "ready": ready, "match": None}
+    if fallback_retry_after is not None:
+        result["retry_after_seconds"] = fallback_retry_after
 
     if ready:
-        fitxa_inferida = infer_fitxa_from_text(history, message, municipi_detectat)
-        keywords = extract_keywords(fitxa_inferida)
-        analysis = analyze_with_gemini(fitxa_inferida, keywords)
-        match = match_all(
-            fitxa_inferida,
-            analysis, keywords
-        )
+        try:
+            if fallback_retry_after is not None or clean.startswith("Ara mateix el servei d'IA està temporalment limitat"):
+                fitxa_inferida, match = _build_keyword_only_match(history, message, municipi_detectat)
+            else:
+                fitxa_inferida = infer_fitxa_from_text(history, message, municipi_detectat)
+                keywords = extract_keywords(fitxa_inferida)
+                analysis = analyze_with_gemini(fitxa_inferida, keywords)
+                match = match_all(
+                    fitxa_inferida,
+                    analysis, keywords
+                )
+        except Exception:
+            logger.exception("Matching pipeline failed in /chat/persona")
+            return _json_error("No s'ha pogut completar el matching automàtic.", 500, code="matching_failed")
+
         result["match"] = match
 
         try:
@@ -174,17 +260,27 @@ def chat_persona():
             increment_assigned_volunteers(expedient.get("voluntaris_assignats", []))
         except Exception:
             logger.exception("Error guardant expedient chatbot")
-            return jsonify({"error": "No s'ha pogut guardar l'expedient generat"}), 500
+            return _json_error("No s'ha pogut guardar l'expedient generat", 500, code="expedient_persist_failed")
 
         try:
             bucket = os.getenv("AWS_S3_BUCKET", "hackaton-bucket")
             s3 = boto3.client("s3")
-            s3.put_object(
-                Bucket=bucket,
-                Key=f"expedients/{exp_id}.json",
-                Body=json.dumps(expedient, ensure_ascii=False),
-                ContentType="application/json"
-            )
+            # Retry once to tolerate transient S3 failures.
+            for attempt in range(2):
+                try:
+                    s3.put_object(
+                        Bucket=bucket,
+                        Key=f"expedients/{exp_id}.json",
+                        Body=json.dumps(expedient, ensure_ascii=False),
+                        ContentType="application/json",
+                    )
+                    if attempt == 1:
+                        logger.info("S3 mirror succeeded after retry for expedient %s", exp_id)
+                    break
+                except Exception:
+                    if attempt == 1:
+                        raise
+                    logger.warning("S3 mirror failed, retrying once for expedient %s", exp_id, exc_info=True)
         except Exception:
             logger.exception("Error fent mirall S3 de l'expedient %s", exp_id)
 
@@ -202,18 +298,42 @@ def chat_voluntari():
         return jsonify({"error": "Cal enviar un missatge"}), 400
 
     prompt = build_prompt(SYSTEM_VOLUNTARI, history, message)
-    response = call_gemini(prompt)
-    clean, ready, municipi_detectat = _safe_chat_payload(response)
+    fallback_retry_after: int | None = None
+    try:
+        response = call_gemini(prompt)
+        clean, ready, municipi_detectat = _safe_chat_payload(response)
+    except Exception as exc:
+        kind, retry_after = _classify_gemini_failure(exc)
+        if kind in {"rate_limited", "timeout", "auth"}:
+            logger.warning("Gemini unavailable in /chat/voluntari. Applying keyword-only fallback. kind=%s", kind, exc_info=True)
+            clean = "Ara mateix el servei d'IA està temporalment limitat. Et mostro una primera proposta basada en el teu context."
+            ready = True
+            municipi_detectat = None
+            fallback_retry_after = retry_after
+        else:
+            logger.exception("Unexpected Gemini failure in /chat/voluntari")
+            return _json_error("El servei de conversa no està disponible temporalment.", 502, code="chat_upstream_error")
+
     result = {"response": clean, "ready": ready, "match": None}
+    if fallback_retry_after is not None:
+        result["retry_after_seconds"] = fallback_retry_after
 
     if ready:
-        fitxa_inferida = infer_fitxa_from_text(history, message, municipi_detectat)
-        keywords = extract_keywords(fitxa_inferida)
-        analysis = analyze_with_gemini(fitxa_inferida, keywords)
-        match = match_all(
-            fitxa_inferida,
-            analysis, keywords
-        )
+        try:
+            if fallback_retry_after is not None or clean.startswith("Ara mateix el servei d'IA està temporalment limitat"):
+                _, match = _build_keyword_only_match(history, message, municipi_detectat)
+            else:
+                fitxa_inferida = infer_fitxa_from_text(history, message, municipi_detectat)
+                keywords = extract_keywords(fitxa_inferida)
+                analysis = analyze_with_gemini(fitxa_inferida, keywords)
+                match = match_all(
+                    fitxa_inferida,
+                    analysis, keywords
+                )
+        except Exception:
+            logger.exception("Matching pipeline failed in /chat/voluntari")
+            return _json_error("No s'ha pogut completar el matching automàtic.", 500, code="matching_failed")
+
         result["match"] = match
 
     return jsonify(result), 200

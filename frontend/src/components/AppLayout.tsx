@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Heart, MapPin, LayoutDashboard, Menu, X } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { AppLanguage, applyLanguageToDocument, getStoredLang, setStoredLang } from '@/lib/i18n';
 
 type StoredUser = {
@@ -13,6 +14,15 @@ type StoredUser = {
   name?: string;
   companyName?: string;
   expiresAt?: number;
+};
+
+// Use a widened label type so additional nav items do not narrow unions.
+type NavItem = {
+  href: string;
+  label: string;
+  icon: LucideIcon;
+  color: string;
+  activeBg: string;
 };
 
 function toTitleCaseName(value: string): string {
@@ -136,7 +146,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     }`;
 
   const navItems = useMemo(() => {
-    const base = [
+    const base: NavItem[] = [
       { href: '/help-request-interface', label: t.profiles, icon: Heart, color: 'text-rose-600', activeBg: 'bg-rose-50' },
       { href: '/support-locator', label: t.needHelp, icon: MapPin, color: 'text-blue-600', activeBg: 'bg-blue-50' },
     ];

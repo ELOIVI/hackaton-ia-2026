@@ -1,5 +1,6 @@
 from functools import wraps
 from typing import Iterable
+import re
 
 from flask import jsonify, request
 from flask import g
@@ -9,9 +10,9 @@ from utils.auth_tokens import verify_auth_token
 
 def _extract_bearer_token() -> str | None:
     auth_header = request.headers.get("Authorization", "")
-    if not auth_header.startswith("Bearer "):
-        return None
-    return auth_header.replace("Bearer ", "", 1).strip()
+    # Enforce strict Bearer token format to avoid malformed header bypass.
+    match = re.match(r"^Bearer\s+([A-Za-z0-9\-_.=]+)$", auth_header)
+    return match.group(1) if match else None
 
 
 def require_auth(roles: Iterable[str] | None = None):

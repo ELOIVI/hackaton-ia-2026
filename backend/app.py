@@ -3,11 +3,16 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+# Load environment explicitly from backend/.env regardless of current working directory.
+_ENV_PATH = os.path.join(os.path.dirname(__file__), ".env")
+load_dotenv(_ENV_PATH)
 
 app = Flask(__name__, template_folder="templates")
+# Enforce a reasonable max request size to protect against oversized payloads.
+app.config["MAX_CONTENT_LENGTH"] = 1 * 1024 * 1024
 
-allow_all_origins = os.getenv("CORS_ALLOW_ALL", "1") == "1"
+# Secure-by-default CORS: allow all origins only if explicitly enabled.
+allow_all_origins = os.getenv("CORS_ALLOW_ALL", "0") == "1"
 if allow_all_origins:
     CORS(app, resources={r"/*": {"origins": "*"}})
 else:
@@ -38,6 +43,10 @@ app.register_blueprint(dashboard_bp)
 app.register_blueprint(auth_bp)
 
 ensure_auth_secret_configured()
+# Fail fast at startup if AUTH_SECRET_KEY is not configured.
+if not os.getenv("AUTH_SECRET_KEY", "").strip():
+    raise RuntimeError("AUTH_SECRET_KEY is required. Define it in backend/.env before starting the API.")
+
 initialize_sqlite_db_settings()
 preloaded_catalogs = warm_catalog_cache()
 init_user_store()

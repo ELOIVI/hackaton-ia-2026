@@ -8,6 +8,11 @@ interface Message { role: 'assistant' | 'user'; content: string; }
 
 type Step = 'login' | 'register' | 'chatbot' | 'dashboard';
 
+// Narrow unknown payloads before rendering nested fields.
+function asRecord(value: unknown): Record<string, unknown> | null {
+  return typeof value === 'object' && value !== null ? value as Record<string, unknown> : null;
+}
+
 function getVolunteerFaceIdKey(email: string): string {
   return `faceid:voluntari:${email.trim().toLowerCase()}`;
 }
@@ -316,25 +321,31 @@ export default function VolunteerForm({ onBack, onLogin }: { onBack: () => void;
               <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: '#C8102E' }} />{String(p)}
             </div>
           ))}
-          {matchResult.centre_mes_proper && (
-            <div className="bg-white rounded-xl p-4 border border-gray-100 space-y-2 mt-3">
-              <div className="flex items-start gap-2 text-sm">
-                <MapPin size={14} className="text-gray-400 mt-0.5" />
-                <div>
-                  <div className="font-semibold">{String((matchResult.centre_mes_proper as Record<string,unknown>)?.nom || '')}</div>
-                  <div className="text-gray-500">{String((matchResult.centre_mes_proper as Record<string,unknown>)?.adreça || '')}</div>
+          {(() => {
+            // Guard against unknown center payloads before rendering UI.
+            const center = asRecord(matchResult.centre_mes_proper);
+            if (!center) return null;
+
+            return (
+              <div className="bg-white rounded-xl p-4 border border-gray-100 space-y-2 mt-3">
+                <div className="flex items-start gap-2 text-sm">
+                  <MapPin size={14} className="text-gray-400 mt-0.5" />
+                  <div>
+                    <div className="font-semibold">{String(center.nom || '')}</div>
+                    <div className="text-gray-500">{String(center.adreça || '')}</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Phone size={14} className="text-gray-400" />
+                  <span>{String(center.email || '')}</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Clock size={14} className="text-gray-400" />
+                  <span>{String(center.horari || 'Consulta horari')}</span>
                 </div>
               </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Phone size={14} className="text-gray-400" />
-                <span>{String((matchResult.centre_mes_proper as Record<string,unknown>)?.email || '')}</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Clock size={14} className="text-gray-400" />
-                <span>{String((matchResult.centre_mes_proper as Record<string,unknown>)?.horari || 'Consulta horari')}</span>
-              </div>
-            </div>
-          )}
+            );
+          })()}
         </div>
       )}
 

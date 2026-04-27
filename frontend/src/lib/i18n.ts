@@ -100,6 +100,7 @@ const EXACT_TRANSLATIONS: Record<Exclude<AppLanguage, 'ca'>, Record<string, stri
     'Nova fitxa social': 'Nueva ficha social',
     'Edat': 'Edad',
     'Municipi': 'Municipio',
+    // Keep a single Habitatge entry to avoid duplicate object keys.
     'Habitatge': 'Vivienda',
     'Selecciona...': 'Selecciona...',
     'Sense habitatge': 'Sin vivienda',
@@ -199,7 +200,6 @@ const EXACT_TRANSLATIONS: Record<Exclude<AppLanguage, 'ca'>, Record<string, stri
     "Explica la teva situació (p.ex. 'No tinc on dormir')": "Explica tu situación (p. ej. 'No tengo dónde dormir')",
     'API Key (opcional)': 'Clave API (opcional)',
     'centres': 'centros',
-    'Habitatge': 'Vivienda',
     'Alimentació': 'Alimentación',
     'Economia': 'Economía',
     'Documentació': 'Documentación',
@@ -336,6 +336,7 @@ const EXACT_TRANSLATIONS: Record<Exclude<AppLanguage, 'ca'>, Record<string, stri
     'Nova fitxa social': 'New social profile',
     'Edat': 'Age',
     'Municipi': 'Municipality',
+    // Keep a single Habitatge entry to avoid duplicate object keys.
     'Habitatge': 'Housing',
     'Selecciona...': 'Select...',
     'Sense habitatge': 'Without housing',
@@ -435,7 +436,6 @@ const EXACT_TRANSLATIONS: Record<Exclude<AppLanguage, 'ca'>, Record<string, stri
     "Explica la teva situació (p.ex. 'No tinc on dormir')": "Describe your situation (e.g. 'I have nowhere to sleep')",
     'API Key (opcional)': 'API Key (optional)',
     'centres': 'centers',
-    'Habitatge': 'Housing',
     'Alimentació': 'Food',
     'Economia': 'Economy',
     'Documentació': 'Documentation',

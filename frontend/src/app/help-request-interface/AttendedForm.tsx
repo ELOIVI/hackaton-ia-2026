@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { ArrowLeft, Send, Loader2, Sparkles, MapPin, Phone, Clock, Volume2, VolumeX } from 'lucide-react';
 import { API_BASE, chatPersona, isApiRequestError } from '@/lib/api';
 
@@ -19,11 +19,44 @@ export default function AttendedForm({ onBack }: { onBack: () => void }) {
   const [isReading, setIsReading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const pendingQueueRef = useRef<Array<{ history: Message[]; message: string }>>([]);
 
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
   useEffect(() => {
     return () => { if (typeof window !== 'undefined' && 'speechSynthesis' in window) window.speechSynthesis.cancel(); };
   }, []);
+
+  const flushPendingQueue = useCallback(async () => {
+    if (loading) return;
+    if (typeof navigator !== 'undefined' && !navigator.onLine) return;
+    if (pendingQueueRef.current.length === 0) return;
+
+    setLoading(true);
+    try {
+      while (pendingQueueRef.current.length > 0) {
+        const item = pendingQueueRef.current[0];
+        const data = await chatPersona(item.history, item.message);
+        const responseText = typeof data?.response === 'string' ? data.response : 'No hi ha resposta disponible.';
+        setMessages((current) => [...current, { role: 'assistant', content: responseText }]);
+        const matchPayload = asRecord(data.match);
+        if (data.ready && matchPayload) setMatchResult(matchPayload);
+        pendingQueueRef.current.shift();
+      }
+    } catch {
+      // Keep queued items for the next retry attempt.
+    } finally {
+      setLoading(false);
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    // Retry queued messages when the browser comes back online.
+    const handleOnline = () => { void flushPendingQueue(); };
+    window.addEventListener('online', handleOnline);
+    void flushPendingQueue();
+    return () => window.removeEventListener('online', handleOnline);
+  }, [flushPendingQueue]);
 
   const toggleVoiceReader = () => {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
@@ -49,6 +82,13 @@ export default function AttendedForm({ onBack }: { onBack: () => void }) {
     setInput('');
     const newMessages: Message[] = [...messages, { role: 'user', content: userMessage }];
     setMessages(newMessages);
+    if (typeof navigator !== 'undefined' && !navigator.onLine) {
+      // Queue message locally when offline and retry when back online.
+      pendingQueueRef.current.push({ history: newMessages.slice(0, -1), message: userMessage });
+      setMessages([...newMessages, { role: 'assistant', content: 'Ara mateix no tens connexió. Enviarem el missatge quan tornis en línia.' }]);
+      return;
+    }
+
     setLoading(true);
     try {
       // Use centralized API helper so all error/status handling stays consistent across the app.
@@ -60,8 +100,16 @@ export default function AttendedForm({ onBack }: { onBack: () => void }) {
     } catch (error) {
       // Differentiate transport/backend/rate-limit/AI-degraded states while preserving current UI design.
       if (isApiRequestError(error)) {
+        // Surface a clear re-auth prompt when the backend invalidates the token.
+        if (error.isTokenExpired) {
+          setMessages([...newMessages, { role: 'assistant', content: 'La sessió ha caducat. Torna a iniciar sessió per continuar.' }]);
+          return;
+        }
+
         if (error.status === 429) {
-          const wait = error.retryAfterSeconds ? ` Torna-ho a provar en ${error.retryAfterSeconds}s.` : '';
+          const wait = typeof error.retryAfterSeconds === 'number'
+            ? ` Torna-ho a provar en ${error.retryAfterSeconds} segons.`
+            : '';
           setMessages([...newMessages, { role: 'assistant', content: `No podem processar més consultes ara mateix per límit de peticions.${wait}` }]);
           return;
         }

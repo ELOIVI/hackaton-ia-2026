@@ -48,6 +48,34 @@ export class ApiRequestError extends Error {
 
 const AUTH_TOKEN_KEY = 'caritasAuthToken';
 
+function safeLocalStorageGet(key: string): string | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    // localStorage may be blocked or unavailable in some environments.
+    return window.localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function safeLocalStorageSet(key: string, value: string): void {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.setItem(key, value);
+  } catch {
+    // Ignore quota or blocked storage errors.
+  }
+}
+
+function safeLocalStorageRemove(key: string): void {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.removeItem(key);
+  } catch {
+    // Ignore quota or blocked storage errors.
+  }
+}
+
 function parseErrorMessage(payload: unknown, fallback: string): string {
   if (typeof payload === 'object' && payload !== null && 'error' in payload) {
     const err = (payload as { error?: unknown }).error;
@@ -123,18 +151,15 @@ async function requestJson<T>(input: RequestInfo | URL, init?: RequestInit, fall
 }
 
 export function saveAuthToken(token: string) {
-  if (typeof window === 'undefined') return;
-  localStorage.setItem(AUTH_TOKEN_KEY, token);
+  safeLocalStorageSet(AUTH_TOKEN_KEY, token);
 }
 
 export function getAuthToken() {
-  if (typeof window === 'undefined') return null;
-  return localStorage.getItem(AUTH_TOKEN_KEY);
+  return safeLocalStorageGet(AUTH_TOKEN_KEY);
 }
 
 export function clearAuthToken() {
-  if (typeof window === 'undefined') return;
-  localStorage.removeItem(AUTH_TOKEN_KEY);
+  safeLocalStorageRemove(AUTH_TOKEN_KEY);
 }
 
 export function getAuthHeaders(extra: Record<string, string> = {}) {

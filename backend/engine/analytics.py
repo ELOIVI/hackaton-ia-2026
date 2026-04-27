@@ -175,6 +175,12 @@ def build_expedient_analytics_cached(
     signature = _expedients_signature(expedients)
 
     with _analytics_cache_lock:
+        # Invalidate cached payload when the expedient signature changes.
+        if _analytics_cache_signature is not None and _analytics_cache_signature != signature:
+            _analytics_cache_payload = None
+            _analytics_cache_signature = None
+            _analytics_cache_expires_at = 0.0
+
         if (
             _analytics_cache_payload is not None
             and _analytics_cache_signature == signature
