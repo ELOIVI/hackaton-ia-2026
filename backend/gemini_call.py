@@ -27,7 +27,7 @@ class GeminiCallError(RuntimeError):
         self.log_detail = log_detail or client_message
 
 
-    _gemini_circuit_open_until: float = 0.0
+_gemini_circuit_open_until: float = 0.0
 
 _gemini_requests_minute: list[float] = []
 _gemini_requests_day: list[float] = []
