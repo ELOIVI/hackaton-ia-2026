@@ -1,9 +1,13 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowLeft, Send, Loader2, Sparkles, MapPin, Phone, Clock, Volume2, VolumeX } from 'lucide-react';
-import { API_BASE, getAuthHeaders } from '@/lib/api';
+import { API_BASE, chatPersona, isApiRequestError } from '@/lib/api';
 
 interface Message { role: 'assistant' | 'user'; content: string; }
+
+function asRecord(value: unknown): Record<string, unknown> | null {
+  return typeof value === 'object' && value !== null ? value as Record<string, unknown> : null;
+}
 
 export default function AttendedForm({ onBack }: { onBack: () => void }) {
   const [messages, setMessages] = useState<Message[]>([
@@ -47,24 +51,30 @@ export default function AttendedForm({ onBack }: { onBack: () => void }) {
     setMessages(newMessages);
     setLoading(true);
     try {
-      const res = await fetch(`${API_BASE}/chat/persona`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...getAuthHeaders(),
-        },
-        body: JSON.stringify({ history: newMessages.slice(0, -1), message: userMessage }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        const backendError = typeof data?.error === 'string' ? data.error : 'Error de servidor';
-        setMessages([...newMessages, { role: 'assistant', content: `No hem pogut processar la consulta: ${backendError}` }]);
-        return;
-      }
+      // Use centralized API helper so all error/status handling stays consistent across the app.
+      const data = await chatPersona(newMessages.slice(0, -1), userMessage);
       const responseText = typeof data?.response === 'string' ? data.response : 'No hi ha resposta disponible.';
       setMessages([...newMessages, { role: 'assistant', content: responseText }]);
-      if (data.ready && data.match) setMatchResult(data.match);
-    } catch {
+      const matchPayload = asRecord(data.match);
+      if (data.ready && matchPayload) setMatchResult(matchPayload);
+    } catch (error) {
+      // Differentiate transport/backend/rate-limit/AI-degraded states while preserving current UI design.
+      if (isApiRequestError(error)) {
+        if (error.status === 429) {
+          const wait = error.retryAfterSeconds ? ` Torna-ho a provar en ${error.retryAfterSeconds}s.` : '';
+          setMessages([...newMessages, { role: 'assistant', content: `No podem processar més consultes ara mateix per límit de peticions.${wait}` }]);
+          return;
+        }
+
+        if (error.status === 502 || error.status === 503 || error.status === 504) {
+          setMessages([...newMessages, { role: 'assistant', content: 'El servei IA està temporalment no disponible. Estem aplicant orientació bàsica automàtica; torna-ho a provar en uns moments.' }]);
+          return;
+        }
+
+        setMessages([...newMessages, { role: 'assistant', content: `No hem pogut processar la consulta: ${error.message}` }]);
+        return;
+      }
+
       setMessages([...newMessages, { role: 'assistant', content: `No hi ha connexió amb el backend (${API_BASE}). Comprova que està actiu.` }]);
     } finally { setLoading(false); }
   };
@@ -130,25 +140,31 @@ export default function AttendedForm({ onBack }: { onBack: () => void }) {
               {r.nom} — {r.unitat}
             </div>
           ))}
-          {matchResult.centre_mes_proper && (
+          {(() => {
+            // Narrow unknown center payload to a safe record before rendering.
+            const center = asRecord(matchResult.centre_mes_proper);
+            if (!center) return null;
+
+            return (
             <div className="bg-white rounded-xl p-4 border border-gray-100 space-y-2 mt-3">
               <div className="flex items-start gap-2 text-sm">
                 <MapPin size={14} className="text-gray-400 mt-0.5" />
                 <div>
-                  <div className="font-semibold">{String((matchResult.centre_mes_proper as Record<string,unknown>)?.nom || '')}</div>
-                  <div className="text-gray-500">{String((matchResult.centre_mes_proper as Record<string,unknown>)?.adreça || '')}</div>
+                  <div className="font-semibold">{String(center.nom || '')}</div>
+                  <div className="text-gray-500">{String(center.adreça || '')}</div>
                 </div>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Phone size={14} className="text-gray-400" />
-                <span>{String((matchResult.centre_mes_proper as Record<string,unknown>)?.email || '')}</span>
+                <span>{String(center.email || '')}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Clock size={14} className="text-gray-400" />
-                <span>{String((matchResult.centre_mes_proper as Record<string,unknown>)?.horari || 'Consulta horari al centre')}</span>
+                <span>{String(center.horari || 'Consulta horari al centre')}</span>
               </div>
             </div>
-          )}
+            );
+          })()}
           <button onClick={onBack} className="mt-4 w-full py-3 rounded-xl border-2 border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50">Tornar</button>
         </div>
       )}

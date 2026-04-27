@@ -16,6 +16,36 @@ interface AuthResponse {
   user: AuthUser;
 }
 
+interface ErrorPayload {
+  error?: unknown;
+  code?: unknown;
+  retry_after_seconds?: unknown;
+}
+
+export class ApiRequestError extends Error {
+  status: number;
+  code?: string;
+  retryAfterSeconds?: number;
+  isTokenExpired: boolean;
+
+  constructor(
+    message: string,
+    options: {
+      status: number;
+      code?: string;
+      retryAfterSeconds?: number;
+      isTokenExpired?: boolean;
+    }
+  ) {
+    super(message);
+    this.name = 'ApiRequestError';
+    this.status = options.status;
+    this.code = options.code;
+    this.retryAfterSeconds = options.retryAfterSeconds;
+    this.isTokenExpired = Boolean(options.isTokenExpired);
+  }
+}
+
 const AUTH_TOKEN_KEY = 'caritasAuthToken';
 
 function parseErrorMessage(payload: unknown, fallback: string): string {
@@ -26,11 +56,68 @@ function parseErrorMessage(payload: unknown, fallback: string): string {
   return fallback;
 }
 
+function parseRetryAfterSeconds(payload: unknown): number | undefined {
+  if (typeof payload !== 'object' || payload === null || !('retry_after_seconds' in payload)) return undefined;
+  const value = (payload as ErrorPayload).retry_after_seconds;
+  const parsed = typeof value === 'number' ? value : Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
+}
+
+function parseErrorCode(payload: unknown): string | undefined {
+  if (typeof payload !== 'object' || payload === null || !('code' in payload)) return undefined;
+  const value = (payload as ErrorPayload).code;
+  return typeof value === 'string' && value.trim() ? value : undefined;
+}
+
+function buildApiError(status: number, payload: unknown, fallbackError: string): ApiRequestError {
+  const code = parseErrorCode(payload);
+  const retryAfterSeconds = parseRetryAfterSeconds(payload);
+
+  // 401 always means token/session must be renewed on client side.
+  if (status === 401) {
+    clearAuthToken();
+    return new ApiRequestError('Sessió expirada o no vàlida. Torna a iniciar sessió.', {
+      status,
+      code,
+      retryAfterSeconds,
+      isTokenExpired: true,
+    });
+  }
+
+  // 429 maps to explicit rate-limit feedback with optional retry-after.
+  if (status === 429) {
+    return new ApiRequestError(parseErrorMessage(payload, 'Massa peticions. Torna-ho a provar en uns segons.'), {
+      status,
+      code,
+      retryAfterSeconds,
+    });
+  }
+
+  // 5xx keeps a safe generic message while preserving details for logging paths.
+  if (status >= 500) {
+    return new ApiRequestError(parseErrorMessage(payload, 'Servei temporalment no disponible. Torna-ho a provar.'), {
+      status,
+      code,
+      retryAfterSeconds,
+    });
+  }
+
+  return new ApiRequestError(parseErrorMessage(payload, fallbackError), {
+    status,
+    code,
+    retryAfterSeconds,
+  });
+}
+
+export function isApiRequestError(error: unknown): error is ApiRequestError {
+  return error instanceof ApiRequestError;
+}
+
 async function requestJson<T>(input: RequestInfo | URL, init?: RequestInit, fallbackError = 'Error de servidor'): Promise<T> {
   const res = await fetch(input, init);
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
-    throw new Error(parseErrorMessage(data, fallbackError));
+    throw buildApiError(res.status, data, fallbackError);
   }
   return data as T;
 }
