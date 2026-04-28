@@ -7,39 +7,20 @@ import * as faceapi from 'face-api.js';
 interface FaceIdLoginProps {
   onSuccess: (faceDescriptor: Float32Array) => void;
   onCancel: () => void;
-  storageKey: string;
+  role: string;
   mode: 'register' | 'login';
 }
 
-const MODEL_URL = '/models';
-const FACE_DISTANCE_THRESHOLD = 0.55;
-
-function safeParseDescriptor(raw: string | null): Float32Array | null {
-  if (!raw) return null;
-
-  try {
-    const parsed = JSON.parse(raw) as unknown;
-    if (!Array.isArray(parsed)) return null;
-
-    const numeric = parsed.map((value) => Number(value));
-    if (numeric.some((value) => Number.isNaN(value))) return null;
-
-    return new Float32Array(numeric);
-  } catch {
-    return null;
-  }
-}
-
-export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: FaceIdLoginProps) {
+export default function FaceIdLogin({ onSuccess, onCancel, role, mode }: FaceIdLoginProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
   const [status, setStatus] = useState<'initializing' | 'scanning' | 'success' | 'error' | 'not-recognized'>('initializing');
-  const [progressMsg, setProgressMsg] = useState('Preparant reconeixement facial...');
+  const [progressMsg, setProgressMsg] = useState('Connectant amb els servidors d\'IA...');
   const [learningProgress, setLearningProgress] = useState(0); 
   
   const isComponentMounted = useRef(true);
-  const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const timeoutId = useRef<NodeJS.Timeout | null>(null); // Canviat a Timeout
   const scanCount = useRef(0);
   const statusRef = useRef(status);
 
@@ -51,8 +32,9 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
     isComponentMounted.current = true;
     const loadModels = async () => {
       try {
+        const MODEL_URL = 'https://justadudewhohacks.github.io/face-api.js/models';
         setProgressMsg('Carregant model de detecció facial...');
-        await faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL);
+        await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
         
         setProgressMsg('Carregant model de punts clau...');
         await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
@@ -101,7 +83,7 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
     try {
       const detection = await faceapi.detectSingleFace(
         videoRef.current, 
-        new faceapi.SsdMobilenetv1Options({ minConfidence: 0.5 })
+        new faceapi.TinyFaceDetectorOptions({ inputSize: 224, scoreThreshold: 0.5 })
       )
       .withFaceLandmarks()
       .withFaceDescriptor();
@@ -122,7 +104,7 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
           const faceDescriptor = detection.descriptor;
 
           if (mode === 'register') {
-            scanCount.current += 10;
+            scanCount.current += 5; 
             setLearningProgress(scanCount.current);
             setProgressMsg(`Aprenent trets facials... ${scanCount.current}%`);
 
@@ -130,34 +112,32 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
               setStatus('success');
               setProgressMsg('Rostre guardat correctament!');
               stopCamera();
-              setTimeout(() => onSuccess(faceDescriptor), 1200);
+              setTimeout(() => onSuccess(faceDescriptor), 1500);
               return; 
             }
           } else {
             setProgressMsg('Rostre detectat. Verificant identitat...');
-            const storedDescriptor = safeParseDescriptor(localStorage.getItem(storageKey));
+            const storedData = localStorage.getItem(`${role}_descriptors`);
             
-            if (storedDescriptor) {
+            if (storedData) {
+              const storedDescriptors = JSON.parse(storedData);
+              const storedArray = Array.isArray(storedDescriptors[0]) ? storedDescriptors[0] : Object.values(storedDescriptors[0]);
+              const storedDescriptor = new Float32Array(storedArray as number[]);
               
               const distance = faceapi.euclideanDistance(storedDescriptor, faceDescriptor);
               
-              if (distance < FACE_DISTANCE_THRESHOLD) { 
+              if (distance < 0.55) { 
                 setStatus('success');
                 setProgressMsg('Identitat verificada!');
                 stopCamera();
-                setTimeout(() => onSuccess(faceDescriptor), 1200);
+                setTimeout(() => onSuccess(faceDescriptor), 1500);
                 return; 
               } else {
                 setProgressMsg('La cara no coincideix. Torna-ho a intentar.');
                 setStatus('not-recognized');
-                setTimeout(() => {
-                  if (!isComponentMounted.current) return;
-                  setStatus('scanning');
-                  setProgressMsg('Buscant rostre...');
-                }, 900);
               }
             } else {
-              setProgressMsg('No hi ha dades biomètriques per a aquest compte.');
+              setProgressMsg(`No hi ha dades per a ${role}.`);
               setStatus('error');
               return;
             }
@@ -230,7 +210,7 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
       
       <h2 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
         {status === 'scanning' && <ScanFace className="text-blue-400 animate-pulse" />}
-        {mode === 'register' ? 'Registre biomètric' : 'Verificació facial'}
+        {mode === 'register' ? 'Registre Biomètric' : 'Control d\'Accés'}
       </h2>
       
       <div className="bg-gray-800 rounded-xl p-3 w-full max-w-sm mb-6 border border-gray-700">
@@ -246,7 +226,7 @@ export default function FaceIdLogin({ onSuccess, onCancel, storageKey, mode }: F
       </div>
 
       <button onClick={handleManualCancel} className="flex items-center gap-2 px-8 py-3 rounded-xl bg-gray-800 text-gray-300 font-bold hover:bg-red-600 hover:text-white transition-all">
-        <X size={20} /> Cancel·lar operació
+        <X size={20} /> Cancel·lar Operació
       </button>
     </div>
   );
