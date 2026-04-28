@@ -1,279 +1,222 @@
-# Hackaton IA 2026 - Connector Càritas Tarragona
+# Connector Càritas Tarragona — Hackathon IA 2026
 
-Resumen técnico completo del repositorio, con estado real de arquitectura, seguridad, datos, flujos funcionales y operación en local/Codespaces/EC2.
+> Plataforma d'atenció social assistida per IA que connecta persones vulnerables amb recursos, voluntaris i organitzacions de Càritas Diocesana de Tarragona.
 
-## 1) Qué Es Este Proyecto
+🌐 **Demo en viu:** [hackaton-ia-2026.vercel.app](https://hackaton-ia-2026.vercel.app)  
+⚙️ **API pública:** [each-kings-thinking-losses.trycloudflare.com](https://each-kings-thinking-losses.trycloudflare.com)  
+🤖 **Model IA:** [huggingface.co/ELOIVI/caritas-urgency-classifier](https://huggingface.co/ELOIVI/caritas-urgency-classifier)
 
-Plataforma de atención social asistida por IA para Càritas Diocesana de Tarragona.
+---
 
-Incluye:
+## Què és aquest projecte
 
-- Backend Flask con autenticación por token y motor de matching social.
-- Frontend Next.js App Router con panel interno, flujo de solicitud y mapa interactivo.
-- Persistencia en SQLite como fuente principal de verdad.
-- Espejo opcional en S3 para compatibilidad/histórico.
-- Integración IA híbrida:
-  - Gemini para análisis semántico y conversación guiada.
-  - Endpoint externo de urgencia (HF Space) para scoring específico.
-  - Analítica con Pandas en dashboard.
+Càritas Diocesana de Tarragona atén cada any més de 9.800 persones en situació de vulnerabilitat a través de 78 centres parroquials i 1.177 voluntaris. El repte era construir una eina que, donada la situació d'una persona, trobés automàticament els recursos, voluntaris i projectes més adequats.
 
-## 2) Stack Tecnológico
+La solució és un motor de matching híbrid en tres capes que combina regles deterministes, anàlisi contextual amb IA generativa i un classificador de machine learning propi, tot integrat en una interfície multirol accessible des del navegador.
 
-- Backend:
-  - Flask, Flask-CORS
-  - SQLite
-  - boto3 (S3 opcional)
-  - requests
-  - pandas
-- Frontend:
-  - Next.js 15 (App Router)
-  - React 19
-  - Tailwind
-  - Recharts
-  - Leaflet + react-leaflet
-- IA:
-  - Google Gemini API
-  - HuggingFace Space (urgency endpoint)
+---
 
-## 3) Scraping Funcional Del Repo (Mapa Real)
+## Arquitectura
 
-### Raíz
+```
+┌─────────────────────────────────────────────────────────┐
+│                    FRONTEND (Vercel)                     │
+│              Next.js 15 · React 19 · Tailwind            │
+│                                                          │
+│  Persona atesa  │  Voluntari  │  Empresa  │  Treballador │
+│  Chatbot guiat  │  Dashboard  │ Dashboard │  Expedients  │
+└────────────────────────┬────────────────────────────────┘
+                         │ HTTPS (Cloudflare Tunnel)
+┌────────────────────────▼────────────────────────────────┐
+│                  BACKEND (EC2 · Flask)                   │
+│                                                          │
+│  Auth JWT  │  Rate Limiting  │  CORS configurable        │
+│                                                          │
+│  ┌─────────────────────────────────────────────────┐    │
+│  │              MOTOR HÍBRID IA (3 capes)          │    │
+│  │                                                  │    │
+│  │  1. Keyword Parser  →  Keywords deterministes   │    │
+│  │  2. Gemini Analyst  →  Anàlisi contextual       │    │
+│  │  3. Matcher         →  Cruça amb BBDDs locals   │    │
+│  └─────────────────────────────────────────────────┘    │
+│                                                          │
+│  SQLite (expedients · usuaris · voluntaris · empreses)   │
+└─────────────┬──────────────────────────┬────────────────┘
+              │                          │
+┌─────────────▼──────────┐  ┌────────────▼───────────────┐
+│  Google Gemini 2.5     │  │  HuggingFace Space         │
+│  Flash (Free Tier)     │  │  DistilBERT fine-tuned     │
+│  · Conversa guiada     │  │  40.000 casos sintètics    │
+│  · Anàlisi semàntica   │  │  89% accuracy              │
+│  · Fallback automàtic  │  │  4 classes d'urgència      │
+└────────────────────────┘  └────────────────────────────┘
+```
 
-- README.md: guía principal (este documento).
-- training_data.json: dataset base del proyecto.
+---
 
-### backend/
+## Motor Híbrid IA — Detall
 
-- app.py
-  - Inicialización global.
-  - Registro de blueprints.
-  - Carga de catálogos a memoria (warmup).
-  - Inicializa stores y cuentas admin automáticas.
-- routes/
-  - auth.py: registro/login/me con validación y rate limit.
-  - match.py: matching estructurado, matching por texto libre y endpoint de urgencia.
-  - chat.py: flujos conversacionales persona/voluntario con integración a matching.
-  - dashboard.py: expedientes, dashboards por rol, analytics y catálogos.
-- engine/
-  - keyword_parser.py: extracción determinista de keywords.
-  - gemini_analyst.py: análisis de caso con Gemini.
-  - matcher.py: motor híbrido final (centro/recursos/voluntarios/organizaciones/empresas).
-  - analytics.py: métricas agregadas con Pandas para dashboard.
-- utils/
-  - auth_tokens.py: firma/verificación de tokens; secret obligatorio.
-  - auth_guard.py: autorización por roles.
-  - db_core.py: conexión SQLite.
-  - user_store.py: usuarios/admins.
-  - partner_store.py: voluntarios/empresas y admins técnicos de partners.
-  - expedient_store.py: persistencia de expedientes y relaciones.
-  - catalog_cache.py: catálogos JSON precargados en RAM.
-  - rate_limit.py, validation.py, volunteer_load.py, json_utils.py.
-- db/
-  - users.sqlite
-  - catálogos JSON (centres, recursos, voluntaris, empreses, etc.).
-  - generate_massive_db_data.py: generación masiva realista multi-origen.
+El cor del projecte és el motor de matching en tres passes seqüencials:
 
-### frontend/
+### Pas 1 — Keyword Parser (determinista)
+Extreu keywords socials de la fitxa estructurada: habitatge, situació laboral, ingressos, ciutadania, menors a càrrec, addiccions, maltractament, discapacitat. És ràpid, transparent i funciona sempre sense dependre de cap API externa.
 
-- src/app/help-request-interface/
-  - flujo de formularios por rol.
-- src/app/internal-dashboard/
-  - panel operativo interno (KPIs, expedientes, actividad, urgencias, cobertura, partners, mapa).
-- src/app/support-locator/
-  - localizador de puntos de atención con mapa Leaflet.
-- src/lib/api.ts
-  - cliente base para backend y auth headers.
+### Pas 2 — Gemini Analyst (IA generativa)
+Envia la fitxa, les keywords i el catàleg de projectes reals de Càritas a Gemini. Rep un JSON estructurat amb urgència, necessitats prioritàries, projectes recomanats i justificació. Si Gemini no està disponible (quota esgotada, timeout), el sistema continua amb un fallback determinista basat en les keywords.
 
-### hf_space/
+### Pas 3 — Matcher (cruça amb BBDDs)
+Creua les necessitats detectades amb les bases de dades locals:
+- Centre per municipi exacte o distància haversine
+- Recursos per keyword overlap + bonus dels tipus recomanats per Gemini
+- Voluntaris per habilitats, disponibilitat, distància i capacitat màxima
+- Regla especial: casos de violència de gènere assignen exclusivament voluntàries dones
+- Organitzacions i empreses per keyword overlap
 
-- app.py + Dockerfile para servicio de urgencia desplegable en Space.
+### Classificador d'urgència (model propi)
+Model DistilBERT multilingüe fine-tuned sobre 40.000 casos sintètics balancejats generats a partir dels patrons reals de Càritas. Classifica text lliure en quatre nivells: baixa, mitjana, alta, crítica. 89% d'accuracy en test.
 
-## 4) Estado De Cambios Clave De Esta Iteración
+---
 
-### Arquitectura y escalabilidad
+## Stack tecnològic
 
-- Catálogos JSON ya no se leen por request.
-- Preload de catálogos al arranque y acceso desde memoria.
-- Analytics de dashboard con caché TTL para evitar recomputar Pandas en cada llamada.
+| Component | Tecnologia |
+|---|---|
+| Backend | Flask, SQLite, Pandas, boto3 |
+| Frontend | Next.js 15, React 19, Tailwind, Recharts, Leaflet |
+| IA generativa | Google Gemini 2.5 Flash |
+| ML propi | DistilBERT multilingüe (HuggingFace) |
+| Auth | JWT (itsdangerous), bcrypt |
+| Deploy backend | AWS EC2 t3.micro + Nginx + Cloudflare Tunnel |
+| Deploy frontend | Vercel |
+| Dades | SQLite + catàlegs JSON + S3 mirror opcional |
 
-### Seguridad y robustez
+---
 
-- Secret de auth obligatorio (fail-fast si falta AUTH_SECRET_KEY).
-- Excepciones sanitizadas en endpoints críticos (sin leakage al cliente).
-- Endpoint de urgencia soporta Bearer token HF_API_TOKEN.
-- Llamada a Gemini endurecida:
-  - API key en header, no en querystring.
-  - errores internos sin exponer datos sensibles en respuestas.
-- Debug y CORS controlados por entorno.
+## Fluxos per rol
 
-### IA y matching
+**Persona atesa** — Chatbot guiat per Gemini que fa preguntes adaptades a cada situació fins tenir prou context per fer el matching. No requereix login. Retorna recursos, centre més proper i urgència classificada.
 
-- Matching híbrido operativo:
-  - deterministic keyword parsing
-  - Gemini analysis
-  - asignación de centro/recursos/voluntarios/organizaciones/empresas
-- Regla determinista de inclusión sensible en matcher:
-  - casos de violencia/maltrato activan filtro women-only en voluntariado.
+**Voluntari** — Login o registre. Chatbot que recull disponibilitat, habilitats i motivació. Assigna el projecte més compatible. Dashboard amb casos actius, hores contribuïdes i projectes ordenats per compatibilitat.
 
-### Dashboard y UX
+**Empresa** — Login corporatiu. Dashboard amb impacte real: persones beneficiades, distribució de recursos, evolució mensual.
 
-- Panels antes hardcodeados migrados a datos reales de DB.
-- Mapa operativo interno incorporado con centros y expedientes geolocalizados.
-- Soporte Leaflet movido a ciclo de cliente para evitar problemas de hidratación.
+**Treballador** — Login restringit. Accés a tots els expedients ordenats per urgència. Formulari de nova fitxa social que passa pel motor de matching automàticament.
 
-### Datos
+---
 
-- Script de generación masiva:
-  - crea/ordena catálogos JSON,
-  - puebla SQLite con miles de registros,
-  - asigna created_by_user_id y resolved_by_user_id,
-  - recalcula carga real de voluntariado.
+## Endpoints API
 
-### Administración
+```
+GET  /health                          — Estat del servidor
+POST /auth/register                   — Registre d'usuari
+POST /auth/login                      — Login (retorna JWT)
+GET  /auth/me                         — Usuari autenticat
 
-- Cuentas admin por rol autogeneradas al arranque:
-  - AdminTreballador@caritas.org
-  - AdminVoluntari@caritas.org
-  - AdminEmpresa@caritas.org
-  - password común por defecto: Admin1234!
+POST /match                           — Matching amb fitxa estructurada
+POST /match/text                      — Matching amb text lliure
+POST /urgency                         — Classificació d'urgència (HuggingFace)
 
-## 5) Endpoints API (Resumen Operativo)
+POST /chat/persona                    — Chatbot persona atesa (públic)
+POST /chat/voluntari                  — Chatbot voluntari (requereix token)
 
-### Meta
+GET  /expedients                      — Llista expedients (treballador)
+POST /expedient                       — Crear expedient amb matching IA
+GET  /expedient/<id>                  — Detall d'expedient
+PATCH /expedient/<id>/close           — Tancar expedient
 
-- GET /health
-- GET /
+GET  /dashboard/voluntari/<id>        — Dashboard voluntari
+GET  /dashboard/empresa/<id>          — Dashboard empresa
+GET  /dashboard/analytics             — Analítiques agregades
+```
 
-### Auth
+---
 
-- POST /auth/register
-- POST /auth/login
-- GET /auth/me
+## Decisions tècniques rellevants
 
-### Matching
+**SQLite en lloc de PostgreSQL** — Per a un hackathon amb un sol servidor, SQLite és suficient, zero configuració i amb WAL mode aguanta desenes de connexions concurrents. La migració a PostgreSQL seria trivial.
 
-- POST /match
-- GET /match/test
-- POST /match/text
-- POST /urgency
+**Fallback determinista per a Gemini** — La free tier de Gemini té 5 RPM i 20 RPD. Quan s'esgota, el sistema continua funcionant amb el keyword parser sol. L'usuari rep una resposta menys rica però sempre rep una resposta.
 
-### Chat
+**Model propi vs Gemini per a urgència** — Gemini és excel·lent per a conversa però impredictible per a classificació repetible. El model DistilBERT propi és determinista, auditables i funciona sense quota. El jurat pot veure exactament com es pren la decisió.
 
-- POST /chat/persona
-- POST /chat/voluntari
-- GET /chat/test
+**Catàlegs en RAM** — Els 60 centres, 260 recursos, 180 organitzacions i 140 projectes es carreguen a memòria a l'arrencada. Cada request de matching és O(n) sobre dades locals sense cap query a base de dades.
 
-### Dashboard y expedientes
+**JWT en lloc de sessions** — L'arquitectura és stateless, el que facilita el deploy i l'escalat horitzontal futur.
 
-- GET /expedients
-- GET /expedients/mine
-- POST /expedient
-- GET /expedient/<id>
-- PATCH /expedient/<id>/close
-- GET /dashboard/analytics
-- GET /catalog/centres
-- GET /dashboard/voluntari/<id>
-- GET /dashboard/empresa/<id>
+---
 
-## 6) Variables De Entorno
+## Seguretat implementada
 
-## Backend (obligatorias recomendadas)
+- AUTH_SECRET_KEY obligatòria (fail-fast si falta)
+- ADMIN_SHARED_PASSWORD obligatòria
+- Bearer token parsing estricte amb regex
+- Rate limiting per endpoint (20 req/min chat, 10 req/min auth)
+- CORS configurable per entorn (CORS_ALLOW_ALL=0 en producció)
+- Input validation: text màx 2000 chars, fitxa fields màx 500 chars, HTTP 413 si excedit
+- Prompt injection hardening: longitud acotada i neutralització de tags HTML
+- Gemini circuit breaker: 5 RPM / 20 RPD tracking local
+- Errors sanititzats: cap stack trace arriba al client
+- PII en logs: fitxes socials no es registren mai als logs
 
-- AUTH_SECRET_KEY (obligatoria)
-- GOOGLE_API_KEY (si usas Gemini)
-- HF_APP_ENDPOINT (si usas /urgency)
+---
 
-## Backend (opcionales)
-
-- HF_API_TOKEN
-- AWS_S3_BUCKET
-- ANALYTICS_TTL_SECONDS (default 300)
-- CORS_ALLOW_ALL (dev default 1)
-- FRONTEND_ORIGINS (cuando CORS_ALLOW_ALL=0)
-- FLASK_DEBUG
-- PORT
-
-## Admin defaults
-
-- MASTER_ADMIN_EMAIL / MASTER_ADMIN_PASSWORD
-- VOLUNTEER_ADMIN_EMAIL
-- COMPANY_ADMIN_EMAIL
-- ADMIN_SHARED_PASSWORD
-
-## Frontend
-
-- NEXT_PUBLIC_API_URL (default http://localhost:5000)
-
-Ejemplo de backend/.env seguro:
-
-AUTH_SECRET_KEY=pon_una_clave_larga_unica
-GOOGLE_API_KEY=tu_key
-HF_APP_ENDPOINT=https://tu-space.hf.space
-HF_API_TOKEN=tu_token
-AWS_S3_BUCKET=hackaton-bucket
-CORS_ALLOW_ALL=0
-FRONTEND_ORIGINS=https://tu-frontend.com
-
-## 7) Arranque Local (Codespaces O Local)
+## Instal·lació local
 
 ### Backend
+```bash
+cd backend
+python -m venv .venv
+source .venv/Scripts/activate   # Windows Git Bash
+pip install -r requirements.txt
 
-1. cd backend
-2. python -m venv .venv
-3. source .venv/Scripts/activate (Git Bash) o .\\.venv\\Scripts\\Activate.ps1 (PowerShell)
-4. pip install -r requirements.txt
-5. define AUTH_SECRET_KEY
-6. python app.py
+# Crea backend/.env amb:
+# AUTH_SECRET_KEY=clau_llarga_unica
+# ADMIN_SHARED_PASSWORD=Admin1234!
+# GOOGLE_API_KEY=la_teva_key
+# HF_APP_ENDPOINT=https://eloivi-caritas-urgency-api.hf.space
+# GEMINI_MODEL=gemini-2.5-flash
 
-Notas:
-
-- En Git Bash usa export AUTH_SECRET_KEY=... (no uses sintaxis de PowerShell).
-- Si aparece ModuleNotFoundError: pandas, faltan dependencias del requirements.
+python app.py
+```
 
 ### Frontend
+```bash
+cd frontend
+npm install
+# Crea frontend/.env.local amb:
+# NEXT_PUBLIC_API_URL=http://localhost:5000
+npm run dev
+```
 
-1. cd frontend
-2. npm install
-3. npm run dev
+### Generar dades de demo
+```bash
+cd backend
+python db/generate_massive_db_data.py --expedients 500 --voluntaris 100 --empreses 50
+```
 
-## 8) Generación Masiva De Datos
+---
 
-Desde backend:
+## Credencials demo
 
-python db/generate_massive_db_data.py --expedients 5000 --voluntaris 900 --empreses 260
+| Rol | Email | Password |
+|---|---|---|
+| Treballador | AdminTreballador@caritas.org | Admin1234! |
+| Voluntari | AdminVoluntari@caritas.org | Admin1234! |
+| Empresa | AdminEmpresa@caritas.org | Admin1234! |
 
-Opciones clave:
+---
 
-- --no-reset para no limpiar tablas existentes.
-- --seed para reproducibilidad.
-- --resolved-ratio para proporción de cerrados.
+## Limitacions conegudes
 
-## 9) Despliegue En EC2 (Resumen)
+El circuit breaker de Gemini és per procés. Si es despleguen múltiples workers Flask, el comptador no es comparteix entre ells. Per a producció real caldria un comptador en Redis. Per a la demo amb un sol worker no és un problema.
 
-- Backend con Gunicorn + systemd en 127.0.0.1:5000.
-- Nginx como reverse proxy.
-- TLS con certbot.
-- Variables en EnvironmentFile (systemd) o .env protegido.
-- No subir ni versionar secrets.
+El Cloudflare Tunnel gratuït (`trycloudflare.com`) canvia la URL en cada reinici. Per a producció caldria un túnel named amb compte Cloudflare o un domini propi.
 
-## 10) Checklist De Seguridad Antes De Producción
+SQLite no aguanta centenars d'escriptures concurrents. Per a escala real, la migració a PostgreSQL és directa ja que tots els accessos van per `expedient_store.py`.
 
-- Rotar inmediatamente cualquier API key que haya sido expuesta.
-- Confirmar AUTH_SECRET_KEY fuerte y única.
-- Desactivar CORS_ALLOW_ALL en producción.
-- Configurar HF_API_TOKEN si endpoint de urgencia es privado.
-- Limitar rate limits según tráfico real.
-- Revisar logs y no devolver trazas al cliente.
+---
 
-## 11) Estado Funcional Actual
+## Equip
 
-El repositorio está en estado funcional con:
-
-- matching operativo,
-- dashboard conectado a DB,
-- mapa interactivo,
-- admins por rol,
-- seguridad reforzada,
-- analytics cacheado,
-- y scripts de seed masivo listos para demo o carga.
-
+Hackathon IA 2026 — URV × T-Systems  
+Càritas Diocesana de Tarragona
